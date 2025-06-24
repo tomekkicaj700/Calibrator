@@ -11,13 +11,16 @@
     Width="1200"
     Height="800"
     Loaded="Window_Loaded"
-    WindowStartupLocation="CenterScreen"
+    SizeChanged="Window_SizeChanged"
+    StateChanged="Window_StateChanged"
+    Closing="Window_Closing"
+    WindowStartupLocation="Manual"
     mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="3*" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="1*" />
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
         <!--  DockPanel: przyciski na górze, TabControl pod spodem  -->
@@ -35,7 +38,7 @@
                     Margin="0,0,10,0"
                     Click="btnScanPorts_Click"
                     Content="Skanuj porty"
-                    FontSize="16" />
+                    FontSize="16"/>
                 <Button
                     x:Name="btnReadConfig"
                     Width="200"
@@ -43,7 +46,7 @@
                     Margin="0,0,10,0"
                     Click="btnReadConfig_Click"
                     Content="Odczytaj konfigurację"
-                    FontSize="16" />
+                    FontSize="16"/>
                 <Button
                     x:Name="btnRun"
                     Width="100"
@@ -61,8 +64,9 @@
                             x:Name="iconRun"
                             Margin="0,0,5,0"
                             FontSize="18"
-                            Text="▶" />
-                        <TextBlock x:Name="txtRun" Text="RUN" />
+                            Text="▶"/>
+                        <TextBlock x:Name="txtRun"
+                                   Text="RUN"/>
                     </StackPanel>
                 </Button>
                 <Button
@@ -72,7 +76,7 @@
                     Margin="0,0,10,0"
                     Click="btnReadWeldParams_Click"
                     Content="Odczytaj parametry zgrzewania"
-                    FontSize="16" />
+                    FontSize="16"/>
                 <Button
                     x:Name="btnResetStats"
                     Width="200"
@@ -86,8 +90,8 @@
                         <TextBlock
                             Margin="0,0,5,0"
                             FontSize="20"
-                            Text="↺" />
-                        <TextBlock Text="Resetuj statystyki" />
+                            Text="↺"/>
+                        <TextBlock Text="Resetuj statystyki"/>
                     </StackPanel>
                 </Button>
                 <ComboBox
@@ -100,17 +104,21 @@
                     <ComboBoxItem
                         Content="3 x/s"
                         IsSelected="True"
-                        Tag="333" />
-                    <ComboBoxItem Content="0.5 s" Tag="500" />
-                    <ComboBoxItem Content="1 s" Tag="1000" />
-                    <ComboBoxItem Content="2 s" Tag="2000" />
-                    <ComboBoxItem Content="3 s" Tag="3000" />
+                        Tag="333"/>
+                    <ComboBoxItem Content="0.5 s"
+                                  Tag="500"/>
+                    <ComboBoxItem Content="1 s"
+                                  Tag="1000"/>
+                    <ComboBoxItem Content="2 s"
+                                  Tag="2000"/>
+                    <ComboBoxItem Content="3 s"
+                                  Tag="3000"/>
                 </ComboBox>
                 <TextBlock
                     x:Name="txtStatus"
                     Margin="10,0,0,0"
                     VerticalAlignment="Center"
-                    FontSize="16" />
+                    FontSize="16"/>
                 <Button
                     x:Name="btnToggleLogPanel"
                     Width="80"
@@ -122,27 +130,29 @@
                         <TextBlock
                             Margin="0,0,5,0"
                             FontSize="16"
-                            Text="📋" />
+                            Text="📋"/>
                         <TextBlock
                             x:Name="txtToggleLogIcon"
                             FontSize="16"
-                            Text="▼" />
+                            Text="▼"/>
                     </StackPanel>
                 </Button>
             </StackPanel>
 
             <!--  TabControl for main content  -->
-            <TabControl x:Name="mainTabControl" FontSize="16">
+            <TabControl x:Name="mainTabControl"
+                        FontSize="16">
                 <!--  Tab 1: Parametry zgrzewania  -->
                 <TabItem Header="Parametry zgrzewania">
                     <Grid Margin="10">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
                         <!--  Lewa kolumna: współczynniki kalibracji  -->
-                        <StackPanel Grid.Column="0" Margin="0,0,20,0">
+                        <StackPanel Grid.Column="0"
+                                    Margin="0,0,20,0">
                             <GroupBox
                                 Margin="0,0,10,0"
                                 Padding="5"
@@ -151,8 +161,9 @@
                                 FontWeight="Bold"
                                 Header="Współczynniki kalibracji.">
                                 <StackPanel>
-                                    <controls:VoltageCoefficients x:Name="wspZgrzewaniaVoltage" />
-                                    <controls:CurrentCoefficients x:Name="wspZgrzewaniaCurrent" Margin="0,10,0,0" />
+                                    <controls:VoltageCoefficients x:Name="wspZgrzewaniaVoltage"/>
+                                    <controls:CurrentCoefficients x:Name="wspZgrzewaniaCurrent"
+                                                                  Margin="0,10,0,0"/>
                                 </StackPanel>
                             </GroupBox>
                         </StackPanel>
@@ -160,22 +171,23 @@
                         <!--  Prawa kolumna: pomiary  -->
                         <Grid Grid.Column="1">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
                             <!--  Napięcie zgrzewania  -->
-                            <StackPanel Grid.Column="0" Margin="20,0,20,0">
+                            <StackPanel Grid.Column="0"
+                                        Margin="20,0,20,0">
                                 <TextBlock
                                     Margin="0,0,0,10"
                                     HorizontalAlignment="Center"
                                     FontSize="22"
                                     FontWeight="Bold"
-                                    Text="Napięcie zgrzewania [V]" />
+                                    Text="Napięcie zgrzewania [V]"/>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <Border
                                         Grid.Column="0"
@@ -185,19 +197,19 @@
                                         CornerRadius="4">
                                         <Grid Margin="5">
                                             <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto" />
-                                                <RowDefinition Height="Auto" />
-                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
                                             </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto" />
-                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
                                             <TextBlock
                                                 Grid.Row="0"
                                                 Grid.Column="0"
                                                 Foreground="Red"
-                                                Text="Max: " />
+                                                Text="Max: "/>
                                             <TextBlock
                                                 x:Name="txtNapiecieMax"
                                                 Grid.Row="0"
@@ -205,12 +217,12 @@
                                                 FontSize="20"
                                                 FontWeight="Bold"
                                                 Foreground="Red"
-                                                Text="0000" />
+                                                Text="0000"/>
                                             <TextBlock
                                                 Grid.Row="1"
                                                 Grid.Column="0"
                                                 Foreground="Blue"
-                                                Text="Avr: " />
+                                                Text="Avr: "/>
                                             <TextBlock
                                                 x:Name="txtNapiecieAvr"
                                                 Grid.Row="1"
@@ -218,12 +230,12 @@
                                                 FontSize="20"
                                                 FontWeight="Bold"
                                                 Foreground="Blue"
-                                                Text="0000" />
+                                                Text="0000"/>
                                             <TextBlock
                                                 Grid.Row="2"
                                                 Grid.Column="0"
                                                 Foreground="#4CAF50"
-                                                Text="Min: " />
+                                                Text="Min: "/>
                                             <TextBlock
                                                 x:Name="txtNapiecieMin"
                                                 Grid.Row="2"
@@ -231,10 +243,11 @@
                                                 FontSize="20"
                                                 FontWeight="Bold"
                                                 Foreground="#4CAF50"
-                                                Text="0000" />
+                                                Text="0000"/>
                                         </Grid>
                                     </Border>
-                                    <StackPanel Grid.Column="1" Margin="5,0,0,0">
+                                    <StackPanel Grid.Column="1"
+                                                Margin="5,0,0,0">
                                         <Border
                                             BorderBrush="#673AB7"
                                             BorderThickness="2"
@@ -246,7 +259,7 @@
                                                 FontSize="28"
                                                 FontWeight="Bold"
                                                 Foreground="#673AB7"
-                                                Text="0,07" />
+                                                Text="0,07"/>
                                         </Border>
                                         <Border
                                             Margin="0,10,0,0"
@@ -259,7 +272,7 @@
                                                 HorizontalAlignment="Center"
                                                 FontSize="24"
                                                 Foreground="#2196F3"
-                                                Text="31" />
+                                                Text="31"/>
                                         </Border>
                                     </StackPanel>
                                 </Grid>
@@ -268,7 +281,7 @@
                                     HorizontalAlignment="Center"
                                     FontSize="16"
                                     FontWeight="Bold"
-                                    Text="Woltomierz [V]" />
+                                    Text="Woltomierz [V]"/>
                                 <lvc:Gauge
                                     x:Name="gaugeNapiecie"
                                     Width="237"
@@ -276,23 +289,25 @@
                                     Foreground="#673AB7"
                                     Value="0.07"
                                     From="0"
-                                    To="50" />
+                                    To="50"/>
                             </StackPanel>
 
                             <!--  Prąd zgrzewania  -->
-                            <StackPanel Grid.Column="1" Margin="20,0,20,0">
+                            <StackPanel Grid.Column="1"
+                                        Margin="20,0,20,0">
                                 <TextBlock
                                     Margin="0,0,0,10"
                                     HorizontalAlignment="Center"
                                     FontSize="22"
                                     FontWeight="Bold"
-                                    Text="Prąd zgrzewania [A]" />
+                                    Text="Prąd zgrzewania [A]"/>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                                    <StackPanel Grid.Column="0"
+                                                Margin="0,0,5,0">
                                         <Border
                                             BorderBrush="#673AB7"
                                             BorderThickness="2"
@@ -304,7 +319,7 @@
                                                 FontSize="28"
                                                 FontWeight="Bold"
                                                 Foreground="#673AB7"
-                                                Text="0,00" />
+                                                Text="0,00"/>
                                         </Border>
                                         <Border
                                             Margin="0,10,0,0"
@@ -317,7 +332,7 @@
                                                 HorizontalAlignment="Center"
                                                 FontSize="24"
                                                 Foreground="#2196F3"
-                                                Text="8" />
+                                                Text="8"/>
                                         </Border>
                                     </StackPanel>
                                     <Border
@@ -328,19 +343,19 @@
                                         CornerRadius="4">
                                         <Grid Margin="5">
                                             <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto" />
-                                                <RowDefinition Height="Auto" />
-                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
                                             </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto" />
-                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
                                             <TextBlock
                                                 Grid.Row="0"
                                                 Grid.Column="0"
                                                 Foreground="Red"
-                                                Text="Max: " />
+                                                Text="Max: "/>
                                             <TextBlock
                                                 x:Name="txtPradMax"
                                                 Grid.Row="0"
@@ -348,12 +363,12 @@
                                                 FontSize="20"
                                                 FontWeight="Bold"
                                                 Foreground="Red"
-                                                Text="0000" />
+                                                Text="0000"/>
                                             <TextBlock
                                                 Grid.Row="1"
                                                 Grid.Column="0"
                                                 Foreground="Blue"
-                                                Text="Avr: " />
+                                                Text="Avr: "/>
                                             <TextBlock
                                                 x:Name="txtPradAvr"
                                                 Grid.Row="1"
@@ -361,12 +376,12 @@
                                                 FontSize="20"
                                                 FontWeight="Bold"
                                                 Foreground="Blue"
-                                                Text="0000" />
+                                                Text="0000"/>
                                             <TextBlock
                                                 Grid.Row="2"
                                                 Grid.Column="0"
                                                 Foreground="#4CAF50"
-                                                Text="Min: " />
+                                                Text="Min: "/>
                                             <TextBlock
                                                 x:Name="txtPradMin"
                                                 Grid.Row="2"
@@ -374,7 +389,7 @@
                                                 FontSize="20"
                                                 FontWeight="Bold"
                                                 Foreground="#4CAF50"
-                                                Text="0000" />
+                                                Text="0000"/>
                                         </Grid>
                                     </Border>
                                 </Grid>
@@ -383,7 +398,7 @@
                                     HorizontalAlignment="Center"
                                     FontSize="16"
                                     FontWeight="Bold"
-                                    Text="Amperomierz [A]" />
+                                    Text="Amperomierz [A]"/>
                                 <lvc:Gauge
                                     x:Name="gaugePrad"
                                     Width="237"
@@ -391,7 +406,7 @@
                                     Foreground="#E91E63"
                                     Value="0"
                                     From="0"
-                                    To="140" />
+                                    To="140"/>
                             </StackPanel>
                         </Grid>
                     </Grid>
@@ -399,22 +414,23 @@
                 <!--  Tab 2: Parametry kalibracji  -->
                 <TabItem Header="Parametry kalibracji">
                     <Border Padding="20">
-                        <TabControl x:Name="tabControlCalibration" FontSize="16">
+                        <TabControl x:Name="tabControlCalibration"
+                                    FontSize="16">
                             <TabItem Header="Konfiguracja">
                                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                                     <Grid Margin="10">
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="58*" />
-                                            <ColumnDefinition Width="126*" />
-                                            <ColumnDefinition Width="22*" />
-                                            <ColumnDefinition Width="479*" />
-                                            <ColumnDefinition Width="684*" />
+                                            <ColumnDefinition Width="58*"/>
+                                            <ColumnDefinition Width="126*"/>
+                                            <ColumnDefinition Width="22*"/>
+                                            <ColumnDefinition Width="479*"/>
+                                            <ColumnDefinition Width="684*"/>
                                         </Grid.ColumnDefinitions>
                                         <!--  Left column: Kanały zgrzewarki  -->
                                         <controls:WelderChannels
                                             x:Name="welderChannels"
                                             Grid.Column="0"
-                                            Grid.ColumnSpan="4" />
+                                            Grid.ColumnSpan="4"/>
                                         <!--  Right column: Wartości kanałów zgrzewarki  -->
                                         <GroupBox
                                             Grid.Column="4"
@@ -422,8 +438,9 @@
                                             FontSize="18"
                                             Header="Wartości kanałów zgrzewarki">
                                             <StackPanel>
-                                                <controls:VoltageCoefficients x:Name="kanalyZgrzewarkiVoltage" />
-                                                <controls:CurrentCoefficients x:Name="kanalyZgrzewarkiCurrent" Margin="0,10,0,0" />
+                                                <controls:VoltageCoefficients x:Name="kanalyZgrzewarkiVoltage"/>
+                                                <controls:CurrentCoefficients x:Name="kanalyZgrzewarkiCurrent"
+                                                                              Margin="0,10,0,0"/>
                                                 <!--  Przycisk Zapisz  -->
                                                 <Button
                                                     x:Name="btnSaveCalibration"
@@ -434,7 +451,7 @@
                                                     Click="btnSaveCalibration_Click"
                                                     Content="Zapisz"
                                                     FontSize="16"
-                                                    Foreground="White" />
+                                                    Foreground="White"/>
                                             </StackPanel>
                                         </GroupBox>
                                     </Grid>
@@ -444,14 +461,14 @@
                                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="341*" />
-                                            <ColumnDefinition Width="41*" />
-                                            <ColumnDefinition Width="71*" />
-                                            <ColumnDefinition Width="452*" />
-                                            <ColumnDefinition Width="452*" />
+                                            <ColumnDefinition Width="341*"/>
+                                            <ColumnDefinition Width="41*"/>
+                                            <ColumnDefinition Width="71*"/>
+                                            <ColumnDefinition Width="452*"/>
+                                            <ColumnDefinition Width="452*"/>
                                         </Grid.ColumnDefinitions>
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
                                         <!--  Column 1: Informacje o zgrzewarce, Podstawowe informacje &amp; Właściciel  -->
                                         <StackPanel
@@ -466,43 +483,43 @@
                                                     <TextBlock
                                                         FontSize="16"
                                                         FontWeight="Bold"
-                                                        Text="Status zgrzewarki:" />
+                                                        Text="Status zgrzewarki:"/>
                                                     <TextBlock
                                                         x:Name="txtWelderStatus"
                                                         Margin="0,0,0,10"
-                                                        FontSize="16" />
+                                                        FontSize="16"/>
                                                     <TextBlock
                                                         FontSize="16"
                                                         FontWeight="Bold"
-                                                        Text="Port:" />
+                                                        Text="Port:"/>
                                                     <TextBlock
                                                         x:Name="txtPort"
                                                         Margin="0,0,0,10"
-                                                        FontSize="16" />
+                                                        FontSize="16"/>
                                                     <TextBlock
                                                         FontSize="16"
                                                         FontWeight="Bold"
-                                                        Text="Baud Rate:" />
+                                                        Text="Baud Rate:"/>
                                                     <TextBlock
                                                         x:Name="txtBaudRate"
                                                         Margin="0,0,0,10"
-                                                        FontSize="16" />
+                                                        FontSize="16"/>
                                                     <TextBlock
                                                         FontSize="16"
                                                         FontWeight="Bold"
-                                                        Text="Typ:" />
+                                                        Text="Typ:"/>
                                                     <TextBlock
                                                         x:Name="txtType"
                                                         Margin="0,0,0,10"
-                                                        FontSize="16" />
+                                                        FontSize="16"/>
                                                     <TextBlock
                                                         FontSize="16"
                                                         FontWeight="Bold"
-                                                        Text="Wersja:" />
+                                                        Text="Wersja:"/>
                                                     <TextBlock
                                                         x:Name="txtVersion"
                                                         Margin="0,0,0,10"
-                                                        FontSize="16" />
+                                                        FontSize="16"/>
                                                 </StackPanel>
                                             </GroupBox>
                                             <GroupBox
@@ -513,43 +530,43 @@
                                                     <TextBlock
                                                         FontSize="16"
                                                         FontWeight="Bold"
-                                                        Text="Typ:" />
+                                                        Text="Typ:"/>
                                                     <TextBlock
                                                         x:Name="txtTyp"
                                                         Margin="0,0,0,10"
-                                                        FontSize="16" />
+                                                        FontSize="16"/>
                                                     <TextBlock
                                                         FontSize="16"
                                                         FontWeight="Bold"
-                                                        Text="KeypadSE:" />
+                                                        Text="KeypadSE:"/>
                                                     <TextBlock
                                                         x:Name="txtKeypadSE"
                                                         Margin="0,0,0,10"
-                                                        FontSize="16" />
+                                                        FontSize="16"/>
                                                     <TextBlock
                                                         FontSize="16"
                                                         FontWeight="Bold"
-                                                        Text="nrJezyka:" />
+                                                        Text="nrJezyka:"/>
                                                     <TextBlock
                                                         x:Name="txtNrJezyka"
                                                         Margin="0,0,0,10"
-                                                        FontSize="16" />
+                                                        FontSize="16"/>
                                                     <TextBlock
                                                         FontSize="16"
                                                         FontWeight="Bold"
-                                                        Text="NazwaZgrzewarki:" />
+                                                        Text="NazwaZgrzewarki:"/>
                                                     <TextBlock
                                                         x:Name="txtNazwaZgrzewarki"
                                                         Margin="0,0,0,10"
-                                                        FontSize="16" />
+                                                        FontSize="16"/>
                                                     <TextBlock
                                                         FontSize="16"
                                                         FontWeight="Bold"
-                                                        Text="NumerSeryjny:" />
+                                                        Text="NumerSeryjny:"/>
                                                     <TextBlock
                                                         x:Name="txtNumerSeryjny"
                                                         Margin="0,0,0,10"
-                                                        FontSize="16" />
+                                                        FontSize="16"/>
                                                 </StackPanel>
                                             </GroupBox>
                                             <GroupBox
@@ -560,27 +577,27 @@
                                                     <TextBlock
                                                         FontSize="16"
                                                         FontWeight="Bold"
-                                                        Text="DaneWlasciciela0:" />
+                                                        Text="DaneWlasciciela0:"/>
                                                     <TextBlock
                                                         x:Name="txtDaneWlasciciela0"
                                                         Margin="0,0,0,10"
-                                                        FontSize="16" />
+                                                        FontSize="16"/>
                                                     <TextBlock
                                                         FontSize="16"
                                                         FontWeight="Bold"
-                                                        Text="DaneWlasciciela1:" />
+                                                        Text="DaneWlasciciela1:"/>
                                                     <TextBlock
                                                         x:Name="txtDaneWlasciciela1"
                                                         Margin="0,0,0,10"
-                                                        FontSize="16" />
+                                                        FontSize="16"/>
                                                     <TextBlock
                                                         FontSize="16"
                                                         FontWeight="Bold"
-                                                        Text="DaneWlasciciela2:" />
+                                                        Text="DaneWlasciciela2:"/>
                                                     <TextBlock
                                                         x:Name="txtDaneWlasciciela2"
                                                         Margin="0,0,0,10"
-                                                        FontSize="16" />
+                                                        FontSize="16"/>
                                                 </StackPanel>
                                             </GroupBox>
                                             <GroupBox
@@ -591,32 +608,33 @@
                                                     <TextBlock
                                                         FontSize="16"
                                                         FontWeight="Bold"
-                                                        Text="DataSprzedazy:" />
+                                                        Text="DataSprzedazy:"/>
                                                     <TextBlock
                                                         x:Name="txtDataSprzedazy"
                                                         Margin="0,0,0,10"
-                                                        FontSize="16" />
+                                                        FontSize="16"/>
                                                     <TextBlock
                                                         FontSize="16"
                                                         FontWeight="Bold"
-                                                        Text="DataPierwszegoZgrzewu:" />
+                                                        Text="DataPierwszegoZgrzewu:"/>
                                                     <TextBlock
                                                         x:Name="txtDataPierwszegoZgrzewu"
                                                         Margin="0,0,0,10"
-                                                        FontSize="16" />
+                                                        FontSize="16"/>
                                                     <TextBlock
                                                         FontSize="16"
                                                         FontWeight="Bold"
-                                                        Text="DataOstatniejKalibracji:" />
+                                                        Text="DataOstatniejKalibracji:"/>
                                                     <TextBlock
                                                         x:Name="txtDataOstatniejKalibracji"
                                                         Margin="0,0,0,10"
-                                                        FontSize="16" />
+                                                        FontSize="16"/>
                                                 </StackPanel>
                                             </GroupBox>
                                         </StackPanel>
                                         <!--  Column 2: Parametry techniczne &amp; Kalibracja  -->
-                                        <StackPanel Grid.Column="3" Margin="5,5,5,5">
+                                        <StackPanel Grid.Column="3"
+                                                    Margin="5,5,5,5">
                                             <GroupBox
                                                 Margin="0,0,0,10"
                                                 FontSize="18"
@@ -625,51 +643,51 @@
                                                     <TextBlock
                                                         FontSize="16"
                                                         FontWeight="Bold"
-                                                        Text="Offset_MCP3425:" />
+                                                        Text="Offset_MCP3425:"/>
                                                     <TextBlock
                                                         x:Name="txtOffsetMCP3425"
                                                         Margin="0,0,0,10"
-                                                        FontSize="16" />
+                                                        FontSize="16"/>
                                                     <TextBlock
                                                         FontSize="16"
                                                         FontWeight="Bold"
-                                                        Text="WolneMiejsce:" />
+                                                        Text="WolneMiejsce:"/>
                                                     <TextBlock
                                                         x:Name="txtWolneMiejsce"
                                                         Margin="0,0,0,10"
-                                                        FontSize="16" />
+                                                        FontSize="16"/>
                                                     <TextBlock
                                                         FontSize="16"
                                                         FontWeight="Bold"
-                                                        Text="LiczbaZgrzOstKalibr:" />
+                                                        Text="LiczbaZgrzOstKalibr:"/>
                                                     <TextBlock
                                                         x:Name="txtLiczbaZgrzOstKalibr"
                                                         Margin="0,0,0,10"
-                                                        FontSize="16" />
+                                                        FontSize="16"/>
                                                     <TextBlock
                                                         FontSize="16"
                                                         FontWeight="Bold"
-                                                        Text="OkresKalibracji:" />
+                                                        Text="OkresKalibracji:"/>
                                                     <TextBlock
                                                         x:Name="txtOkresKalibracji"
                                                         Margin="0,0,0,10"
-                                                        FontSize="16" />
+                                                        FontSize="16"/>
                                                     <TextBlock
                                                         FontSize="16"
                                                         FontWeight="Bold"
-                                                        Text="RejestrKonfiguracji:" />
+                                                        Text="RejestrKonfiguracji:"/>
                                                     <TextBlock
                                                         x:Name="txtRejestrKonfiguracji"
                                                         Margin="0,0,0,10"
-                                                        FontSize="16" />
+                                                        FontSize="16"/>
                                                     <TextBlock
                                                         FontSize="16"
                                                         FontWeight="Bold"
-                                                        Text="RejestrKonfiguracjiBankTwo:" />
+                                                        Text="RejestrKonfiguracjiBankTwo:"/>
                                                     <TextBlock
                                                         x:Name="txtRejestrKonfiguracjiBankTwo"
                                                         Margin="0,0,0,10"
-                                                        FontSize="16" />
+                                                        FontSize="16"/>
                                                 </StackPanel>
                                             </GroupBox>
                                             <GroupBox
@@ -680,59 +698,59 @@
                                                     <TextBlock
                                                         FontSize="16"
                                                         FontWeight="Bold"
-                                                        Text="TempOtRefVal:" />
+                                                        Text="TempOtRefVal:"/>
                                                     <TextBlock
                                                         x:Name="txtTempOtRefVal"
                                                         Margin="0,0,0,10"
-                                                        FontSize="16" />
+                                                        FontSize="16"/>
                                                     <TextBlock
                                                         FontSize="16"
                                                         FontWeight="Bold"
-                                                        Text="TempOtRefADC:" />
+                                                        Text="TempOtRefADC:"/>
                                                     <TextBlock
                                                         x:Name="txtTempOtRefADC"
                                                         Margin="0,0,0,10"
-                                                        FontSize="16" />
+                                                        FontSize="16"/>
                                                     <TextBlock
                                                         FontSize="16"
                                                         FontWeight="Bold"
-                                                        Text="KorekcjaTempWewn:" />
+                                                        Text="KorekcjaTempWewn:"/>
                                                     <TextBlock
                                                         x:Name="txtKorekcjaTempWewn"
                                                         Margin="0,0,0,10"
-                                                        FontSize="16" />
+                                                        FontSize="16"/>
                                                     <TextBlock
                                                         FontSize="16"
                                                         FontWeight="Bold"
-                                                        Text="KorekcjaTempZewn:" />
+                                                        Text="KorekcjaTempZewn:"/>
                                                     <TextBlock
                                                         x:Name="txtKorekcjaTempZewn"
                                                         Margin="0,0,0,10"
-                                                        FontSize="16" />
+                                                        FontSize="16"/>
                                                     <TextBlock
                                                         FontSize="16"
                                                         FontWeight="Bold"
-                                                        Text="KodBlokady:" />
+                                                        Text="KodBlokady:"/>
                                                     <TextBlock
                                                         x:Name="txtKodBlokady"
                                                         Margin="0,0,0,10"
-                                                        FontSize="16" />
+                                                        FontSize="16"/>
                                                     <TextBlock
                                                         FontSize="16"
                                                         FontWeight="Bold"
-                                                        Text="TypBlokady:" />
+                                                        Text="TypBlokady:"/>
                                                     <TextBlock
                                                         x:Name="txtTypBlokady"
                                                         Margin="0,0,0,10"
-                                                        FontSize="16" />
+                                                        FontSize="16"/>
                                                     <TextBlock
                                                         FontSize="16"
                                                         FontWeight="Bold"
-                                                        Text="GPSconfiguration:" />
+                                                        Text="GPSconfiguration:"/>
                                                     <TextBlock
                                                         x:Name="txtGPSconfiguration"
                                                         Margin="0,0,0,10"
-                                                        FontSize="16" />
+                                                        FontSize="16"/>
                                                 </StackPanel>
                                             </GroupBox>
                                         </StackPanel>
@@ -747,9 +765,9 @@
                 <TabItem Header="Historia pomiarów">
                     <Grid Margin="10">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
                         <!--  Row 0: Przyciski i filtrowanie  -->
@@ -762,30 +780,31 @@
                             CornerRadius="4">
                             <StackPanel>
                                 <!--  Przyciski akcji  -->
-                                <StackPanel Margin="0,0,0,10" Orientation="Horizontal">
+                                <StackPanel Margin="0,0,0,10"
+                                            Orientation="Horizontal">
                                     <Button
                                         x:Name="btnRefreshHistory"
                                         Margin="0,0,10,0"
                                         Padding="10,5"
                                         Click="btnRefreshHistory_Click"
-                                        Content="Odśwież" />
+                                        Content="Odśwież"/>
                                     <Button
                                         x:Name="btnClearHistory"
                                         Margin="0,0,10,0"
                                         Padding="10,5"
                                         Click="btnClearHistory_Click"
-                                        Content="Wyczyść" />
+                                        Content="Wyczyść"/>
                                     <Button
                                         x:Name="btnOpenFileHistory"
                                         Margin="0,0,10,0"
                                         Padding="10,5"
                                         Click="btnOpenFileHistory_Click"
-                                        Content="Otwórz plik" />
+                                        Content="Otwórz plik"/>
                                     <Button
                                         x:Name="btnToggleDetails"
                                         Padding="10,5"
                                         Click="btnToggleDetails_Click"
-                                        Content="Pokaż/Ukryj szczegóły" />
+                                        Content="Pokaż/Ukryj szczegóły"/>
                                 </StackPanel>
                                 <!--  Filtrowanie  -->
                                 <Border
@@ -797,41 +816,41 @@
                                         <TextBlock
                                             Margin="0,0,0,5"
                                             FontWeight="Bold"
-                                            Text="Filtrowanie:" />
+                                            Text="Filtrowanie:"/>
                                         <Grid>
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto" />
-                                                <ColumnDefinition Width="200" />
-                                                <ColumnDefinition Width="Auto" />
-                                                <ColumnDefinition Width="200" />
-                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="200"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="200"/>
+                                                <ColumnDefinition Width="Auto"/>
                                             </Grid.ColumnDefinitions>
                                             <TextBlock
                                                 Grid.Column="0"
                                                 Margin="0,0,5,0"
                                                 VerticalAlignment="Center"
-                                                Text="Typ urządzenia:" />
+                                                Text="Typ urządzenia:"/>
                                             <TextBox
                                                 x:Name="txtFilterDeviceType"
                                                 Grid.Column="1"
                                                 Margin="0,0,10,0"
-                                                TextChanged="txtFilter_TextChanged" />
+                                                TextChanged="txtFilter_TextChanged"/>
                                             <TextBlock
                                                 Grid.Column="2"
                                                 Margin="0,0,5,0"
                                                 VerticalAlignment="Center"
-                                                Text="Numer seryjny:" />
+                                                Text="Numer seryjny:"/>
                                             <TextBox
                                                 x:Name="txtFilterSerialNumber"
                                                 Grid.Column="3"
                                                 Margin="0,0,10,0"
-                                                TextChanged="txtFilter_TextChanged" />
+                                                TextChanged="txtFilter_TextChanged"/>
                                             <Button
                                                 x:Name="btnClearFilter"
                                                 Grid.Column="4"
                                                 Width="100"
                                                 Click="btnClearFilter_Click"
-                                                Content="Wyczyść filtr" />
+                                                Content="Wyczyść filtr"/>
                                         </Grid>
                                     </StackPanel>
                                 </Border>
@@ -854,63 +873,63 @@
                                 <DataGridTextColumn
                                     Width="150"
                                     Binding="{Binding DateTime}"
-                                    Header="Data i czas" />
+                                    Header="Data i czas"/>
                                 <DataGridTextColumn
                                     Width="120"
                                     Binding="{Binding DeviceType}"
-                                    Header="Typ urządzenia" />
+                                    Header="Typ urządzenia"/>
                                 <DataGridTextColumn
                                     Width="150"
                                     Binding="{Binding SerialNumber}"
-                                    Header="Numer seryjny" />
+                                    Header="Numer seryjny"/>
                                 <DataGridTextColumn
                                     Width="80"
                                     Binding="{Binding MMWVH}"
-                                    Header="MMWVH" />
+                                    Header="MMWVH"/>
                                 <DataGridTextColumn
                                     Width="80"
                                     Binding="{Binding MMWVL}"
-                                    Header="MMWVL" />
+                                    Header="MMWVL"/>
                                 <DataGridTextColumn
                                     Width="80"
                                     Binding="{Binding IVHC_U}"
-                                    Header="IVHC-U" />
+                                    Header="IVHC-U"/>
                                 <DataGridTextColumn
                                     Width="80"
                                     Binding="{Binding IVLC_U}"
-                                    Header="IVLC-U" />
+                                    Header="IVLC-U"/>
                                 <DataGridTextColumn
                                     Width="100"
                                     Binding="{Binding ADCIVHC_U}"
-                                    Header="ADCIVHC-U" />
+                                    Header="ADCIVHC-U"/>
                                 <DataGridTextColumn
                                     Width="100"
                                     Binding="{Binding ADCIVLC_U}"
-                                    Header="ADCIVLC-U" />
+                                    Header="ADCIVLC-U"/>
                                 <DataGridTextColumn
                                     Width="80"
                                     Binding="{Binding MMWCL}"
-                                    Header="MMWCL" />
+                                    Header="MMWCL"/>
                                 <DataGridTextColumn
                                     Width="80"
                                     Binding="{Binding MMWCH}"
-                                    Header="MMWCH" />
+                                    Header="MMWCH"/>
                                 <DataGridTextColumn
                                     Width="80"
                                     Binding="{Binding IVHC_I}"
-                                    Header="IVHC-I" />
+                                    Header="IVHC-I"/>
                                 <DataGridTextColumn
                                     Width="80"
                                     Binding="{Binding IVLC_I}"
-                                    Header="IVLC-I" />
+                                    Header="IVLC-I"/>
                                 <DataGridTextColumn
                                     Width="100"
                                     Binding="{Binding ADCIVHC_I}"
-                                    Header="ADCIVHC-I" />
+                                    Header="ADCIVHC-I"/>
                                 <DataGridTextColumn
                                     Width="100"
                                     Binding="{Binding ADCIVLC_I}"
-                                    Header="ADCIVLC-I" />
+                                    Header="ADCIVLC-I"/>
                             </DataGrid.Columns>
                         </DataGrid>
 
@@ -921,7 +940,7 @@
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Center"
                             Background="Transparent"
-                            ShowsPreview="True" />
+                            ShowsPreview="True"/>
 
                         <!--  Row 3: Panel ze szczegółami  -->
                         <Grid
@@ -930,17 +949,17 @@
                             Margin="0,10,0,0"
                             Visibility="Collapsed">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <controls:VoltageCoefficients
                                 x:Name="historyVoltageCoefficients"
                                 Grid.Column="0"
-                                Margin="0,0,5,0" />
+                                Margin="0,0,5,0"/>
                             <controls:CurrentCoefficients
                                 x:Name="historyCurrentCoefficients"
                                 Grid.Column="1"
-                                Margin="5,0,0,0" />
+                                Margin="5,0,0,0"/>
                         </Grid>
                     </Grid>
                 </TabItem>
@@ -955,13 +974,14 @@
             VerticalAlignment="Center"
             Background="Transparent"
             DragCompleted="LogPanelSplitter_DragCompleted"
-            ShowsPreview="True" />
+            ShowsPreview="True"/>
 
         <!--  Logger na dole  -->
-        <Grid x:Name="LogPanel" Grid.Row="2">
+        <Grid x:Name="LogPanel"
+              Grid.Row="2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <TextBox
                 x:Name="txtLog"
@@ -976,7 +996,7 @@
                 HorizontalScrollBarVisibility="Auto"
                 IsReadOnly="True"
                 TextWrapping="Wrap"
-                VerticalScrollBarVisibility="Auto" />
+                VerticalScrollBarVisibility="Auto"/>
         </Grid>
     </Grid>
 </Window>

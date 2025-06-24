@@ -12,6 +12,11 @@ namespace WelderRS232
         public int? LastBaudRate { get; set; }
         public double? LogPanelHeight { get; set; }
 
+        // Nowe właściwości dla rozmiaru okna
+        public double? WindowWidth { get; set; }
+        public double? WindowHeight { get; set; }
+        public bool? WindowMaximized { get; set; }
+
         public static WelderSettings Load()
         {
             try

@@ -189,6 +189,20 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+
+        // Przywracanie rozmiaru i stanu okna przed wyświetleniem
+        var settings = WelderSettings.Load();
+        if (settings.WindowWidth.HasValue && settings.WindowHeight.HasValue &&
+            settings.WindowWidth.Value > 0 && settings.WindowHeight.Value > 0)
+        {
+            this.Width = settings.WindowWidth.Value;
+            this.Height = settings.WindowHeight.Value;
+        }
+        if (settings.WindowMaximized.HasValue)
+        {
+            this.WindowState = settings.WindowMaximized.Value ? WindowState.Maximized : WindowState.Normal;
+        }
+
         welder = new Welder(LogToConsole);
         welder.BezSzyfrowania = true;
         UpdateWelderInfo();
@@ -654,18 +668,6 @@ public partial class MainWindow : Window
 
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
-        // Sprawdź rozdzielczość ekranu i maksymalizuj okno jeśli wysokość < 1000px
-        var screenHeight = System.Windows.SystemParameters.PrimaryScreenHeight;
-        if (screenHeight < 1000)
-        {
-            this.WindowState = WindowState.Maximized;
-            LogToConsole($"Wykryto mały ekran (wysokość: {screenHeight:F0}px). Okno zostało zmaksymalizowane.");
-        }
-        else
-        {
-            LogToConsole($"Wykryto duży ekran (wysokość: {screenHeight:F0}px). Okno pozostaje w normalnym rozmiarze.");
-        }
-
         // Odczytaj wysokość logów z ustawień
         var settings = WelderSettings.Load();
         var mainGrid = (Grid)this.Content;
@@ -679,6 +681,50 @@ public partial class MainWindow : Window
         {
             LogToConsole("Brak zapisanej wysokości logów w ustawieniach, używam domyślnej.");
         }
+    }
+
+    private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+    {
+        // Zapisz rozmiar okna tylko jeśli nie jest zmaksymalizowane
+        if (this.WindowState == WindowState.Normal)
+        {
+            var settings = WelderSettings.Load();
+            settings.WindowWidth = this.Width;
+            settings.WindowHeight = this.Height;
+            settings.Save();
+        }
+    }
+
+    private void Window_StateChanged(object sender, EventArgs e)
+    {
+        var settings = WelderSettings.Load();
+        settings.WindowMaximized = (this.WindowState == WindowState.Maximized);
+        settings.Save();
+    }
+
+    private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+    {
+        // Zapisz aktualny rozmiar i stan okna przed zamknięciem
+        var settings = WelderSettings.Load();
+
+        if (this.WindowState == WindowState.Normal)
+        {
+            settings.WindowWidth = this.Width;
+            settings.WindowHeight = this.Height;
+        }
+        else
+        {
+            // Jeśli okno jest zmaksymalizowane, zapisz ostatni znany rozmiar normalny
+            // lub użyj domyślnych wartości
+            if (!settings.WindowWidth.HasValue || !settings.WindowHeight.HasValue)
+            {
+                settings.WindowWidth = 1200;
+                settings.WindowHeight = 800;
+            }
+        }
+
+        settings.WindowMaximized = (this.WindowState == WindowState.Maximized);
+        settings.Save();
     }
 
     private void LogPanel_SizeChanged(object sender, SizeChangedEventArgs e)
