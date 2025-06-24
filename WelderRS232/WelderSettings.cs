@@ -17,6 +17,10 @@ namespace WelderRS232
         public double? WindowHeight { get; set; }
         public bool? WindowMaximized { get; set; }
 
+        // Właściwości dla pozycji okna
+        public double? WindowLeft { get; set; }
+        public double? WindowTop { get; set; }
+
         public static WelderSettings Load()
         {
             try

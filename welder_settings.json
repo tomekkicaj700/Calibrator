@@ -2,7 +2,9 @@
   "LastPort": "COM4",
   "LastBaudRate": 115200,
   "LogPanelHeight": 240,
-  "WindowWidth": 1159,
-  "WindowHeight": 831,
-  "WindowMaximized": false
+  "WindowWidth": 1606,
+  "WindowHeight": 1051,
+  "WindowMaximized": false,
+  "WindowLeft": 954,
+  "WindowTop": 300
 }

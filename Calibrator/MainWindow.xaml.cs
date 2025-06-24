@@ -195,8 +195,77 @@ public partial class MainWindow : Window
         if (settings.WindowWidth.HasValue && settings.WindowHeight.HasValue &&
             settings.WindowWidth.Value > 0 && settings.WindowHeight.Value > 0)
         {
-            this.Width = settings.WindowWidth.Value;
-            this.Height = settings.WindowHeight.Value;
+            // Sprawdź rozmiar ekranu przed ustawieniem rozmiaru okna
+            double screenWidth = SystemParameters.PrimaryScreenWidth;
+            double screenHeight = SystemParameters.PrimaryScreenHeight;
+
+            // Ustaw rozmiar okna, ale nie przekraczaj rozmiaru ekranu
+            double windowWidth = Math.Min(settings.WindowWidth.Value, screenWidth);
+            double windowHeight = Math.Min(settings.WindowHeight.Value, screenHeight);
+
+            // Dodatkowo sprawdź czy okno nie jest za małe (minimum 800x600)
+            windowWidth = Math.Max(windowWidth, 800);
+            windowHeight = Math.Max(windowHeight, 600);
+
+            this.Width = windowWidth;
+            this.Height = windowHeight;
+
+            // Sprawdź i ustaw pozycję okna
+            if (settings.WindowLeft.HasValue && settings.WindowTop.HasValue)
+            {
+                double windowLeft = settings.WindowLeft.Value;
+                double windowTop = settings.WindowTop.Value;
+
+                // Sprawdź czy okno nie wychodzi poza granice ekranu
+                if (windowLeft + windowWidth > screenWidth)
+                {
+                    windowLeft = Math.Max(0, screenWidth - windowWidth);
+                }
+                if (windowTop + windowHeight > screenHeight)
+                {
+                    windowTop = Math.Max(0, screenHeight - windowHeight);
+                }
+
+                // Sprawdź czy okno nie jest całkowicie poza ekranem (np. na odłączonym monitorze)
+                if (windowLeft < -windowWidth + 100 || windowTop < -windowHeight + 100)
+                {
+                    // Wycentruj okno na ekranie
+                    windowLeft = (screenWidth - windowWidth) / 2;
+                    windowTop = (screenHeight - windowHeight) / 2;
+
+                    Dispatcher.BeginInvoke(() =>
+                    {
+                        LogToConsole("Okno było poza ekranem - wycentrowano na ekranie");
+                    });
+                }
+
+                // Ustaw pozycję okna
+                this.Left = windowLeft;
+                this.Top = windowTop;
+
+                // Logowanie informacji o dostosowaniu pozycji
+                if (windowLeft != settings.WindowLeft.Value || windowTop != settings.WindowTop.Value)
+                {
+                    Dispatcher.BeginInvoke(() =>
+                    {
+                        LogToConsole($"Dostosowano pozycję okna do rozmiaru ekranu: {screenWidth}x{screenHeight}");
+                        LogToConsole($"Zapisana pozycja: {settings.WindowLeft.Value},{settings.WindowTop.Value}");
+                        LogToConsole($"Ustawiona pozycja: {windowLeft},{windowTop}");
+                    });
+                }
+            }
+
+            // Logowanie informacji o dostosowaniu rozmiaru
+            if (windowWidth != settings.WindowWidth.Value || windowHeight != settings.WindowHeight.Value)
+            {
+                // Użyj Dispatcher.BeginInvoke aby logowanie nastąpiło po inicjalizacji komponentów
+                Dispatcher.BeginInvoke(() =>
+                {
+                    LogToConsole($"Dostosowano rozmiar okna do rozmiaru ekranu: {screenWidth}x{screenHeight}");
+                    LogToConsole($"Zapisany rozmiar: {settings.WindowWidth.Value}x{settings.WindowHeight.Value}");
+                    LogToConsole($"Ustawiony rozmiar: {windowWidth}x{windowHeight}");
+                });
+            }
         }
         if (settings.WindowMaximized.HasValue)
         {
@@ -691,6 +760,8 @@ public partial class MainWindow : Window
             var settings = WelderSettings.Load();
             settings.WindowWidth = this.Width;
             settings.WindowHeight = this.Height;
+            settings.WindowLeft = this.Left;
+            settings.WindowTop = this.Top;
             settings.Save();
         }
     }
@@ -711,6 +782,8 @@ public partial class MainWindow : Window
         {
             settings.WindowWidth = this.Width;
             settings.WindowHeight = this.Height;
+            settings.WindowLeft = this.Left;
+            settings.WindowTop = this.Top;
         }
         else
         {
