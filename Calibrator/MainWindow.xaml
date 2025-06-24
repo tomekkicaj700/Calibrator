@@ -178,13 +178,14 @@
                                     </Grid.ColumnDefinitions>
                                     <!--  Napięcie zgrzewania  -->
                                     <StackPanel Grid.Column="0"
-                                                HorizontalAlignment="Stretch"
-                                                VerticalAlignment="Stretch">
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Stretch"
+                                            Margin="0,0,20,0">
                                         <TextBlock Margin="0,0,0,10"
-                                                   HorizontalAlignment="Center"
-                                                   FontSize="22"
-                                                   FontWeight="Bold"
-                                                   Text="Napięcie zgrzewania [V]"/>
+                                                HorizontalAlignment="Center"
+                                                FontSize="22"
+                                                FontWeight="Bold"
+                                                Text="Napięcie zgrzewania [V]"/>
                                         <Grid HorizontalAlignment="Stretch">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>
@@ -270,28 +271,29 @@
                                             </StackPanel>
                                         </Grid>
                                         <TextBlock Margin="0,10,0,5"
-                                                   HorizontalAlignment="Center"
-                                                   FontSize="16"
-                                                   FontWeight="Bold"
-                                                   Text="Woltomierz [V]"/>
+                                                HorizontalAlignment="Center"
+                                                FontSize="16"
+                                                FontWeight="Bold"
+                                                Text="Woltomierz [V]"/>
                                         <lvc:Gauge x:Name="gaugeNapiecie"
-                                                   Width="237"
-                                                   Height="277"
-                                                   Foreground="#673AB7"
-                                                   Value="0.07"
-                                                   From="0"
-                                                   To="50"/>
+                                                Width="237"
+                                                Height="277"
+                                                Foreground="#673AB7"
+                                                Value="0.07"
+                                                From="0"
+                                                To="50"/>
                                     </StackPanel>
 
                                     <!--  Prąd zgrzewania  -->
                                     <StackPanel Grid.Column="1"
-                                                HorizontalAlignment="Stretch"
-                                                VerticalAlignment="Stretch">
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Stretch"
+                                            Margin="20,0,0,0">
                                         <TextBlock Margin="0,0,0,10"
-                                                   HorizontalAlignment="Center"
-                                                   FontSize="22"
-                                                   FontWeight="Bold"
-                                                   Text="Prąd zgrzewania [A]"/>
+                                                HorizontalAlignment="Center"
+                                                FontSize="22"
+                                                FontWeight="Bold"
+                                                Text="Prąd zgrzewania [A]"/>
                                         <Grid HorizontalAlignment="Stretch">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>
@@ -377,17 +379,17 @@
                                             </StackPanel>
                                         </Grid>
                                         <TextBlock Margin="0,10,0,5"
-                                                   HorizontalAlignment="Center"
-                                                   FontSize="16"
-                                                   FontWeight="Bold"
-                                                   Text="Amperomierz [A]"/>
+                                                HorizontalAlignment="Center"
+                                                FontSize="16"
+                                                FontWeight="Bold"
+                                                Text="Amperomierz [A]"/>
                                         <lvc:Gauge x:Name="gaugePrad"
-                                                   Width="237"
-                                                   Height="277"
-                                                   Foreground="#E91E63"
-                                                   Value="0"
-                                                   From="0"
-                                                   To="140"/>
+                                                Width="237"
+                                                Height="277"
+                                                Foreground="#E91E63"
+                                                Value="0"
+                                                From="0"
+                                                To="140"/>
                                     </StackPanel>
                                 </Grid>
                             </GroupBox>
