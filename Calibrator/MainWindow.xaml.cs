@@ -1160,4 +1160,9 @@ public partial class MainWindow : Window
             historyCurrentCoefficients.ADCIVLC_I_Value = "—";
         }
     }
+
+    private void welderChannels_Loaded(object sender, RoutedEventArgs e)
+    {
+
+    }
 }

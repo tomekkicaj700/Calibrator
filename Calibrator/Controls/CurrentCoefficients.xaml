@@ -7,9 +7,10 @@
              mc:Ignorable="d"
              d:DesignHeight="120"
              d:DesignWidth="250">
-    <Border BorderBrush="Gray"
-            BorderThickness="1"
-            Padding="5">
+    <GroupBox Header="Prąd zgrzewania"
+              Padding="5"
+              BorderBrush="Gray"
+              BorderThickness="1">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -85,5 +86,5 @@
                        FontWeight="Bold"
                        Foreground="Blue"/>
         </Grid>
-    </Border>
+    </GroupBox>
 </UserControl> 
