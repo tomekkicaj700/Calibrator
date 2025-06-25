@@ -51,5 +51,10 @@ namespace WelderRS232
                 Console.WriteLine($"Błąd podczas zapisu ustawień: {ex.Message}");
             }
         }
+
+        public static string GetConfigFilePath()
+        {
+            return Path.GetFullPath(SETTINGS_FILE);
+        }
     }
 }

@@ -21,6 +21,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml;
 using System.Xml.Serialization;
+using System.IO.Ports;
 
 namespace Calibrator;
 
@@ -1164,5 +1165,117 @@ public partial class MainWindow : Window
     private void welderChannels_Loaded(object sender, RoutedEventArgs e)
     {
 
+    }
+
+    private async void btnScanUSRDevices_Click(object sender, RoutedEventArgs e)
+    {
+        if (isScanning) return;
+        try
+        {
+            isScanning = true;
+            btnScanUSRDevices.IsEnabled = false;
+            LogToConsole("Rozpoczęto skanowanie urządzeń USR-N520 w sieci lokalnej...");
+            LogToConsole("Najpierw sprawdzam domyślny adres IP 192.168.0.7 na porcie 23...");
+
+            // Skanuj urządzenia USR-N520 w sieci
+            var usrDevices = await Task.Run(() => USRDeviceManager.FindUSRDevicesAsync());
+
+            if (usrDevices.Count == 0)
+            {
+                LogToConsole("Nie znaleziono żadnych urządzeń USR-N520 w sieci.");
+                return;
+            }
+
+            LogToConsole($"Znaleziono {usrDevices.Count} urządzeń USR-N520:");
+            foreach (var device in usrDevices)
+            {
+                LogToConsole($"  - {device.DeviceType} na {device.IP}:{device.Port}");
+            }
+
+            // Użyj pierwszego znalezionego urządzenia (prawdopodobnie 192.168.0.7 jeśli jest dostępne)
+            var firstDevice = usrDevices.First();
+            LogToConsole($"Próbuję połączyć się z {firstDevice.IP}:{firstDevice.Port}...");
+
+            var usrManager = new USRDeviceManager(firstDevice.IP, firstDevice.Port);
+            if (await usrManager.ConnectAsync())
+            {
+                LogToConsole($"Połączono z USR-N520 na {firstDevice.IP}:{firstDevice.Port}");
+
+                // Skanuj porty RS-232 na urządzeniu USR-N520
+                LogToConsole("Skanuję porty RS-232 na urządzeniu USR-N520...");
+                var rs232Results = await usrManager.ScanRS232PortsAsync();
+
+                if (rs232Results.Count == 0)
+                {
+                    LogToConsole("Nie znaleziono żadnych aktywnych portów RS-232 na urządzeniu USR-N520.");
+                }
+                else
+                {
+                    LogToConsole($"Wyniki skanowania portów RS-232 na USR-N520:");
+                    foreach (var result in rs232Results)
+                    {
+                        if (result.Success)
+                        {
+                            LogToConsole($"  ✓ {result.PortName} ({result.BaudRate} baud): {result.Response}");
+                            // Jeśli znaleziono zgrzewarkę, zaktualizuj status
+                            if (result.Response.Contains("ZGRZ") || result.Response.Contains("AGRE"))
+                            {
+                                LogToConsole("Znaleziono zgrzewarkę na porcie RS-232 urządzenia USR-N520!");
+                                // Tutaj możesz dodać logikę do przełączenia na komunikację przez USR-N520
+                            }
+                        }
+                        else
+                        {
+                            LogToConsole($"  ✗ {result.PortName} ({result.BaudRate} baud): {result.Response}");
+                        }
+                    }
+                }
+
+                usrManager.Disconnect();
+            }
+            else
+            {
+                LogToConsole($"Nie udało się połączyć z urządzeniem USR-N520 na {firstDevice.IP}:{firstDevice.Port}");
+            }
+        }
+        catch (Exception ex)
+        {
+            LogToConsole($"Błąd podczas skanowania urządzeń USR-N520: {ex.Message}");
+        }
+        finally
+        {
+            isScanning = false;
+            btnScanUSRDevices.IsEnabled = true;
+        }
+    }
+
+    private void btnOpenConfig_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            var configPath = WelderSettings.GetConfigFilePath();
+            if (File.Exists(configPath))
+            {
+                var process = new System.Diagnostics.Process
+                {
+                    StartInfo = new System.Diagnostics.ProcessStartInfo(configPath)
+                    {
+                        UseShellExecute = true
+                    }
+                };
+                process.Start();
+                LogToConsole($"Otwarto plik konfiguracji: {configPath}");
+            }
+            else
+            {
+                LogToConsole($"Plik konfiguracji nie istnieje: {configPath}");
+                MessageBox.Show($"Plik konfiguracji nie istnieje.\nŚcieżka: {configPath}", "Informacja", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+        catch (Exception ex)
+        {
+            LogToConsole($"Błąd podczas otwierania pliku konfiguracji: {ex.Message}");
+            MessageBox.Show($"Nie udało się otworzyć pliku konfiguracji: {ex.Message}", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
     }
 }
