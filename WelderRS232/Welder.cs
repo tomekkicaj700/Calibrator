@@ -89,6 +89,11 @@ namespace WelderRS232
         private readonly WelderSettings settings;
         private readonly LogCallback logCallback;
 
+        // Dodatkowe pole do przechowywania połączenia USR-N520
+        private USRDeviceManager? usrConnection = null;
+        private string? usrConnectedPort = null;
+        private string usrPortMode = "0"; // 0=RS-232, 1=RS-485
+
         public bool BezSzyfrowania { get; set; } = false;
 
         // Konstruktor domyślny - używa Console.WriteLine
@@ -157,6 +162,18 @@ namespace WelderRS232
                             return results;
                         }
                     }
+                }
+            }
+
+            // Jeśli nie znaleziono zgrzewarki na portach COM, spróbuj przez USR-N520
+            Log("Nie znaleziono zgrzewarki na portach COM. Próbuję połączyć się przez urządzenia USR-N520...");
+            var usrResult = TryConnectThroughUSR();
+            if (usrResult != null)
+            {
+                results.Add(usrResult);
+                if (usrResult.Success)
+                {
+                    return results;
                 }
             }
 
@@ -253,6 +270,116 @@ namespace WelderRS232
             }
         }
 
+        private PortScanResult? TryConnectThroughUSR()
+        {
+            try
+            {
+                Log("Skanuję urządzenia USR-N520 w sieci...");
+
+                // Skanuj urządzenia USR-N520
+                var usrDevices = USRDeviceManager.FindUSRDevicesAsync().Result;
+
+                if (usrDevices.Count == 0)
+                {
+                    Log("Nie znaleziono żadnych urządzeń USR-N520 w sieci.");
+                    return new PortScanResult
+                    {
+                        PortName = "USR-N520",
+                        BaudRate = 0,
+                        Success = false,
+                        Response = "Nie znaleziono urządzeń USR-N520"
+                    };
+                }
+
+                Log($"Znaleziono {usrDevices.Count} urządzeń USR-N520. Próbuję połączyć się z pierwszym...");
+
+                // Użyj pierwszego znalezionego urządzenia
+                var firstDevice = usrDevices.First();
+                var usrManager = new USRDeviceManager(firstDevice.IP, firstDevice.Port);
+
+                if (usrManager.ConnectAsync().Result)
+                {
+                    Log($"Połączono z USR-N520 na {firstDevice.IP}:{firstDevice.Port}");
+
+                    // Skanuj porty RS-232 na urządzeniu USR-N520
+                    var rs232Results = usrManager.ScanRS232PortsAsync().Result;
+
+                    foreach (var rs232Result in rs232Results)
+                    {
+                        if (rs232Result.Success)
+                        {
+                            Log($"Znaleziono zgrzewarkę na porcie RS-232 USR-N520: {rs232Result.PortName} ({rs232Result.BaudRate} baud)");
+
+                            // Ustaw status połączenia przez USR-N520
+                            if (rs232Result.Response.Contains("AGRE"))
+                            {
+                                status = WelderStatus.NEW_WELDER;
+                                welderInfo = new WelderInfo
+                                {
+                                    IsNewUnit = true,
+                                    Version = rs232Result.Response.Length >= 6 && rs232Result.Response[4] == 'V' && rs232Result.Response[5] == 'C' ? "C" : "EE"
+                                };
+                            }
+                            else
+                            {
+                                status = WelderStatus.CONNECTED;
+                            }
+
+                            connectedPort = $"USR-N520:{firstDevice.IP}:{rs232Result.PortName}";
+                            connectedBaudRate = rs232Result.BaudRate;
+
+                            // Zapisz połączenie USR-N520 do późniejszego użycia
+                            usrConnection = usrManager;
+                            usrConnectedPort = rs232Result.PortName;
+
+                            // Zapisz informację o wybranym porcie (RS-232 lub RS-485)
+                            if (rs232Result.PortName.Contains("RS-232"))
+                                usrPortMode = "0";
+                            else if (rs232Result.PortName.Contains("RS-485"))
+                                usrPortMode = "1";
+
+                            // Nie zamykaj połączenia - będzie używane później
+                            // usrManager.Disconnect();
+
+                            return new PortScanResult
+                            {
+                                PortName = $"USR-N520:{firstDevice.IP}:{rs232Result.PortName}",
+                                BaudRate = rs232Result.BaudRate,
+                                Success = true,
+                                Response = rs232Result.Response
+                            };
+                        }
+                    }
+
+                    usrManager.Disconnect();
+                    Log("Nie znaleziono zgrzewarki na portach RS-232 urządzenia USR-N520.");
+                }
+                else
+                {
+                    Log($"Nie udało się połączyć z urządzeniem USR-N520 na {firstDevice.IP}:{firstDevice.Port}");
+                }
+
+                return new PortScanResult
+                {
+                    PortName = "USR-N520",
+                    BaudRate = 0,
+                    Success = false,
+                    Response = "Nie znaleziono zgrzewarki na urządzeniach USR-N520"
+                };
+            }
+            catch (Exception ex)
+            {
+                Log($"Błąd podczas próby połączenia przez USR-N520: {ex.Message}");
+                return new PortScanResult
+                {
+                    PortName = "USR-N520",
+                    BaudRate = 0,
+                    Success = false,
+                    Response = $"Błąd USR-N520: {ex.Message}"
+                };
+            }
+        }
+
         private void PrintFrameTable(byte[] frame)
         {
             // Wiersz z numerami bajtów
@@ -296,6 +423,18 @@ namespace WelderRS232
                         return;
                     }
                 }
+            }
+
+            // Jeśli nie znaleziono zgrzewarki na portach COM, spróbuj przez USR-N520
+            Log("Nie znaleziono zgrzewarki na portach COM. Próbuję połączyć się przez urządzenia USR-N520...");
+            var usrResult = TryConnectThroughUSR();
+            if (usrResult?.Success == true)
+            {
+                // Zapisz informacje o połączeniu USR-N520
+                settings.LastPort = usrResult.PortName;
+                settings.LastBaudRate = usrResult.BaudRate;
+                settings.Save();
+                return;
             }
 
             // Jeśli nie znaleziono zgrzewarki, ustaw odpowiedni status
@@ -381,6 +520,12 @@ namespace WelderRS232
             configData = new byte[256];  // Inicjalizacja bufora na dane konfiguracji
             if (status != WelderStatus.CONNECTED && status != WelderStatus.NEW_WELDER) return false;
 
+            // Sprawdź czy połączenie jest przez USR-N520
+            if (usrConnection != null && !string.IsNullOrEmpty(usrConnectedPort))
+            {
+                return ReadConfigurationRegisterThroughUSR(out configData);
+            }
+
             try
             {
                 using (var port = new SerialPort(connectedPort!, connectedBaudRate!.Value, Parity.None, 8, StopBits.One))
@@ -450,6 +595,94 @@ namespace WelderRS232
             catch (Exception ex)
             {
                 Log($"Błąd podczas odczytu rejestru konfiguracji: {ex.Message}");
+            }
+            return false;
+        }
+
+        private bool ReadConfigurationRegisterThroughUSR(out byte[] configData)
+        {
+            configData = new byte[256];
+            try
+            {
+                if (usrConnection == null || string.IsNullOrEmpty(usrConnectedPort))
+                {
+                    Log("Błąd: Brak aktywnego połączenia USR-N520");
+                    return false;
+                }
+
+                // Konfiguruj port RS-232 na urządzeniu USR-N520
+                if (!usrConnection.ConfigureRS232PortAsync(connectedBaudRate!.Value, portMode: usrPortMode).Result)
+                {
+                    Log($"Błąd: Nie udało się skonfigurować portu RS-232 na urządzeniu USR-N520");
+                    return false;
+                }
+
+                byte[] cmd = WelderCommands.BuildReadConfigCommand(BezSzyfrowania);
+                Log("Wysyłanie komendy odczytu rejestru konfiguracji przez USR-N520:");
+                PrintFrameTable(cmd);
+
+                // Wyślij komendę przez USR-N520
+                usrConnection.SendDataAsync(cmd).Wait();
+
+                // Odbierz odpowiedź
+                var responseBytes = usrConnection.ReceiveDataBytesAsync().Result;
+                if (responseBytes == null || responseBytes.Length == 0)
+                {
+                    Log("Błąd: Nie otrzymano odpowiedzi przez USR-N520");
+                    return false;
+                }
+
+                string response = System.Text.Encoding.ASCII.GetString(responseBytes);
+                if (string.IsNullOrEmpty(response))
+                {
+                    Log("Błąd: Pusta odpowiedź przez USR-N520");
+                    return false;
+                }
+
+                if (response.Length > 256)
+                {
+                    Log("Błąd: Odpowiedź zbyt długa przez USR-N520");
+                    return false;
+                }
+
+                // Kopiuj dane konfiguracji do bufora wyjściowego
+                Array.Copy(responseBytes, configData, response.Length);
+
+                Log($"\nOdebrano {response.Length} bajtów przez USR-N520:");
+                Log("Offset    00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F    ASCII");
+                Log("--------  -----------------------------------------------    ----------------");
+
+                for (int i = 0; i < response.Length; i += 16)
+                {
+                    // Wyświetl offset
+                    var line = $"{i:X8}  ";
+
+                    // Wyświetl bajty w hex
+                    for (int j = 0; j < 16; j++)
+                    {
+                        if (i + j < response.Length)
+                            line += $"{responseBytes[i + j]:X2} ";
+                        else
+                            line += "   ";
+                    }
+
+                    // Wyświetl ASCII
+                    line += "   ";
+                    for (int j = 0; j < 16 && i + j < response.Length; j++)
+                    {
+                        char c = response[i + j];
+                        if (c >= 32 && c <= 126)  // Drukowalne znaki ASCII
+                            line += c;
+                        else
+                            line += ".";
+                    }
+                    Log(line);
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Log($"Błąd podczas odczytu rejestru konfiguracji przez USR-N520: {ex.Message}");
             }
             return false;
         }
@@ -563,6 +796,13 @@ namespace WelderRS232
                 errorDetails = "Brak połączenia ze zgrzewarką.";
                 return null;
             }
+
+            // Sprawdź czy połączenie jest przez USR-N520
+            if (usrConnection != null && !string.IsNullOrEmpty(usrConnectedPort))
+            {
+                return ReadWeldParametersThroughUSR(out errorDetails);
+            }
+
             try
             {
                 using (var port = new SerialPort(connectedPort!, connectedBaudRate!.Value, Parity.None, 8, StopBits.One))
@@ -629,6 +869,92 @@ namespace WelderRS232
             catch (Exception ex)
             {
                 errorDetails = $"Wyjątek: {ex.Message}";
+            }
+            return null;
+        }
+
+        private WeldParameters? ReadWeldParametersThroughUSR(out string? errorDetails)
+        {
+            errorDetails = null;
+            try
+            {
+                if (usrConnection == null || string.IsNullOrEmpty(usrConnectedPort))
+                {
+                    errorDetails = "Brak aktywnego połączenia USR-N520";
+                    return null;
+                }
+
+                // Konfiguruj port RS-232 na urządzeniu USR-N520
+                if (!usrConnection.ConfigureRS232PortAsync(connectedBaudRate!.Value, portMode: usrPortMode).Result)
+                {
+                    Log($"Błąd: Nie udało się skonfigurować portu RS-232 na urządzeniu USR-N520");
+                    return null;
+                }
+
+                byte[] cmd = WelderCommands.BuildReadWeldParametersCommand(BezSzyfrowania);
+                Log("Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:");
+                PrintFrameTable(cmd);
+
+                // Wyślij komendę przez USR-N520
+                usrConnection.SendDataAsync(cmd).Wait();
+
+                // Odbierz odpowiedź
+                var responseBytes = usrConnection.ReceiveDataBytesAsync().Result;
+                if (responseBytes == null || responseBytes.Length == 0)
+                {
+                    errorDetails = "Nie otrzymano odpowiedzi przez USR-N520";
+                    return null;
+                }
+
+                string response = System.Text.Encoding.ASCII.GetString(responseBytes);
+                if (string.IsNullOrEmpty(response))
+                {
+                    errorDetails = "Pusta odpowiedź przez USR-N520";
+                    return null;
+                }
+
+                try
+                {
+                    var result = ParseWeldParameters(response);
+                    if (result == null)
+                    {
+                        errorDetails = "Nieprawidłowy format odpowiedzi przez USR-N520";
+                        return null;
+                    }
+
+                    // Logowanie wszystkich parametrów zgrzewania
+                    Log($"\nParametry zgrzewania (przez USR-N520):");
+                    Log($"Napięcie zgrzewania: {result.NapiecieZgrzewania:F2} V");
+                    Log($"Prąd zgrzewania: {result.PradZgrzewania:F2} A");
+                    Log($"\nWartości ADC:");
+                    Log($"ADC napięcia zgrzewania: {result.ADCNapZgrzew:X4}");
+                    Log($"ADC prądu zgrzewania: {result.ADCPradZgrzew:X4}");
+                    Log($"\nParametry kalibracji napięcia:");
+                    Log($"IVHC-U: {result.IVHC_U}");
+                    Log($"IVLC-U: {result.IVLC_U}");
+                    Log($"ADCIVHC-U: {result.ADCIVHC_U}");
+                    Log($"ADCIVLC-U: {result.ADCIVLC_U}");
+                    Log($"\nParametry kalibracji prądu:");
+                    Log($"IVHC-I: {result.IMHC_I}");
+                    Log($"IVLC-I: {result.IMLC_I}");
+                    Log($"ADCIVHC-I: {result.ADCIVHC_I}");
+                    Log($"ADCIVLC-I: {result.ADCIVLC_I}");
+                    Log($"\nWartości multimetru:");
+                    Log($"MMWVL: {result.MMWVL}");
+                    Log($"MMWVH: {result.MMWVH}");
+                    Log($"MMWCL: {result.MMWCL}");
+                    Log($"MMWCH: {result.MMWCH}");
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    errorDetails = $"Błąd parsowania odpowiedzi przez USR-N520: {ex.Message}";
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                errorDetails = $"Wyjątek podczas komunikacji przez USR-N520: {ex.Message}";
             }
             return null;
         }

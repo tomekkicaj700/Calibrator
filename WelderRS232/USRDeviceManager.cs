@@ -184,58 +184,91 @@ namespace WelderRS232
                 return results;
             }
 
-            // USR-N520 ma 2 porty: RS-232 i RS-485
-            // Próbujemy komunikować się przez port RS-232 (port 1)
+            // USR-N520 ma 2 porty: RS-232 (MODE=0) i RS-485 (MODE=1)
+            // Sprawdzamy oba porty
+            string[] portModes = { "0", "1" }; // 0=RS-232, 1=RS-485
             int[] baudRates = { 19200, 115200, 9600 };
 
-            foreach (int baudRate in baudRates)
+            foreach (string portMode in portModes)
             {
                 try
                 {
-                    // Wysyłamy komendę konfiguracyjną do USR-N520 aby ustawić parametry portu RS-232
-                    string configCommand = $"AT+UART={baudRate},8,1,N\r\n";
-                    await SendDataAsync(configCommand);
+                    // 1. Przełącz na konkretny port
+                    string modeCommand = $"AT+MODE={portMode}\r\n";
+                    await SendDataAsync(modeCommand);
+                    await Task.Delay(200);
 
-                    // Czekamy na odpowiedź
-                    await Task.Delay(100);
-
-                    // Teraz próbujemy wysłać komendę identyfikacyjną do zgrzewarki
-                    byte[] identifyCommand = WelderCommands.BuildIdentifyCommand(true); // bez szyfrowania
-                    await SendDataAsync(identifyCommand);
-
-                    // Czekamy na odpowiedź
-                    await Task.Delay(500);
-
-                    // Sprawdzamy czy otrzymaliśmy odpowiedź
-                    var response = await ReceiveDataAsync();
-                    if (!string.IsNullOrEmpty(response))
+                    // Sprawdź czy przełączenie się udało
+                    var modeResponse = await ReceiveDataAsync();
+                    if (!modeResponse.Contains("OK"))
                     {
-                        bool found = response.Contains("ZGRZ") || response.Contains("AGRE");
-                        results.Add(new PortScanResult
-                        {
-                            PortName = $"USR-N520-RS232-{baudRate}",
-                            BaudRate = baudRate,
-                            Success = found,
-                            Response = response
-                        });
+                        Console.WriteLine($"Nie udało się przełączyć na port {portMode}");
+                        continue;
+                    }
 
-                        if (found)
+                    Console.WriteLine($"Przełączono na port {portMode} ({(portMode == "0" ? "RS-232" : "RS-485")})");
+
+                    foreach (int baudRate in baudRates)
+                    {
+                        try
                         {
-                            Console.WriteLine($"Znaleziono zgrzewarkę na USR-N520 RS-232, {baudRate} baud: {response}");
-                            break; // Znaleźliśmy zgrzewarkę, nie musimy sprawdzać innych prędkości
+                            // 2. Konfiguruj parametry portu
+                            string configCommand = $"AT+UART={baudRate},8,1,N\r\n";
+                            await SendDataAsync(configCommand);
+                            await Task.Delay(100);
+
+                            var configResponse = await ReceiveDataAsync();
+                            if (!configResponse.Contains("OK"))
+                            {
+                                Console.WriteLine($"Nie udało się skonfigurować portu {portMode} na {baudRate} baud");
+                                continue;
+                            }
+
+                            // 3. Wyślij komendę identyfikacyjną do zgrzewarki
+                            byte[] identifyCommand = WelderCommands.BuildIdentifyCommand(true); // bez szyfrowania
+                            await SendDataAsync(identifyCommand);
+
+                            // 4. Czekaj na odpowiedź
+                            await Task.Delay(500);
+
+                            // 5. Sprawdź czy otrzymaliśmy odpowiedź
+                            var response = await ReceiveDataAsync();
+                            if (!string.IsNullOrEmpty(response))
+                            {
+                                bool found = response.Contains("ZGRZ") || response.Contains("AGRE");
+                                string portName = portMode == "0" ? "RS-232" : "RS-485";
+
+                                results.Add(new PortScanResult
+                                {
+                                    PortName = $"USR-N520-{portName}-{baudRate}",
+                                    BaudRate = baudRate,
+                                    Success = found,
+                                    Response = response
+                                });
+
+                                if (found)
+                                {
+                                    Console.WriteLine($"Znaleziono zgrzewarkę na USR-N520 {portName}, {baudRate} baud: {response}");
+                                    // Nie przerywamy - sprawdź wszystkie prędkości na tym porcie
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"Błąd podczas skanowania portu {portMode} na {baudRate} baud: {ex.Message}");
+                            results.Add(new PortScanResult
+                            {
+                                PortName = $"USR-N520-{(portMode == "0" ? "RS-232" : "RS-485")}-{baudRate}",
+                                BaudRate = baudRate,
+                                Success = false,
+                                Response = $"Błąd: {ex.Message}"
+                            });
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Błąd podczas skanowania RS-232 na {baudRate} baud: {ex.Message}");
-                    results.Add(new PortScanResult
-                    {
-                        PortName = $"USR-N520-RS232-{baudRate}",
-                        BaudRate = baudRate,
-                        Success = false,
-                        Response = $"Błąd: {ex.Message}"
-                    });
+                    Console.WriteLine($"Błąd podczas przełączania na port {portMode}: {ex.Message}");
                 }
             }
 
@@ -243,14 +276,26 @@ namespace WelderRS232
         }
 
         // Metoda do konfiguracji portu RS-232 na USR-N520
-        public async Task<bool> ConfigureRS232PortAsync(int baudRate = 19200, int dataBits = 8, int stopBits = 1, string parity = "N")
+        public async Task<bool> ConfigureRS232PortAsync(int baudRate = 19200, int dataBits = 8, int stopBits = 1, string parity = "N", string portMode = "0")
         {
             if (!IsConnected)
                 return false;
 
             try
             {
-                // Komenda konfiguracyjna USR-N520
+                // 1. Przełącz na konkretny port (0=RS-232, 1=RS-485)
+                string modeCommand = $"AT+MODE={portMode}\r\n";
+                await SendDataAsync(modeCommand);
+                await Task.Delay(200);
+
+                var modeResponse = await ReceiveDataAsync();
+                if (!modeResponse.Contains("OK"))
+                {
+                    Console.WriteLine($"Nie udało się przełączyć na port {portMode}");
+                    return false;
+                }
+
+                // 2. Konfiguruj parametry portu
                 string configCommand = $"AT+UART={baudRate},{dataBits},{stopBits},{parity}\r\n";
                 await SendDataAsync(configCommand);
 
@@ -262,7 +307,7 @@ namespace WelderRS232
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Błąd konfiguracji RS-232: {ex.Message}");
+                Console.WriteLine($"Błąd konfiguracji portu {portMode}: {ex.Message}");
                 return false;
             }
         }
