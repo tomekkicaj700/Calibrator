@@ -293,6 +293,52 @@ public partial class MainWindow : Window
 
         // Inicjalizacja filtrowania
         ApplyFilter();
+
+        // Wyświetl IP komputera w pasku tytułowym
+        UpdateTitleWithLocalIP();
+    }
+
+    private void UpdateTitleWithLocalIP()
+    {
+        try
+        {
+            string localIP = GetLocalIPAddress();
+            if (!string.IsNullOrEmpty(localIP))
+            {
+                this.Title = $"Calibrator - IP: {localIP}";
+                LogToConsole($"Adres IP komputera: {localIP}");
+            }
+            else
+            {
+                this.Title = "Calibrator";
+                LogToConsole("Nie udało się określić adresu IP komputera");
+            }
+        }
+        catch (Exception ex)
+        {
+            LogToConsole($"Błąd podczas pobierania adresu IP: {ex.Message}");
+            this.Title = "Calibrator";
+        }
+    }
+
+    private string GetLocalIPAddress()
+    {
+        try
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip.ToString();
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            LogToConsole($"Błąd podczas pobierania adresu IP: {ex.Message}");
+        }
+        return string.Empty;
     }
 
     private void InitConfigTimer()
@@ -583,8 +629,6 @@ public partial class MainWindow : Window
     {
         try
         {
-            btnReadWeldParams.IsEnabled = false;
-
             if (!await EnsureWelderConnectionAsync("odczytu parametrów zgrzewania"))
             {
                 return; // Połączenie się nie udało, przerwij
@@ -597,10 +641,6 @@ public partial class MainWindow : Window
         catch (Exception ex)
         {
             LogToConsole($"✗ Błąd: {ex.Message}");
-        }
-        finally
-        {
-            btnReadWeldParams.IsEnabled = true;
         }
     }
 
@@ -628,7 +668,6 @@ public partial class MainWindow : Window
 
                 if (scanSuccess)
                 {
-                    btnReadConfig.IsEnabled = true;
                     LogToConsole("✓ Zgrzewarka znaleziona na ostatnio używanym porcie COM!");
                     LogToConsole("✓ Ustawienia komunikacji zostały zapisane.");
                     LogToConsole("✓ Możesz teraz użyć przycisku RUN z zapisanymi ustawieniami.");
@@ -644,14 +683,12 @@ public partial class MainWindow : Window
 
                     if (scanSuccess)
                     {
-                        btnReadConfig.IsEnabled = true;
                         LogToConsole("✓ Zgrzewarka znaleziona na innym porcie COM!");
                         LogToConsole("✓ Ustawienia komunikacji zostały zaktualizowane.");
                         LogToConsole("✓ Możesz teraz użyć przycisku RUN z zapisanymi ustawieniami.");
                     }
                     else
                     {
-                        btnReadConfig.IsEnabled = false;
                         LogToConsole("✗ Skanowanie portów COM nie powiodło się.");
                         LogToConsole("✗ Nie znaleziono zgrzewarki na żadnym porcie COM.");
                     }
@@ -677,7 +714,6 @@ public partial class MainWindow : Window
 
                 if (scanSuccess)
                 {
-                    btnReadConfig.IsEnabled = true;
                     LogToConsole("✓ Skanowanie portów COM zakończone pomyślnie!");
                     LogToConsole("✓ Ustawienia komunikacji zostały zapisane.");
                     LogToConsole("✓ Możesz teraz użyć przycisku RUN z zapisanymi ustawieniami.");
@@ -692,7 +728,6 @@ public partial class MainWindow : Window
                 }
                 else
                 {
-                    btnReadConfig.IsEnabled = false;
                     LogToConsole("✗ Skanowanie portów COM nie powiodło się.");
                     LogToConsole("✗ Nie znaleziono zgrzewarki na żadnym porcie COM.");
                 }
@@ -780,8 +815,6 @@ public partial class MainWindow : Window
     {
         try
         {
-            btnReadConfig.IsEnabled = false;
-
             if (!await EnsureWelderConnectionAsync("odczytu konfiguracji"))
             {
                 return; // Połączenie się nie udało, przerwij
@@ -805,10 +838,6 @@ public partial class MainWindow : Window
         catch (Exception ex)
         {
             LogToConsole($"✗ Błąd: {ex.Message}");
-        }
-        finally
-        {
-            btnReadConfig.IsEnabled = true;
         }
     }
 
@@ -1392,7 +1421,6 @@ public partial class MainWindow : Window
 
             if (scanSuccess)
             {
-                btnReadConfig.IsEnabled = true;
                 LogToConsole("✓ Skanowanie wszystkich urządzeń zakończone pomyślnie!");
                 LogToConsole("✓ Ustawienia komunikacji zostały zapisane.");
                 LogToConsole("✓ Możesz teraz użyć przycisku RUN z zapisanymi ustawieniami.");
@@ -1414,7 +1442,6 @@ public partial class MainWindow : Window
             }
             else
             {
-                btnReadConfig.IsEnabled = false;
                 LogToConsole("✗ Skanowanie wszystkich urządzeń nie powiodło się.");
                 LogToConsole("✗ Nie znaleziono zgrzewarki na żadnym urządzeniu.");
             }

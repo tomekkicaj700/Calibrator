@@ -50,11 +50,15 @@
             border-collapse: collapse;
             margin: 20px 0;
             width: 100%;
+            table-layout: fixed;
         }
         th, td {
             border: 1px solid #ccc;
             padding: 10px;
             text-align: left;
+            width: 33.33%;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
         th {
             background: #f0f0f0;
@@ -79,52 +83,43 @@
         <table>
             <thead>
                 <tr>
-                    <th></th>
+                    <th>Setting</th>
                     <th>Socket A</th>
                     <th>Socket B</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>Mode</td>
+                    <td>Working Mode</td>
                     <td>TCP Server</td>
                     <td>TCP Client</td>
                 </tr>
                 <tr>
-                    <td>Local/Remote Port</td>
-                    <td>23</td>
+                    <td>Operating Mode</td>
+                    <td>1</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>Local Port Number</td>
+                    <td>26</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>Remote Port Number</td>
+                    <td>-</td>
                     <td>20108</td>
                 </tr>
                 <tr>
-                    <td>Baud Rate</td>
-                    <td>115200</td>
-                    <td>115200</td>
+                    <td>Remote Server Address</td>
+                    <td>-</td>
+                    <td>IP komputera na którym uruchomiony jest kalibrator w trybie podglądu danych pomiarowych z miernika </td>
                 </tr>
-                <tr>
-                    <td>Data Bits</td>
-                    <td>8</td>
-                    <td>8</td>
-                </tr>
-                <tr>
-                    <td>Stop Bits</td>
-                    <td>1</td>
-                    <td>1</td>
-                </tr>
-                <tr>
-                    <td>Parity</td>
-                    <td>None</td>
-                    <td>None</td>
-                </tr>
-                <tr>
-                    <td>Flow Control</td>
-                    <td>None</td>
-                    <td>None</td>
-                </tr>
+
             </tbody>
         </table>
     </div>
     <div class='note'>
-        <b>Uwaga:</b> Pozostałe ustawienia pozostaw domyślne. Po zapisaniu zmian zrestartuj urządzenie, jeśli panel o to poprosi.
+        <b>Uwaga:</b> Dla Socket B w polu "Remote Server Address" wpisz adres IP komputera, na którym uruchomiona jest aplikacja Calibrator. Adres IP komputera wyświetlany jest w pasku tytułowym aplikacji.
     </div>
 </body>
 </html> 
