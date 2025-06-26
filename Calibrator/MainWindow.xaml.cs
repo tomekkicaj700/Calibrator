@@ -22,6 +22,8 @@ using System.Windows.Shapes;
 using System.Xml;
 using System.Xml.Serialization;
 using System.IO.Ports;
+using System.Net;
+using System.Net.Sockets;
 
 namespace Calibrator;
 
@@ -186,6 +188,10 @@ public partial class MainWindow : Window
         public int MMWVH, MMWVL, IVHC_U, IVLC_U, ADCIVHC_U, ADCIVLC_U;
         public int MMWCL, MMWCH, IVHC_I, IVLC_I, ADCIVHC_I, ADCIVLC_I;
     }
+
+    private TcpListener? tcpServer = null;
+    private CancellationTokenSource? tcpServerCts = null;
+    private bool isTcpServerRunning = false;
 
     public MainWindow()
     {
@@ -1472,5 +1478,90 @@ public partial class MainWindow : Window
         {
             MessageBox.Show($"Błąd podczas kopiowania zaznaczonego tekstu: {ex.Message}", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
         }
+    }
+
+    private async void btnTcpServer_Click(object sender, RoutedEventArgs e)
+    {
+        if (!isTcpServerRunning)
+        {
+            // Start serwera
+            string ip = txtTcpServerIp.Text.Trim();
+            int port = int.TryParse(txtTcpServerPort.Text.Trim(), out int p) ? p : 20108;
+            try
+            {
+                tcpServerCts = new CancellationTokenSource();
+                tcpServer = new TcpListener(IPAddress.Parse(ip), port);
+                tcpServer.Start();
+                isTcpServerRunning = true;
+                btnTcpServer.Content = "Zatrzymaj serwer TCP";
+                LogToConsole($"[TCP SERVER] Nasłuchuję na {ip}:{port}");
+                _ = Task.Run(() => AcceptTcpClientsAsync(tcpServer, tcpServerCts.Token));
+            }
+            catch (Exception ex)
+            {
+                LogToConsole($"[TCP SERVER] Błąd uruchamiania: {ex.Message}");
+                isTcpServerRunning = false;
+                btnTcpServer.Content = "Uruchom serwer TCP";
+            }
+        }
+        else
+        {
+            // Stop serwera
+            try
+            {
+                tcpServerCts?.Cancel();
+                tcpServer?.Stop();
+                isTcpServerRunning = false;
+                btnTcpServer.Content = "Uruchom serwer TCP";
+                LogToConsole("[TCP SERVER] Serwer zatrzymany.");
+            }
+            catch (Exception ex)
+            {
+                LogToConsole($"[TCP SERVER] Błąd zatrzymywania: {ex.Message}");
+            }
+        }
+    }
+
+    private async Task AcceptTcpClientsAsync(TcpListener listener, CancellationToken token)
+    {
+        try
+        {
+            while (!token.IsCancellationRequested)
+            {
+                var client = await listener.AcceptTcpClientAsync();
+                _ = Task.Run(() => HandleTcpClientAsync(client, token));
+            }
+        }
+        catch (ObjectDisposedException) { }
+        catch (Exception ex)
+        {
+            LogToConsole($"[TCP SERVER] Błąd AcceptTcpClients: {ex.Message}");
+        }
+    }
+
+    private async Task HandleTcpClientAsync(TcpClient client, CancellationToken token)
+    {
+        var endpoint = client.Client.RemoteEndPoint?.ToString() ?? "?";
+        LogToConsole($"[TCP SERVER] Połączono z {endpoint}");
+        try
+        {
+            using (client)
+            using (var stream = client.GetStream())
+            {
+                byte[] buffer = new byte[4096];
+                while (!token.IsCancellationRequested)
+                {
+                    int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length, token);
+                    if (bytesRead == 0) break; // rozłączono
+                    string data = System.Text.Encoding.UTF8.GetString(buffer, 0, bytesRead);
+                    LogToConsole($"[TCP SERVER] Otrzymano od {endpoint}: {data}");
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            LogToConsole($"[TCP SERVER] Błąd klienta {endpoint}: {ex.Message}");
+        }
+        LogToConsole($"[TCP SERVER] Rozłączono {endpoint}");
     }
 }
