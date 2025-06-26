@@ -602,35 +602,35 @@ public partial class MainWindow : Window
         {
             isScanning = true;
             btnScanPorts.IsEnabled = false;
-            LogToConsole("=== ROZPOCZYNAM SKANOWANIE I ZAPISYWANIE USTAWIENIA ===");
-            LogToConsole("Skanuję TCP/IP i porty COM, zapisuję ustawienia komunikacji...");
+            LogToConsole("=== ROZPOCZYNAM SKANOWANIE PORTÓW COM ===");
+            LogToConsole("Skanuję tylko porty COM, zapisuję ustawienia komunikacji...");
 
-            var scanSuccess = await Task.Run(() => welder.ScanAndSaveSettings());
+            var scanSuccess = await Task.Run(() => welder.ScanComPortsOnly());
             UpdateWelderInfo();
 
             if (scanSuccess)
             {
                 btnReadConfig.IsEnabled = true;
-                LogToConsole("✓ Skanowanie zakończone pomyślnie!");
+                LogToConsole("✓ Skanowanie portów COM zakończone pomyślnie!");
                 LogToConsole("✓ Ustawienia komunikacji zostały zapisane.");
                 LogToConsole("✓ Możesz teraz użyć przycisku RUN z zapisanymi ustawieniami.");
             }
             else
             {
                 btnReadConfig.IsEnabled = false;
-                LogToConsole("✗ Skanowanie nie powiodło się.");
-                LogToConsole("✗ Nie znaleziono zgrzewarki lub wystąpił błąd komunikacji.");
+                LogToConsole("✗ Skanowanie portów COM nie powiodło się.");
+                LogToConsole("✗ Nie znaleziono zgrzewarki na żadnym porcie COM.");
             }
         }
         catch (Exception ex)
         {
-            LogToConsole($"Błąd podczas skanowania: {ex.Message}");
+            LogToConsole($"Błąd podczas skanowania portów COM: {ex.Message}");
         }
         finally
         {
             isScanning = false;
             btnScanPorts.IsEnabled = true;
-            LogToConsole("=== ZAKOŃCZONO SKANOWANIE ===");
+            LogToConsole("=== ZAKOŃCZONO SKANOWANIE PORTÓW COM ===");
         }
     }
 
@@ -1238,10 +1238,9 @@ public partial class MainWindow : Window
             btnScanUSRDevices.IsEnabled = false;
             LogToConsole("=== ROZPOCZYNAM SKANOWANIE URZĄDZEŃ USR-N520 ===");
             LogToConsole("USR-N520 ma 2 fizyczne porty: RS-232 (9-pin D-sub) i RS-485 (2-wire A+, B-)");
-            LogToConsole("Próbuję połączyć się z USR-N520 na 192.168.0.7:8233...");
+            LogToConsole("Próbuję połączyć się z USR-N520 na 192.168.0.7:23...");
 
-            // Użyj ScanAndSaveSettings dla spójności z nową logiką
-            var scanSuccess = await Task.Run(() => welder.ScanAndSaveSettings());
+            var scanSuccess = await Task.Run(() => welder.ScanUSRDevicesOnly());
             UpdateWelderInfo();
 
             if (scanSuccess)
@@ -1286,6 +1285,60 @@ public partial class MainWindow : Window
             isScanning = false;
             btnScanUSRDevices.IsEnabled = true;
             LogToConsole("=== ZAKOŃCZONO SKANOWANIE USR-N520 ===");
+        }
+    }
+
+    private async void btnScanAllDevices_Click(object sender, RoutedEventArgs e)
+    {
+        if (isScanning) return;
+        try
+        {
+            isScanning = true;
+            btnScanAllDevices.IsEnabled = false;
+            LogToConsole("=== ROZPOCZYNAM SKANOWANIE WSZYSTKICH URZĄDZEŃ ===");
+            LogToConsole("Skanuję TCP/IP (USR-N520) i porty COM, zapisuję ustawienia komunikacji...");
+
+            var scanSuccess = await Task.Run(() => welder.ScanAndSaveSettings());
+            UpdateWelderInfo();
+
+            if (scanSuccess)
+            {
+                btnReadConfig.IsEnabled = true;
+                LogToConsole("✓ Skanowanie wszystkich urządzeń zakończone pomyślnie!");
+                LogToConsole("✓ Ustawienia komunikacji zostały zapisane.");
+                LogToConsole("✓ Możesz teraz użyć przycisku RUN z zapisanymi ustawieniami.");
+
+                // Pokaż szczegóły połączenia
+                var settings = WelderSettings.Load();
+                if (!string.IsNullOrEmpty(settings.CommType))
+                {
+                    LogToConsole($"✓ Typ połączenia: {settings.CommType}");
+                    if (settings.CommType == "TCP")
+                    {
+                        LogToConsole($"✓ IP: {settings.USR_IP}, Port: {settings.USR_Port}");
+                    }
+                    else if (settings.CommType == "COM")
+                    {
+                        LogToConsole($"✓ Port: {settings.COM_Port}, Baud: {settings.COM_Baud}");
+                    }
+                }
+            }
+            else
+            {
+                btnReadConfig.IsEnabled = false;
+                LogToConsole("✗ Skanowanie wszystkich urządzeń nie powiodło się.");
+                LogToConsole("✗ Nie znaleziono zgrzewarki na żadnym urządzeniu.");
+            }
+        }
+        catch (Exception ex)
+        {
+            LogToConsole($"Błąd podczas skanowania wszystkich urządzeń: {ex.Message}");
+        }
+        finally
+        {
+            isScanning = false;
+            btnScanAllDevices.IsEnabled = true;
+            LogToConsole("=== ZAKOŃCZONO SKANOWANIE WSZYSTKICH URZĄDZEŃ ===");
         }
     }
 

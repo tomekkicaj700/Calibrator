@@ -797,14 +797,9 @@ namespace WelderRS232
                     return false;
                 }
 
-                if (response.Length > 256)
-                {
-                    Log("Błąd: Odpowiedź zbyt długa przez USR-N520");
-                    return false;
-                }
-
                 // Kopiuj dane konfiguracji do bufora wyjściowego
-                Array.Copy(responseBytes, configData, response.Length);
+                int copyLen = Math.Min(responseBytes.Length, configData.Length);
+                Array.Copy(responseBytes, configData, copyLen);
 
                 Log($"\nOdebrano {response.Length} bajtów przez USR-N520:");
                 Log("Offset    00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F    ASCII");
@@ -1279,59 +1274,28 @@ namespace WelderRS232
             return "n/d";
         }
 
-        // Nowa metoda: Skanowanie i zapisywanie ustawień
-        public bool ScanAndSaveSettings()
+        // Nowa metoda: Skanowanie tylko portów COM
+        public bool ScanComPortsOnly()
         {
-            // Najpierw próbuj TCP/IP (USR-N520)
-            string usrIp = "192.168.0.7";
-            int usrPort = 23;
-            try
-            {
-                if (usrConnection == null)
-                {
-                    usrConnection = new USRDeviceManager(usrIp, usrPort, logCallback);
-                }
-                if (!usrConnection.IsConnected)
-                {
-                    if (!usrConnection.ConnectAsync().Result)
-                    {
-                        Log($"Nie udało się połączyć z USR-N520 na {usrIp}:{usrPort}");
-                    }
-                }
-                if (usrConnection.IsConnected)
-                {
-                    Log($"Połączono z USR-N520 na {usrIp}:{usrPort}");
-                    // USUWAM: Konfigurację portu RS-232 i tryb AT podczas skanowania
-                    // Skanowanie tylko wysyła komendę identyfikacyjną
-                    byte[] cmd = WelderCommands.BuildIdentifyCommand(BezSzyfrowania);
-                    usrConnection.SendDataAsync(cmd).Wait();
-                    var response = usrConnection.ReceiveDataAsync(2000).Result;
-                    bool found = response.Contains("ZGRZ") || response.Contains("AGRE");
-                    if (found)
-                    {
-                        settings.CommType = "USR";
-                        settings.USR_IP = usrIp;
-                        settings.USR_Port = usrPort;
-                        settings.Save();
-                        Log("Zgrzewarka znaleziona przez TCP/IP (USR-N520)!");
-                        // NIE rozłączaj usrConnection
-                        return true;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Log($"Błąd TCP/IP: {ex.Message}");
-            }
-            // Jeśli nie znaleziono przez TCP/IP, próbuj portów COM
+            Log("=== SKANOWANIE TYLKO PORTÓW COM ===");
             int[] baudRates = { 19200, 115200 };
             var availablePorts = SerialPort.GetPortNames();
+
+            if (availablePorts.Length == 0)
+            {
+                Log("Nie znaleziono żadnych dostępnych portów COM.");
+                return false;
+            }
+
+            Log($"Znaleziono {availablePorts.Length} portów COM: {string.Join(", ", availablePorts)}");
+
             foreach (var portName in availablePorts)
             {
                 foreach (var baud in baudRates)
                 {
                     try
                     {
+                        Log($"Sprawdzam port {portName} z prędkością {baud} baud...");
                         using (var port = new SerialPort(portName, baud, Parity.None, 8, StopBits.One))
                         {
                             port.ReadTimeout = 1000;
@@ -1348,25 +1312,103 @@ namespace WelderRS232
                                 settings.COM_Port = portName;
                                 settings.COM_Baud = baud;
                                 settings.Save();
-                                Log($"Zgrzewarka znaleziona na porcie COM {portName} ({baud} baud)!");
+                                Log($"✓ Zgrzewarka znaleziona na porcie COM {portName} ({baud} baud)!");
                                 return true;
+                            }
+                            else
+                            {
+                                Log($"  Brak odpowiedzi z {portName} ({baud} baud)");
                             }
                         }
                     }
                     catch (Exception ex)
                     {
-                        Log($"Błąd COM {portName} {baud}: {ex.Message}");
+                        Log($"  Błąd COM {portName} {baud}: {ex.Message}");
                     }
                 }
             }
-            Log("Nie znaleziono zgrzewarki przez TCP/IP ani na żadnym porcie COM.");
+            Log("✗ Nie znaleziono zgrzewarki na żadnym porcie COM.");
             return false;
+        }
+
+        // Nowa metoda: Skanowanie tylko urządzeń USR-N520
+        public bool ScanUSRDevicesOnly()
+        {
+            Log("=== SKANOWANIE TYLKO URZĄDZEŃ USR-N520 ===");
+            Log("USR-N520 ma 2 fizyczne porty: RS-232 (9-pin D-sub) i RS-485 (2-wire A+, B-)");
+
+            string usrIp = "192.168.0.7";
+            int usrPort = 23;
+
+            try
+            {
+                Log($"Próbuję połączyć się z USR-N520 na {usrIp}:{usrPort}...");
+
+                if (usrConnection == null)
+                {
+                    usrConnection = new USRDeviceManager(usrIp, usrPort, logCallback);
+                }
+
+                if (!usrConnection.IsConnected)
+                {
+                    if (!usrConnection.ConnectAsync().Result)
+                    {
+                        Log($"✗ Nie udało się połączyć z USR-N520 na {usrIp}:{usrPort}");
+                        return false;
+                    }
+                }
+
+                Log($"✓ Połączono z USR-N520 na {usrIp}:{usrPort}");
+
+                // Skanowanie tylko wysyła komendę identyfikacyjną
+                byte[] cmd = WelderCommands.BuildIdentifyCommand(BezSzyfrowania);
+                usrConnection.SendDataAsync(cmd).Wait();
+                var response = usrConnection.ReceiveDataAsync(2000).Result;
+                bool found = response.Contains("ZGRZ") || response.Contains("AGRE");
+
+                if (found)
+                {
+                    settings.CommType = "TCP";
+                    settings.USR_IP = usrIp;
+                    settings.USR_Port = usrPort;
+                    settings.Save();
+                    Log("✓ Zgrzewarka znaleziona przez TCP/IP (USR-N520)!");
+                    // NIE rozłączaj usrConnection - zostaw je aktywne
+                    return true;
+                }
+                else
+                {
+                    Log("✗ Brak odpowiedzi od zgrzewarki przez USR-N520");
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log($"✗ Błąd TCP/IP: {ex.Message}");
+                return false;
+            }
+        }
+
+        // Nowa metoda: Skanowanie i zapisywanie ustawień
+        public bool ScanAndSaveSettings()
+        {
+            Log("=== SKANOWANIE WSZYSTKICH URZĄDZEŃ ===");
+
+            // Najpierw próbuj TCP/IP (USR-N520)
+            if (ScanUSRDevicesOnly())
+            {
+                return true;
+            }
+
+            // Jeśli nie znaleziono przez TCP/IP, próbuj portów COM
+            Log("Przechodzę do skanowania portów COM...");
+            return ScanComPortsOnly();
         }
 
         // Nowa metoda: RUN z użyciem zapisanych ustawień
         public bool RunWithSavedSettings()
         {
-            if (settings.CommType == "USR")
+            if (settings.CommType == "TCP")
             {
                 string ip = settings.USR_IP ?? "";
                 int port = settings.USR_Port ?? 23;

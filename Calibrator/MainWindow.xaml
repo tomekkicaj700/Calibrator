@@ -57,6 +57,23 @@
                     </StackPanel>
                 </Button>
                 <Button
+                    x:Name="btnScanAllDevices"
+                    Width="200"
+                    Height="40"
+                    Margin="0,0,10,0"
+                    Background="Purple"
+                    Click="btnScanAllDevices_Click"
+                    FontSize="16"
+                    Foreground="White">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock
+                            Margin="0,0,5,0"
+                            FontSize="16"
+                            Text="🔍"/>
+                        <TextBlock Text="Skanuj wszystkie"/>
+                    </StackPanel>
+                </Button>
+                <Button
                     x:Name="btnReadConfig"
                     Width="200"
                     Height="40"
