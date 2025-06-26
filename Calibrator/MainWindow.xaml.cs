@@ -24,6 +24,7 @@ using System.Xml.Serialization;
 using System.IO.Ports;
 using System.Net;
 using System.Net.Sockets;
+using System.Collections.Concurrent;
 
 namespace Calibrator;
 
@@ -192,6 +193,7 @@ public partial class MainWindow : Window
     private TcpListener? tcpServer = null;
     private CancellationTokenSource? tcpServerCts = null;
     private bool isTcpServerRunning = false;
+    private ConcurrentBag<TcpClient> tcpClients = new ConcurrentBag<TcpClient>();
 
     public MainWindow()
     {
@@ -864,6 +866,33 @@ public partial class MainWindow : Window
         {
             LogToConsole("Brak zapisanej wysokości logów w ustawieniach, używam domyślnej.");
         }
+
+        // Inicjalizacja WebView2 z treścią HTML
+        InitializeInfoWebView();
+    }
+
+    private async void InitializeInfoWebView()
+    {
+        try
+        {
+            await InfoWebView.EnsureCoreWebView2Async();
+
+            // Wczytaj HTML z pliku
+            string htmlFilePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "InfoContent.html");
+            if (File.Exists(htmlFilePath))
+            {
+                string htmlContent = await File.ReadAllTextAsync(htmlFilePath);
+                InfoWebView.NavigateToString(htmlContent);
+            }
+            else
+            {
+                LogToConsole($"Plik HTML nie został znaleziony: {htmlFilePath}");
+            }
+        }
+        catch (Exception ex)
+        {
+            LogToConsole($"Błąd podczas inicjalizacji WebView2: {ex.Message}");
+        }
     }
 
     private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -1529,6 +1558,7 @@ public partial class MainWindow : Window
             while (!token.IsCancellationRequested)
             {
                 var client = await listener.AcceptTcpClientAsync();
+                tcpClients.Add(client);
                 _ = Task.Run(() => HandleTcpClientAsync(client, token));
             }
         }
@@ -1563,5 +1593,38 @@ public partial class MainWindow : Window
             LogToConsole($"[TCP SERVER] Błąd klienta {endpoint}: {ex.Message}");
         }
         LogToConsole($"[TCP SERVER] Rozłączono {endpoint}");
+    }
+
+    private async void btnSendSampleData_Click(object sender, RoutedEventArgs e)
+    {
+        if (!isTcpServerRunning)
+        {
+            LogToConsole("[TCP SERVER] Serwer nie jest uruchomiony.");
+            return;
+        }
+        if (tcpClients.IsEmpty)
+        {
+            LogToConsole("[TCP SERVER] Brak podłączonych klientów do wysłania danych.");
+            return;
+        }
+        string sample = $"Przykładowe dane {DateTime.Now:HH:mm:ss}";
+        byte[] data = System.Text.Encoding.UTF8.GetBytes(sample);
+        int sent = 0;
+        foreach (var client in tcpClients)
+        {
+            try
+            {
+                if (client.Connected)
+                {
+                    await client.GetStream().WriteAsync(data, 0, data.Length);
+                    sent++;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogToConsole($"[TCP SERVER] Błąd wysyłania do klienta: {ex.Message}");
+            }
+        }
+        LogToConsole($"[TCP SERVER] Wysłano przykładowe dane do {sent} klient(ów).");
     }
 }

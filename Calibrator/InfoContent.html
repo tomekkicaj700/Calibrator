@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Konfiguracja USR-N520</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 30px;
+            background: #fff;
+            color: #333;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.2em;
+        }
+        h2 {
+            color: #34495e;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+        .step {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .note {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        table {
+            border-collapse: collapse;
+            margin: 20px 0;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Konfiguracja USR-N520</h1>
+    <div class='step'>
+        <strong>1. Podłącz urządzenie do sieci Ethernet i zasilania.</strong>
+    </div>
+    <div class='step'>
+        <strong>2. Otwórz przeglądarkę i wpisz adres <span style="color:#3498db">192.168.0.7</span></strong>
+    </div>
+    <div class='step'>
+        <strong>3. Zaloguj się do panelu konfiguracyjnego:</strong><br>
+        Login: <b>admin</b><br>
+        Hasło: <b>admin</b>
+    </div>
+    <div class='step'>
+        <strong>4. Ustaw parametry zgodnie z poniższą tabelą:</strong>
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Socket A</th>
+                    <th>Socket B</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Mode</td>
+                    <td>TCP Server</td>
+                    <td>TCP Client</td>
+                </tr>
+                <tr>
+                    <td>Local/Remote Port</td>
+                    <td>23</td>
+                    <td>20108</td>
+                </tr>
+                <tr>
+                    <td>Baud Rate</td>
+                    <td>115200</td>
+                    <td>115200</td>
+                </tr>
+                <tr>
+                    <td>Data Bits</td>
+                    <td>8</td>
+                    <td>8</td>
+                </tr>
+                <tr>
+                    <td>Stop Bits</td>
+                    <td>1</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>Parity</td>
+                    <td>None</td>
+                    <td>None</td>
+                </tr>
+                <tr>
+                    <td>Flow Control</td>
+                    <td>None</td>
+                    <td>None</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class='note'>
+        <b>Uwaga:</b> Pozostałe ustawienia pozostaw domyślne. Po zapisaniu zmian zrestartuj urządzenie, jeśli panel o to poprosi.
+    </div>
+</body>
+</html> 

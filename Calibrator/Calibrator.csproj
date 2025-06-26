@@ -1,13 +1,25 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <None Remove="USR-N520 Default Settings.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CalibrationReport\CalibrationReport.csproj" />
     <ProjectReference Include="..\WelderRS232\WelderRS232.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3296.44" />
     <PackageReference Include="System.Management" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="USR-N520 Default Settings.png" />
+    <Content Include="InfoContent.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <PropertyGroup>
