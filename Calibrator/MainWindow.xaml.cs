@@ -296,29 +296,52 @@ public partial class MainWindow : Window
     {
         if (!isRunning)
         {
-            // Jeśli nie ma połączenia, najpierw skanuj porty
-            if (welder.GetStatus() != WelderStatus.CONNECTED && welder.GetStatus() != WelderStatus.NEW_WELDER)
+            // Sprawdź czy mamy zapisane ustawienia komunikacji
+            var settings = WelderSettings.Load();
+            if (string.IsNullOrEmpty(settings.CommType))
             {
-                LogToConsole("Brak połączenia ze zgrzewarką. Rozpoczynam skanowanie portów...");
-                var scanResults = await Task.Run(() => welder.ScanAllPorts());
-                UpdateWelderInfo();
-                if (welder.GetStatus() != WelderStatus.CONNECTED && welder.GetStatus() != WelderStatus.NEW_WELDER)
-                {
-                    LogToConsole("Nie znaleziono zgrzewarki. RUN nie zostanie uruchomiony.");
-                    return;
-                }
-                LogToConsole("Zgrzewarka znaleziona. Uruchamiam RUN.");
+                LogToConsole("✗ Brak zapisanych ustawień komunikacji.");
+                LogToConsole("✗ Najpierw użyj przycisku 'Skanuj porty' aby zapisać ustawienia.");
+                return;
             }
-            configTimer.Interval = TimeSpan.FromMilliseconds(GetSelectedInterval());
-            configTimer.Start();
-            iconRun.Text = "⏹";
-            txtRun.Text = "STOP";
-            btnRun.Background = new SolidColorBrush(Colors.Red);
-            btnRun.Foreground = Brushes.White;
-            isRunning = true;
+
+            LogToConsole("=== ROZPOCZYNAM RUN Z ZAPISANYMI USTAWIENIAMI ===");
+            LogToConsole($"Używam zapisanych ustawień: {settings.CommType}");
+            if (settings.CommType == "TCP")
+            {
+                LogToConsole($"  IP: {settings.USR_IP}, Port: {settings.USR_Port}");
+            }
+            else if (settings.CommType == "COM")
+            {
+                LogToConsole($"  Port: {settings.COM_Port}, Baud: {settings.COM_Baud}");
+            }
+
+            // Próbuj połączyć się używając zapisanych ustawień
+            var runSuccess = await Task.Run(() => welder.RunWithSavedSettings());
+            UpdateWelderInfo();
+
+            if (runSuccess)
+            {
+                LogToConsole("✓ Połączenie z zapisanymi ustawieniami udane!");
+                LogToConsole("✓ Uruchamiam timer odczytu parametrów zgrzewania...");
+
+                configTimer.Interval = TimeSpan.FromMilliseconds(GetSelectedInterval());
+                configTimer.Start();
+                iconRun.Text = "⏹";
+                txtRun.Text = "STOP";
+                btnRun.Background = new SolidColorBrush(Colors.Red);
+                btnRun.Foreground = Brushes.White;
+                isRunning = true;
+            }
+            else
+            {
+                LogToConsole("✗ Połączenie z zapisanymi ustawieniami nie powiodło się.");
+                LogToConsole("✗ Użyj przycisku 'Skanuj porty' aby ponownie skanować i zapisać ustawienia.");
+            }
         }
         else
         {
+            LogToConsole("=== ZATRZYMUJĘ RUN ===");
             configTimer.Stop();
             iconRun.Text = "▶";
             txtRun.Text = "RUN";
@@ -529,19 +552,35 @@ public partial class MainWindow : Window
         try
         {
             btnReadWeldParams.IsEnabled = false;
-            // Jeśli nie ma połączenia, najpierw skanuj porty
+
+            // Sprawdź czy mamy zapisane ustawienia komunikacji
+            var settings = WelderSettings.Load();
+            if (string.IsNullOrEmpty(settings.CommType))
+            {
+                LogToConsole("✗ Brak zapisanych ustawień komunikacji.");
+                LogToConsole("✗ Najpierw użyj przycisku 'Skanuj porty' aby zapisać ustawienia.");
+                return;
+            }
+
+            // Sprawdź czy jest połączenie, jeśli nie - użyj zapisanych ustawień
             if (welder.GetStatus() != WelderStatus.CONNECTED && welder.GetStatus() != WelderStatus.NEW_WELDER)
             {
-                LogToConsole("Brak połączenia ze zgrzewarką. Rozpoczynam skanowanie portów...");
-                var scanResults = await Task.Run(() => welder.ScanAllPorts());
+                LogToConsole("Brak połączenia ze zgrzewarką. Próbuję połączyć się z zapisanymi ustawieniami...");
+                var runSuccess = await Task.Run(() => welder.RunWithSavedSettings());
                 UpdateWelderInfo();
-                if (welder.GetStatus() != WelderStatus.CONNECTED && welder.GetStatus() != WelderStatus.NEW_WELDER)
+                if (!runSuccess)
                 {
-                    LogToConsole("Nie znaleziono zgrzewarki. Odczyt parametrów zgrzewania nie zostanie wykonany.");
+                    LogToConsole("✗ Nie udało się połączyć z zapisanymi ustawieniami.");
+                    LogToConsole("✗ Użyj przycisku 'Skanuj porty' aby ponownie skanować i zapisać ustawienia.");
                     return;
                 }
-                LogToConsole("Zgrzewarka znaleziona. Odczytuję parametry zgrzewania.");
+                LogToConsole("✓ Połączenie z zapisanymi ustawieniami udane. Odczytuję parametry zgrzewania.");
             }
+            else
+            {
+                LogToConsole("Zgrzewarka już połączona. Odczytuję parametry zgrzewania.");
+            }
+
             await ReadWeldParametersAndUpdateUIAsync();
             // Przełącz na zakładkę 'Parametry zgrzewania' (pierwsza zakładka, indeks 0)
             mainTabControl.SelectedIndex = 0;
@@ -563,28 +602,35 @@ public partial class MainWindow : Window
         {
             isScanning = true;
             btnScanPorts.IsEnabled = false;
-            LogToConsole("Rozpoczęto skanowanie portów.");
-            var scanResults = await Task.Run(() => welder.ScanAllPorts());
+            LogToConsole("=== ROZPOCZYNAM SKANOWANIE I ZAPISYWANIE USTAWIENIA ===");
+            LogToConsole("Skanuję TCP/IP i porty COM, zapisuję ustawienia komunikacji...");
+
+            var scanSuccess = await Task.Run(() => welder.ScanAndSaveSettings());
             UpdateWelderInfo();
-            if (welder.GetStatus() == WelderStatus.CONNECTED || welder.GetStatus() == WelderStatus.NEW_WELDER)
+
+            if (scanSuccess)
             {
                 btnReadConfig.IsEnabled = true;
-                LogToConsole("Zgrzewarka znaleziona!");
+                LogToConsole("✓ Skanowanie zakończone pomyślnie!");
+                LogToConsole("✓ Ustawienia komunikacji zostały zapisane.");
+                LogToConsole("✓ Możesz teraz użyć przycisku RUN z zapisanymi ustawieniami.");
             }
             else
             {
                 btnReadConfig.IsEnabled = false;
-                LogToConsole("Nie znaleziono zgrzewarki.");
+                LogToConsole("✗ Skanowanie nie powiodło się.");
+                LogToConsole("✗ Nie znaleziono zgrzewarki lub wystąpił błąd komunikacji.");
             }
         }
         catch (Exception ex)
         {
-            LogToConsole($"Błąd: {ex.Message}");
+            LogToConsole($"Błąd podczas skanowania: {ex.Message}");
         }
         finally
         {
             isScanning = false;
             btnScanPorts.IsEnabled = true;
+            LogToConsole("=== ZAKOŃCZONO SKANOWANIE ===");
         }
     }
 
@@ -659,19 +705,35 @@ public partial class MainWindow : Window
         try
         {
             btnReadConfig.IsEnabled = false;
-            // Jeśli nie ma połączenia, najpierw skanuj porty
+
+            // Sprawdź czy mamy zapisane ustawienia komunikacji
+            var settings = WelderSettings.Load();
+            if (string.IsNullOrEmpty(settings.CommType))
+            {
+                LogToConsole("✗ Brak zapisanych ustawień komunikacji.");
+                LogToConsole("✗ Najpierw użyj przycisku 'Skanuj porty' aby zapisać ustawienia.");
+                return;
+            }
+
+            // Sprawdź czy jest połączenie, jeśli nie - użyj zapisanych ustawień
             if (welder.GetStatus() != WelderStatus.CONNECTED && welder.GetStatus() != WelderStatus.NEW_WELDER)
             {
-                LogToConsole("Brak połączenia ze zgrzewarką. Rozpoczynam skanowanie portów...");
-                var scanResults = await Task.Run(() => welder.ScanAllPorts());
+                LogToConsole("Brak połączenia ze zgrzewarką. Próbuję połączyć się z zapisanymi ustawieniami...");
+                var runSuccess = await Task.Run(() => welder.RunWithSavedSettings());
                 UpdateWelderInfo();
-                if (welder.GetStatus() != WelderStatus.CONNECTED && welder.GetStatus() != WelderStatus.NEW_WELDER)
+                if (!runSuccess)
                 {
-                    LogToConsole("Nie znaleziono zgrzewarki. Odczyt kalibracji nie zostanie wykonany.");
+                    LogToConsole("✗ Nie udało się połączyć z zapisanymi ustawieniami.");
+                    LogToConsole("✗ Użyj przycisku 'Skanuj porty' aby ponownie skanować i zapisać ustawienia.");
                     return;
                 }
-                LogToConsole("Zgrzewarka znaleziona. Odczytuję kalibrację.");
+                LogToConsole("✓ Połączenie z zapisanymi ustawieniami udane. Odczytuję kalibrację.");
             }
+            else
+            {
+                LogToConsole("Zgrzewarka już połączona. Odczytuję kalibrację.");
+            }
+
             LogToConsole("Wysyłanie polecenia: Odczytaj kalibrację");
             byte[] configData = new byte[256];
             if (await Task.Run(() => welder.ReadConfigurationRegister(out configData)))
@@ -1174,78 +1236,56 @@ public partial class MainWindow : Window
         {
             isScanning = true;
             btnScanUSRDevices.IsEnabled = false;
-            LogToConsole("Rozpoczęto skanowanie urządzeń USR-N520 w sieci lokalnej...");
-            LogToConsole("Najpierw sprawdzam domyślny adres IP 192.168.0.7 na porcie 23...");
+            LogToConsole("=== ROZPOCZYNAM SKANOWANIE URZĄDZEŃ USR-N520 ===");
+            LogToConsole("USR-N520 ma 2 fizyczne porty: RS-232 (9-pin D-sub) i RS-485 (2-wire A+, B-)");
+            LogToConsole("Próbuję połączyć się z USR-N520 na 192.168.0.7:8233...");
 
-            // Skanuj urządzenia USR-N520 w sieci
-            var usrDevices = await Task.Run(() => USRDeviceManager.FindUSRDevicesAsync());
+            // Użyj ScanAndSaveSettings dla spójności z nową logiką
+            var scanSuccess = await Task.Run(() => welder.ScanAndSaveSettings());
+            UpdateWelderInfo();
 
-            if (usrDevices.Count == 0)
+            if (scanSuccess)
             {
-                LogToConsole("Nie znaleziono żadnych urządzeń USR-N520 w sieci.");
-                return;
-            }
+                LogToConsole("✓ Skanowanie USR-N520 zakończone pomyślnie!");
+                LogToConsole("✓ Ustawienia komunikacji zostały zapisane.");
 
-            LogToConsole($"Znaleziono {usrDevices.Count} urządzeń USR-N520:");
-            foreach (var device in usrDevices)
-            {
-                LogToConsole($"  - {device.DeviceType} na {device.IP}:{device.Port}");
-            }
-
-            // Użyj pierwszego znalezionego urządzenia (prawdopodobnie 192.168.0.7 jeśli jest dostępne)
-            var firstDevice = usrDevices.First();
-            LogToConsole($"Próbuję połączyć się z {firstDevice.IP}:{firstDevice.Port}...");
-
-            var usrManager = new USRDeviceManager(firstDevice.IP, firstDevice.Port);
-            if (await usrManager.ConnectAsync())
-            {
-                LogToConsole($"Połączono z USR-N520 na {firstDevice.IP}:{firstDevice.Port}");
-
-                // Skanuj porty RS-232 na urządzeniu USR-N520
-                LogToConsole("Skanuję porty RS-232 na urządzeniu USR-N520...");
-                var rs232Results = await usrManager.ScanRS232PortsAsync();
-
-                if (rs232Results.Count == 0)
+                // Pokaż szczegóły połączenia
+                var settings = WelderSettings.Load();
+                if (!string.IsNullOrEmpty(settings.CommType))
                 {
-                    LogToConsole("Nie znaleziono żadnych aktywnych portów RS-232 na urządzeniu USR-N520.");
-                }
-                else
-                {
-                    LogToConsole($"Wyniki skanowania portów RS-232 na USR-N520:");
-                    foreach (var result in rs232Results)
+                    LogToConsole($"✓ Typ połączenia: {settings.CommType}");
+                    if (settings.CommType == "TCP")
                     {
-                        if (result.Success)
-                        {
-                            LogToConsole($"  ✓ {result.PortName} ({result.BaudRate} baud): {result.Response}");
-                            // Jeśli znaleziono zgrzewarkę, zaktualizuj status
-                            if (result.Response.Contains("ZGRZ") || result.Response.Contains("AGRE"))
-                            {
-                                LogToConsole("Znaleziono zgrzewarkę na porcie RS-232 urządzenia USR-N520!");
-                                // Tutaj możesz dodać logikę do przełączenia na komunikację przez USR-N520
-                            }
-                        }
-                        else
-                        {
-                            LogToConsole($"  ✗ {result.PortName} ({result.BaudRate} baud): {result.Response}");
-                        }
+                        LogToConsole($"✓ IP: {settings.USR_IP}, Port: {settings.USR_Port}");
+                    }
+                    else if (settings.CommType == "COM")
+                    {
+                        LogToConsole($"✓ Port: {settings.COM_Port}, Baud: {settings.COM_Baud}");
                     }
                 }
-
-                usrManager.Disconnect();
             }
             else
             {
-                LogToConsole($"Nie udało się połączyć z urządzeniem USR-N520 na {firstDevice.IP}:{firstDevice.Port}");
+                LogToConsole("✗ Skanowanie USR-N520 nie powiodło się.");
+                LogToConsole("✗ Nie znaleziono zgrzewarki lub wystąpił błąd komunikacji.");
             }
         }
         catch (Exception ex)
         {
             LogToConsole($"Błąd podczas skanowania urządzeń USR-N520: {ex.Message}");
+            LogToConsole("Szczegóły błędu:");
+            LogToConsole($"  - Typ: {ex.GetType().Name}");
+            LogToConsole($"  - Wiadomość: {ex.Message}");
+            if (ex.InnerException != null)
+            {
+                LogToConsole($"  - Błąd wewnętrzny: {ex.InnerException.Message}");
+            }
         }
         finally
         {
             isScanning = false;
             btnScanUSRDevices.IsEnabled = true;
+            LogToConsole("=== ZAKOŃCZONO SKANOWANIE USR-N520 ===");
         }
     }
 
@@ -1276,6 +1316,54 @@ public partial class MainWindow : Window
         {
             LogToConsole($"Błąd podczas otwierania pliku konfiguracji: {ex.Message}");
             MessageBox.Show($"Nie udało się otworzyć pliku konfiguracji: {ex.Message}", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+
+    // Menu kontekstowe logu
+    private void menuClearLog_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            txtLog.Clear();
+            // Nie logujemy informacji o wyczyszczeniu logu
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Błąd podczas czyszczenia logu: {ex.Message}", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+
+    private void menuCopyLog_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            if (!string.IsNullOrEmpty(txtLog.Text))
+            {
+                Clipboard.SetText(txtLog.Text);
+                // Nie logujemy informacji o skopiowaniu
+            }
+            // Nie logujemy gdy log jest pusty
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Błąd podczas kopiowania logu: {ex.Message}", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+
+    private void menuCopySelected_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            if (!string.IsNullOrEmpty(txtLog.SelectedText))
+            {
+                Clipboard.SetText(txtLog.SelectedText);
+                // Nie logujemy informacji o skopiowaniu zaznaczonego tekstu
+            }
+            // Nie logujemy gdy nic nie jest zaznaczone
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Błąd podczas kopiowania zaznaczonego tekstu: {ex.Message}", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 }

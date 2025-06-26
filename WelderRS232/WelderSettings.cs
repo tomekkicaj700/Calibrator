@@ -21,6 +21,15 @@ namespace WelderRS232
         public double? WindowLeft { get; set; }
         public double? WindowTop { get; set; }
 
+        // Flaga preferencji połączenia TCP/IP
+        public bool PreferTcpIp { get; set; } = false;
+
+        public string? CommType { get; set; } // \"USR\" or \"COM\"
+        public string? USR_IP { get; set; }
+        public int? USR_Port { get; set; }
+        public string? COM_Port { get; set; }
+        public int? COM_Baud { get; set; }
+
         public static WelderSettings Load()
         {
             try

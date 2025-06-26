@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 
 namespace WelderRS232
@@ -7,9 +8,13 @@ namespace WelderRS232
         private USRDeviceManager manager;
         public bool IsConnected { get; private set; }
 
-        public TcpWelderCommunication(string ip, int port = 23)
+        public TcpWelderCommunication(string ip, int port = 23) : this(ip, port, Console.WriteLine)
         {
-            manager = new USRDeviceManager(ip, port);
+        }
+
+        public TcpWelderCommunication(string ip, int port, Action<string> logFn)
+        {
+            manager = new USRDeviceManager(ip, port, logFn);
         }
 
         public async Task<bool> ConnectAsync()

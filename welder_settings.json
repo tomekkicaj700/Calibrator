@@ -1,10 +1,16 @@
 {
-  "LastPort": "COM2",
+  "LastPort": "COM1",
   "LastBaudRate": 115200,
   "LogPanelHeight": 240,
-  "WindowWidth": 1841,
-  "WindowHeight": 1051,
+  "WindowWidth": 1097,
+  "WindowHeight": 1186,
   "WindowMaximized": false,
-  "WindowLeft": 306,
-  "WindowTop": 113
+  "WindowLeft": 66,
+  "WindowTop": 83,
+  "PreferTcpIp": true,
+  "CommType": "USR",
+  "USR_IP": "192.168.0.7",
+  "USR_Port": 23,
+  "COM_Port": null,
+  "COM_Baud": null
 }

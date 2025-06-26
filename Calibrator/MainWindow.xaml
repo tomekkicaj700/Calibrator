@@ -1017,7 +1017,46 @@
                 HorizontalScrollBarVisibility="Auto"
                 IsReadOnly="True"
                 TextWrapping="Wrap"
-                VerticalScrollBarVisibility="Auto"/>
+                VerticalScrollBarVisibility="Auto">
+                <TextBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem
+                            x:Name="menuClearLog"
+                            Click="menuClearLog_Click"
+                            Header="Wyczyść ekran"
+                            ToolTip="Usuwa wszystkie wpisy z logu">
+                            <MenuItem.Icon>
+                                <TextBlock
+                                    FontSize="14"
+                                    Text="🗑"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator/>
+                        <MenuItem
+                            x:Name="menuCopyLog"
+                            Click="menuCopyLog_Click"
+                            Header="Kopiuj wszystko"
+                            ToolTip="Kopiuje całą zawartość logu do schowka">
+                            <MenuItem.Icon>
+                                <TextBlock
+                                    FontSize="14"
+                                    Text="📋"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem
+                            x:Name="menuCopySelected"
+                            Click="menuCopySelected_Click"
+                            Header="Kopiuj zaznaczone"
+                            ToolTip="Kopiuje zaznaczony tekst do schowka">
+                            <MenuItem.Icon>
+                                <TextBlock
+                                    FontSize="14"
+                                    Text="✂"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </ContextMenu>
+                </TextBox.ContextMenu>
+            </TextBox>
         </Grid>
     </Grid>
 </Window>
