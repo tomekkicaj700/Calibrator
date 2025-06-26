@@ -190,23 +190,23 @@
                     </StackPanel>
                 </Button>
                 <StackPanel Orientation="Horizontal"
-                        Margin="0,10,0,0">
+                            Margin="0,10,0,0">
                     <TextBlock Text="IP:"
-                            VerticalAlignment="Center"
-                            Margin="0,0,5,0"/>
+                               VerticalAlignment="Center"
+                               Margin="0,0,5,0"/>
                     <TextBox x:Name="txtTcpServerIp"
-                            Width="100"
-                            IsReadOnly="True"
-                            Text="0.0.0.0"
-                            Margin="0,0,10,0"/>
+                             Width="100"
+                             IsReadOnly="True"
+                             Text="0.0.0.0"
+                             Margin="0,0,10,0"/>
                     <TextBlock Text="Port:"
-                            VerticalAlignment="Center"
-                            Margin="0,0,5,0"/>
+                               VerticalAlignment="Center"
+                               Margin="0,0,5,0"/>
                     <TextBox x:Name="txtTcpServerPort"
-                            Width="70"
-                            IsReadOnly="True"
-                            Text="20108"
-                            Margin="0,0,10,0"/>
+                             Width="70"
+                             IsReadOnly="True"
+                             Text="20108"
+                             Margin="0,0,10,0"/>
                     <Button x:Name="btnTcpServer"
                             Content="Uruchom serwer TCP"
                             Width="160"
