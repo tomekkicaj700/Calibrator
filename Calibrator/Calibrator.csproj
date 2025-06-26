@@ -17,6 +17,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
     <NoWarn>NU1701</NoWarn>
+    <ApplicationIcon>logo_icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <Target Name="TestTarget" AfterTargets="Build">

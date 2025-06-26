@@ -296,48 +296,22 @@ public partial class MainWindow : Window
     {
         if (!isRunning)
         {
-            // Sprawdź czy mamy zapisane ustawienia komunikacji
-            var settings = WelderSettings.Load();
-            if (string.IsNullOrEmpty(settings.CommType))
+            LogToConsole("=== ROZPOCZYNAM RUN ===");
+
+            if (!await EnsureWelderConnectionAsync("funkcji RUN"))
             {
-                LogToConsole("✗ Brak zapisanych ustawień komunikacji.");
-                LogToConsole("✗ Najpierw użyj przycisku 'Skanuj porty' aby zapisać ustawienia.");
-                return;
+                return; // Połączenie się nie udało, przerwij
             }
 
-            LogToConsole("=== ROZPOCZYNAM RUN Z ZAPISANYMI USTAWIENIAMI ===");
-            LogToConsole($"Używam zapisanych ustawień: {settings.CommType}");
-            if (settings.CommType == "TCP")
-            {
-                LogToConsole($"  IP: {settings.USR_IP}, Port: {settings.USR_Port}");
-            }
-            else if (settings.CommType == "COM")
-            {
-                LogToConsole($"  Port: {settings.COM_Port}, Baud: {settings.COM_Baud}");
-            }
+            LogToConsole("✓ Połączenie udane! Uruchamiam timer odczytu parametrów zgrzewania...");
 
-            // Próbuj połączyć się używając zapisanych ustawień
-            var runSuccess = await Task.Run(() => welder.RunWithSavedSettings());
-            UpdateWelderInfo();
-
-            if (runSuccess)
-            {
-                LogToConsole("✓ Połączenie z zapisanymi ustawieniami udane!");
-                LogToConsole("✓ Uruchamiam timer odczytu parametrów zgrzewania...");
-
-                configTimer.Interval = TimeSpan.FromMilliseconds(GetSelectedInterval());
-                configTimer.Start();
-                iconRun.Text = "⏹";
-                txtRun.Text = "STOP";
-                btnRun.Background = new SolidColorBrush(Colors.Red);
-                btnRun.Foreground = Brushes.White;
-                isRunning = true;
-            }
-            else
-            {
-                LogToConsole("✗ Połączenie z zapisanymi ustawieniami nie powiodło się.");
-                LogToConsole("✗ Użyj przycisku 'Skanuj porty' aby ponownie skanować i zapisać ustawienia.");
-            }
+            configTimer.Interval = TimeSpan.FromMilliseconds(GetSelectedInterval());
+            configTimer.Start();
+            iconRun.Text = "⏹";
+            txtRun.Text = "STOP";
+            btnRun.Background = new SolidColorBrush(Colors.Red);
+            btnRun.Foreground = Brushes.White;
+            isRunning = true;
         }
         else
         {
@@ -547,38 +521,65 @@ public partial class MainWindow : Window
         return s;
     }
 
+    // Wspólna metoda do sprawdzania połączenia ze zgrzewarką i automatycznego skanowania
+    private async Task<bool> EnsureWelderConnectionAsync(string operationName = "operacji")
+    {
+        // Sprawdź czy mamy zapisane ustawienia komunikacji
+        var settings = WelderSettings.Load();
+        if (string.IsNullOrEmpty(settings.CommType))
+        {
+            LogToConsole("Brak zapisanych ustawień komunikacji.");
+            LogToConsole($"Automatycznie skanuję wszystkie urządzenia w poszukiwaniu zgrzewarki dla {operationName}...");
+
+            // Automatycznie skanuj wszystkie urządzenia
+            var scanSuccess = await Task.Run(() => welder.ScanAndSaveSettings());
+            UpdateWelderInfo();
+
+            if (!scanSuccess)
+            {
+                LogToConsole("✗ Zgrzewarka nie została znaleziona na żadnym urządzeniu.");
+                LogToConsole("✗ Sprawdź połączenie ze zgrzewarką i spróbuj ponownie.");
+                return false;
+            }
+
+            LogToConsole($"✓ Zgrzewarka została znaleziona! Kontynuuję {operationName}...");
+        }
+        else
+        {
+            LogToConsole("Znaleziono zapisane ustawienia komunikacji.");
+        }
+
+        // Sprawdź czy jest połączenie, jeśli nie - użyj zapisanych ustawień
+        if (welder.GetStatus() != WelderStatus.CONNECTED && welder.GetStatus() != WelderStatus.NEW_WELDER)
+        {
+            LogToConsole("Brak połączenia ze zgrzewarką. Próbuję połączyć się z zapisanymi ustawieniami...");
+            var runSuccess = await Task.Run(() => welder.RunWithSavedSettings());
+            UpdateWelderInfo();
+            if (!runSuccess)
+            {
+                LogToConsole("✗ Nie udało się połączyć z zapisanymi ustawieniami.");
+                LogToConsole("✗ Spróbuj ponownie skanować urządzenia.");
+                return false;
+            }
+            LogToConsole($"✓ Połączenie z zapisanymi ustawieniami udane. Kontynuuję {operationName}.");
+        }
+        else
+        {
+            LogToConsole($"Zgrzewarka już połączona. Kontynuuję {operationName}.");
+        }
+
+        return true;
+    }
+
     private async void btnReadWeldParams_Click(object sender, RoutedEventArgs e)
     {
         try
         {
             btnReadWeldParams.IsEnabled = false;
 
-            // Sprawdź czy mamy zapisane ustawienia komunikacji
-            var settings = WelderSettings.Load();
-            if (string.IsNullOrEmpty(settings.CommType))
+            if (!await EnsureWelderConnectionAsync("odczytu parametrów zgrzewania"))
             {
-                LogToConsole("✗ Brak zapisanych ustawień komunikacji.");
-                LogToConsole("✗ Najpierw użyj przycisku 'Skanuj porty' aby zapisać ustawienia.");
-                return;
-            }
-
-            // Sprawdź czy jest połączenie, jeśli nie - użyj zapisanych ustawień
-            if (welder.GetStatus() != WelderStatus.CONNECTED && welder.GetStatus() != WelderStatus.NEW_WELDER)
-            {
-                LogToConsole("Brak połączenia ze zgrzewarką. Próbuję połączyć się z zapisanymi ustawieniami...");
-                var runSuccess = await Task.Run(() => welder.RunWithSavedSettings());
-                UpdateWelderInfo();
-                if (!runSuccess)
-                {
-                    LogToConsole("✗ Nie udało się połączyć z zapisanymi ustawieniami.");
-                    LogToConsole("✗ Użyj przycisku 'Skanuj porty' aby ponownie skanować i zapisać ustawienia.");
-                    return;
-                }
-                LogToConsole("✓ Połączenie z zapisanymi ustawieniami udane. Odczytuję parametry zgrzewania.");
-            }
-            else
-            {
-                LogToConsole("Zgrzewarka już połączona. Odczytuję parametry zgrzewania.");
+                return; // Połączenie się nie udało, przerwij
             }
 
             await ReadWeldParametersAndUpdateUIAsync();
@@ -587,7 +588,7 @@ public partial class MainWindow : Window
         }
         catch (Exception ex)
         {
-            LogToConsole($"Błąd: {ex.Message}");
+            LogToConsole($"✗ Błąd: {ex.Message}");
         }
         finally
         {
@@ -602,35 +603,102 @@ public partial class MainWindow : Window
         {
             isScanning = true;
             btnScanPorts.IsEnabled = false;
-            LogToConsole("=== ROZPOCZYNAM SKANOWANIE PORTÓW COM ===");
-            LogToConsole("Skanuję tylko porty COM, zapisuję ustawienia komunikacji...");
 
-            var scanSuccess = await Task.Run(() => welder.ScanComPortsOnly());
-            UpdateWelderInfo();
+            // Sprawdź zapisane ustawienia komunikacji
+            var settings = WelderSettings.Load();
+            bool hasComSettings = !string.IsNullOrEmpty(settings.CommType) && settings.CommType == "COM" && !string.IsNullOrEmpty(settings.COM_Port);
 
-            if (scanSuccess)
+            if (hasComSettings)
             {
-                btnReadConfig.IsEnabled = true;
-                LogToConsole("✓ Skanowanie portów COM zakończone pomyślnie!");
-                LogToConsole("✓ Ustawienia komunikacji zostały zapisane.");
-                LogToConsole("✓ Możesz teraz użyć przycisku RUN z zapisanymi ustawieniami.");
+                LogToConsole("=== ROZPOCZYNAM SKANOWANIE PORTÓW COM ===");
+                LogToConsole($"Znaleziono zapisane ustawienia COM: {settings.COM_Port} ({settings.COM_Baud} baud)");
+                LogToConsole("Najpierw sprawdzam ostatnio używany port COM...");
+
+                // Najpierw spróbuj na zapisanym porcie COM
+                var scanSuccess = await Task.Run(() => welder.ScanComPortsOnly(settings.COM_Port, settings.COM_Baud));
+                UpdateWelderInfo();
+
+                if (scanSuccess)
+                {
+                    btnReadConfig.IsEnabled = true;
+                    LogToConsole("✓ Zgrzewarka znaleziona na ostatnio używanym porcie COM!");
+                    LogToConsole("✓ Ustawienia komunikacji zostały zapisane.");
+                    LogToConsole("✓ Możesz teraz użyć przycisku RUN z zapisanymi ustawieniami.");
+                }
+                else
+                {
+                    LogToConsole("Zgrzewarka nie została znaleziona na ostatnio używanym porcie COM.");
+                    LogToConsole("Skanuję wszystkie dostępne porty COM...");
+
+                    // Jeśli nie znaleziono na preferowanym porcie, skanuj wszystkie porty COM
+                    scanSuccess = await Task.Run(() => welder.ScanComPortsOnly());
+                    UpdateWelderInfo();
+
+                    if (scanSuccess)
+                    {
+                        btnReadConfig.IsEnabled = true;
+                        LogToConsole("✓ Zgrzewarka znaleziona na innym porcie COM!");
+                        LogToConsole("✓ Ustawienia komunikacji zostały zaktualizowane.");
+                        LogToConsole("✓ Możesz teraz użyć przycisku RUN z zapisanymi ustawieniami.");
+                    }
+                    else
+                    {
+                        btnReadConfig.IsEnabled = false;
+                        LogToConsole("✗ Skanowanie portów COM nie powiodło się.");
+                        LogToConsole("✗ Nie znaleziono zgrzewarki na żadnym porcie COM.");
+                    }
+                }
             }
             else
             {
-                btnReadConfig.IsEnabled = false;
-                LogToConsole("✗ Skanowanie portów COM nie powiodło się.");
-                LogToConsole("✗ Nie znaleziono zgrzewarki na żadnym porcie COM.");
+                LogToConsole("=== ROZPOCZYNAM SKANOWANIE WSZYSTKICH PORTÓW COM ===");
+                if (!string.IsNullOrEmpty(settings.CommType))
+                {
+                    LogToConsole($"Znaleziono zapisane ustawienia {settings.CommType}, ale nie dotyczą portów COM.");
+                    LogToConsole("Skanuję wszystkie dostępne porty COM...");
+                }
+                else
+                {
+                    LogToConsole("Brak zapisanych ustawień komunikacji.");
+                    LogToConsole("Skanuję wszystkie dostępne porty COM...");
+                }
+
+                // Skanuj tylko porty COM (nie USR)
+                var scanSuccess = await Task.Run(() => welder.ScanComPortsOnly());
+                UpdateWelderInfo();
+
+                if (scanSuccess)
+                {
+                    btnReadConfig.IsEnabled = true;
+                    LogToConsole("✓ Skanowanie portów COM zakończone pomyślnie!");
+                    LogToConsole("✓ Ustawienia komunikacji zostały zapisane.");
+                    LogToConsole("✓ Możesz teraz użyć przycisku RUN z zapisanymi ustawieniami.");
+
+                    // Pokaż szczegóły połączenia
+                    var currentSettings = WelderSettings.Load();
+                    if (!string.IsNullOrEmpty(currentSettings.CommType) && currentSettings.CommType == "COM")
+                    {
+                        LogToConsole($"✓ Typ połączenia: {currentSettings.CommType}");
+                        LogToConsole($"✓ Port: {currentSettings.COM_Port}, Baud: {currentSettings.COM_Baud}");
+                    }
+                }
+                else
+                {
+                    btnReadConfig.IsEnabled = false;
+                    LogToConsole("✗ Skanowanie portów COM nie powiodło się.");
+                    LogToConsole("✗ Nie znaleziono zgrzewarki na żadnym porcie COM.");
+                }
             }
         }
         catch (Exception ex)
         {
-            LogToConsole($"Błąd podczas skanowania portów COM: {ex.Message}");
+            LogToConsole($"Błąd podczas skanowania: {ex.Message}");
         }
         finally
         {
             isScanning = false;
             btnScanPorts.IsEnabled = true;
-            LogToConsole("=== ZAKOŃCZONO SKANOWANIE PORTÓW COM ===");
+            LogToConsole("=== ZAKOŃCZONO SKANOWANIE ===");
         }
     }
 
@@ -706,32 +774,9 @@ public partial class MainWindow : Window
         {
             btnReadConfig.IsEnabled = false;
 
-            // Sprawdź czy mamy zapisane ustawienia komunikacji
-            var settings = WelderSettings.Load();
-            if (string.IsNullOrEmpty(settings.CommType))
+            if (!await EnsureWelderConnectionAsync("odczytu konfiguracji"))
             {
-                LogToConsole("✗ Brak zapisanych ustawień komunikacji.");
-                LogToConsole("✗ Najpierw użyj przycisku 'Skanuj porty' aby zapisać ustawienia.");
-                return;
-            }
-
-            // Sprawdź czy jest połączenie, jeśli nie - użyj zapisanych ustawień
-            if (welder.GetStatus() != WelderStatus.CONNECTED && welder.GetStatus() != WelderStatus.NEW_WELDER)
-            {
-                LogToConsole("Brak połączenia ze zgrzewarką. Próbuję połączyć się z zapisanymi ustawieniami...");
-                var runSuccess = await Task.Run(() => welder.RunWithSavedSettings());
-                UpdateWelderInfo();
-                if (!runSuccess)
-                {
-                    LogToConsole("✗ Nie udało się połączyć z zapisanymi ustawieniami.");
-                    LogToConsole("✗ Użyj przycisku 'Skanuj porty' aby ponownie skanować i zapisać ustawienia.");
-                    return;
-                }
-                LogToConsole("✓ Połączenie z zapisanymi ustawieniami udane. Odczytuję kalibrację.");
-            }
-            else
-            {
-                LogToConsole("Zgrzewarka już połączona. Odczytuję kalibrację.");
+                return; // Połączenie się nie udało, przerwij
             }
 
             LogToConsole("Wysyłanie polecenia: Odczytaj kalibrację");
@@ -740,18 +785,18 @@ public partial class MainWindow : Window
             {
                 var config = await Task.Run(() => CalibrationReport.ReadFromBuffer(configData));
                 DisplayConfiguration(config);
-                LogToConsole("Kalibracja odczytana pomyślnie.");
+                LogToConsole("✓ Kalibracja odczytana pomyślnie.");
                 // Przełącz na zakładkę 'Parametry kalibracji' (druga zakładka, indeks 1)
                 mainTabControl.SelectedIndex = 1;
             }
             else
             {
-                LogToConsole("Błąd: Nie udało się odczytać kalibracji.");
+                LogToConsole("✗ Błąd: Nie udało się odczytać kalibracji.");
             }
         }
         catch (Exception ex)
         {
-            LogToConsole($"Błąd: {ex.Message}");
+            LogToConsole($"✗ Błąd: {ex.Message}");
         }
         finally
         {
@@ -1241,6 +1286,11 @@ public partial class MainWindow : Window
             LogToConsole("Próbuję połączyć się z USR-N520 na 192.168.0.7:23...");
 
             var scanSuccess = await Task.Run(() => welder.ScanUSRDevicesOnly());
+            if (scanSuccess)
+            {
+                // Wymuś poprawny stan komunikacji po skanowaniu
+                await Task.Run(() => welder.RunWithSavedSettings());
+            }
             UpdateWelderInfo();
 
             if (scanSuccess)
@@ -1299,6 +1349,10 @@ public partial class MainWindow : Window
             LogToConsole("Skanuję TCP/IP (USR-N520) i porty COM, zapisuję ustawienia komunikacji...");
 
             var scanSuccess = await Task.Run(() => welder.ScanAndSaveSettings());
+            if (scanSuccess)
+            {
+                await Task.Run(() => welder.RunWithSavedSettings());
+            }
             UpdateWelderInfo();
 
             if (scanSuccess)

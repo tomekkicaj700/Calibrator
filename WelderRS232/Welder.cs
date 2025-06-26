@@ -321,7 +321,7 @@ namespace WelderRS232
             {
                 using (var port = new SerialPort(portName, baudRate, Parity.None, 8, StopBits.One))
                 {
-                    port.ReadTimeout = 1000;
+                    port.ReadTimeout = 2000;
                     port.WriteTimeout = 500;
                     port.Open();
                     port.DiscardInBuffer();
@@ -332,7 +332,7 @@ namespace WelderRS232
                     port.Write(cmd, 0, cmd.Length);
 
                     // Odbiór do CRLF lub timeout 1s bez znaku
-                    string response = ReadResponseToCRLF(port);
+                    string response = ReadResponseToCRLF(port, 2000);
                     if (string.IsNullOrEmpty(response))
                     {
                         Log($"Brak odpowiedzi od urządzenia na porcie {portName} ({baudRate} baud)");
@@ -378,6 +378,14 @@ namespace WelderRS232
 
                         // Ustaw globalny typ komunikacji na COM
                         globalCommunicationType = CommunicationType.COM_PORT;
+
+                        // Zapisz ustawienia do ponownego wykorzystania
+                        settings.CommType = "COM";
+                        settings.COM_Port = portName;
+                        settings.COM_Baud = baudRate;
+                        settings.LastPort = portName;
+                        settings.LastBaudRate = baudRate;
+                        settings.Save();
 
                         Log($"Poprawna odpowiedź od zgrzewarki na porcie {portName} ({baudRate} baud): {response}");
                     }
@@ -494,6 +502,14 @@ namespace WelderRS232
                             // Ustaw globalny typ komunikacji na USR-N520
                             globalCommunicationType = CommunicationType.USR_N520;
                             Log($"Ustawiono globalCommunicationType = USR_N520");
+
+                            // Zapisz ustawienia do ponownego wykorzystania
+                            settings.CommType = "TCP";
+                            settings.USR_IP = firstDevice.IP;
+                            settings.USR_Port = firstDevice.Port;
+                            settings.LastPort = $"USR-N520:{firstDevice.IP}:{rs232Result.PortName}";
+                            settings.LastBaudRate = rs232Result.BaudRate;
+                            settings.Save();
 
                             // Nie zamykaj połączenia - będzie używane później
                             // usrManager.Disconnect();
@@ -615,9 +631,9 @@ namespace WelderRS232
 
             try
             {
-                using (var port = new SerialPort(connectedPort!, 9600, Parity.None, 8, StopBits.One))
+                using (var port = new SerialPort(connectedPort!, connectedBaudRate!.Value, Parity.None, 8, StopBits.One))
                 {
-                    port.ReadTimeout = 500;
+                    port.ReadTimeout = 2000;
                     port.WriteTimeout = 500;
                     port.Open();
                     port.DiscardInBuffer();
@@ -627,7 +643,7 @@ namespace WelderRS232
                     port.Write(cmd, 0, cmd.Length);
 
                     // Odbiór do CRLF lub timeout 1s bez znaku
-                    string response = ReadResponseToCRLF(port);
+                    string response = ReadResponseToCRLF(port, 2000);
                     if (!string.IsNullOrEmpty(response))
                     {
                         welderInfo = new WelderInfo();
@@ -695,7 +711,7 @@ namespace WelderRS232
             {
                 using (var port = new SerialPort(connectedPort!, connectedBaudRate!.Value, Parity.None, 8, StopBits.One))
                 {
-                    port.ReadTimeout = 2000;  // Dłuższy timeout ze względu na większą ilość danych
+                    port.ReadTimeout = 2000;  // Zwiększony timeout do 2 sekund
                     port.WriteTimeout = 500;
                     port.Open();
                     port.DiscardInBuffer();
@@ -708,7 +724,7 @@ namespace WelderRS232
                     port.Write(cmd, 0, cmd.Length);
 
                     // Odbiór do CRLF lub timeout 1s bez znaku
-                    string response = ReadResponseToCRLF(port);
+                    string response = ReadResponseToCRLF(port, 2000);
                     if (string.IsNullOrEmpty(response))
                     {
                         Log("Błąd: Nie otrzymano odpowiedzi");
@@ -848,7 +864,7 @@ namespace WelderRS232
             {
                 using (var port = new SerialPort(connectedPort!, connectedBaudRate!.Value, Parity.None, 8, StopBits.One))
                 {
-                    port.ReadTimeout = 1000;
+                    port.ReadTimeout = 2000;  // Zwiększony timeout do 2 sekund
                     port.WriteTimeout = 500;
                     port.Open();
                     port.DiscardInBuffer();
@@ -861,7 +877,7 @@ namespace WelderRS232
                     port.Write(cmd, 0, cmd.Length);
 
                     // Odbiór do CRLF lub timeout 1s bez znaku
-                    string response = ReadResponseToCRLF(port);
+                    string response = ReadResponseToCRLF(port, 2000);
                     if (!string.IsNullOrEmpty(response))
                     {
                         // Konwertuj string na liczbę
@@ -950,19 +966,39 @@ namespace WelderRS232
                 return null;
             }
 
+            // Dodaj szczegółowe logowanie stanu połączenia
+            Log($"=== DIAGNOSTYKA STANU POŁĄCZENIA ===");
+            Log($"Status: {status}");
+            Log($"ConnectedPort: {connectedPort}");
+            Log($"ConnectedBaudRate: {connectedBaudRate}");
+            Log($"GlobalCommunicationType: {globalCommunicationType}");
+            Log($"WasUSRConnection: {wasUSRConnection}");
+            Log($"USRConnection: {(usrConnection != null ? "istnieje" : "null")}");
+            Log($"USRConnectedPort: {usrConnectedPort}");
+            Log($"USRConnection.IsConnected: {(usrConnection?.IsConnected == true ? "true" : "false")}");
+            Log($"Settings.CommType: {settings.CommType}");
+            Log($"Settings.USR_IP: {settings.USR_IP}");
+            Log($"Settings.USR_Port: {settings.USR_Port}");
+            Log($"Settings.COM_Port: {settings.COM_Port}");
+            Log($"Settings.COM_Baud: {settings.COM_Baud}");
+            Log($"=== KONIEC DIAGNOSTYKI ===");
+
             // Użyj globalnego typu komunikacji ustalonego podczas skanowania
             Log($"Używam globalnego typu komunikacji: {globalCommunicationType}");
 
             switch (globalCommunicationType)
             {
                 case CommunicationType.USR_N520:
+                    Log("WYBIERAM: ReadWeldParametersThroughUSR");
                     return ReadWeldParametersThroughUSR(out errorDetails);
 
                 case CommunicationType.COM_PORT:
+                    Log("WYBIERAM: ReadWeldParametersThroughCOM");
                     return ReadWeldParametersThroughCOM(out errorDetails);
 
                 default:
                     errorDetails = $"Nieznany typ komunikacji: {globalCommunicationType}";
+                    Log($"BŁĄD: Nieznany typ komunikacji: {globalCommunicationType}");
                     return null;
             }
         }
@@ -1153,7 +1189,7 @@ namespace WelderRS232
             {
                 using (var port = new SerialPort(connectedPort!, connectedBaudRate!.Value, Parity.None, 8, StopBits.One))
                 {
-                    port.ReadTimeout = 1000;
+                    port.ReadTimeout = 2000;
                     port.WriteTimeout = 500;
                     port.Open();
                     port.DiscardInBuffer();
@@ -1166,7 +1202,7 @@ namespace WelderRS232
                     port.Write(cmd, 0, cmd.Length);
 
                     // Odbiór do CRLF lub timeout 1s bez znaku
-                    string response = ReadResponseToCRLF(port);
+                    string response = ReadResponseToCRLF(port, 2000);
                     if (string.IsNullOrEmpty(response))
                     {
                         errorDetails = "Brak odpowiedzi od zgrzewarki przez COM.";
@@ -1223,15 +1259,18 @@ namespace WelderRS232
         private string ReadResponseToCRLF(SerialPort port, int timeoutMs = 1000)
         {
             StringBuilder responseBuilder = new StringBuilder();
+            DateTime startTime = DateTime.Now;
             DateTime lastByteTime = DateTime.Now;
             bool crlfFound = false;
+
             while ((DateTime.Now - lastByteTime).TotalMilliseconds < timeoutMs)
             {
                 if (port.BytesToRead > 0)
                 {
                     int b = port.ReadByte();
                     responseBuilder.Append((char)b);
-                    lastByteTime = DateTime.Now;
+                    lastByteTime = DateTime.Now;  // Resetuj timeout od ostatniego bajtu
+
                     if (responseBuilder.Length >= 2 &&
                         responseBuilder[^2] == '\r' && responseBuilder[^1] == '\n')
                     {
@@ -1241,12 +1280,23 @@ namespace WelderRS232
                 }
                 else
                 {
-                    System.Threading.Thread.Sleep(5);
+                    // Jeśli nie ma danych, sprawdź czy minął timeout od ostatniego bajtu
+                    if ((DateTime.Now - lastByteTime).TotalMilliseconds >= timeoutMs)
+                    {
+                        break;
+                    }
+                    System.Threading.Thread.Sleep(10);
                 }
             }
-            if (!crlfFound)
-                return responseBuilder.ToString();
-            return responseBuilder.ToString().TrimEnd('\r', '\n');
+
+            string result = responseBuilder.ToString();
+            Log($"Odebrano {result.Length} znaków, CRLF: {crlfFound}, Timeout: {(DateTime.Now - startTime).TotalMilliseconds:F0}ms");
+
+            if (crlfFound)
+            {
+                return result.TrimEnd('\r', '\n');
+            }
+            return result;
         }
 
         public static string GetWelderName(int index)
@@ -1275,7 +1325,7 @@ namespace WelderRS232
         }
 
         // Nowa metoda: Skanowanie tylko portów COM
-        public bool ScanComPortsOnly()
+        public bool ScanComPortsOnly(string? preferredPort = null, int? preferredBaud = null)
         {
             Log("=== SKANOWANIE TYLKO PORTÓW COM ===");
             int[] baudRates = { 19200, 115200 };
@@ -1287,48 +1337,137 @@ namespace WelderRS232
                 return false;
             }
 
-            Log($"Znaleziono {availablePorts.Length} portów COM: {string.Join(", ", availablePorts)}");
-
-            foreach (var portName in availablePorts)
+            // Jeśli podano preferowany port, sprawdź czy jest dostępny
+            if (!string.IsNullOrEmpty(preferredPort))
             {
-                foreach (var baud in baudRates)
+                if (!availablePorts.Contains(preferredPort))
+                {
+                    Log($"Preferowany port {preferredPort} nie jest dostępny.");
+                    Log($"Dostępne porty: {string.Join(", ", availablePorts)}");
+                    return false;
+                }
+
+                if (preferredBaud.HasValue)
+                {
+                    Log($"Skanuję tylko preferowany port: {preferredPort} z prędkością {preferredBaud} baud");
+                }
+                else
+                {
+                    Log($"Skanuję tylko preferowany port: {preferredPort}");
+                }
+                Log($"Dostępne porty: {string.Join(", ", availablePorts)}");
+            }
+            else
+            {
+                Log($"Skanuję wszystkie dostępne porty COM.");
+                Log($"Znaleziono {availablePorts.Length} portów COM: {string.Join(", ", availablePorts)}");
+            }
+
+            // Słownik: [baud][port] = wynik
+            var matrix = new Dictionary<int, Dictionary<string, string>>();
+            bool foundAny = false;
+
+            // Określ które porty i prędkości skanować
+            var portsToScan = !string.IsNullOrEmpty(preferredPort) ? new[] { preferredPort } : availablePorts;
+            var baudsToScan = preferredBaud.HasValue ? new[] { preferredBaud.Value } : baudRates;
+
+            foreach (var baud in baudsToScan)
+            {
+                matrix[baud] = new Dictionary<string, string>();
+                foreach (var portName in portsToScan)
                 {
                     try
                     {
                         Log($"Sprawdzam port {portName} z prędkością {baud} baud...");
                         using (var port = new SerialPort(portName, baud, Parity.None, 8, StopBits.One))
                         {
-                            port.ReadTimeout = 1000;
+                            port.ReadTimeout = 2000;
                             port.WriteTimeout = 500;
                             port.Open();
                             port.DiscardInBuffer();
                             port.DiscardOutBuffer();
                             byte[] cmd = WelderCommands.BuildIdentifyCommand(BezSzyfrowania);
                             port.Write(cmd, 0, cmd.Length);
-                            string response = ReadResponseToCRLF(port);
+                            string response = ReadResponseToCRLF(port, 2000);
                             if (!string.IsNullOrEmpty(response) && (response.Contains("ZGRZ") || response.Contains("AGRE")))
                             {
                                 settings.CommType = "COM";
                                 settings.COM_Port = portName;
                                 settings.COM_Baud = baud;
                                 settings.Save();
-                                Log($"✓ Zgrzewarka znaleziona na porcie COM {portName} ({baud} baud)!");
-                                return true;
+                                Log($"X Zgrzewarka znaleziona na porcie COM {portName} ({baud} baud)!");
+                                matrix[baud][portName] = "X";
+                                foundAny = true;
+
+                                // Jeśli skanujemy tylko preferowany port i znaleźliśmy zgrzewarkę, przerwij
+                                if (!string.IsNullOrEmpty(preferredPort))
+                                {
+                                    Log($"Znaleziono zgrzewarkę na preferowanym porcie {preferredPort}!");
+                                    return true;
+                                }
                             }
                             else
                             {
                                 Log($"  Brak odpowiedzi z {portName} ({baud} baud)");
+                                matrix[baud][portName] = " ";
                             }
                         }
                     }
                     catch (Exception ex)
                     {
                         Log($"  Błąd COM {portName} {baud}: {ex.Message}");
+                        matrix[baud][portName] = "ERR";
                     }
                 }
             }
-            Log("✗ Nie znaleziono zgrzewarki na żadnym porcie COM.");
+
+            // Wyświetl tabelę tylko jeśli skanujemy wszystkie porty
+            if (string.IsNullOrEmpty(preferredPort))
+            {
+                // Wyznacz szerokości kolumn
+                int baudColWidth = 8;
+                var portColWidths = availablePorts.Select(p => Math.Max(8, p.Length + 2)).ToArray();
+
+                // Nagłówek
+                string header = "|" + CenterText("Baud", baudColWidth) + "|";
+                for (int i = 0; i < availablePorts.Length; i++)
+                    header += CenterText(availablePorts[i], portColWidths[i]) + "|";
+                // Separator
+                string sep = "|" + new string('-', baudColWidth) + "|";
+                for (int i = 0; i < portColWidths.Length; i++)
+                    sep += new string('-', portColWidths[i]) + "|";
+
+                Log("");
+                Log("Podsumowanie skanowania portów COM:");
+                Log(header);
+                Log(sep);
+                // Wiersze
+                foreach (var baud in baudsToScan)
+                {
+                    string row = "|" + CenterText(baud.ToString(), baudColWidth) + "|";
+                    for (int i = 0; i < availablePorts.Length; i++)
+                    {
+                        string val = matrix[baud][availablePorts[i]];
+                        row += CenterText(val, portColWidths[i]) + "|";
+                    }
+                    Log(row);
+                }
+                Log("");
+            }
+
+            if (foundAny)
+                return true;
+            Log("X Nie znaleziono zgrzewarki na żadnym porcie COM.");
             return false;
+        }
+
+        // Pomocnicza metoda do centrowania tekstu w kolumnie
+        private string CenterText(string text, int width)
+        {
+            if (string.IsNullOrEmpty(text)) text = "";
+            int padding = width - text.Length;
+            int padLeft = padding / 2 + text.Length;
+            return text.PadLeft(padLeft).PadRight(width);
         }
 
         // Nowa metoda: Skanowanie tylko urządzeń USR-N520
@@ -1368,11 +1507,23 @@ namespace WelderRS232
 
                 if (found)
                 {
+                    // Ustaw wszystkie zmienne stanu po udanym znalezieniu zgrzewarki
+                    status = WelderStatus.CONNECTED;
+                    globalCommunicationType = CommunicationType.USR_N520;
+                    connectedPort = $"USR-N520 {usrIp}:{usrPort}";
+                    connectedBaudRate = 115200; // Domyślny baud rate dla USR
+                    wasUSRConnection = true;
+                    usrConnectedPort = $"{usrIp}:{usrPort}";
+
+                    // Zapisz ustawienia do pliku
                     settings.CommType = "TCP";
                     settings.USR_IP = usrIp;
                     settings.USR_Port = usrPort;
                     settings.Save();
+
                     Log("✓ Zgrzewarka znaleziona przez TCP/IP (USR-N520)!");
+                    Log($"✓ Ustawiono globalCommunicationType = {globalCommunicationType}");
+                    Log($"✓ Ustawiono connectedPort = {connectedPort}");
                     // NIE rozłączaj usrConnection - zostaw je aktywne
                     return true;
                 }
@@ -1457,7 +1608,7 @@ namespace WelderRS232
                 {
                     using (var port = new SerialPort(portName, baud, Parity.None, 8, StopBits.One))
                     {
-                        port.ReadTimeout = 1000;
+                        port.ReadTimeout = 2000;  // Zwiększony timeout do 2 sekund
                         port.WriteTimeout = 500;
                         port.Open();
                         port.DiscardInBuffer();
@@ -1470,7 +1621,7 @@ namespace WelderRS232
                         wasUSRConnection = false;
                         byte[] cmd = WelderCommands.BuildReadWeldParametersCommand(BezSzyfrowania);
                         port.Write(cmd, 0, cmd.Length);
-                        string response = ReadResponseToCRLF(port);
+                        string response = ReadResponseToCRLF(port, 2000);
                         Log($"Odpowiedź: {response}");
                         return true;
                     }

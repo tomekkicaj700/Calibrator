@@ -1033,7 +1033,7 @@
                 Foreground="Lime"
                 HorizontalScrollBarVisibility="Auto"
                 IsReadOnly="True"
-                TextWrapping="Wrap"
+                TextWrapping="NoWrap"
                 VerticalScrollBarVisibility="Auto">
                 <TextBox.ContextMenu>
                     <ContextMenu>
