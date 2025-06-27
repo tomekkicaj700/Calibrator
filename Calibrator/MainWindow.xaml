@@ -937,7 +937,8 @@
                             HeadersVisibility="All"
                             IsReadOnly="True"
                             MouseDoubleClick="dataGridHistory_MouseDoubleClick"
-                            SelectionChanged="dataGridHistory_SelectionChanged">
+                            SelectionChanged="dataGridHistory_SelectionChanged"
+                            LoadingRow="dataGridHistory_LoadingRow">
                             <DataGrid.Columns>
                                 <DataGridTextColumn
                                     Width="150"
@@ -1096,6 +1097,16 @@
                                 <TextBlock
                                     FontSize="14"
                                     Text="🗑"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem
+                            x:Name="menuClearLogFile"
+                            Click="menuClearLogFile_Click"
+                            Header="Wyczyść plik LOG-u"
+                            ToolTip="Usuwa cały plik logu (log.txt) z dysku">
+                            <MenuItem.Icon>
+                                <TextBlock FontSize="14"
+                                           Text="🧹"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <Separator/>

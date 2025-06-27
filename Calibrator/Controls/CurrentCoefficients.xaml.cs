@@ -1,5 +1,6 @@
 using System.Windows;
 using System.Windows.Controls;
+using CalibrationReportLib;
 
 namespace Calibrator.Controls
 {
@@ -59,6 +60,31 @@ namespace Calibrator.Controls
         {
             get { return (string)GetValue(ADCIVLC_I_ValueProperty); }
             set { SetValue(ADCIVLC_I_ValueProperty, value); }
+        }
+
+        public void SetConfiguration(SKonfiguracjaSystemu config)
+        {
+            // Mapowanie wartości kanałów prądowych
+            var wartosci = MapujWartosciKanalowZgrzewarki(config);
+            MMWCLValue = wartosci.MMWCL.ToString();
+            MMWCHValue = wartosci.MMWCH.ToString();
+            IVHC_I_Value = wartosci.IVHC_I.ToString();
+            IVLC_I_Value = wartosci.IVLC_I.ToString();
+            ADCIVHC_I_Value = wartosci.ADCIVHC_I.ToString();
+            ADCIVLC_I_Value = wartosci.ADCIVLC_I.ToString();
+        }
+
+        private dynamic MapujWartosciKanalowZgrzewarki(SKonfiguracjaSystemu konf)
+        {
+            return new
+            {
+                MMWCL = konf.uMultimeterWeldCurrentLowCurrent,
+                MMWCH = konf.uMultimeterWeldCurrentHighCurrent,
+                IVHC_I = konf.uInputVoltageHighCurrent.Length > 6 ? konf.uInputVoltageHighCurrent[6] : 0,
+                IVLC_I = konf.uInputVoltageLowCurrent.Length > 6 ? konf.uInputVoltageLowCurrent[6] : 0,
+                ADCIVHC_I = konf.uADCValueHighCurrent.Length > 6 ? konf.uADCValueHighCurrent[6] : 0,
+                ADCIVLC_I = konf.uADCValueLowCurrent.Length > 6 ? konf.uADCValueLowCurrent[6] : 0
+            };
         }
     }
 }

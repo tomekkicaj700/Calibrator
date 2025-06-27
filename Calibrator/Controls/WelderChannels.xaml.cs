@@ -1,5 +1,6 @@
 using System.Windows;
 using System.Windows.Controls;
+using CalibrationReportLib;
 
 namespace Calibrator.Controls
 {
@@ -8,6 +9,8 @@ namespace Calibrator.Controls
     /// </summary>
     public partial class WelderChannels : UserControl
     {
+        private SKonfiguracjaSystemu? LastConfig;
+
         public WelderChannels()
         {
             InitializeComponent();
@@ -60,6 +63,24 @@ namespace Calibrator.Controls
         {
             get { return txtUMultimeterWeldCurrentHighCurrent.Text; }
             set { txtUMultimeterWeldCurrentHighCurrent.Text = value; }
+        }
+
+        public void SetConfiguration(SKonfiguracjaSystemu config)
+        {
+            LastConfig = config;
+            UInputVoltageHighCurrent = string.Join(", ", config.uInputVoltageHighCurrent);
+            UInputVoltageLowCurrent = string.Join(", ", config.uInputVoltageLowCurrent);
+            UADCValueHighCurrent = string.Join(", ", config.uADCValueHighCurrent);
+            UADCValueLowCurrent = string.Join(", ", config.uADCValueLowCurrent);
+            UMultimeterWeldVoltageLowCurrent = config.uMultimeterWeldVoltageLowCurrent.ToString();
+            UMultimeterWeldVoltageHighCurrent = config.uMultimeterWeldVoltageHighCurrent.ToString();
+            UMultimeterWeldCurrentLowCurrent = config.uMultimeterWeldCurrentLowCurrent.ToString();
+            UMultimeterWeldCurrentHighCurrent = config.uMultimeterWeldCurrentHighCurrent.ToString();
+        }
+
+        public SKonfiguracjaSystemu? GetConfiguration()
+        {
+            return LastConfig;
         }
     }
 }

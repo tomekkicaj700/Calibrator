@@ -7,6 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CalibrationReport\CalibrationReport.csproj" />
     <ProjectReference Include="..\WelderRS232\WelderRS232.csproj" />
+    <ProjectReference Include="..\Logger\Logger.csproj" />
   </ItemGroup>
 
   <ItemGroup>
