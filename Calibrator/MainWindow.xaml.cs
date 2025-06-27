@@ -95,7 +95,7 @@ public partial class MainWindow : Window
         public int MMWCL, MMWCH, IVHC_I, IVLC_I, ADCIVHC_I, ADCIVLC_I;
     }
 
-    private readonly WelderService welderService;
+    private WelderService? welderService;
     private readonly System.Windows.Threading.DispatcherTimer configTimer;
     private bool isRunning = false;
 
@@ -114,19 +114,17 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
 
-        // Pobierz serwis z kontenera DI
-        welderService = ServiceContainer.WelderService;
+        // Initialize services according to the new architecture
+        InitializeServicesAsync();
 
         // Ustaw LabelFormatter dla gaugeNapiecie i gaugePrad
         gaugeNapiecie.LabelFormatter = value => value.ToString("F1");
         gaugePrad.LabelFormatter = value => value.ToString("F1");
 
-        // Podłącz eventy serwisu do UI
-        // welderService.LogMessage += Log; // Usunięte - teraz logowanie przez LoggerService
-        welderService.WeldParametersUpdated += OnWeldParametersUpdated;
-        welderService.ConfigurationUpdated += OnConfigurationUpdated;
-        welderService.WelderStatusChanged += OnWelderStatusChanged;
-        welderService.HistoryUpdated += OnHistoryUpdated;
+        // Subscribe to ConfigService events
+        var configService = ServiceContainer.ConfigService;
+        configService.SettingsChanged += OnConfigSettingsChanged;
+        configService.DetectedPortsChanged += OnConfigDetectedPortsChanged;
 
         // Przywracanie rozmiaru i stanu okna przed wyświetleniem
         var windowSettings = WindowSettings.Load();
@@ -213,9 +211,6 @@ public partial class MainWindow : Window
         configTimer = new System.Windows.Threading.DispatcherTimer();
         configTimer.Tick += ConfigTimer_Tick;
 
-        // Inicjalizacja historii pomiarów
-        dataGridHistory.ItemsSource = welderService.CalibrationHistory;
-
         // Inicjalizacja filtrowania
         ApplyFilter();
 
@@ -230,6 +225,38 @@ public partial class MainWindow : Window
         // 3. Numeracja wierszy historii pomiarów
         // Dodaj event do DataGrid:
         dataGridHistory.LoadingRow += dataGridHistory_LoadingRow;
+    }
+
+    private async void InitializeServicesAsync()
+    {
+        try
+        {
+            Log("Initializing services...");
+            await ServiceContainer.InitializeAsync();
+
+            // Get services after initialization
+            welderService = ServiceContainer.WelderService;
+
+            // Podłącz eventy serwisu do UI
+            if (welderService != null)
+            {
+                welderService.WeldParametersUpdated += OnWeldParametersUpdated;
+                welderService.ConfigurationUpdated += OnConfigurationUpdated;
+                welderService.WelderStatusChanged += OnWelderStatusChanged;
+                welderService.HistoryUpdated += OnHistoryUpdated;
+
+                // Inicjalizacja historii pomiarów
+                dataGridHistory.ItemsSource = welderService.CalibrationHistory;
+            }
+
+            Log("Services initialized successfully");
+        }
+        catch (Exception ex)
+        {
+            Log($"Error initializing services: {ex.Message}");
+            // Fallback to direct service access
+            welderService = ServiceContainer.WelderService;
+        }
     }
 
     private void UpdateTitleWithLocalIP()
@@ -327,13 +354,13 @@ public partial class MainWindow : Window
 
     private async Task ReadConfigAndUpdateUIAsync()
     {
-        if (welderService.IsReadingConfig) return;
+        if (welderService?.IsReadingConfig == true) return;
 
         try
         {
             Log("=== ODCZYTUJĘ KONFIGURACJĘ SYSTEMU ===");
 
-            var config = await welderService.ReadConfigurationAsync();
+            var config = await welderService?.ReadConfigurationAsync();
             if (config != null)
             {
                 DisplayConfiguration(config);
@@ -360,6 +387,8 @@ public partial class MainWindow : Window
 
     private void UpdateWelderInfo()
     {
+        if (welderService == null) return;
+
         var status = welderService.WelderStatus;
         var statusDescription = GetStatusDescription(status);
         txtStatus.Text = statusDescription;
@@ -417,11 +446,13 @@ public partial class MainWindow : Window
 
     private async Task ReadWeldParametersAndUpdateUIAsync()
     {
+        if (welderService?.IsReadingConfig == true) return;
+
         try
         {
             Log("=== ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===");
 
-            var parameters = await welderService.ReadWeldParametersAsync();
+            var parameters = await welderService?.ReadWeldParametersAsync();
             if (parameters != null)
             {
                 UpdateWeldParametersUI(parameters);
@@ -456,6 +487,8 @@ public partial class MainWindow : Window
     // Wspólna metoda do sprawdzania połączenia ze zgrzewarką i automatycznego skanowania
     private async Task<bool> EnsureWelderConnectionAsync(string operationName = "operacji")
     {
+        if (welderService == null) return false;
+
         // Sprawdź czy mamy zapisane ustawienia komunikacji
         var settings = WelderSettings.Load();
         if (string.IsNullOrEmpty(settings.CommType))
@@ -510,6 +543,7 @@ public partial class MainWindow : Window
             // Przełącz na zakładkę 'Parametry zgrzewania' (pierwsza zakładka, indeks 0) od razu
             mainTabControl.SelectedIndex = 0;
 
+            if (welderService == null) return;
             if (!await welderService.EnsureWelderConnectionAsync("odczytu parametrów zgrzewania"))
             {
                 return; // Połączenie się nie udało, przerwij
@@ -528,6 +562,8 @@ public partial class MainWindow : Window
     {
         try
         {
+            if (welderService == null) return;
+
             // Sprawdź czy mamy preferowane ustawienia
             var settings = WelderSettings.Load();
             string? preferredPort = null;
@@ -616,6 +652,7 @@ public partial class MainWindow : Window
             // Przełącz na zakładkę 'Parametry kalibracji' (druga zakładka, indeks 1) od razu
             mainTabControl.SelectedIndex = 1;
 
+            if (welderService == null) return;
             if (!await welderService.EnsureWelderConnectionAsync("odczytu konfiguracji"))
             {
                 return; // Połączenie się nie udało, przerwij
@@ -633,6 +670,7 @@ public partial class MainWindow : Window
 
     private void btnResetStats_Click(object sender, RoutedEventArgs e)
     {
+        if (welderService == null) return;
         welderService.ResetStatistics();
         UpdateStatisticsUI();
         Log("Statystyki zostały zresetowane.");
@@ -879,8 +917,8 @@ public partial class MainWindow : Window
 
     private void ApplyFilter()
     {
-        // TODO: Zastosuj filtry do historii
-        // var filteredHistory = welderService.GetFilteredHistory(deviceTypeFilter, serialNumberFilter);
+        if (welderService == null)
+            return;
         string deviceTypeFilter = txtFilterDeviceType.Text?.Trim() ?? "";
         string serialNumberFilter = txtFilterSerialNumber.Text?.Trim() ?? "";
 
@@ -1332,5 +1370,31 @@ public partial class MainWindow : Window
     private void dataGridHistory_LoadingRow(object sender, DataGridRowEventArgs e)
     {
         e.Row.Header = (e.Row.GetIndex() + 1).ToString();
+    }
+
+    // ConfigService event handlers
+    private void OnConfigSettingsChanged(WelderSettings settings)
+    {
+        Dispatcher.Invoke(() =>
+        {
+            Log($"Configuration settings changed: {settings.CommType}");
+            // Update UI elements that depend on configuration
+            UpdateWelderInfo();
+        });
+    }
+
+    private void OnConfigDetectedPortsChanged(List<DetectedPort> ports)
+    {
+        Dispatcher.Invoke(() =>
+        {
+            Log($"Detected ports updated: {ports.Count} ports");
+            // Update UI elements that show detected ports
+            // This could update a list of available ports in the UI
+        });
+    }
+
+    private void Log(string message)
+    {
+        LoggerService.Log(message);
     }
 }
