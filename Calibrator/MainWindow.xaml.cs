@@ -28,8 +28,60 @@ using System.Collections.Concurrent;
 using Calibrator.Services;
 using Logger;
 using static Logger.LoggerService;
+using System.Text.Json;
 
 namespace Calibrator;
+
+/// <summary>
+/// Klasa do zarządzania ustawieniami UI okna
+/// </summary>
+public class WindowSettings
+{
+    private const string WINDOW_SETTINGS_FILE = "window_settings.json";
+
+    public double? WindowWidth { get; set; }
+    public double? WindowHeight { get; set; }
+    public bool? WindowMaximized { get; set; }
+    public double? WindowLeft { get; set; }
+    public double? WindowTop { get; set; }
+    public double? LogPanelHeight { get; set; }
+
+    public static WindowSettings Load()
+    {
+        try
+        {
+            if (File.Exists(WINDOW_SETTINGS_FILE))
+            {
+                string jsonString = File.ReadAllText(WINDOW_SETTINGS_FILE);
+                var settings = JsonSerializer.Deserialize<WindowSettings>(jsonString);
+                return settings ?? new WindowSettings();
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Błąd podczas odczytu ustawień okna: {ex.Message}");
+        }
+        return new WindowSettings();
+    }
+
+    public void Save()
+    {
+        try
+        {
+            string jsonString = JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(WINDOW_SETTINGS_FILE, jsonString);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Błąd podczas zapisu ustawień okna: {ex.Message}");
+        }
+    }
+
+    public static string GetConfigFilePath()
+    {
+        return System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.xml");
+    }
+}
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml
@@ -77,17 +129,17 @@ public partial class MainWindow : Window
         welderService.HistoryUpdated += OnHistoryUpdated;
 
         // Przywracanie rozmiaru i stanu okna przed wyświetleniem
-        var settings = WelderSettings.Load();
-        if (settings.WindowWidth.HasValue && settings.WindowHeight.HasValue &&
-            settings.WindowWidth.Value > 0 && settings.WindowHeight.Value > 0)
+        var windowSettings = WindowSettings.Load();
+        if (windowSettings.WindowWidth.HasValue && windowSettings.WindowHeight.HasValue &&
+            windowSettings.WindowWidth.Value > 0 && windowSettings.WindowHeight.Value > 0)
         {
             // Sprawdź rozmiar ekranu przed ustawieniem rozmiaru okna
             double screenWidth = SystemParameters.PrimaryScreenWidth;
             double screenHeight = SystemParameters.PrimaryScreenHeight;
 
             // Ustaw rozmiar okna, ale nie przekraczaj rozmiaru ekranu
-            double windowWidth = Math.Min(settings.WindowWidth.Value, screenWidth);
-            double windowHeight = Math.Min(settings.WindowHeight.Value, screenHeight);
+            double windowWidth = Math.Min(windowSettings.WindowWidth.Value, screenWidth);
+            double windowHeight = Math.Min(windowSettings.WindowHeight.Value, screenHeight);
 
             // Dodatkowo sprawdź czy okno nie jest za małe (minimum 800x600)
             windowWidth = Math.Max(windowWidth, 800);
@@ -97,10 +149,10 @@ public partial class MainWindow : Window
             this.Height = windowHeight;
 
             // Sprawdź i ustaw pozycję okna
-            if (settings.WindowLeft.HasValue && settings.WindowTop.HasValue)
+            if (windowSettings.WindowLeft.HasValue && windowSettings.WindowTop.HasValue)
             {
-                double windowLeft = settings.WindowLeft.Value;
-                double windowTop = settings.WindowTop.Value;
+                double windowLeft = windowSettings.WindowLeft.Value;
+                double windowTop = windowSettings.WindowTop.Value;
 
                 // Sprawdź czy okno nie wychodzi poza granice ekranu
                 if (windowLeft + windowWidth > screenWidth)
@@ -130,32 +182,32 @@ public partial class MainWindow : Window
                 this.Top = windowTop;
 
                 // Logowanie informacji o dostosowaniu pozycji
-                if (windowLeft != settings.WindowLeft.Value || windowTop != settings.WindowTop.Value)
+                if (windowLeft != windowSettings.WindowLeft.Value || windowTop != windowSettings.WindowTop.Value)
                 {
                     Dispatcher.BeginInvoke(() =>
                     {
                         Log($"Dostosowano pozycję okna do rozmiaru ekranu: {screenWidth}x{screenHeight}");
-                        Log($"Zapisana pozycja: {settings.WindowLeft.Value},{settings.WindowTop.Value}");
+                        Log($"Zapisana pozycja: {windowSettings.WindowLeft.Value},{windowSettings.WindowTop.Value}");
                         Log($"Ustawiona pozycja: {windowLeft},{windowTop}");
                     });
                 }
             }
 
             // Logowanie informacji o dostosowaniu rozmiaru
-            if (windowWidth != settings.WindowWidth.Value || windowHeight != settings.WindowHeight.Value)
+            if (windowWidth != windowSettings.WindowWidth.Value || windowHeight != windowSettings.WindowHeight.Value)
             {
                 // Użyj Dispatcher.BeginInvoke aby logowanie nastąpiło po inicjalizacji komponentów
                 Dispatcher.BeginInvoke(() =>
                 {
                     Log($"Dostosowano rozmiar okna do rozmiaru ekranu: {screenWidth}x{screenHeight}");
-                    Log($"Zapisany rozmiar: {settings.WindowWidth.Value}x{settings.WindowHeight.Value}");
+                    Log($"Zapisany rozmiar: {windowSettings.WindowWidth.Value}x{windowSettings.WindowHeight.Value}");
                     Log($"Ustawiony rozmiar: {windowWidth}x{windowHeight}");
                 });
             }
         }
-        if (settings.WindowMaximized.HasValue)
+        if (windowSettings.WindowMaximized.HasValue)
         {
-            this.WindowState = settings.WindowMaximized.Value ? WindowState.Maximized : WindowState.Normal;
+            this.WindowState = windowSettings.WindowMaximized.Value ? WindowState.Maximized : WindowState.Normal;
         }
 
         configTimer = new System.Windows.Threading.DispatcherTimer();
@@ -509,6 +561,16 @@ public partial class MainWindow : Window
         lastConfig = config;
         try
         {
+            // Logi diagnostyczne
+            Log("=== DIAGNOSTYKA DISPLAYCONFIGURATION ===");
+            Log($"config.uMultimeterWeldVoltageHighCurrent: {config.uMultimeterWeldVoltageHighCurrent}");
+            Log($"config.uMultimeterWeldVoltageLowCurrent: {config.uMultimeterWeldVoltageLowCurrent}");
+            Log($"config.uInputVoltageHighCurrent[5]: {(config.uInputVoltageHighCurrent.Length > 5 ? config.uInputVoltageHighCurrent[5].ToString() : "BRAK")}");
+            Log($"config.uInputVoltageLowCurrent[5]: {(config.uInputVoltageLowCurrent.Length > 5 ? config.uInputVoltageLowCurrent[5].ToString() : "BRAK")}");
+            Log($"config.uADCValueHighCurrent[5]: {(config.uADCValueHighCurrent.Length > 5 ? config.uADCValueHighCurrent[5].ToString() : "BRAK")}");
+            Log($"config.uADCValueLowCurrent[5]: {(config.uADCValueLowCurrent.Length > 5 ? config.uADCValueLowCurrent[5].ToString() : "BRAK")}");
+            Log("=== KONIEC DIAGNOSTYKI ===");
+
             welderChannels.SetConfiguration(config);
             kanalyZgrzewarkiVoltage.SetConfiguration(config);
             kanalyZgrzewarkiCurrent.SetConfiguration(config);
@@ -517,7 +579,7 @@ public partial class MainWindow : Window
             txtTyp.Text = config.Typ.ToString();
             txtKeypadSE.Text = config.KeypadSE.ToString();
             txtNrJezyka.Text = config.nrJezyka.ToString();
-            txtNazwaZgrzewarki.Text = WelderRS232.Welder.GetWelderName(config.NazwaZgrzewarki);
+            txtNazwaZgrzewarki.Text = WelderService.GetWelderName(config.NazwaZgrzewarki);
             txtNumerSeryjny.Text = Encoding.ASCII.GetString(config.NumerSeryjny).TrimEnd('\0');
             txtDaneWlasciciela0.Text = Encoding.ASCII.GetString(config.DaneWlasciciela0).TrimEnd('\0');
             txtDaneWlasciciela1.Text = Encoding.ASCII.GetString(config.DaneWlasciciela1).TrimEnd('\0');
@@ -598,7 +660,7 @@ public partial class MainWindow : Window
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
         // Odczytaj wysokość logów z ustawień
-        var settings = WelderSettings.Load();
+        var settings = WindowSettings.Load();
         var mainGrid = (Grid)this.Content;
         if (settings.LogPanelHeight.HasValue && settings.LogPanelHeight.Value > 0)
         {
@@ -644,7 +706,7 @@ public partial class MainWindow : Window
         // Zapisz rozmiar okna tylko jeśli nie jest zmaksymalizowane
         if (this.WindowState == WindowState.Normal)
         {
-            var settings = WelderSettings.Load();
+            var settings = WindowSettings.Load();
             settings.WindowWidth = this.Width;
             settings.WindowHeight = this.Height;
             settings.WindowLeft = this.Left;
@@ -655,7 +717,7 @@ public partial class MainWindow : Window
 
     private void Window_StateChanged(object sender, EventArgs e)
     {
-        var settings = WelderSettings.Load();
+        var settings = WindowSettings.Load();
         settings.WindowMaximized = (this.WindowState == WindowState.Maximized);
         settings.Save();
     }
@@ -663,7 +725,7 @@ public partial class MainWindow : Window
     private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
     {
         // Zapisz aktualny rozmiar i stan okna przed zamknięciem
-        var settings = WelderSettings.Load();
+        var settings = WindowSettings.Load();
 
         if (this.WindowState == WindowState.Normal)
         {
@@ -691,7 +753,7 @@ public partial class MainWindow : Window
     {
         if (!logPanelCollapsed && e.HeightChanged)
         {
-            var settings = WelderSettings.Load();
+            var settings = WindowSettings.Load();
             double newHeight = LogPanel.RowDefinitions[1].ActualHeight;
             settings.LogPanelHeight = newHeight;
             settings.Save();
@@ -703,7 +765,7 @@ public partial class MainWindow : Window
     {
         var newHeight = LogPanel.ActualHeight;
         lastLogPanelHeight = newHeight;
-        var settings = WelderSettings.Load();
+        var settings = WindowSettings.Load();
         settings.LogPanelHeight = newHeight;
         settings.Save();
         Log($"[Splitter] Zapisano wysokość logów: {newHeight:F0} px do ustawień.");
@@ -904,7 +966,7 @@ public partial class MainWindow : Window
     {
         try
         {
-            var configPath = WelderSettings.GetConfigFilePath();
+            var configPath = WindowSettings.GetConfigFilePath();
             if (File.Exists(configPath))
             {
                 var process = new System.Diagnostics.Process

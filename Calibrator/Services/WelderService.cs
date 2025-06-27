@@ -408,7 +408,7 @@ namespace Calibrator.Services
                     Typ = config.Typ,
                     KeypadSE = config.KeypadSE,
                     NrJezyka = config.nrJezyka,
-                    NazwaZgrzewarki = WelderRS232.Welder.GetWelderName(config.NazwaZgrzewarki),
+                    NazwaZgrzewarki = GetWelderName(config.NazwaZgrzewarki),
                     DaneWlasciciela0 = Encoding.ASCII.GetString(config.DaneWlasciciela0).TrimEnd('\0'),
                     DaneWlasciciela1 = Encoding.ASCII.GetString(config.DaneWlasciciela1).TrimEnd('\0'),
                     DaneWlasciciela2 = Encoding.ASCII.GetString(config.DaneWlasciciela2).TrimEnd('\0'),
@@ -673,6 +673,18 @@ namespace Calibrator.Services
 
             [XmlElement("GPSconfiguration")]
             public int GPSconfiguration { get; set; }
+        }
+
+        #endregion
+
+        #region Utility Methods
+
+        /// <summary>
+        /// Zwraca nazwę zgrzewarki na podstawie indeksu
+        /// </summary>
+        public static string GetWelderName(int index)
+        {
+            return Welder.GetWelderName(index);
         }
 
         #endregion
