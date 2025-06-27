@@ -102,11 +102,8 @@ public partial class MainWindow : Window
     private bool logPanelCollapsed = false;
     private double lastLogPanelHeight = 150;
 
-    // TCP Server variables
-    private TcpListener? tcpServer;
-    private CancellationTokenSource? tcpServerCts;
-    private bool isTcpServerRunning = false;
-    private readonly ConcurrentBag<TcpClient> tcpClients = new ConcurrentBag<TcpClient>();
+    // TCP Server service
+    private LocalTcpServerService tcpServerService = new LocalTcpServerService();
 
     private SKonfiguracjaSystemu? lastConfig;
 
@@ -225,6 +222,9 @@ public partial class MainWindow : Window
         // 3. Numeracja wierszy historii pomiarów
         // Dodaj event do DataGrid:
         dataGridHistory.LoadingRow += dataGridHistory_LoadingRow;
+
+        // Subskrybuj eventy serwisu TCP
+        // Możesz dodać obsługę DataReceived/ClientConnected/ClientDisconnected jeśli chcesz
     }
 
     private async void InitializeServicesAsync()
@@ -1080,121 +1080,41 @@ public partial class MainWindow : Window
 
     private async void btnTcpServer_Click(object sender, RoutedEventArgs e)
     {
-        if (!isTcpServerRunning)
+        string ip = txtTcpServerIp.Text.Trim();
+        int port = int.TryParse(txtTcpServerPort.Text.Trim(), out int p) ? p : 20108;
+        if (!tcpServerService.IsRunning)
         {
-            // Start serwera
-            string ip = txtTcpServerIp.Text.Trim();
-            int port = int.TryParse(txtTcpServerPort.Text.Trim(), out int p) ? p : 20108;
-            try
+            bool started = await tcpServerService.StartAsync(ip, port);
+            if (started)
             {
-                tcpServerCts = new CancellationTokenSource();
-                tcpServer = new TcpListener(IPAddress.Parse(ip), port);
-                tcpServer.Start();
-                isTcpServerRunning = true;
                 btnTcpServer.Content = "Zatrzymaj serwer TCP";
-                Log($"[TCP SERVER] Nasłuchuję na {ip}:{port}");
-                _ = Task.Run(() => AcceptTcpClientsAsync(tcpServer, tcpServerCts.Token));
             }
-            catch (Exception ex)
+            else
             {
-                Log($"[TCP SERVER] Błąd uruchamiania: {ex.Message}");
-                isTcpServerRunning = false;
                 btnTcpServer.Content = "Uruchom serwer TCP";
             }
         }
         else
         {
-            // Stop serwera
-            try
-            {
-                tcpServerCts?.Cancel();
-                tcpServer?.Stop();
-                isTcpServerRunning = false;
-                btnTcpServer.Content = "Uruchom serwer TCP";
-                Log("[TCP SERVER] Serwer zatrzymany.");
-            }
-            catch (Exception ex)
-            {
-                Log($"[TCP SERVER] Błąd zatrzymywania: {ex.Message}");
-            }
+            tcpServerService.Stop();
+            btnTcpServer.Content = "Uruchom serwer TCP";
         }
-    }
-
-    private async Task AcceptTcpClientsAsync(TcpListener listener, CancellationToken token)
-    {
-        try
-        {
-            while (!token.IsCancellationRequested)
-            {
-                var client = await listener.AcceptTcpClientAsync();
-                tcpClients.Add(client);
-                _ = Task.Run(() => HandleTcpClientAsync(client, token));
-            }
-        }
-        catch (ObjectDisposedException) { }
-        catch (Exception ex)
-        {
-            Log($"[TCP SERVER] Błąd AcceptTcpClients: {ex.Message}");
-        }
-    }
-
-    private async Task HandleTcpClientAsync(TcpClient client, CancellationToken token)
-    {
-        var endpoint = client.Client.RemoteEndPoint?.ToString() ?? "?";
-        Log($"[TCP SERVER] Połączono z {endpoint}");
-        try
-        {
-            using (client)
-            using (var stream = client.GetStream())
-            {
-                byte[] buffer = new byte[4096];
-                while (!token.IsCancellationRequested)
-                {
-                    int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length, token);
-                    if (bytesRead == 0) break; // rozłączono
-                    string data = System.Text.Encoding.UTF8.GetString(buffer, 0, bytesRead);
-                    Log($"[TCP SERVER] Otrzymano od {endpoint}: {data}");
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            Log($"[TCP SERVER] Błąd klienta {endpoint}: {ex.Message}");
-        }
-        Log($"[TCP SERVER] Rozłączono {endpoint}");
     }
 
     private async void btnSendSampleData_Click(object sender, RoutedEventArgs e)
     {
-        if (!isTcpServerRunning)
+        if (!tcpServerService.IsRunning)
         {
             Log("[TCP SERVER] Serwer nie jest uruchomiony.");
             return;
         }
-        if (tcpClients.IsEmpty)
+        if (tcpServerService.ConnectedClientsCount == 0)
         {
             Log("[TCP SERVER] Brak podłączonych klientów do wysłania danych.");
             return;
         }
         string sample = $"Przykładowe dane {DateTime.Now:HH:mm:ss}";
-        byte[] data = System.Text.Encoding.UTF8.GetBytes(sample);
-        int sent = 0;
-        foreach (var client in tcpClients)
-        {
-            try
-            {
-                if (client.Connected)
-                {
-                    await client.GetStream().WriteAsync(data, 0, data.Length);
-                    sent++;
-                }
-            }
-            catch (Exception ex)
-            {
-                Log($"[TCP SERVER] Błąd wysyłania do klienta: {ex.Message}");
-            }
-        }
-        Log($"[TCP SERVER] Wysłano przykładowe dane do {sent} klient(ów).");
+        await tcpServerService.SendToAllAsync(sample);
     }
 
     private void OnWeldParametersUpdated(WeldParameters parameters)
