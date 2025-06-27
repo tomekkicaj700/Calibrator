@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using Logger;
 
 namespace CalibrationReportLib
 {
@@ -65,6 +66,22 @@ namespace CalibrationReportLib
 
     public class CalibrationReport
     {
+        private readonly Action<string> logger;
+
+        public CalibrationReport(Action<string>? logger = null)
+        {
+            this.logger = logger ?? Console.WriteLine;
+        }
+
+        // Prywatna metoda do logowania
+        private void Log(string message)
+        {
+            if (logger != null)
+                logger(message);
+            else
+                Console.WriteLine(message);
+        }
+
         public static SKonfiguracjaSystemu ReadFromBuffer(byte[] data)
         {
             var konf = new SKonfiguracjaSystemu();
@@ -142,65 +159,64 @@ namespace CalibrationReportLib
             };
         }
 
-        public static void Print(SKonfiguracjaSystemu konf)
+        public void Print(SKonfiguracjaSystemu konf)
         {
-            Console.WriteLine($"dummy: {konf.dummy}");
-            Console.WriteLine($"Typ: {konf.Typ}");
-            Console.WriteLine($"KeypadSE: {konf.KeypadSE}");
-            Console.WriteLine($"nrJezyka: {konf.nrJezyka}");
-            Console.WriteLine($"NazwaZgrzewarki: {konf.NazwaZgrzewarki}");
-            Console.WriteLine($"Offset_MCP3425: {konf.Offset_MCP3425}");
-            Console.WriteLine($"WolneMiejsce: {BitConverter.ToString(konf.WolneMiejsce)}");
-            Console.WriteLine($"NumerSeryjny: {Encoding.ASCII.GetString(konf.NumerSeryjny).TrimEnd('\0')}");
-            Console.WriteLine($"DaneWlasciciela0: {Encoding.ASCII.GetString(konf.DaneWlasciciela0).TrimEnd('\0')}");
-            Console.WriteLine($"DaneWlasciciela1: {Encoding.ASCII.GetString(konf.DaneWlasciciela1).TrimEnd('\0')}");
-            Console.WriteLine($"DaneWlasciciela2: {Encoding.ASCII.GetString(konf.DaneWlasciciela2).TrimEnd('\0')}");
-            Console.WriteLine($"DataSprzedazy: {FormatDate(konf.DataSprzedazy)}");
-            Console.WriteLine($"DataPierwszegoZgrzewu: {FormatDate(konf.DataPierwszegoZgrzewu)}");
-            Console.WriteLine($"DataOstatniejKalibracji: {FormatDate(konf.DataOstatniejKalibracji)}");
-            Console.WriteLine($"LiczbaZgrzOstKalibr: {konf.LiczbaZgrzOstKalibr}");
-            Console.WriteLine($"OkresKalibracji: {konf.OkresKalibracji}");
-            Console.WriteLine($"RejestrKonfiguracji: {konf.RejestrKonfiguracji}");
-            Console.WriteLine($"TempOtRefVal: {konf.TempOtRefVal}");
-            Console.WriteLine($"TempOtRefADC: {konf.TempOtRefADC}");
-            Console.WriteLine($"KorekcjaTempWewn: {konf.KorekcjaTempWewn}");
-            Console.WriteLine($"KorekcjaTempZewn: {konf.KorekcjaTempZewn}");
-            Console.WriteLine($"uInputVoltageHighCurrent: {string.Join(", ", konf.uInputVoltageHighCurrent)}");
-            Console.WriteLine($"uInputVoltageLowCurrent: {string.Join(", ", konf.uInputVoltageLowCurrent)}");
-            Console.WriteLine($"uADCValueHighCurrent: {string.Join(", ", konf.uADCValueHighCurrent)}");
-            Console.WriteLine($"uADCValueLowCurrent: {string.Join(", ", konf.uADCValueLowCurrent)}");
-            Console.WriteLine($"uMultimeterWeldVoltageLowCurrent: {konf.uMultimeterWeldVoltageLowCurrent}");
-            Console.WriteLine($"uMultimeterWeldVoltageHighCurrent: {konf.uMultimeterWeldVoltageHighCurrent}");
-            Console.WriteLine($"uMultimeterWeldCurrentLowCurrent: {konf.uMultimeterWeldCurrentLowCurrent}");
-            Console.WriteLine($"uMultimeterWeldCurrentHighCurrent: {konf.uMultimeterWeldCurrentHighCurrent}");
-            Console.WriteLine($"KodBlokady: {konf.KodBlokady}");
-            Console.WriteLine($"TypBlokady: {konf.TypBlokady}");
-            Console.WriteLine($"uSupplyVoltageHigh_TriacRelay_On: {konf.uSupplyVoltageHigh_TriacRelay_On}");
-            Console.WriteLine($"uSupplyVoltageLow_TriacRelay_On: {konf.uSupplyVoltageLow_TriacRelay_On}");
-            Console.WriteLine($"uSupplyADCValueHigh_TriacRelay_On: {konf.uSupplyADCValueHigh_TriacRelay_On}");
-            Console.WriteLine($"uSupplyADCValueLow_TriacRelay_On: {konf.uSupplyADCValueLow_TriacRelay_On}");
-            Console.WriteLine($"GPSconfiguration: {konf.GPSconfiguration}");
-            Console.WriteLine($"RejestrKonfiguracjiBankTwo: {konf.RejestrKonfiguracjiBankTwo}");
-            Console.WriteLine($"temp: {BitConverter.ToString(konf.temp)}");
-            Console.WriteLine($"CRC: {konf.CRC}");
-
+            Log($"dummy: {konf.dummy}");
+            Log($"Typ: {konf.Typ}");
+            Log($"KeypadSE: {konf.KeypadSE}");
+            Log($"nrJezyka: {konf.nrJezyka}");
+            Log($"NazwaZgrzewarki: {konf.NazwaZgrzewarki}");
+            Log($"Offset_MCP3425: {konf.Offset_MCP3425}");
+            Log($"WolneMiejsce: {BitConverter.ToString(konf.WolneMiejsce)}");
+            Log($"NumerSeryjny: {Encoding.ASCII.GetString(konf.NumerSeryjny).TrimEnd('\0')}");
+            Log($"DaneWlasciciela0: {Encoding.ASCII.GetString(konf.DaneWlasciciela0).TrimEnd('\0')}");
+            Log($"DaneWlasciciela1: {Encoding.ASCII.GetString(konf.DaneWlasciciela1).TrimEnd('\0')}");
+            Log($"DaneWlasciciela2: {Encoding.ASCII.GetString(konf.DaneWlasciciela2).TrimEnd('\0')}");
+            Log($"DataSprzedazy: {FormatDate(konf.DataSprzedazy)}");
+            Log($"DataPierwszegoZgrzewu: {FormatDate(konf.DataPierwszegoZgrzewu)}");
+            Log($"DataOstatniejKalibracji: {FormatDate(konf.DataOstatniejKalibracji)}");
+            Log($"LiczbaZgrzOstKalibr: {konf.LiczbaZgrzOstKalibr}");
+            Log($"OkresKalibracji: {konf.OkresKalibracji}");
+            Log($"RejestrKonfiguracji: {konf.RejestrKonfiguracji}");
+            Log($"TempOtRefVal: {konf.TempOtRefVal}");
+            Log($"TempOtRefADC: {konf.TempOtRefADC}");
+            Log($"KorekcjaTempWewn: {konf.KorekcjaTempWewn}");
+            Log($"KorekcjaTempZewn: {konf.KorekcjaTempZewn}");
+            Log($"uInputVoltageHighCurrent: {string.Join(", ", konf.uInputVoltageHighCurrent)}");
+            Log($"uInputVoltageLowCurrent: {string.Join(", ", konf.uInputVoltageLowCurrent)}");
+            Log($"uADCValueHighCurrent: {string.Join(", ", konf.uADCValueHighCurrent)}");
+            Log($"uADCValueLowCurrent: {string.Join(", ", konf.uADCValueLowCurrent)}");
+            Log($"uMultimeterWeldVoltageLowCurrent: {konf.uMultimeterWeldVoltageLowCurrent}");
+            Log($"uMultimeterWeldVoltageHighCurrent: {konf.uMultimeterWeldVoltageHighCurrent}");
+            Log($"uMultimeterWeldCurrentLowCurrent: {konf.uMultimeterWeldCurrentLowCurrent}");
+            Log($"uMultimeterWeldCurrentHighCurrent: {konf.uMultimeterWeldCurrentHighCurrent}");
+            Log($"KodBlokady: {konf.KodBlokady}");
+            Log($"TypBlokady: {konf.TypBlokady}");
+            Log($"uSupplyVoltageHigh_TriacRelay_On: {konf.uSupplyVoltageHigh_TriacRelay_On}");
+            Log($"uSupplyVoltageLow_TriacRelay_On: {konf.uSupplyVoltageLow_TriacRelay_On}");
+            Log($"uSupplyADCValueHigh_TriacRelay_On: {konf.uSupplyADCValueHigh_TriacRelay_On}");
+            Log($"uSupplyADCValueLow_TriacRelay_On: {konf.uSupplyADCValueLow_TriacRelay_On}");
+            Log($"GPSconfiguration: {konf.GPSconfiguration}");
+            Log($"RejestrKonfiguracjiBankTwo: {konf.RejestrKonfiguracjiBankTwo}");
+            Log($"temp: {BitConverter.ToString(konf.temp)}");
+            Log($"CRC: {konf.CRC}");
             var kanaly = MapujKanały(konf);
-            Console.WriteLine("--- Wartości kanałów zgrzewarki ---");
-            Console.WriteLine("Napięcie zasilania:");
-            Console.WriteLine($"  Max: {kanaly.NapiecieZasilaniaMax}");
-            Console.WriteLine($"  Min: {kanaly.NapiecieZasilaniaMin}");
-            Console.WriteLine($"  Max ADC: {kanaly.NapiecieZasilaniaMaxADC}");
-            Console.WriteLine($"  Min ADC: {kanaly.NapiecieZasilaniaMinADC}");
-            Console.WriteLine("Napięcie zgrzewania:");
-            Console.WriteLine($"  Max: {kanaly.NapiecieZgrzewaniaMax}");
-            Console.WriteLine($"  Min: {kanaly.NapiecieZgrzewaniaMin}");
-            Console.WriteLine($"  Max ADC: {kanaly.NapiecieZgrzewaniaMaxADC}");
-            Console.WriteLine($"  Min ADC: {kanaly.NapiecieZgrzewaniaMinADC}");
-            Console.WriteLine("Prąd zgrzewania:");
-            Console.WriteLine($"  Max: {kanaly.PradZgrzewaniaMax}");
-            Console.WriteLine($"  Min: {kanaly.PradZgrzewaniaMin}");
-            Console.WriteLine($"  Max ADC: {kanaly.PradZgrzewaniaMaxADC}");
-            Console.WriteLine($"  Min ADC: {kanaly.PradZgrzewaniaMinADC}");
+            Log("--- Wartości kanałów zgrzewarki ---");
+            Log("Napięcie zasilania:");
+            Log($"  Max: {kanaly.NapiecieZasilaniaMax}");
+            Log($"  Min: {kanaly.NapiecieZasilaniaMin}");
+            Log($"  Max ADC: {kanaly.NapiecieZasilaniaMaxADC}");
+            Log($"  Min ADC: {kanaly.NapiecieZasilaniaMinADC}");
+            Log("Napięcie zgrzewania:");
+            Log($"  Max: {kanaly.NapiecieZgrzewaniaMax}");
+            Log($"  Min: {kanaly.NapiecieZgrzewaniaMin}");
+            Log($"  Max ADC: {kanaly.NapiecieZgrzewaniaMaxADC}");
+            Log($"  Min ADC: {kanaly.NapiecieZgrzewaniaMinADC}");
+            Log("Prąd zgrzewania:");
+            Log($"  Max: {kanaly.PradZgrzewaniaMax}");
+            Log($"  Min: {kanaly.PradZgrzewaniaMin}");
+            Log($"  Max ADC: {kanaly.PradZgrzewaniaMaxADC}");
+            Log($"  Min ADC: {kanaly.PradZgrzewaniaMinADC}");
         }
     }
 }

@@ -6,6 +6,8 @@ using System.Linq;
 using System.ComponentModel;
 using System.Threading;
 using System.IO;
+using Logger;
+using static Logger.LoggerService;
 
 namespace WelderRS232
 {
@@ -85,7 +87,6 @@ namespace WelderRS232
         public int MMWCH { get; set; }
     }
 
-
     public class Welder
     {
         private WelderStatus status = WelderStatus.NO_CONNECTION;
@@ -95,7 +96,6 @@ namespace WelderRS232
         private const int COMMAND_SIZE = 30;  // Match C++ COMMAND_SIZE
         private WelderInfo? welderInfo = null;
         private readonly WelderSettings settings;
-        private readonly Action<string> logCallback;
 
         // Dodatkowe pole do przechowywania połączenia USR-N520
         private USRDeviceManager? usrConnection = null;
@@ -111,22 +111,17 @@ namespace WelderRS232
 
         public bool BezSzyfrowania { get; set; } = false;
 
-        // Konstruktor domyślny - używa Console.WriteLine
-        public Welder() : this(Console.WriteLine)
-        {
-        }
-
-        // Konstruktor z callbackiem
-        public Welder(Action<string>? callback)
+        // Konstruktor domyślny
+        public Welder()
         {
             settings = WelderSettings.Load();
-            logCallback = callback ?? Console.WriteLine;
         }
 
-        // Prywatna metoda do logowania
-        private void Log(string message)
+        // Konstruktor z callbackiem (dla kompatybilności wstecznej)
+        public Welder(Action<string>? logCallback = null)
         {
-            logCallback?.Invoke(message);
+            settings = WelderSettings.Load();
+            // Ignorujemy logCallback - używamy LoggerService
         }
 
         public WelderStatus GetStatus() => status;
@@ -151,7 +146,7 @@ namespace WelderRS232
                 int usrPort = 23;
                 try
                 {
-                    var usrManager = new USRDeviceManager(usrIp, usrPort, logCallback);
+                    var usrManager = new USRDeviceManager(usrIp, usrPort);
                     if (usrManager.ConnectAsync().Result)
                     {
                         Log($"Połączono z USR-N520 na {usrIp}:{usrPort}");
@@ -212,7 +207,7 @@ namespace WelderRS232
             int usrPort2 = 23;
             try
             {
-                var usrManager = new USRDeviceManager(usrIp2, usrPort2, logCallback);
+                var usrManager = new USRDeviceManager(usrIp2, usrPort2);
                 if (usrManager.ConnectAsync().Result)
                 {
                     Log($"Połączono z USR-N520 na {usrIp2}:{usrPort2}");
@@ -446,7 +441,7 @@ namespace WelderRS232
                 var firstDevice = usrDevices.First();
                 Log($"Próbuję połączyć się z pierwszym urządzeniem: {firstDevice.IP}:{firstDevice.Port}");
 
-                var usrManager = new USRDeviceManager(firstDevice.IP, firstDevice.Port, logCallback);
+                var usrManager = new USRDeviceManager(firstDevice.IP, firstDevice.Port);
 
                 Log("Wywołuję usrManager.ConnectAsync()...");
                 if (usrManager.ConnectAsync().Result)
@@ -1065,7 +1060,7 @@ namespace WelderRS232
                             if (int.TryParse(parts[1], out int port))
                             {
                                 Log($"Próbuję ponownie połączyć się z USR-N520 na {ip}:{port}");
-                                usrConnection = new USRDeviceManager(ip, port, logCallback);
+                                usrConnection = new USRDeviceManager(ip, port);
                                 if (usrConnection.ConnectAsync().Result)
                                 {
                                     Log($"Ponownie połączono z USR-N520 na {ip}:{port}");
@@ -1485,7 +1480,7 @@ namespace WelderRS232
 
                 if (usrConnection == null)
                 {
-                    usrConnection = new USRDeviceManager(usrIp, usrPort, logCallback);
+                    usrConnection = new USRDeviceManager(usrIp, usrPort);
                 }
 
                 if (!usrConnection.IsConnected)
@@ -1567,7 +1562,7 @@ namespace WelderRS232
                 {
                     if (usrConnection == null)
                     {
-                        usrConnection = new USRDeviceManager(ip, port, logCallback);
+                        usrConnection = new USRDeviceManager(ip, port);
                     }
                     if (!usrConnection.IsConnected)
                     {

@@ -1201,3 +1201,1573 @@ Wartości multimetru:
 [2025-06-27 14:16:35.268] Odczytano parametry zgrzewania poprawnie.
 [2025-06-27 14:16:35.268] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
 [2025-06-27 14:16:35.605] === ZATRZYMUJĘ RUN ===
+[2025-06-27 14:30:38.539] Adres IP komputera: 192.168.0.105
+[2025-06-27 14:30:38.709] Odczytano wysokość logów z ustawień: 240 px
+[2025-06-27 14:30:51.900] Znaleziono zapisane ustawienia komunikacji.
+[2025-06-27 14:30:51.900] Brak połączenia ze zgrzewarką. Próbuję połączyć się z zapisanymi ustawieniami...
+[2025-06-27 14:30:51.907] Połączono z USR-N520 na 192.168.0.7:23
+[2025-06-27 14:30:51.907] Połączono z USR-N520 na 192.168.0.7:23
+[2025-06-27 14:30:51.936] Odpowiedź: U:19.5;I:2.8;ADCU:002F5;ADCI:00048;IVHC-U:03950;IVLC-U:03970;ADCIVHC-U:1535;ADCIVLC-U:1535;IVHC-I:04780;IVLC-I:00520;ADCIVHC-I:1084;ADCIVLC-I:0124;MMWVL:0000;MMWVH:0000;MMWCL:0000;MMWCH:0000
+
+[2025-06-27 14:30:51.937] Połączono: USR-N520 192.168.0.7:23 (115200 baud)
+[2025-06-27 14:30:51.937] ✓ Połączenie z zapisanymi ustawieniami udane. Kontynuuję odczytu parametrów zgrzewania.
+[2025-06-27 14:30:51.937] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-06-27 14:30:51.937] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-06-27 14:30:51.938] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-06-27 14:30:51.939] Status: CONNECTED
+[2025-06-27 14:30:51.939] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-06-27 14:30:51.939] ConnectedBaudRate: 115200
+[2025-06-27 14:30:51.939] GlobalCommunicationType: USR_N520
+[2025-06-27 14:30:51.939] WasUSRConnection: True
+[2025-06-27 14:30:51.939] USRConnection: istnieje
+[2025-06-27 14:30:51.939] USRConnectedPort: 192.168.0.7:23
+[2025-06-27 14:30:51.939] USRConnection.IsConnected: true
+[2025-06-27 14:30:51.939] Settings.CommType: TCP
+[2025-06-27 14:30:51.939] Settings.USR_IP: 192.168.0.7
+[2025-06-27 14:30:51.939] Settings.USR_Port: 23
+[2025-06-27 14:30:51.939] Settings.COM_Port: COM4
+[2025-06-27 14:30:51.939] Settings.COM_Baud: 115200
+[2025-06-27 14:30:51.939] === KONIEC DIAGNOSTYKI ===
+[2025-06-27 14:30:51.939] Używam globalnego typu komunikacji: USR_N520
+[2025-06-27 14:30:51.939] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-06-27 14:30:51.939] Próba 1/3 połączenia z USR-N520
+[2025-06-27 14:30:51.939] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-06-27 14:30:51.939] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-06-27 14:30:51.940] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-06-27 14:30:51.941] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-06-27 14:30:51.941] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-06-27 14:30:51.941] 
+[2025-06-27 14:30:51.969] 
+Parametry zgrzewania (USR-N520):
+[2025-06-27 14:30:51.969] Napięcie zgrzewania: 19,50 V
+[2025-06-27 14:30:51.970] Prąd zgrzewania: 2,80 A
+[2025-06-27 14:30:51.970] 
+Wartości ADC:
+[2025-06-27 14:30:51.970] ADC napięcia zgrzewania: 02F5
+[2025-06-27 14:30:51.970] ADC prądu zgrzewania: 0048
+[2025-06-27 14:30:51.970] 
+Parametry kalibracji napięcia:
+[2025-06-27 14:30:51.970] IVHC-U: 3950
+[2025-06-27 14:30:51.970] IVLC-U: 3970
+[2025-06-27 14:30:51.970] ADCIVHC-U: 1535
+[2025-06-27 14:30:51.970] ADCIVLC-U: 1535
+[2025-06-27 14:30:51.970] 
+Parametry kalibracji prądu:
+[2025-06-27 14:30:51.970] IVHC-I: 4780
+[2025-06-27 14:30:51.970] IVLC-I: 520
+[2025-06-27 14:30:51.970] ADCIVHC-I: 1084
+[2025-06-27 14:30:51.970] ADCIVLC-I: 124
+[2025-06-27 14:30:51.970] 
+Wartości multimetru:
+[2025-06-27 14:30:51.970] MMWVL: 0
+[2025-06-27 14:30:51.970] MMWVH: 0
+[2025-06-27 14:30:51.970] MMWCL: 0
+[2025-06-27 14:30:51.970] MMWCH: 0
+[2025-06-27 14:30:51.970] Pomyślnie odczytano parametry przez USR-N520
+[2025-06-27 14:30:51.970] Odebrane wartości:
+[2025-06-27 14:30:51.970] Napięcie zgrzewania: 19,50V
+[2025-06-27 14:30:51.970] Prąd zgrzewania: 2,80A
+[2025-06-27 14:30:51.970] ADC Napięcia: 0x02F5
+[2025-06-27 14:30:51.970] ADC Prądu: 0x0048
+[2025-06-27 14:30:51.970] IVHC-U: 3950
+[2025-06-27 14:30:51.970] IVLC-U: 3970
+[2025-06-27 14:30:51.970] ADCIVHC-U: 1535
+[2025-06-27 14:30:51.970] ADCIVLC-U: 1535
+[2025-06-27 14:30:51.970] IVHC-I: 4780
+[2025-06-27 14:30:51.970] IVLC-I: 520
+[2025-06-27 14:30:51.970] ADCIVHC-I: 1084
+[2025-06-27 14:30:51.970] ADCIVLC-I: 124
+[2025-06-27 14:30:51.970] MMWVL: 0
+[2025-06-27 14:30:51.970] MMWVH: 0
+[2025-06-27 14:30:51.970] MMWCL: 0
+[2025-06-27 14:30:51.970] MMWCH: 0
+[2025-06-27 14:30:51.970] -------------------
+[2025-06-27 14:30:51.972] Odczytano parametry zgrzewania poprawnie.
+[2025-06-27 14:30:51.974] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-06-27 14:30:52.322] Znaleziono zapisane ustawienia komunikacji.
+[2025-06-27 14:30:52.322] Zgrzewarka już połączona. Kontynuuję odczytu parametrów zgrzewania.
+[2025-06-27 14:30:52.322] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-06-27 14:30:52.322] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-06-27 14:30:52.322] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-06-27 14:30:52.322] Status: CONNECTED
+[2025-06-27 14:30:52.322] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-06-27 14:30:52.322] ConnectedBaudRate: 115200
+[2025-06-27 14:30:52.322] GlobalCommunicationType: USR_N520
+[2025-06-27 14:30:52.322] WasUSRConnection: True
+[2025-06-27 14:30:52.322] USRConnection: istnieje
+[2025-06-27 14:30:52.322] USRConnectedPort: 192.168.0.7:23
+[2025-06-27 14:30:52.322] USRConnection.IsConnected: true
+[2025-06-27 14:30:52.322] Settings.CommType: TCP
+[2025-06-27 14:30:52.322] Settings.USR_IP: 192.168.0.7
+[2025-06-27 14:30:52.322] Settings.USR_Port: 23
+[2025-06-27 14:30:52.322] Settings.COM_Port: COM4
+[2025-06-27 14:30:52.322] Settings.COM_Baud: 115200
+[2025-06-27 14:30:52.322] === KONIEC DIAGNOSTYKI ===
+[2025-06-27 14:30:52.322] Używam globalnego typu komunikacji: USR_N520
+[2025-06-27 14:30:52.322] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-06-27 14:30:52.322] Próba 1/3 połączenia z USR-N520
+[2025-06-27 14:30:52.322] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-06-27 14:30:52.322] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-06-27 14:30:52.322] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-06-27 14:30:52.322] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-06-27 14:30:52.322] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-06-27 14:30:52.322] 
+[2025-06-27 14:30:52.482] Znaleziono zapisane ustawienia komunikacji.
+[2025-06-27 14:30:52.482] Zgrzewarka już połączona. Kontynuuję odczytu parametrów zgrzewania.
+[2025-06-27 14:30:52.482] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-06-27 14:30:52.482] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-06-27 14:30:52.482] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-06-27 14:30:52.482] Status: CONNECTED
+[2025-06-27 14:30:52.482] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-06-27 14:30:52.482] ConnectedBaudRate: 115200
+[2025-06-27 14:30:52.482] GlobalCommunicationType: USR_N520
+[2025-06-27 14:30:52.482] WasUSRConnection: True
+[2025-06-27 14:30:52.482] USRConnection: istnieje
+[2025-06-27 14:30:52.482] USRConnectedPort: 192.168.0.7:23
+[2025-06-27 14:30:52.482] USRConnection.IsConnected: true
+[2025-06-27 14:30:52.482] Settings.CommType: TCP
+[2025-06-27 14:30:52.482] Settings.USR_IP: 192.168.0.7
+[2025-06-27 14:30:52.482] Settings.USR_Port: 23
+[2025-06-27 14:30:52.482] Settings.COM_Port: COM4
+[2025-06-27 14:30:52.482] Settings.COM_Baud: 115200
+[2025-06-27 14:30:52.482] === KONIEC DIAGNOSTYKI ===
+[2025-06-27 14:30:52.482] Używam globalnego typu komunikacji: USR_N520
+[2025-06-27 14:30:52.482] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-06-27 14:30:52.482] Próba 1/3 połączenia z USR-N520
+[2025-06-27 14:30:52.482] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-06-27 14:30:52.482] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-06-27 14:30:52.482] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-06-27 14:30:52.482] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-06-27 14:30:52.482] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-06-27 14:30:52.482] 
+[2025-06-27 14:30:52.636] Znaleziono zapisane ustawienia komunikacji.
+[2025-06-27 14:30:52.636] Zgrzewarka już połączona. Kontynuuję odczytu parametrów zgrzewania.
+[2025-06-27 14:30:52.636] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-06-27 14:30:52.636] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-06-27 14:30:52.636] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-06-27 14:30:52.636] Status: CONNECTED
+[2025-06-27 14:30:52.636] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-06-27 14:30:52.636] ConnectedBaudRate: 115200
+[2025-06-27 14:30:52.636] GlobalCommunicationType: USR_N520
+[2025-06-27 14:30:52.636] WasUSRConnection: True
+[2025-06-27 14:30:52.636] USRConnection: istnieje
+[2025-06-27 14:30:52.636] USRConnectedPort: 192.168.0.7:23
+[2025-06-27 14:30:52.636] USRConnection.IsConnected: true
+[2025-06-27 14:30:52.636] Settings.CommType: TCP
+[2025-06-27 14:30:52.636] Settings.USR_IP: 192.168.0.7
+[2025-06-27 14:30:52.636] Settings.USR_Port: 23
+[2025-06-27 14:30:52.636] Settings.COM_Port: COM4
+[2025-06-27 14:30:52.636] Settings.COM_Baud: 115200
+[2025-06-27 14:30:52.636] === KONIEC DIAGNOSTYKI ===
+[2025-06-27 14:30:52.636] Używam globalnego typu komunikacji: USR_N520
+[2025-06-27 14:30:52.636] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-06-27 14:30:52.636] Próba 1/3 połączenia z USR-N520
+[2025-06-27 14:30:52.636] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-06-27 14:30:52.636] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-06-27 14:30:52.636] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-06-27 14:30:52.636] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-06-27 14:30:52.636] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-06-27 14:30:52.636] 
+[2025-06-27 14:30:52.786] Znaleziono zapisane ustawienia komunikacji.
+[2025-06-27 14:30:52.786] Zgrzewarka już połączona. Kontynuuję odczytu parametrów zgrzewania.
+[2025-06-27 14:30:52.786] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-06-27 14:30:52.786] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-06-27 14:30:52.786] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-06-27 14:30:52.786] Status: CONNECTED
+[2025-06-27 14:30:52.786] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-06-27 14:30:52.786] ConnectedBaudRate: 115200
+[2025-06-27 14:30:52.786] GlobalCommunicationType: USR_N520
+[2025-06-27 14:30:52.786] WasUSRConnection: True
+[2025-06-27 14:30:52.786] USRConnection: istnieje
+[2025-06-27 14:30:52.786] USRConnectedPort: 192.168.0.7:23
+[2025-06-27 14:30:52.786] USRConnection.IsConnected: true
+[2025-06-27 14:30:52.786] Settings.CommType: TCP
+[2025-06-27 14:30:52.786] Settings.USR_IP: 192.168.0.7
+[2025-06-27 14:30:52.786] Settings.USR_Port: 23
+[2025-06-27 14:30:52.786] Settings.COM_Port: COM4
+[2025-06-27 14:30:52.786] Settings.COM_Baud: 115200
+[2025-06-27 14:30:52.786] === KONIEC DIAGNOSTYKI ===
+[2025-06-27 14:30:52.786] Używam globalnego typu komunikacji: USR_N520
+[2025-06-27 14:30:52.786] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-06-27 14:30:52.786] Próba 1/3 połączenia z USR-N520
+[2025-06-27 14:30:52.786] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-06-27 14:30:52.786] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-06-27 14:30:52.786] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-06-27 14:30:52.786] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-06-27 14:30:52.786] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-06-27 14:30:52.786] 
+[2025-06-27 14:30:52.932] Znaleziono zapisane ustawienia komunikacji.
+[2025-06-27 14:30:52.932] Zgrzewarka już połączona. Kontynuuję odczytu parametrów zgrzewania.
+[2025-06-27 14:30:52.932] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-06-27 14:30:52.932] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-06-27 14:30:52.932] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-06-27 14:30:52.932] Status: CONNECTED
+[2025-06-27 14:30:52.932] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-06-27 14:30:52.932] ConnectedBaudRate: 115200
+[2025-06-27 14:30:52.932] GlobalCommunicationType: USR_N520
+[2025-06-27 14:30:52.932] WasUSRConnection: True
+[2025-06-27 14:30:52.932] USRConnection: istnieje
+[2025-06-27 14:30:52.932] USRConnectedPort: 192.168.0.7:23
+[2025-06-27 14:30:52.932] USRConnection.IsConnected: true
+[2025-06-27 14:30:52.932] Settings.CommType: TCP
+[2025-06-27 14:30:52.932] Settings.USR_IP: 192.168.0.7
+[2025-06-27 14:30:52.932] Settings.USR_Port: 23
+[2025-06-27 14:30:52.932] Settings.COM_Port: COM4
+[2025-06-27 14:30:52.932] Settings.COM_Baud: 115200
+[2025-06-27 14:30:52.932] === KONIEC DIAGNOSTYKI ===
+[2025-06-27 14:30:52.932] Używam globalnego typu komunikacji: USR_N520
+[2025-06-27 14:30:52.932] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-06-27 14:30:52.932] Próba 1/3 połączenia z USR-N520
+[2025-06-27 14:30:52.932] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-06-27 14:30:52.932] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-06-27 14:30:52.932] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-06-27 14:30:52.932] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-06-27 14:30:52.932] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-06-27 14:30:52.932] 
+[2025-06-27 14:30:53.528] 
+Parametry zgrzewania (USR-N520):
+[2025-06-27 14:30:53.528] Napięcie zgrzewania: 19,50 V
+[2025-06-27 14:30:53.528] Prąd zgrzewania: 2,80 A
+[2025-06-27 14:30:53.528] 
+Wartości ADC:
+[2025-06-27 14:30:53.528] ADC napięcia zgrzewania: 02F5
+[2025-06-27 14:30:53.528] ADC prądu zgrzewania: 0048
+[2025-06-27 14:30:53.528] 
+Parametry kalibracji napięcia:
+[2025-06-27 14:30:53.528] IVHC-U: 3950
+[2025-06-27 14:30:53.528] IVLC-U: 3970
+[2025-06-27 14:30:53.528] ADCIVHC-U: 1535
+[2025-06-27 14:30:53.528] ADCIVLC-U: 1535
+[2025-06-27 14:30:53.528] 
+Parametry kalibracji prądu:
+[2025-06-27 14:30:53.528] IVHC-I: 4780
+[2025-06-27 14:30:53.528] IVLC-I: 520
+[2025-06-27 14:30:53.528] ADCIVHC-I: 1084
+[2025-06-27 14:30:53.528] ADCIVLC-I: 124
+[2025-06-27 14:30:53.528] 
+Wartości multimetru:
+[2025-06-27 14:30:53.528] MMWVL: 0
+[2025-06-27 14:30:53.528] MMWVH: 0
+[2025-06-27 14:30:53.528] MMWCL: 0
+[2025-06-27 14:30:53.528] MMWCH: 0
+[2025-06-27 14:30:53.528] Pomyślnie odczytano parametry przez USR-N520
+[2025-06-27 14:30:53.528] Odebrane wartości:
+[2025-06-27 14:30:53.528] Napięcie zgrzewania: 19,50V
+[2025-06-27 14:30:53.528] Prąd zgrzewania: 2,80A
+[2025-06-27 14:30:53.528] ADC Napięcia: 0x02F5
+[2025-06-27 14:30:53.528] ADC Prądu: 0x0048
+[2025-06-27 14:30:53.528] IVHC-U: 3950
+[2025-06-27 14:30:53.528] IVLC-U: 3970
+[2025-06-27 14:30:53.528] ADCIVHC-U: 1535
+[2025-06-27 14:30:53.528] ADCIVLC-U: 1535
+[2025-06-27 14:30:53.528] IVHC-I: 4780
+[2025-06-27 14:30:53.528] IVLC-I: 520
+[2025-06-27 14:30:53.528] ADCIVHC-I: 1084
+[2025-06-27 14:30:53.528] ADCIVLC-I: 124
+[2025-06-27 14:30:53.528] MMWVL: 0
+[2025-06-27 14:30:53.528] MMWVH: 0
+[2025-06-27 14:30:53.528] MMWCL: 0
+[2025-06-27 14:30:53.528] MMWCH: 0
+[2025-06-27 14:30:53.528] -------------------
+[2025-06-27 14:30:53.528] Odczytano parametry zgrzewania poprawnie.
+[2025-06-27 14:30:53.528] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-06-27 14:35:06.602] Adres IP komputera: 192.168.0.105
+[2025-06-27 14:35:06.795] Odczytano wysokość logów z ustawień: 240 px
+[2025-06-27 14:35:11.612] Znaleziono zapisane ustawienia komunikacji.
+[2025-06-27 14:35:11.613] Brak połączenia ze zgrzewarką. Próbuję połączyć się z zapisanymi ustawieniami...
+[2025-06-27 14:35:11.618] Połączono z USR-N520 na 192.168.0.7:23
+[2025-06-27 14:35:11.618] Połączono z USR-N520 na 192.168.0.7:23
+[2025-06-27 14:35:11.646] Odpowiedź: U:19.5;I:2.8;ADCU:002F5;ADCI:00048;IVHC-U:03950;IVLC-U:03970;ADCIVHC-U:1535;ADCIVLC-U:1535;IVHC-I:04780;IVLC-I:00520;ADCIVHC-I:1084;ADCIVLC-I:0124;MMWVL:0000;MMWVH:0000;MMWCL:0000;MMWCH:0000
+
+[2025-06-27 14:35:11.647] Połączono: USR-N520 192.168.0.7:23 (115200 baud)
+[2025-06-27 14:35:11.647] ✓ Połączenie z zapisanymi ustawieniami udane. Kontynuuję odczytu konfiguracji.
+[2025-06-27 14:35:11.648] Wysyłanie polecenia: Odczytaj kalibrację
+[2025-06-27 14:35:11.649] Wysyłanie komendy odczytu rejestru konfiguracji przez USR-N520:
+[2025-06-27 14:35:11.649] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-06-27 14:35:11.650] HEX:    74 5A 56 36 04 53 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 65 15 0D 0A
+[2025-06-27 14:35:11.650] ASCII:  t Z V 6 . S X X X X X X X X X X X X X X X X X X X X e . . .
+[2025-06-27 14:35:11.650] 
+[2025-06-27 14:35:11.689] 
+Odebrano 258 bajtów przez USR-N520:
+[2025-06-27 14:35:11.689] Offset    00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F    ASCII
+[2025-06-27 14:35:11.689] --------  -----------------------------------------------    ----------------
+[2025-06-27 14:35:11.689] 00000000  AB AB 00 00 01 00 00 00 00 00 00 00 00 00 00 00    ??..............
+[2025-06-27 14:35:11.689] 00000010  00 00 00 00 00 00 00 00 00 33 38 35 35 30 31 20    .........385501 
+[2025-06-27 14:35:11.689] 00000020  20 20 20 20 20 20 20 20 20 2E 2E 2E 2E 2E 2E 2E             .......
+[2025-06-27 14:35:11.689] 00000030  2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 20 2E 2E    ............. ..
+[2025-06-27 14:35:11.689] 00000040  2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E    ................
+[2025-06-27 14:35:11.689] 00000050  2E 2E 20 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E    .. .............
+[2025-06-27 14:35:11.689] 00000060  2E 2E 2E 2E 2E 2E 2E 20 0F 04 19 0F 04 14 0F 04    ....... ........
+[2025-06-27 14:35:11.689] 00000070  19 00 00 0C CC BF 20 7D 00 00 00 00 00 00 00 00    ....?? }........
+[2025-06-27 14:35:11.689] 00000080  00 00 A8 61 6E 0F AC 12 00 00 00 00 00 00 00 00    ..?an.?.........
+[2025-06-27 14:35:11.689] 00000090  00 00 98 3A 82 0F 08 02 00 00 00 00 00 00 00 00    ..?:?...........
+[2025-06-27 14:35:11.689] 000000A0  00 00 5B 04 FF 05 3C 04 00 00 00 00 00 00 00 00    ..[.?.<.........
+[2025-06-27 14:35:11.689] 000000B0  00 00 26 02 FF 05 7C 00 00 00 00 00 00 00 00 00    ..&.?.|.........
+[2025-06-27 14:35:11.689] 000000C0  00 00 00 00 00 A8 61 98 3A 21 04 F4 01 6A 06 00    .....?a?:!.?.j..
+[2025-06-27 14:35:11.689] 000000D0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
+[2025-06-27 14:35:11.689] 000000E0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
+[2025-06-27 14:35:11.689] 000000F0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 51 CA    ..............Q?
+[2025-06-27 14:35:11.689] 00000100  0D 0A                                              ..
+[2025-06-27 14:35:11.690] ✓ Kalibracja odczytana pomyślnie.
+[2025-06-27 14:35:11.731] Konfiguracja została odczytana i wyświetlona w UI.
+[2025-06-27 14:35:12.179] Znaleziono zapisane ustawienia komunikacji.
+[2025-06-27 14:35:12.179] Zgrzewarka już połączona. Kontynuuję odczytu konfiguracji.
+[2025-06-27 14:35:12.179] Wysyłanie polecenia: Odczytaj kalibrację
+[2025-06-27 14:35:12.179] Wysyłanie komendy odczytu rejestru konfiguracji przez USR-N520:
+[2025-06-27 14:35:12.179] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-06-27 14:35:12.179] HEX:    74 5A 56 36 04 53 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 65 15 0D 0A
+[2025-06-27 14:35:12.179] ASCII:  t Z V 6 . S X X X X X X X X X X X X X X X X X X X X e . . .
+[2025-06-27 14:35:12.179] 
+[2025-06-27 14:35:12.218] 
+Odebrano 258 bajtów przez USR-N520:
+[2025-06-27 14:35:12.218] Offset    00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F    ASCII
+[2025-06-27 14:35:12.218] --------  -----------------------------------------------    ----------------
+[2025-06-27 14:35:12.218] 00000000  AB AB 00 00 01 00 00 00 00 00 00 00 00 00 00 00    ??..............
+[2025-06-27 14:35:12.218] 00000010  00 00 00 00 00 00 00 00 00 33 38 35 35 30 31 20    .........385501 
+[2025-06-27 14:35:12.218] 00000020  20 20 20 20 20 20 20 20 20 2E 2E 2E 2E 2E 2E 2E             .......
+[2025-06-27 14:35:12.218] 00000030  2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 20 2E 2E    ............. ..
+[2025-06-27 14:35:12.218] 00000040  2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E    ................
+[2025-06-27 14:35:12.218] 00000050  2E 2E 20 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E    .. .............
+[2025-06-27 14:35:12.218] 00000060  2E 2E 2E 2E 2E 2E 2E 20 0F 04 19 0F 04 14 0F 04    ....... ........
+[2025-06-27 14:35:12.218] 00000070  19 00 00 0C CC BF 20 7D 00 00 00 00 00 00 00 00    ....?? }........
+[2025-06-27 14:35:12.218] 00000080  00 00 A8 61 6E 0F AC 12 00 00 00 00 00 00 00 00    ..?an.?.........
+[2025-06-27 14:35:12.218] 00000090  00 00 98 3A 82 0F 08 02 00 00 00 00 00 00 00 00    ..?:?...........
+[2025-06-27 14:35:12.218] 000000A0  00 00 5B 04 FF 05 3C 04 00 00 00 00 00 00 00 00    ..[.?.<.........
+[2025-06-27 14:35:12.218] 000000B0  00 00 26 02 FF 05 7C 00 00 00 00 00 00 00 00 00    ..&.?.|.........
+[2025-06-27 14:35:12.218] 000000C0  00 00 00 00 00 A8 61 98 3A 21 04 F4 01 6A 06 00    .....?a?:!.?.j..
+[2025-06-27 14:35:12.218] 000000D0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
+[2025-06-27 14:35:12.218] 000000E0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
+[2025-06-27 14:35:12.218] 000000F0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 51 CA    ..............Q?
+[2025-06-27 14:35:12.218] 00000100  0D 0A                                              ..
+[2025-06-27 14:35:12.218] ✓ Kalibracja odczytana pomyślnie.
+[2025-06-27 14:35:12.218] Konfiguracja została odczytana i wyświetlona w UI.
+[2025-06-27 14:35:12.331] Znaleziono zapisane ustawienia komunikacji.
+[2025-06-27 14:35:12.331] Zgrzewarka już połączona. Kontynuuję odczytu konfiguracji.
+[2025-06-27 14:35:12.331] Wysyłanie polecenia: Odczytaj kalibrację
+[2025-06-27 14:35:12.331] Wysyłanie komendy odczytu rejestru konfiguracji przez USR-N520:
+[2025-06-27 14:35:12.331] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-06-27 14:35:12.331] HEX:    74 5A 56 36 04 53 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 65 15 0D 0A
+[2025-06-27 14:35:12.331] ASCII:  t Z V 6 . S X X X X X X X X X X X X X X X X X X X X e . . .
+[2025-06-27 14:35:12.331] 
+[2025-06-27 14:35:12.371] 
+Odebrano 258 bajtów przez USR-N520:
+[2025-06-27 14:35:12.371] Offset    00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F    ASCII
+[2025-06-27 14:35:12.371] --------  -----------------------------------------------    ----------------
+[2025-06-27 14:35:12.371] 00000000  AB AB 00 00 01 00 00 00 00 00 00 00 00 00 00 00    ??..............
+[2025-06-27 14:35:12.371] 00000010  00 00 00 00 00 00 00 00 00 33 38 35 35 30 31 20    .........385501 
+[2025-06-27 14:35:12.371] 00000020  20 20 20 20 20 20 20 20 20 2E 2E 2E 2E 2E 2E 2E             .......
+[2025-06-27 14:35:12.371] 00000030  2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 20 2E 2E    ............. ..
+[2025-06-27 14:35:12.371] 00000040  2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E    ................
+[2025-06-27 14:35:12.371] 00000050  2E 2E 20 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E    .. .............
+[2025-06-27 14:35:12.371] 00000060  2E 2E 2E 2E 2E 2E 2E 20 0F 04 19 0F 04 14 0F 04    ....... ........
+[2025-06-27 14:35:12.371] 00000070  19 00 00 0C CC BF 20 7D 00 00 00 00 00 00 00 00    ....?? }........
+[2025-06-27 14:35:12.371] 00000080  00 00 A8 61 6E 0F AC 12 00 00 00 00 00 00 00 00    ..?an.?.........
+[2025-06-27 14:35:12.371] 00000090  00 00 98 3A 82 0F 08 02 00 00 00 00 00 00 00 00    ..?:?...........
+[2025-06-27 14:35:12.371] 000000A0  00 00 5B 04 FF 05 3C 04 00 00 00 00 00 00 00 00    ..[.?.<.........
+[2025-06-27 14:35:12.371] 000000B0  00 00 26 02 FF 05 7C 00 00 00 00 00 00 00 00 00    ..&.?.|.........
+[2025-06-27 14:35:12.371] 000000C0  00 00 00 00 00 A8 61 98 3A 21 04 F4 01 6A 06 00    .....?a?:!.?.j..
+[2025-06-27 14:35:12.371] 000000D0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
+[2025-06-27 14:35:12.371] 000000E0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
+[2025-06-27 14:35:12.371] 000000F0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 51 CA    ..............Q?
+[2025-06-27 14:35:12.371] 00000100  0D 0A                                              ..
+[2025-06-27 14:35:12.371] ✓ Kalibracja odczytana pomyślnie.
+[2025-06-27 14:35:12.371] Konfiguracja została odczytana i wyświetlona w UI.
+[2025-06-27 14:35:12.885] Znaleziono zapisane ustawienia komunikacji.
+[2025-06-27 14:35:12.885] Zgrzewarka już połączona. Kontynuuję odczytu parametrów zgrzewania.
+[2025-06-27 14:35:12.885] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-06-27 14:35:12.885] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-06-27 14:35:12.886] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-06-27 14:35:12.887] Status: CONNECTED
+[2025-06-27 14:35:12.887] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-06-27 14:35:12.887] ConnectedBaudRate: 115200
+[2025-06-27 14:35:12.887] GlobalCommunicationType: USR_N520
+[2025-06-27 14:35:12.887] WasUSRConnection: True
+[2025-06-27 14:35:12.887] USRConnection: istnieje
+[2025-06-27 14:35:12.887] USRConnectedPort: 192.168.0.7:23
+[2025-06-27 14:35:12.887] USRConnection.IsConnected: true
+[2025-06-27 14:35:12.887] Settings.CommType: TCP
+[2025-06-27 14:35:12.887] Settings.USR_IP: 192.168.0.7
+[2025-06-27 14:35:12.887] Settings.USR_Port: 23
+[2025-06-27 14:35:12.887] Settings.COM_Port: COM4
+[2025-06-27 14:35:12.887] Settings.COM_Baud: 115200
+[2025-06-27 14:35:12.887] === KONIEC DIAGNOSTYKI ===
+[2025-06-27 14:35:12.887] Używam globalnego typu komunikacji: USR_N520
+[2025-06-27 14:35:12.887] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-06-27 14:35:12.887] Próba 1/3 połączenia z USR-N520
+[2025-06-27 14:35:12.887] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-06-27 14:35:12.887] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-06-27 14:35:12.887] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-06-27 14:35:12.887] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-06-27 14:35:12.887] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-06-27 14:35:12.887] 
+[2025-06-27 14:35:12.916] 
+Parametry zgrzewania (USR-N520):
+[2025-06-27 14:35:12.916] Napięcie zgrzewania: 19,50 V
+[2025-06-27 14:35:12.916] Prąd zgrzewania: 2,80 A
+[2025-06-27 14:35:12.916] 
+Wartości ADC:
+[2025-06-27 14:35:12.916] ADC napięcia zgrzewania: 02F5
+[2025-06-27 14:35:12.916] ADC prądu zgrzewania: 0048
+[2025-06-27 14:35:12.916] 
+Parametry kalibracji napięcia:
+[2025-06-27 14:35:12.916] IVHC-U: 3950
+[2025-06-27 14:35:12.916] IVLC-U: 3970
+[2025-06-27 14:35:12.916] ADCIVHC-U: 1535
+[2025-06-27 14:35:12.916] ADCIVLC-U: 1535
+[2025-06-27 14:35:12.916] 
+Parametry kalibracji prądu:
+[2025-06-27 14:35:12.916] IVHC-I: 4780
+[2025-06-27 14:35:12.916] IVLC-I: 520
+[2025-06-27 14:35:12.916] ADCIVHC-I: 1084
+[2025-06-27 14:35:12.916] ADCIVLC-I: 124
+[2025-06-27 14:35:12.916] 
+Wartości multimetru:
+[2025-06-27 14:35:12.916] MMWVL: 0
+[2025-06-27 14:35:12.916] MMWVH: 0
+[2025-06-27 14:35:12.916] MMWCL: 0
+[2025-06-27 14:35:12.916] MMWCH: 0
+[2025-06-27 14:35:12.916] Pomyślnie odczytano parametry przez USR-N520
+[2025-06-27 14:35:12.917] Odebrane wartości:
+[2025-06-27 14:35:12.917] Napięcie zgrzewania: 19,50V
+[2025-06-27 14:35:12.917] Prąd zgrzewania: 2,80A
+[2025-06-27 14:35:12.917] ADC Napięcia: 0x02F5
+[2025-06-27 14:35:12.917] ADC Prądu: 0x0048
+[2025-06-27 14:35:12.917] IVHC-U: 3950
+[2025-06-27 14:35:12.917] IVLC-U: 3970
+[2025-06-27 14:35:12.917] ADCIVHC-U: 1535
+[2025-06-27 14:35:12.917] ADCIVLC-U: 1535
+[2025-06-27 14:35:12.917] IVHC-I: 4780
+[2025-06-27 14:35:12.917] IVLC-I: 520
+[2025-06-27 14:35:12.917] ADCIVHC-I: 1084
+[2025-06-27 14:35:12.917] ADCIVLC-I: 124
+[2025-06-27 14:35:12.917] MMWVL: 0
+[2025-06-27 14:35:12.917] MMWVH: 0
+[2025-06-27 14:35:12.917] MMWCL: 0
+[2025-06-27 14:35:12.917] MMWCH: 0
+[2025-06-27 14:35:12.917] -------------------
+[2025-06-27 14:35:12.919] Odczytano parametry zgrzewania poprawnie.
+[2025-06-27 14:35:12.919] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-06-27 14:35:13.283] Znaleziono zapisane ustawienia komunikacji.
+[2025-06-27 14:35:13.283] Zgrzewarka już połączona. Kontynuuję odczytu parametrów zgrzewania.
+[2025-06-27 14:35:13.283] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-06-27 14:35:13.283] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-06-27 14:35:13.283] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-06-27 14:35:13.283] Status: CONNECTED
+[2025-06-27 14:35:13.283] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-06-27 14:35:13.283] ConnectedBaudRate: 115200
+[2025-06-27 14:35:13.283] GlobalCommunicationType: USR_N520
+[2025-06-27 14:35:13.283] WasUSRConnection: True
+[2025-06-27 14:35:13.283] USRConnection: istnieje
+[2025-06-27 14:35:13.283] USRConnectedPort: 192.168.0.7:23
+[2025-06-27 14:35:13.283] USRConnection.IsConnected: true
+[2025-06-27 14:35:13.283] Settings.CommType: TCP
+[2025-06-27 14:35:13.283] Settings.USR_IP: 192.168.0.7
+[2025-06-27 14:35:13.283] Settings.USR_Port: 23
+[2025-06-27 14:35:13.283] Settings.COM_Port: COM4
+[2025-06-27 14:35:13.283] Settings.COM_Baud: 115200
+[2025-06-27 14:35:13.283] === KONIEC DIAGNOSTYKI ===
+[2025-06-27 14:35:13.283] Używam globalnego typu komunikacji: USR_N520
+[2025-06-27 14:35:13.283] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-06-27 14:35:13.283] Próba 1/3 połączenia z USR-N520
+[2025-06-27 14:35:13.283] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-06-27 14:35:13.283] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-06-27 14:35:13.283] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-06-27 14:35:13.283] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-06-27 14:35:13.283] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-06-27 14:35:13.283] 
+[2025-06-27 14:35:13.311] 
+Parametry zgrzewania (USR-N520):
+[2025-06-27 14:35:13.311] Napięcie zgrzewania: 19,50 V
+[2025-06-27 14:35:13.311] Prąd zgrzewania: 2,80 A
+[2025-06-27 14:35:13.311] 
+Wartości ADC:
+[2025-06-27 14:35:13.311] ADC napięcia zgrzewania: 02F5
+[2025-06-27 14:35:13.311] ADC prądu zgrzewania: 0048
+[2025-06-27 14:35:13.311] 
+Parametry kalibracji napięcia:
+[2025-06-27 14:35:13.311] IVHC-U: 3950
+[2025-06-27 14:35:13.311] IVLC-U: 3970
+[2025-06-27 14:35:13.311] ADCIVHC-U: 1535
+[2025-06-27 14:35:13.311] ADCIVLC-U: 1535
+[2025-06-27 14:35:13.311] 
+Parametry kalibracji prądu:
+[2025-06-27 14:35:13.311] IVHC-I: 4780
+[2025-06-27 14:35:13.311] IVLC-I: 520
+[2025-06-27 14:35:13.311] ADCIVHC-I: 1084
+[2025-06-27 14:35:13.311] ADCIVLC-I: 124
+[2025-06-27 14:35:13.311] 
+Wartości multimetru:
+[2025-06-27 14:35:13.311] MMWVL: 0
+[2025-06-27 14:35:13.311] MMWVH: 0
+[2025-06-27 14:35:13.311] MMWCL: 0
+[2025-06-27 14:35:13.311] MMWCH: 0
+[2025-06-27 14:35:13.311] Pomyślnie odczytano parametry przez USR-N520
+[2025-06-27 14:35:13.311] Odebrane wartości:
+[2025-06-27 14:35:13.311] Napięcie zgrzewania: 19,50V
+[2025-06-27 14:35:13.311] Prąd zgrzewania: 2,80A
+[2025-06-27 14:35:13.311] ADC Napięcia: 0x02F5
+[2025-06-27 14:35:13.311] ADC Prądu: 0x0048
+[2025-06-27 14:35:13.311] IVHC-U: 3950
+[2025-06-27 14:35:13.311] IVLC-U: 3970
+[2025-06-27 14:35:13.311] ADCIVHC-U: 1535
+[2025-06-27 14:35:13.311] ADCIVLC-U: 1535
+[2025-06-27 14:35:13.311] IVHC-I: 4780
+[2025-06-27 14:35:13.311] IVLC-I: 520
+[2025-06-27 14:35:13.311] ADCIVHC-I: 1084
+[2025-06-27 14:35:13.311] ADCIVLC-I: 124
+[2025-06-27 14:35:13.311] MMWVL: 0
+[2025-06-27 14:35:13.311] MMWVH: 0
+[2025-06-27 14:35:13.311] MMWCL: 0
+[2025-06-27 14:35:13.311] MMWCH: 0
+[2025-06-27 14:35:13.311] -------------------
+[2025-06-27 14:35:13.311] Odczytano parametry zgrzewania poprawnie.
+[2025-06-27 14:35:13.311] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-06-27 14:35:13.482] Znaleziono zapisane ustawienia komunikacji.
+[2025-06-27 14:35:13.482] Zgrzewarka już połączona. Kontynuuję odczytu parametrów zgrzewania.
+[2025-06-27 14:35:13.482] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-06-27 14:35:13.482] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-06-27 14:35:13.482] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-06-27 14:35:13.482] Status: CONNECTED
+[2025-06-27 14:35:13.482] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-06-27 14:35:13.482] ConnectedBaudRate: 115200
+[2025-06-27 14:35:13.482] GlobalCommunicationType: USR_N520
+[2025-06-27 14:35:13.482] WasUSRConnection: True
+[2025-06-27 14:35:13.482] USRConnection: istnieje
+[2025-06-27 14:35:13.482] USRConnectedPort: 192.168.0.7:23
+[2025-06-27 14:35:13.482] USRConnection.IsConnected: true
+[2025-06-27 14:35:13.482] Settings.CommType: TCP
+[2025-06-27 14:35:13.482] Settings.USR_IP: 192.168.0.7
+[2025-06-27 14:35:13.482] Settings.USR_Port: 23
+[2025-06-27 14:35:13.482] Settings.COM_Port: COM4
+[2025-06-27 14:35:13.482] Settings.COM_Baud: 115200
+[2025-06-27 14:35:13.482] === KONIEC DIAGNOSTYKI ===
+[2025-06-27 14:35:13.482] Używam globalnego typu komunikacji: USR_N520
+[2025-06-27 14:35:13.482] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-06-27 14:35:13.482] Próba 1/3 połączenia z USR-N520
+[2025-06-27 14:35:13.482] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-06-27 14:35:13.482] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-06-27 14:35:13.482] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-06-27 14:35:13.482] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-06-27 14:35:13.482] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-06-27 14:35:13.482] 
+[2025-06-27 14:35:13.510] 
+Parametry zgrzewania (USR-N520):
+[2025-06-27 14:35:13.510] Napięcie zgrzewania: 19,50 V
+[2025-06-27 14:35:13.510] Prąd zgrzewania: 2,80 A
+[2025-06-27 14:35:13.510] 
+Wartości ADC:
+[2025-06-27 14:35:13.510] ADC napięcia zgrzewania: 02F5
+[2025-06-27 14:35:13.510] ADC prądu zgrzewania: 0048
+[2025-06-27 14:35:13.510] 
+Parametry kalibracji napięcia:
+[2025-06-27 14:35:13.510] IVHC-U: 3950
+[2025-06-27 14:35:13.510] IVLC-U: 3970
+[2025-06-27 14:35:13.510] ADCIVHC-U: 1535
+[2025-06-27 14:35:13.510] ADCIVLC-U: 1535
+[2025-06-27 14:35:13.510] 
+Parametry kalibracji prądu:
+[2025-06-27 14:35:13.510] IVHC-I: 4780
+[2025-06-27 14:35:13.510] IVLC-I: 520
+[2025-06-27 14:35:13.510] ADCIVHC-I: 1084
+[2025-06-27 14:35:13.510] ADCIVLC-I: 124
+[2025-06-27 14:35:13.510] 
+Wartości multimetru:
+[2025-06-27 14:35:13.510] MMWVL: 0
+[2025-06-27 14:35:13.510] MMWVH: 0
+[2025-06-27 14:35:13.510] MMWCL: 0
+[2025-06-27 14:35:13.510] MMWCH: 0
+[2025-06-27 14:35:13.510] Pomyślnie odczytano parametry przez USR-N520
+[2025-06-27 14:35:13.510] Odebrane wartości:
+[2025-06-27 14:35:13.510] Napięcie zgrzewania: 19,50V
+[2025-06-27 14:35:13.510] Prąd zgrzewania: 2,80A
+[2025-06-27 14:35:13.510] ADC Napięcia: 0x02F5
+[2025-06-27 14:35:13.510] ADC Prądu: 0x0048
+[2025-06-27 14:35:13.510] IVHC-U: 3950
+[2025-06-27 14:35:13.510] IVLC-U: 3970
+[2025-06-27 14:35:13.510] ADCIVHC-U: 1535
+[2025-06-27 14:35:13.510] ADCIVLC-U: 1535
+[2025-06-27 14:35:13.510] IVHC-I: 4780
+[2025-06-27 14:35:13.510] IVLC-I: 520
+[2025-06-27 14:35:13.510] ADCIVHC-I: 1084
+[2025-06-27 14:35:13.510] ADCIVLC-I: 124
+[2025-06-27 14:35:13.510] MMWVL: 0
+[2025-06-27 14:35:13.510] MMWVH: 0
+[2025-06-27 14:35:13.510] MMWCL: 0
+[2025-06-27 14:35:13.510] MMWCH: 0
+[2025-06-27 14:35:13.510] -------------------
+[2025-06-27 14:35:13.510] Odczytano parametry zgrzewania poprawnie.
+[2025-06-27 14:35:13.510] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-06-27 14:37:57.188] Znaleziono zapisane ustawienia komunikacji.
+[2025-06-27 14:37:57.188] Zgrzewarka już połączona. Kontynuuję odczytu parametrów zgrzewania.
+[2025-06-27 14:37:57.188] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-06-27 14:37:57.188] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-06-27 14:37:57.188] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-06-27 14:37:57.188] Status: CONNECTED
+[2025-06-27 14:37:57.188] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-06-27 14:37:57.188] ConnectedBaudRate: 115200
+[2025-06-27 14:37:57.188] GlobalCommunicationType: USR_N520
+[2025-06-27 14:37:57.188] WasUSRConnection: True
+[2025-06-27 14:37:57.188] USRConnection: istnieje
+[2025-06-27 14:37:57.188] USRConnectedPort: 192.168.0.7:23
+[2025-06-27 14:37:57.188] USRConnection.IsConnected: true
+[2025-06-27 14:37:57.188] Settings.CommType: TCP
+[2025-06-27 14:37:57.188] Settings.USR_IP: 192.168.0.7
+[2025-06-27 14:37:57.188] Settings.USR_Port: 23
+[2025-06-27 14:37:57.188] Settings.COM_Port: COM4
+[2025-06-27 14:37:57.188] Settings.COM_Baud: 115200
+[2025-06-27 14:37:57.188] === KONIEC DIAGNOSTYKI ===
+[2025-06-27 14:37:57.188] Używam globalnego typu komunikacji: USR_N520
+[2025-06-27 14:37:57.188] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-06-27 14:37:57.188] Próba 1/3 połączenia z USR-N520
+[2025-06-27 14:37:57.188] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-06-27 14:37:57.188] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-06-27 14:37:57.188] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-06-27 14:37:57.188] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-06-27 14:37:57.188] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-06-27 14:37:57.188] 
+[2025-06-27 14:37:57.216] 
+Parametry zgrzewania (USR-N520):
+[2025-06-27 14:37:57.216] Napięcie zgrzewania: 19,50 V
+[2025-06-27 14:37:57.216] Prąd zgrzewania: 2,80 A
+[2025-06-27 14:37:57.216] 
+Wartości ADC:
+[2025-06-27 14:37:57.216] ADC napięcia zgrzewania: 02F5
+[2025-06-27 14:37:57.216] ADC prądu zgrzewania: 0048
+[2025-06-27 14:37:57.216] 
+Parametry kalibracji napięcia:
+[2025-06-27 14:37:57.216] IVHC-U: 3950
+[2025-06-27 14:37:57.216] IVLC-U: 3970
+[2025-06-27 14:37:57.216] ADCIVHC-U: 1535
+[2025-06-27 14:37:57.216] ADCIVLC-U: 1535
+[2025-06-27 14:37:57.216] 
+Parametry kalibracji prądu:
+[2025-06-27 14:37:57.216] IVHC-I: 4780
+[2025-06-27 14:37:57.216] IVLC-I: 520
+[2025-06-27 14:37:57.216] ADCIVHC-I: 1084
+[2025-06-27 14:37:57.216] ADCIVLC-I: 124
+[2025-06-27 14:37:57.216] 
+Wartości multimetru:
+[2025-06-27 14:37:57.216] MMWVL: 0
+[2025-06-27 14:37:57.216] MMWVH: 0
+[2025-06-27 14:37:57.216] MMWCL: 0
+[2025-06-27 14:37:57.216] MMWCH: 0
+[2025-06-27 14:37:57.216] Pomyślnie odczytano parametry przez USR-N520
+[2025-06-27 14:37:57.216] Odebrane wartości:
+[2025-06-27 14:37:57.216] Napięcie zgrzewania: 19,50V
+[2025-06-27 14:37:57.216] Prąd zgrzewania: 2,80A
+[2025-06-27 14:37:57.216] ADC Napięcia: 0x02F5
+[2025-06-27 14:37:57.216] ADC Prądu: 0x0048
+[2025-06-27 14:37:57.216] IVHC-U: 3950
+[2025-06-27 14:37:57.216] IVLC-U: 3970
+[2025-06-27 14:37:57.216] ADCIVHC-U: 1535
+[2025-06-27 14:37:57.216] ADCIVLC-U: 1535
+[2025-06-27 14:37:57.216] IVHC-I: 4780
+[2025-06-27 14:37:57.216] IVLC-I: 520
+[2025-06-27 14:37:57.216] ADCIVHC-I: 1084
+[2025-06-27 14:37:57.216] ADCIVLC-I: 124
+[2025-06-27 14:37:57.216] MMWVL: 0
+[2025-06-27 14:37:57.216] MMWVH: 0
+[2025-06-27 14:37:57.216] MMWCL: 0
+[2025-06-27 14:37:57.216] MMWCH: 0
+[2025-06-27 14:37:57.216] -------------------
+[2025-06-27 14:37:57.216] Odczytano parametry zgrzewania poprawnie.
+[2025-06-27 14:37:57.216] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-06-27 14:37:57.684] Znaleziono zapisane ustawienia komunikacji.
+[2025-06-27 14:37:57.684] Zgrzewarka już połączona. Kontynuuję odczytu parametrów zgrzewania.
+[2025-06-27 14:37:57.684] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-06-27 14:37:57.684] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-06-27 14:37:57.684] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-06-27 14:37:57.684] Status: CONNECTED
+[2025-06-27 14:37:57.684] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-06-27 14:37:57.684] ConnectedBaudRate: 115200
+[2025-06-27 14:37:57.684] GlobalCommunicationType: USR_N520
+[2025-06-27 14:37:57.684] WasUSRConnection: True
+[2025-06-27 14:37:57.684] USRConnection: istnieje
+[2025-06-27 14:37:57.684] USRConnectedPort: 192.168.0.7:23
+[2025-06-27 14:37:57.684] USRConnection.IsConnected: true
+[2025-06-27 14:37:57.684] Settings.CommType: TCP
+[2025-06-27 14:37:57.684] Settings.USR_IP: 192.168.0.7
+[2025-06-27 14:37:57.684] Settings.USR_Port: 23
+[2025-06-27 14:37:57.684] Settings.COM_Port: COM4
+[2025-06-27 14:37:57.684] Settings.COM_Baud: 115200
+[2025-06-27 14:37:57.684] === KONIEC DIAGNOSTYKI ===
+[2025-06-27 14:37:57.684] Używam globalnego typu komunikacji: USR_N520
+[2025-06-27 14:37:57.684] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-06-27 14:37:57.684] Próba 1/3 połączenia z USR-N520
+[2025-06-27 14:37:57.684] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-06-27 14:37:57.684] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-06-27 14:37:57.684] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-06-27 14:37:57.684] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-06-27 14:37:57.684] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-06-27 14:37:57.684] 
+[2025-06-27 14:37:57.712] 
+Parametry zgrzewania (USR-N520):
+[2025-06-27 14:37:57.712] Napięcie zgrzewania: 19,50 V
+[2025-06-27 14:37:57.712] Prąd zgrzewania: 2,80 A
+[2025-06-27 14:37:57.712] 
+Wartości ADC:
+[2025-06-27 14:37:57.712] ADC napięcia zgrzewania: 02F5
+[2025-06-27 14:37:57.712] ADC prądu zgrzewania: 0048
+[2025-06-27 14:37:57.712] 
+Parametry kalibracji napięcia:
+[2025-06-27 14:37:57.712] IVHC-U: 3950
+[2025-06-27 14:37:57.712] IVLC-U: 3970
+[2025-06-27 14:37:57.712] ADCIVHC-U: 1535
+[2025-06-27 14:37:57.712] ADCIVLC-U: 1535
+[2025-06-27 14:37:57.712] 
+Parametry kalibracji prądu:
+[2025-06-27 14:37:57.712] IVHC-I: 4780
+[2025-06-27 14:37:57.712] IVLC-I: 520
+[2025-06-27 14:37:57.712] ADCIVHC-I: 1084
+[2025-06-27 14:37:57.712] ADCIVLC-I: 124
+[2025-06-27 14:37:57.712] 
+Wartości multimetru:
+[2025-06-27 14:37:57.712] MMWVL: 0
+[2025-06-27 14:37:57.712] MMWVH: 0
+[2025-06-27 14:37:57.712] MMWCL: 0
+[2025-06-27 14:37:57.712] MMWCH: 0
+[2025-06-27 14:37:57.712] Pomyślnie odczytano parametry przez USR-N520
+[2025-06-27 14:37:57.712] Odebrane wartości:
+[2025-06-27 14:37:57.712] Napięcie zgrzewania: 19,50V
+[2025-06-27 14:37:57.712] Prąd zgrzewania: 2,80A
+[2025-06-27 14:37:57.712] ADC Napięcia: 0x02F5
+[2025-06-27 14:37:57.712] ADC Prądu: 0x0048
+[2025-06-27 14:37:57.712] IVHC-U: 3950
+[2025-06-27 14:37:57.712] IVLC-U: 3970
+[2025-06-27 14:37:57.712] ADCIVHC-U: 1535
+[2025-06-27 14:37:57.712] ADCIVLC-U: 1535
+[2025-06-27 14:37:57.712] IVHC-I: 4780
+[2025-06-27 14:37:57.712] IVLC-I: 520
+[2025-06-27 14:37:57.712] ADCIVHC-I: 1084
+[2025-06-27 14:37:57.712] ADCIVLC-I: 124
+[2025-06-27 14:37:57.712] MMWVL: 0
+[2025-06-27 14:37:57.712] MMWVH: 0
+[2025-06-27 14:37:57.712] MMWCL: 0
+[2025-06-27 14:37:57.712] MMWCH: 0
+[2025-06-27 14:37:57.712] -------------------
+[2025-06-27 14:37:57.712] Odczytano parametry zgrzewania poprawnie.
+[2025-06-27 14:37:57.712] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-06-27 14:37:57.826] Znaleziono zapisane ustawienia komunikacji.
+[2025-06-27 14:37:57.826] Zgrzewarka już połączona. Kontynuuję odczytu parametrów zgrzewania.
+[2025-06-27 14:37:57.826] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-06-27 14:37:57.826] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-06-27 14:37:57.826] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-06-27 14:37:57.826] Status: CONNECTED
+[2025-06-27 14:37:57.826] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-06-27 14:37:57.826] ConnectedBaudRate: 115200
+[2025-06-27 14:37:57.826] GlobalCommunicationType: USR_N520
+[2025-06-27 14:37:57.826] WasUSRConnection: True
+[2025-06-27 14:37:57.826] USRConnection: istnieje
+[2025-06-27 14:37:57.826] USRConnectedPort: 192.168.0.7:23
+[2025-06-27 14:37:57.826] USRConnection.IsConnected: true
+[2025-06-27 14:37:57.826] Settings.CommType: TCP
+[2025-06-27 14:37:57.826] Settings.USR_IP: 192.168.0.7
+[2025-06-27 14:37:57.826] Settings.USR_Port: 23
+[2025-06-27 14:37:57.826] Settings.COM_Port: COM4
+[2025-06-27 14:37:57.826] Settings.COM_Baud: 115200
+[2025-06-27 14:37:57.826] === KONIEC DIAGNOSTYKI ===
+[2025-06-27 14:37:57.826] Używam globalnego typu komunikacji: USR_N520
+[2025-06-27 14:37:57.826] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-06-27 14:37:57.826] Próba 1/3 połączenia z USR-N520
+[2025-06-27 14:37:57.826] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-06-27 14:37:57.826] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-06-27 14:37:57.826] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-06-27 14:37:57.826] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-06-27 14:37:57.826] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-06-27 14:37:57.826] 
+[2025-06-27 14:37:57.854] 
+Parametry zgrzewania (USR-N520):
+[2025-06-27 14:37:57.854] Napięcie zgrzewania: 19,50 V
+[2025-06-27 14:37:57.854] Prąd zgrzewania: 2,80 A
+[2025-06-27 14:37:57.854] 
+Wartości ADC:
+[2025-06-27 14:37:57.854] ADC napięcia zgrzewania: 02F5
+[2025-06-27 14:37:57.854] ADC prądu zgrzewania: 0048
+[2025-06-27 14:37:57.854] 
+Parametry kalibracji napięcia:
+[2025-06-27 14:37:57.854] IVHC-U: 3950
+[2025-06-27 14:37:57.854] IVLC-U: 3970
+[2025-06-27 14:37:57.854] ADCIVHC-U: 1535
+[2025-06-27 14:37:57.854] ADCIVLC-U: 1535
+[2025-06-27 14:37:57.854] 
+Parametry kalibracji prądu:
+[2025-06-27 14:37:57.854] IVHC-I: 4780
+[2025-06-27 14:37:57.854] IVLC-I: 520
+[2025-06-27 14:37:57.854] ADCIVHC-I: 1084
+[2025-06-27 14:37:57.854] ADCIVLC-I: 124
+[2025-06-27 14:37:57.854] 
+Wartości multimetru:
+[2025-06-27 14:37:57.854] MMWVL: 0
+[2025-06-27 14:37:57.854] MMWVH: 0
+[2025-06-27 14:37:57.854] MMWCL: 0
+[2025-06-27 14:37:57.854] MMWCH: 0
+[2025-06-27 14:37:57.854] Pomyślnie odczytano parametry przez USR-N520
+[2025-06-27 14:37:57.854] Odebrane wartości:
+[2025-06-27 14:37:57.854] Napięcie zgrzewania: 19,50V
+[2025-06-27 14:37:57.854] Prąd zgrzewania: 2,80A
+[2025-06-27 14:37:57.854] ADC Napięcia: 0x02F5
+[2025-06-27 14:37:57.854] ADC Prądu: 0x0048
+[2025-06-27 14:37:57.854] IVHC-U: 3950
+[2025-06-27 14:37:57.854] IVLC-U: 3970
+[2025-06-27 14:37:57.854] ADCIVHC-U: 1535
+[2025-06-27 14:37:57.854] ADCIVLC-U: 1535
+[2025-06-27 14:37:57.854] IVHC-I: 4780
+[2025-06-27 14:37:57.854] IVLC-I: 520
+[2025-06-27 14:37:57.854] ADCIVHC-I: 1084
+[2025-06-27 14:37:57.854] ADCIVLC-I: 124
+[2025-06-27 14:37:57.854] MMWVL: 0
+[2025-06-27 14:37:57.854] MMWVH: 0
+[2025-06-27 14:37:57.854] MMWCL: 0
+[2025-06-27 14:37:57.854] MMWCH: 0
+[2025-06-27 14:37:57.854] -------------------
+[2025-06-27 14:37:57.854] Odczytano parametry zgrzewania poprawnie.
+[2025-06-27 14:37:57.854] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-06-27 14:37:57.980] Znaleziono zapisane ustawienia komunikacji.
+[2025-06-27 14:37:57.980] Zgrzewarka już połączona. Kontynuuję odczytu parametrów zgrzewania.
+[2025-06-27 14:37:57.980] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-06-27 14:37:57.980] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-06-27 14:37:57.981] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-06-27 14:37:57.981] Status: CONNECTED
+[2025-06-27 14:37:57.981] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-06-27 14:37:57.981] ConnectedBaudRate: 115200
+[2025-06-27 14:37:57.981] GlobalCommunicationType: USR_N520
+[2025-06-27 14:37:57.981] WasUSRConnection: True
+[2025-06-27 14:37:57.981] USRConnection: istnieje
+[2025-06-27 14:37:57.981] USRConnectedPort: 192.168.0.7:23
+[2025-06-27 14:37:57.981] USRConnection.IsConnected: true
+[2025-06-27 14:37:57.981] Settings.CommType: TCP
+[2025-06-27 14:37:57.981] Settings.USR_IP: 192.168.0.7
+[2025-06-27 14:37:57.981] Settings.USR_Port: 23
+[2025-06-27 14:37:57.981] Settings.COM_Port: COM4
+[2025-06-27 14:37:57.981] Settings.COM_Baud: 115200
+[2025-06-27 14:37:57.981] === KONIEC DIAGNOSTYKI ===
+[2025-06-27 14:37:57.981] Używam globalnego typu komunikacji: USR_N520
+[2025-06-27 14:37:57.981] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-06-27 14:37:57.981] Próba 1/3 połączenia z USR-N520
+[2025-06-27 14:37:57.981] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-06-27 14:37:57.981] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-06-27 14:37:57.981] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-06-27 14:37:57.981] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-06-27 14:37:57.981] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-06-27 14:37:57.981] 
+[2025-06-27 14:37:58.008] 
+Parametry zgrzewania (USR-N520):
+[2025-06-27 14:37:58.008] Napięcie zgrzewania: 19,50 V
+[2025-06-27 14:37:58.008] Prąd zgrzewania: 2,80 A
+[2025-06-27 14:37:58.008] 
+Wartości ADC:
+[2025-06-27 14:37:58.008] ADC napięcia zgrzewania: 02F5
+[2025-06-27 14:37:58.008] ADC prądu zgrzewania: 0048
+[2025-06-27 14:37:58.008] 
+Parametry kalibracji napięcia:
+[2025-06-27 14:37:58.008] IVHC-U: 3950
+[2025-06-27 14:37:58.008] IVLC-U: 3970
+[2025-06-27 14:37:58.008] ADCIVHC-U: 1535
+[2025-06-27 14:37:58.008] ADCIVLC-U: 1535
+[2025-06-27 14:37:58.008] 
+Parametry kalibracji prądu:
+[2025-06-27 14:37:58.008] IVHC-I: 4780
+[2025-06-27 14:37:58.008] IVLC-I: 520
+[2025-06-27 14:37:58.008] ADCIVHC-I: 1084
+[2025-06-27 14:37:58.008] ADCIVLC-I: 124
+[2025-06-27 14:37:58.008] 
+Wartości multimetru:
+[2025-06-27 14:37:58.008] MMWVL: 0
+[2025-06-27 14:37:58.008] MMWVH: 0
+[2025-06-27 14:37:58.008] MMWCL: 0
+[2025-06-27 14:37:58.008] MMWCH: 0
+[2025-06-27 14:37:58.008] Pomyślnie odczytano parametry przez USR-N520
+[2025-06-27 14:37:58.009] Odebrane wartości:
+[2025-06-27 14:37:58.009] Napięcie zgrzewania: 19,50V
+[2025-06-27 14:37:58.009] Prąd zgrzewania: 2,80A
+[2025-06-27 14:37:58.009] ADC Napięcia: 0x02F5
+[2025-06-27 14:37:58.009] ADC Prądu: 0x0048
+[2025-06-27 14:37:58.009] IVHC-U: 3950
+[2025-06-27 14:37:58.009] IVLC-U: 3970
+[2025-06-27 14:37:58.009] ADCIVHC-U: 1535
+[2025-06-27 14:37:58.009] ADCIVLC-U: 1535
+[2025-06-27 14:37:58.009] IVHC-I: 4780
+[2025-06-27 14:37:58.009] IVLC-I: 520
+[2025-06-27 14:37:58.009] ADCIVHC-I: 1084
+[2025-06-27 14:37:58.009] ADCIVLC-I: 124
+[2025-06-27 14:37:58.009] MMWVL: 0
+[2025-06-27 14:37:58.009] MMWVH: 0
+[2025-06-27 14:37:58.009] MMWCL: 0
+[2025-06-27 14:37:58.009] MMWCH: 0
+[2025-06-27 14:37:58.009] -------------------
+[2025-06-27 14:37:58.009] Odczytano parametry zgrzewania poprawnie.
+[2025-06-27 14:37:58.009] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-06-27 14:49:23.719] Adres IP komputera: 192.168.0.105
+[2025-06-27 14:49:23.930] Odczytano wysokość logów z ustawień: 240 px
+[2025-06-27 14:49:49.715] Adres IP komputera: 192.168.0.105
+[2025-06-27 14:49:49.926] Odczytano wysokość logów z ustawień: 240 px
+[2025-06-27 14:55:21.989] Adres IP komputera: 192.168.0.105
+[2025-06-27 14:55:22.198] Odczytano wysokość logów z ustawień: 240 px
+[2025-06-27 14:55:24.428] Znaleziono zapisane ustawienia komunikacji.
+[2025-06-27 14:55:24.428] Brak połączenia ze zgrzewarką. Próbuję połączyć się z zapisanymi ustawieniami...
+[2025-06-27 14:55:24.433] Połączono z USR-N520 na 192.168.0.7:23
+[2025-06-27 14:55:24.433] Połączono z USR-N520 na 192.168.0.7:23
+[2025-06-27 14:55:24.462] Odpowiedź: U:19.5;I:2.8;ADCU:002F5;ADCI:00048;IVHC-U:03950;IVLC-U:03970;ADCIVHC-U:1535;ADCIVLC-U:1535;IVHC-I:04780;IVLC-I:00520;ADCIVHC-I:1084;ADCIVLC-I:0124;MMWVL:0000;MMWVH:0000;MMWCL:0000;MMWCH:0000
+
+[2025-06-27 14:55:24.464] Połączono: USR-N520 192.168.0.7:23 (115200 baud)
+[2025-06-27 14:55:24.464] ✓ Połączenie z zapisanymi ustawieniami udane. Kontynuuję odczytu parametrów zgrzewania.
+[2025-06-27 14:55:24.465] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-06-27 14:55:24.465] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-06-27 14:55:24.466] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-06-27 14:55:24.466] Status: CONNECTED
+[2025-06-27 14:55:24.466] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-06-27 14:55:24.466] ConnectedBaudRate: 115200
+[2025-06-27 14:55:24.467] GlobalCommunicationType: USR_N520
+[2025-06-27 14:55:24.467] WasUSRConnection: True
+[2025-06-27 14:55:24.467] USRConnection: istnieje
+[2025-06-27 14:55:24.467] USRConnectedPort: 192.168.0.7:23
+[2025-06-27 14:55:24.467] USRConnection.IsConnected: true
+[2025-06-27 14:55:24.467] Settings.CommType: TCP
+[2025-06-27 14:55:24.467] Settings.USR_IP: 192.168.0.7
+[2025-06-27 14:55:24.467] Settings.USR_Port: 23
+[2025-06-27 14:55:24.467] Settings.COM_Port: COM4
+[2025-06-27 14:55:24.467] Settings.COM_Baud: 115200
+[2025-06-27 14:55:24.467] === KONIEC DIAGNOSTYKI ===
+[2025-06-27 14:55:24.467] Używam globalnego typu komunikacji: USR_N520
+[2025-06-27 14:55:24.467] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-06-27 14:55:24.467] Próba 1/3 połączenia z USR-N520
+[2025-06-27 14:55:24.467] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-06-27 14:55:24.467] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-06-27 14:55:24.468] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-06-27 14:55:24.468] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-06-27 14:55:24.468] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-06-27 14:55:24.468] 
+[2025-06-27 14:55:24.497] 
+Parametry zgrzewania (USR-N520):
+[2025-06-27 14:55:24.497] Napięcie zgrzewania: 19,50 V
+[2025-06-27 14:55:24.497] Prąd zgrzewania: 2,80 A
+[2025-06-27 14:55:24.497] 
+Wartości ADC:
+[2025-06-27 14:55:24.497] ADC napięcia zgrzewania: 02F5
+[2025-06-27 14:55:24.497] ADC prądu zgrzewania: 0048
+[2025-06-27 14:55:24.497] 
+Parametry kalibracji napięcia:
+[2025-06-27 14:55:24.497] IVHC-U: 3950
+[2025-06-27 14:55:24.497] IVLC-U: 3970
+[2025-06-27 14:55:24.497] ADCIVHC-U: 1535
+[2025-06-27 14:55:24.497] ADCIVLC-U: 1535
+[2025-06-27 14:55:24.497] 
+Parametry kalibracji prądu:
+[2025-06-27 14:55:24.497] IVHC-I: 4780
+[2025-06-27 14:55:24.497] IVLC-I: 520
+[2025-06-27 14:55:24.497] ADCIVHC-I: 1084
+[2025-06-27 14:55:24.497] ADCIVLC-I: 124
+[2025-06-27 14:55:24.497] 
+Wartości multimetru:
+[2025-06-27 14:55:24.497] MMWVL: 0
+[2025-06-27 14:55:24.497] MMWVH: 0
+[2025-06-27 14:55:24.497] MMWCL: 0
+[2025-06-27 14:55:24.497] MMWCH: 0
+[2025-06-27 14:55:24.497] Pomyślnie odczytano parametry przez USR-N520
+[2025-06-27 14:55:24.498] Odebrane wartości:
+[2025-06-27 14:55:24.498] Napięcie zgrzewania: 19,50V
+[2025-06-27 14:55:24.498] Prąd zgrzewania: 2,80A
+[2025-06-27 14:55:24.498] ADC Napięcia: 0x02F5
+[2025-06-27 14:55:24.498] ADC Prądu: 0x0048
+[2025-06-27 14:55:24.498] IVHC-U: 3950
+[2025-06-27 14:55:24.498] IVLC-U: 3970
+[2025-06-27 14:55:24.498] ADCIVHC-U: 1535
+[2025-06-27 14:55:24.498] ADCIVLC-U: 1535
+[2025-06-27 14:55:24.498] IVHC-I: 4780
+[2025-06-27 14:55:24.498] IVLC-I: 520
+[2025-06-27 14:55:24.498] ADCIVHC-I: 1084
+[2025-06-27 14:55:24.498] ADCIVLC-I: 124
+[2025-06-27 14:55:24.498] MMWVL: 0
+[2025-06-27 14:55:24.498] MMWVH: 0
+[2025-06-27 14:55:24.498] MMWCL: 0
+[2025-06-27 14:55:24.498] MMWCH: 0
+[2025-06-27 14:55:24.498] -------------------
+[2025-06-27 14:55:24.500] Odczytano parametry zgrzewania poprawnie.
+[2025-06-27 14:55:24.500] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-06-27 14:55:25.869] Znaleziono zapisane ustawienia komunikacji.
+[2025-06-27 14:55:25.869] Zgrzewarka już połączona. Kontynuuję odczytu konfiguracji.
+[2025-06-27 14:55:25.870] Wysyłanie polecenia: Odczytaj kalibrację
+[2025-06-27 14:55:25.871] Wysyłanie komendy odczytu rejestru konfiguracji przez USR-N520:
+[2025-06-27 14:55:25.871] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-06-27 14:55:25.871] HEX:    74 5A 56 36 04 53 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 65 15 0D 0A
+[2025-06-27 14:55:25.871] ASCII:  t Z V 6 . S X X X X X X X X X X X X X X X X X X X X e . . .
+[2025-06-27 14:55:25.871] 
+[2025-06-27 14:55:25.910] 
+Odebrano 258 bajtów przez USR-N520:
+[2025-06-27 14:55:25.910] Offset    00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F    ASCII
+[2025-06-27 14:55:25.910] --------  -----------------------------------------------    ----------------
+[2025-06-27 14:55:25.910] 00000000  AB AB 00 00 01 00 00 00 00 00 00 00 00 00 00 00    ??..............
+[2025-06-27 14:55:25.910] 00000010  00 00 00 00 00 00 00 00 00 33 38 35 35 30 31 20    .........385501 
+[2025-06-27 14:55:25.910] 00000020  20 20 20 20 20 20 20 20 20 2E 2E 2E 2E 2E 2E 2E             .......
+[2025-06-27 14:55:25.910] 00000030  2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 20 2E 2E    ............. ..
+[2025-06-27 14:55:25.910] 00000040  2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E    ................
+[2025-06-27 14:55:25.910] 00000050  2E 2E 20 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E    .. .............
+[2025-06-27 14:55:25.910] 00000060  2E 2E 2E 2E 2E 2E 2E 20 0F 04 19 0F 04 14 0F 04    ....... ........
+[2025-06-27 14:55:25.910] 00000070  19 00 00 0C CC BF 20 7D 00 00 00 00 00 00 00 00    ....?? }........
+[2025-06-27 14:55:25.910] 00000080  00 00 A8 61 6E 0F AC 12 00 00 00 00 00 00 00 00    ..?an.?.........
+[2025-06-27 14:55:25.910] 00000090  00 00 98 3A 82 0F 08 02 00 00 00 00 00 00 00 00    ..?:?...........
+[2025-06-27 14:55:25.910] 000000A0  00 00 5B 04 FF 05 3C 04 00 00 00 00 00 00 00 00    ..[.?.<.........
+[2025-06-27 14:55:25.910] 000000B0  00 00 26 02 FF 05 7C 00 00 00 00 00 00 00 00 00    ..&.?.|.........
+[2025-06-27 14:55:25.910] 000000C0  00 00 00 00 00 A8 61 98 3A 21 04 F4 01 6A 06 00    .....?a?:!.?.j..
+[2025-06-27 14:55:25.910] 000000D0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
+[2025-06-27 14:55:25.910] 000000E0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
+[2025-06-27 14:55:25.910] 000000F0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 51 CA    ..............Q?
+[2025-06-27 14:55:25.910] 00000100  0D 0A                                              ..
+[2025-06-27 14:55:25.911] ✓ Kalibracja odczytana pomyślnie.
+[2025-06-27 14:55:25.942] Konfiguracja została odczytana i wyświetlona w UI.
+[2025-06-27 14:55:26.635] Znaleziono zapisane ustawienia komunikacji.
+[2025-06-27 14:55:26.635] Zgrzewarka już połączona. Kontynuuję odczytu konfiguracji.
+[2025-06-27 14:55:26.635] Wysyłanie polecenia: Odczytaj kalibrację
+[2025-06-27 14:55:26.635] Wysyłanie komendy odczytu rejestru konfiguracji przez USR-N520:
+[2025-06-27 14:55:26.635] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-06-27 14:55:26.635] HEX:    74 5A 56 36 04 53 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 65 15 0D 0A
+[2025-06-27 14:55:26.635] ASCII:  t Z V 6 . S X X X X X X X X X X X X X X X X X X X X e . . .
+[2025-06-27 14:55:26.635] 
+[2025-06-27 14:55:26.674] 
+Odebrano 258 bajtów przez USR-N520:
+[2025-06-27 14:55:26.674] Offset    00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F    ASCII
+[2025-06-27 14:55:26.674] --------  -----------------------------------------------    ----------------
+[2025-06-27 14:55:26.674] 00000000  AB AB 00 00 01 00 00 00 00 00 00 00 00 00 00 00    ??..............
+[2025-06-27 14:55:26.674] 00000010  00 00 00 00 00 00 00 00 00 33 38 35 35 30 31 20    .........385501 
+[2025-06-27 14:55:26.674] 00000020  20 20 20 20 20 20 20 20 20 2E 2E 2E 2E 2E 2E 2E             .......
+[2025-06-27 14:55:26.674] 00000030  2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 20 2E 2E    ............. ..
+[2025-06-27 14:55:26.674] 00000040  2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E    ................
+[2025-06-27 14:55:26.674] 00000050  2E 2E 20 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E    .. .............
+[2025-06-27 14:55:26.674] 00000060  2E 2E 2E 2E 2E 2E 2E 20 0F 04 19 0F 04 14 0F 04    ....... ........
+[2025-06-27 14:55:26.674] 00000070  19 00 00 0C CC BF 20 7D 00 00 00 00 00 00 00 00    ....?? }........
+[2025-06-27 14:55:26.674] 00000080  00 00 A8 61 6E 0F AC 12 00 00 00 00 00 00 00 00    ..?an.?.........
+[2025-06-27 14:55:26.674] 00000090  00 00 98 3A 82 0F 08 02 00 00 00 00 00 00 00 00    ..?:?...........
+[2025-06-27 14:55:26.674] 000000A0  00 00 5B 04 FF 05 3C 04 00 00 00 00 00 00 00 00    ..[.?.<.........
+[2025-06-27 14:55:26.675] 000000B0  00 00 26 02 FF 05 7C 00 00 00 00 00 00 00 00 00    ..&.?.|.........
+[2025-06-27 14:55:26.675] 000000C0  00 00 00 00 00 A8 61 98 3A 21 04 F4 01 6A 06 00    .....?a?:!.?.j..
+[2025-06-27 14:55:26.675] 000000D0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
+[2025-06-27 14:55:26.675] 000000E0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
+[2025-06-27 14:55:26.675] 000000F0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 51 CA    ..............Q?
+[2025-06-27 14:55:26.675] 00000100  0D 0A                                              ..
+[2025-06-27 14:55:26.675] ✓ Kalibracja odczytana pomyślnie.
+[2025-06-27 14:55:26.675] Konfiguracja została odczytana i wyświetlona w UI.
+[2025-06-27 14:55:26.867] Znaleziono zapisane ustawienia komunikacji.
+[2025-06-27 14:55:26.867] Zgrzewarka już połączona. Kontynuuję odczytu konfiguracji.
+[2025-06-27 14:55:26.867] Wysyłanie polecenia: Odczytaj kalibrację
+[2025-06-27 14:55:26.867] Wysyłanie komendy odczytu rejestru konfiguracji przez USR-N520:
+[2025-06-27 14:55:26.867] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-06-27 14:55:26.867] HEX:    74 5A 56 36 04 53 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 65 15 0D 0A
+[2025-06-27 14:55:26.867] ASCII:  t Z V 6 . S X X X X X X X X X X X X X X X X X X X X e . . .
+[2025-06-27 14:55:26.867] 
+[2025-06-27 14:55:26.906] 
+Odebrano 258 bajtów przez USR-N520:
+[2025-06-27 14:55:26.906] Offset    00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F    ASCII
+[2025-06-27 14:55:26.906] --------  -----------------------------------------------    ----------------
+[2025-06-27 14:55:26.906] 00000000  AB AB 00 00 01 00 00 00 00 00 00 00 00 00 00 00    ??..............
+[2025-06-27 14:55:26.906] 00000010  00 00 00 00 00 00 00 00 00 33 38 35 35 30 31 20    .........385501 
+[2025-06-27 14:55:26.906] 00000020  20 20 20 20 20 20 20 20 20 2E 2E 2E 2E 2E 2E 2E             .......
+[2025-06-27 14:55:26.906] 00000030  2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 20 2E 2E    ............. ..
+[2025-06-27 14:55:26.906] 00000040  2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E    ................
+[2025-06-27 14:55:26.906] 00000050  2E 2E 20 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E    .. .............
+[2025-06-27 14:55:26.906] 00000060  2E 2E 2E 2E 2E 2E 2E 20 0F 04 19 0F 04 14 0F 04    ....... ........
+[2025-06-27 14:55:26.906] 00000070  19 00 00 0C CC BF 20 7D 00 00 00 00 00 00 00 00    ....?? }........
+[2025-06-27 14:55:26.906] 00000080  00 00 A8 61 6E 0F AC 12 00 00 00 00 00 00 00 00    ..?an.?.........
+[2025-06-27 14:55:26.906] 00000090  00 00 98 3A 82 0F 08 02 00 00 00 00 00 00 00 00    ..?:?...........
+[2025-06-27 14:55:26.906] 000000A0  00 00 5B 04 FF 05 3C 04 00 00 00 00 00 00 00 00    ..[.?.<.........
+[2025-06-27 14:55:26.906] 000000B0  00 00 26 02 FF 05 7C 00 00 00 00 00 00 00 00 00    ..&.?.|.........
+[2025-06-27 14:55:26.906] 000000C0  00 00 00 00 00 A8 61 98 3A 21 04 F4 01 6A 06 00    .....?a?:!.?.j..
+[2025-06-27 14:55:26.906] 000000D0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
+[2025-06-27 14:55:26.906] 000000E0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
+[2025-06-27 14:55:26.906] 000000F0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 51 CA    ..............Q?
+[2025-06-27 14:55:26.906] 00000100  0D 0A                                              ..
+[2025-06-27 14:55:26.906] ✓ Kalibracja odczytana pomyślnie.
+[2025-06-27 14:55:26.906] Konfiguracja została odczytana i wyświetlona w UI.
+[2025-06-27 14:55:27.058] Znaleziono zapisane ustawienia komunikacji.
+[2025-06-27 14:55:27.058] Zgrzewarka już połączona. Kontynuuję odczytu konfiguracji.
+[2025-06-27 14:55:27.058] Wysyłanie polecenia: Odczytaj kalibrację
+[2025-06-27 14:55:27.058] Wysyłanie komendy odczytu rejestru konfiguracji przez USR-N520:
+[2025-06-27 14:55:27.058] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-06-27 14:55:27.058] HEX:    74 5A 56 36 04 53 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 65 15 0D 0A
+[2025-06-27 14:55:27.058] ASCII:  t Z V 6 . S X X X X X X X X X X X X X X X X X X X X e . . .
+[2025-06-27 14:55:27.058] 
+[2025-06-27 14:55:27.098] 
+Odebrano 258 bajtów przez USR-N520:
+[2025-06-27 14:55:27.098] Offset    00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F    ASCII
+[2025-06-27 14:55:27.098] --------  -----------------------------------------------    ----------------
+[2025-06-27 14:55:27.098] 00000000  AB AB 00 00 01 00 00 00 00 00 00 00 00 00 00 00    ??..............
+[2025-06-27 14:55:27.098] 00000010  00 00 00 00 00 00 00 00 00 33 38 35 35 30 31 20    .........385501 
+[2025-06-27 14:55:27.098] 00000020  20 20 20 20 20 20 20 20 20 2E 2E 2E 2E 2E 2E 2E             .......
+[2025-06-27 14:55:27.098] 00000030  2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 20 2E 2E    ............. ..
+[2025-06-27 14:55:27.098] 00000040  2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E    ................
+[2025-06-27 14:55:27.098] 00000050  2E 2E 20 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E    .. .............
+[2025-06-27 14:55:27.098] 00000060  2E 2E 2E 2E 2E 2E 2E 20 0F 04 19 0F 04 14 0F 04    ....... ........
+[2025-06-27 14:55:27.098] 00000070  19 00 00 0C CC BF 20 7D 00 00 00 00 00 00 00 00    ....?? }........
+[2025-06-27 14:55:27.098] 00000080  00 00 A8 61 6E 0F AC 12 00 00 00 00 00 00 00 00    ..?an.?.........
+[2025-06-27 14:55:27.098] 00000090  00 00 98 3A 82 0F 08 02 00 00 00 00 00 00 00 00    ..?:?...........
+[2025-06-27 14:55:27.098] 000000A0  00 00 5B 04 FF 05 3C 04 00 00 00 00 00 00 00 00    ..[.?.<.........
+[2025-06-27 14:55:27.098] 000000B0  00 00 26 02 FF 05 7C 00 00 00 00 00 00 00 00 00    ..&.?.|.........
+[2025-06-27 14:55:27.098] 000000C0  00 00 00 00 00 A8 61 98 3A 21 04 F4 01 6A 06 00    .....?a?:!.?.j..
+[2025-06-27 14:55:27.098] 000000D0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
+[2025-06-27 14:55:27.098] 000000E0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
+[2025-06-27 14:55:27.098] 000000F0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 51 CA    ..............Q?
+[2025-06-27 14:55:27.098] 00000100  0D 0A                                              ..
+[2025-06-27 14:55:27.098] ✓ Kalibracja odczytana pomyślnie.
+[2025-06-27 14:55:27.098] Konfiguracja została odczytana i wyświetlona w UI.
+[2025-06-27 14:55:27.229] Znaleziono zapisane ustawienia komunikacji.
+[2025-06-27 14:55:27.229] Zgrzewarka już połączona. Kontynuuję odczytu konfiguracji.
+[2025-06-27 14:55:27.229] Wysyłanie polecenia: Odczytaj kalibrację
+[2025-06-27 14:55:27.229] Wysyłanie komendy odczytu rejestru konfiguracji przez USR-N520:
+[2025-06-27 14:55:27.229] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-06-27 14:55:27.229] HEX:    74 5A 56 36 04 53 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 65 15 0D 0A
+[2025-06-27 14:55:27.229] ASCII:  t Z V 6 . S X X X X X X X X X X X X X X X X X X X X e . . .
+[2025-06-27 14:55:27.229] 
+[2025-06-27 14:55:27.268] 
+Odebrano 258 bajtów przez USR-N520:
+[2025-06-27 14:55:27.268] Offset    00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F    ASCII
+[2025-06-27 14:55:27.268] --------  -----------------------------------------------    ----------------
+[2025-06-27 14:55:27.268] 00000000  AB AB 00 00 01 00 00 00 00 00 00 00 00 00 00 00    ??..............
+[2025-06-27 14:55:27.268] 00000010  00 00 00 00 00 00 00 00 00 33 38 35 35 30 31 20    .........385501 
+[2025-06-27 14:55:27.268] 00000020  20 20 20 20 20 20 20 20 20 2E 2E 2E 2E 2E 2E 2E             .......
+[2025-06-27 14:55:27.268] 00000030  2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 20 2E 2E    ............. ..
+[2025-06-27 14:55:27.268] 00000040  2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E    ................
+[2025-06-27 14:55:27.268] 00000050  2E 2E 20 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E    .. .............
+[2025-06-27 14:55:27.268] 00000060  2E 2E 2E 2E 2E 2E 2E 20 0F 04 19 0F 04 14 0F 04    ....... ........
+[2025-06-27 14:55:27.268] 00000070  19 00 00 0C CC BF 20 7D 00 00 00 00 00 00 00 00    ....?? }........
+[2025-06-27 14:55:27.268] 00000080  00 00 A8 61 6E 0F AC 12 00 00 00 00 00 00 00 00    ..?an.?.........
+[2025-06-27 14:55:27.268] 00000090  00 00 98 3A 82 0F 08 02 00 00 00 00 00 00 00 00    ..?:?...........
+[2025-06-27 14:55:27.268] 000000A0  00 00 5B 04 FF 05 3C 04 00 00 00 00 00 00 00 00    ..[.?.<.........
+[2025-06-27 14:55:27.268] 000000B0  00 00 26 02 FF 05 7C 00 00 00 00 00 00 00 00 00    ..&.?.|.........
+[2025-06-27 14:55:27.268] 000000C0  00 00 00 00 00 A8 61 98 3A 21 04 F4 01 6A 06 00    .....?a?:!.?.j..
+[2025-06-27 14:55:27.268] 000000D0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
+[2025-06-27 14:55:27.268] 000000E0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
+[2025-06-27 14:55:27.268] 000000F0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 51 CA    ..............Q?
+[2025-06-27 14:55:27.268] 00000100  0D 0A                                              ..
+[2025-06-27 14:55:27.268] ✓ Kalibracja odczytana pomyślnie.
+[2025-06-27 14:55:27.268] Konfiguracja została odczytana i wyświetlona w UI.
+[2025-06-27 14:55:27.388] Znaleziono zapisane ustawienia komunikacji.
+[2025-06-27 14:55:27.388] Zgrzewarka już połączona. Kontynuuję odczytu konfiguracji.
+[2025-06-27 14:55:27.388] Wysyłanie polecenia: Odczytaj kalibrację
+[2025-06-27 14:55:27.388] Wysyłanie komendy odczytu rejestru konfiguracji przez USR-N520:
+[2025-06-27 14:55:27.388] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-06-27 14:55:27.388] HEX:    74 5A 56 36 04 53 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 65 15 0D 0A
+[2025-06-27 14:55:27.388] ASCII:  t Z V 6 . S X X X X X X X X X X X X X X X X X X X X e . . .
+[2025-06-27 14:55:27.388] 
+[2025-06-27 14:55:27.428] 
+Odebrano 258 bajtów przez USR-N520:
+[2025-06-27 14:55:27.428] Offset    00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F    ASCII
+[2025-06-27 14:55:27.428] --------  -----------------------------------------------    ----------------
+[2025-06-27 14:55:27.428] 00000000  AB AB 00 00 01 00 00 00 00 00 00 00 00 00 00 00    ??..............
+[2025-06-27 14:55:27.428] 00000010  00 00 00 00 00 00 00 00 00 33 38 35 35 30 31 20    .........385501 
+[2025-06-27 14:55:27.428] 00000020  20 20 20 20 20 20 20 20 20 2E 2E 2E 2E 2E 2E 2E             .......
+[2025-06-27 14:55:27.428] 00000030  2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 20 2E 2E    ............. ..
+[2025-06-27 14:55:27.428] 00000040  2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E    ................
+[2025-06-27 14:55:27.428] 00000050  2E 2E 20 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E    .. .............
+[2025-06-27 14:55:27.428] 00000060  2E 2E 2E 2E 2E 2E 2E 20 0F 04 19 0F 04 14 0F 04    ....... ........
+[2025-06-27 14:55:27.428] 00000070  19 00 00 0C CC BF 20 7D 00 00 00 00 00 00 00 00    ....?? }........
+[2025-06-27 14:55:27.428] 00000080  00 00 A8 61 6E 0F AC 12 00 00 00 00 00 00 00 00    ..?an.?.........
+[2025-06-27 14:55:27.428] 00000090  00 00 98 3A 82 0F 08 02 00 00 00 00 00 00 00 00    ..?:?...........
+[2025-06-27 14:55:27.428] 000000A0  00 00 5B 04 FF 05 3C 04 00 00 00 00 00 00 00 00    ..[.?.<.........
+[2025-06-27 14:55:27.428] 000000B0  00 00 26 02 FF 05 7C 00 00 00 00 00 00 00 00 00    ..&.?.|.........
+[2025-06-27 14:55:27.428] 000000C0  00 00 00 00 00 A8 61 98 3A 21 04 F4 01 6A 06 00    .....?a?:!.?.j..
+[2025-06-27 14:55:27.428] 000000D0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
+[2025-06-27 14:55:27.428] 000000E0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
+[2025-06-27 14:55:27.428] 000000F0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 51 CA    ..............Q?
+[2025-06-27 14:55:27.428] 00000100  0D 0A                                              ..
+[2025-06-27 14:55:27.429] ✓ Kalibracja odczytana pomyślnie.
+[2025-06-27 14:55:27.429] Konfiguracja została odczytana i wyświetlona w UI.
+[2025-06-27 14:55:27.539] Znaleziono zapisane ustawienia komunikacji.
+[2025-06-27 14:55:27.539] Zgrzewarka już połączona. Kontynuuję odczytu konfiguracji.
+[2025-06-27 14:55:27.539] Wysyłanie polecenia: Odczytaj kalibrację
+[2025-06-27 14:55:27.539] Wysyłanie komendy odczytu rejestru konfiguracji przez USR-N520:
+[2025-06-27 14:55:27.539] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-06-27 14:55:27.539] HEX:    74 5A 56 36 04 53 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 65 15 0D 0A
+[2025-06-27 14:55:27.539] ASCII:  t Z V 6 . S X X X X X X X X X X X X X X X X X X X X e . . .
+[2025-06-27 14:55:27.539] 
+[2025-06-27 14:55:27.578] 
+Odebrano 258 bajtów przez USR-N520:
+[2025-06-27 14:55:27.578] Offset    00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F    ASCII
+[2025-06-27 14:55:27.578] --------  -----------------------------------------------    ----------------
+[2025-06-27 14:55:27.578] 00000000  AB AB 00 00 01 00 00 00 00 00 00 00 00 00 00 00    ??..............
+[2025-06-27 14:55:27.578] 00000010  00 00 00 00 00 00 00 00 00 33 38 35 35 30 31 20    .........385501 
+[2025-06-27 14:55:27.578] 00000020  20 20 20 20 20 20 20 20 20 2E 2E 2E 2E 2E 2E 2E             .......
+[2025-06-27 14:55:27.578] 00000030  2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 20 2E 2E    ............. ..
+[2025-06-27 14:55:27.578] 00000040  2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E    ................
+[2025-06-27 14:55:27.578] 00000050  2E 2E 20 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E 2E    .. .............
+[2025-06-27 14:55:27.578] 00000060  2E 2E 2E 2E 2E 2E 2E 20 0F 04 19 0F 04 14 0F 04    ....... ........
+[2025-06-27 14:55:27.578] 00000070  19 00 00 0C CC BF 20 7D 00 00 00 00 00 00 00 00    ....?? }........
+[2025-06-27 14:55:27.578] 00000080  00 00 A8 61 6E 0F AC 12 00 00 00 00 00 00 00 00    ..?an.?.........
+[2025-06-27 14:55:27.578] 00000090  00 00 98 3A 82 0F 08 02 00 00 00 00 00 00 00 00    ..?:?...........
+[2025-06-27 14:55:27.578] 000000A0  00 00 5B 04 FF 05 3C 04 00 00 00 00 00 00 00 00    ..[.?.<.........
+[2025-06-27 14:55:27.578] 000000B0  00 00 26 02 FF 05 7C 00 00 00 00 00 00 00 00 00    ..&.?.|.........
+[2025-06-27 14:55:27.578] 000000C0  00 00 00 00 00 A8 61 98 3A 21 04 F4 01 6A 06 00    .....?a?:!.?.j..
+[2025-06-27 14:55:27.578] 000000D0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
+[2025-06-27 14:55:27.578] 000000E0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
+[2025-06-27 14:55:27.578] 000000F0  00 00 00 00 00 00 00 00 00 00 00 00 00 00 51 CA    ..............Q?
+[2025-06-27 14:55:27.578] 00000100  0D 0A                                              ..
+[2025-06-27 14:55:27.578] ✓ Kalibracja odczytana pomyślnie.
+[2025-06-27 14:55:27.578] Konfiguracja została odczytana i wyświetlona w UI.
+[2025-06-27 14:55:28.444] === ROZPOCZYNAM RUN ===
+[2025-06-27 14:55:28.444] Znaleziono zapisane ustawienia komunikacji.
+[2025-06-27 14:55:28.444] Zgrzewarka już połączona. Kontynuuję funkcji RUN.
+[2025-06-27 14:55:28.444] ✓ Połączenie udane! Uruchamiam timer odczytu parametrów zgrzewania...
+[2025-06-27 14:55:28.789] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-06-27 14:55:28.789] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-06-27 14:55:28.789] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-06-27 14:55:28.789] Status: CONNECTED
+[2025-06-27 14:55:28.789] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-06-27 14:55:28.789] ConnectedBaudRate: 115200
+[2025-06-27 14:55:28.789] GlobalCommunicationType: USR_N520
+[2025-06-27 14:55:28.789] WasUSRConnection: True
+[2025-06-27 14:55:28.789] USRConnection: istnieje
+[2025-06-27 14:55:28.789] USRConnectedPort: 192.168.0.7:23
+[2025-06-27 14:55:28.789] USRConnection.IsConnected: true
+[2025-06-27 14:55:28.789] Settings.CommType: TCP
+[2025-06-27 14:55:28.789] Settings.USR_IP: 192.168.0.7
+[2025-06-27 14:55:28.789] Settings.USR_Port: 23
+[2025-06-27 14:55:28.789] Settings.COM_Port: COM4
+[2025-06-27 14:55:28.789] Settings.COM_Baud: 115200
+[2025-06-27 14:55:28.789] === KONIEC DIAGNOSTYKI ===
+[2025-06-27 14:55:28.789] Używam globalnego typu komunikacji: USR_N520
+[2025-06-27 14:55:28.789] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-06-27 14:55:28.789] Próba 1/3 połączenia z USR-N520
+[2025-06-27 14:55:28.789] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-06-27 14:55:28.789] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-06-27 14:55:28.789] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-06-27 14:55:28.789] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-06-27 14:55:28.789] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-06-27 14:55:28.789] 
+[2025-06-27 14:55:28.817] 
+Parametry zgrzewania (USR-N520):
+[2025-06-27 14:55:28.817] Napięcie zgrzewania: 19,50 V
+[2025-06-27 14:55:28.817] Prąd zgrzewania: 2,80 A
+[2025-06-27 14:55:28.817] 
+Wartości ADC:
+[2025-06-27 14:55:28.817] ADC napięcia zgrzewania: 02F5
+[2025-06-27 14:55:28.817] ADC prądu zgrzewania: 0048
+[2025-06-27 14:55:28.817] 
+Parametry kalibracji napięcia:
+[2025-06-27 14:55:28.817] IVHC-U: 3950
+[2025-06-27 14:55:28.817] IVLC-U: 3970
+[2025-06-27 14:55:28.817] ADCIVHC-U: 1535
+[2025-06-27 14:55:28.817] ADCIVLC-U: 1535
+[2025-06-27 14:55:28.817] 
+Parametry kalibracji prądu:
+[2025-06-27 14:55:28.817] IVHC-I: 4780
+[2025-06-27 14:55:28.817] IVLC-I: 520
+[2025-06-27 14:55:28.817] ADCIVHC-I: 1084
+[2025-06-27 14:55:28.817] ADCIVLC-I: 124
+[2025-06-27 14:55:28.817] 
+Wartości multimetru:
+[2025-06-27 14:55:28.817] MMWVL: 0
+[2025-06-27 14:55:28.817] MMWVH: 0
+[2025-06-27 14:55:28.817] MMWCL: 0
+[2025-06-27 14:55:28.817] MMWCH: 0
+[2025-06-27 14:55:28.817] Pomyślnie odczytano parametry przez USR-N520
+[2025-06-27 14:55:28.817] Odebrane wartości:
+[2025-06-27 14:55:28.817] Napięcie zgrzewania: 19,50V
+[2025-06-27 14:55:28.817] Prąd zgrzewania: 2,80A
+[2025-06-27 14:55:28.817] ADC Napięcia: 0x02F5
+[2025-06-27 14:55:28.817] ADC Prądu: 0x0048
+[2025-06-27 14:55:28.817] IVHC-U: 3950
+[2025-06-27 14:55:28.817] IVLC-U: 3970
+[2025-06-27 14:55:28.817] ADCIVHC-U: 1535
+[2025-06-27 14:55:28.817] ADCIVLC-U: 1535
+[2025-06-27 14:55:28.817] IVHC-I: 4780
+[2025-06-27 14:55:28.817] IVLC-I: 520
+[2025-06-27 14:55:28.817] ADCIVHC-I: 1084
+[2025-06-27 14:55:28.817] ADCIVLC-I: 124
+[2025-06-27 14:55:28.817] MMWVL: 0
+[2025-06-27 14:55:28.817] MMWVH: 0
+[2025-06-27 14:55:28.817] MMWCL: 0
+[2025-06-27 14:55:28.817] MMWCH: 0
+[2025-06-27 14:55:28.817] -------------------
+[2025-06-27 14:55:28.817] Odczytano parametry zgrzewania poprawnie.
+[2025-06-27 14:55:28.817] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-06-27 14:55:29.136] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-06-27 14:55:29.136] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-06-27 14:55:29.136] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-06-27 14:55:29.136] Status: CONNECTED
+[2025-06-27 14:55:29.136] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-06-27 14:55:29.136] ConnectedBaudRate: 115200
+[2025-06-27 14:55:29.136] GlobalCommunicationType: USR_N520
+[2025-06-27 14:55:29.136] WasUSRConnection: True
+[2025-06-27 14:55:29.136] USRConnection: istnieje
+[2025-06-27 14:55:29.136] USRConnectedPort: 192.168.0.7:23
+[2025-06-27 14:55:29.136] USRConnection.IsConnected: true
+[2025-06-27 14:55:29.136] Settings.CommType: TCP
+[2025-06-27 14:55:29.136] Settings.USR_IP: 192.168.0.7
+[2025-06-27 14:55:29.136] Settings.USR_Port: 23
+[2025-06-27 14:55:29.136] Settings.COM_Port: COM4
+[2025-06-27 14:55:29.136] Settings.COM_Baud: 115200
+[2025-06-27 14:55:29.136] === KONIEC DIAGNOSTYKI ===
+[2025-06-27 14:55:29.136] Używam globalnego typu komunikacji: USR_N520
+[2025-06-27 14:55:29.137] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-06-27 14:55:29.137] Próba 1/3 połączenia z USR-N520
+[2025-06-27 14:55:29.137] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-06-27 14:55:29.137] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-06-27 14:55:29.137] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-06-27 14:55:29.137] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-06-27 14:55:29.137] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-06-27 14:55:29.137] 
+[2025-06-27 14:55:29.164] 
+Parametry zgrzewania (USR-N520):
+[2025-06-27 14:55:29.164] Napięcie zgrzewania: 19,50 V
+[2025-06-27 14:55:29.164] Prąd zgrzewania: 2,80 A
+[2025-06-27 14:55:29.164] 
+Wartości ADC:
+[2025-06-27 14:55:29.164] ADC napięcia zgrzewania: 02F5
+[2025-06-27 14:55:29.164] ADC prądu zgrzewania: 0048
+[2025-06-27 14:55:29.164] 
+Parametry kalibracji napięcia:
+[2025-06-27 14:55:29.164] IVHC-U: 3950
+[2025-06-27 14:55:29.164] IVLC-U: 3970
+[2025-06-27 14:55:29.164] ADCIVHC-U: 1535
+[2025-06-27 14:55:29.164] ADCIVLC-U: 1535
+[2025-06-27 14:55:29.164] 
+Parametry kalibracji prądu:
+[2025-06-27 14:55:29.164] IVHC-I: 4780
+[2025-06-27 14:55:29.164] IVLC-I: 520
+[2025-06-27 14:55:29.164] ADCIVHC-I: 1084
+[2025-06-27 14:55:29.164] ADCIVLC-I: 124
+[2025-06-27 14:55:29.164] 
+Wartości multimetru:
+[2025-06-27 14:55:29.164] MMWVL: 0
+[2025-06-27 14:55:29.164] MMWVH: 0
+[2025-06-27 14:55:29.164] MMWCL: 0
+[2025-06-27 14:55:29.164] MMWCH: 0
+[2025-06-27 14:55:29.164] Pomyślnie odczytano parametry przez USR-N520
+[2025-06-27 14:55:29.164] Odebrane wartości:
+[2025-06-27 14:55:29.164] Napięcie zgrzewania: 19,50V
+[2025-06-27 14:55:29.164] Prąd zgrzewania: 2,80A
+[2025-06-27 14:55:29.164] ADC Napięcia: 0x02F5
+[2025-06-27 14:55:29.164] ADC Prądu: 0x0048
+[2025-06-27 14:55:29.164] IVHC-U: 3950
+[2025-06-27 14:55:29.164] IVLC-U: 3970
+[2025-06-27 14:55:29.164] ADCIVHC-U: 1535
+[2025-06-27 14:55:29.164] ADCIVLC-U: 1535
+[2025-06-27 14:55:29.164] IVHC-I: 4780
+[2025-06-27 14:55:29.164] IVLC-I: 520
+[2025-06-27 14:55:29.164] ADCIVHC-I: 1084
+[2025-06-27 14:55:29.164] ADCIVLC-I: 124
+[2025-06-27 14:55:29.164] MMWVL: 0
+[2025-06-27 14:55:29.164] MMWVH: 0
+[2025-06-27 14:55:29.164] MMWCL: 0
+[2025-06-27 14:55:29.164] MMWCH: 0
+[2025-06-27 14:55:29.164] -------------------
+[2025-06-27 14:55:29.165] Odczytano parametry zgrzewania poprawnie.
+[2025-06-27 14:55:29.165] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-06-27 14:55:29.482] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-06-27 14:55:29.482] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-06-27 14:55:29.482] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-06-27 14:55:29.482] Status: CONNECTED
+[2025-06-27 14:55:29.482] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-06-27 14:55:29.482] ConnectedBaudRate: 115200
+[2025-06-27 14:55:29.482] GlobalCommunicationType: USR_N520
+[2025-06-27 14:55:29.482] WasUSRConnection: True
+[2025-06-27 14:55:29.482] USRConnection: istnieje
+[2025-06-27 14:55:29.482] USRConnectedPort: 192.168.0.7:23
+[2025-06-27 14:55:29.482] USRConnection.IsConnected: true
+[2025-06-27 14:55:29.482] Settings.CommType: TCP
+[2025-06-27 14:55:29.482] Settings.USR_IP: 192.168.0.7
+[2025-06-27 14:55:29.482] Settings.USR_Port: 23
+[2025-06-27 14:55:29.482] Settings.COM_Port: COM4
+[2025-06-27 14:55:29.482] Settings.COM_Baud: 115200
+[2025-06-27 14:55:29.482] === KONIEC DIAGNOSTYKI ===
+[2025-06-27 14:55:29.482] Używam globalnego typu komunikacji: USR_N520
+[2025-06-27 14:55:29.482] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-06-27 14:55:29.482] Próba 1/3 połączenia z USR-N520
+[2025-06-27 14:55:29.482] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-06-27 14:55:29.482] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-06-27 14:55:29.482] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-06-27 14:55:29.482] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-06-27 14:55:29.482] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-06-27 14:55:29.482] 
+[2025-06-27 14:55:29.510] 
+Parametry zgrzewania (USR-N520):
+[2025-06-27 14:55:29.510] Napięcie zgrzewania: 19,50 V
+[2025-06-27 14:55:29.510] Prąd zgrzewania: 2,80 A
+[2025-06-27 14:55:29.510] 
+Wartości ADC:
+[2025-06-27 14:55:29.510] ADC napięcia zgrzewania: 02F5
+[2025-06-27 14:55:29.510] ADC prądu zgrzewania: 0048
+[2025-06-27 14:55:29.510] 
+Parametry kalibracji napięcia:
+[2025-06-27 14:55:29.510] IVHC-U: 3950
+[2025-06-27 14:55:29.510] IVLC-U: 3970
+[2025-06-27 14:55:29.510] ADCIVHC-U: 1535
+[2025-06-27 14:55:29.510] ADCIVLC-U: 1535
+[2025-06-27 14:55:29.510] 
+Parametry kalibracji prądu:
+[2025-06-27 14:55:29.510] IVHC-I: 4780
+[2025-06-27 14:55:29.510] IVLC-I: 520
+[2025-06-27 14:55:29.510] ADCIVHC-I: 1084
+[2025-06-27 14:55:29.510] ADCIVLC-I: 124
+[2025-06-27 14:55:29.510] 
+Wartości multimetru:
+[2025-06-27 14:55:29.510] MMWVL: 0
+[2025-06-27 14:55:29.510] MMWVH: 0
+[2025-06-27 14:55:29.510] MMWCL: 0
+[2025-06-27 14:55:29.510] MMWCH: 0
+[2025-06-27 14:55:29.510] Pomyślnie odczytano parametry przez USR-N520
+[2025-06-27 14:55:29.510] Odebrane wartości:
+[2025-06-27 14:55:29.510] Napięcie zgrzewania: 19,50V
+[2025-06-27 14:55:29.510] Prąd zgrzewania: 2,80A
+[2025-06-27 14:55:29.510] ADC Napięcia: 0x02F5
+[2025-06-27 14:55:29.510] ADC Prądu: 0x0048
+[2025-06-27 14:55:29.510] IVHC-U: 3950
+[2025-06-27 14:55:29.510] IVLC-U: 3970
+[2025-06-27 14:55:29.510] ADCIVHC-U: 1535
+[2025-06-27 14:55:29.510] ADCIVLC-U: 1535
+[2025-06-27 14:55:29.510] IVHC-I: 4780
+[2025-06-27 14:55:29.510] IVLC-I: 520
+[2025-06-27 14:55:29.510] ADCIVHC-I: 1084
+[2025-06-27 14:55:29.510] ADCIVLC-I: 124
+[2025-06-27 14:55:29.510] MMWVL: 0
+[2025-06-27 14:55:29.510] MMWVH: 0
+[2025-06-27 14:55:29.510] MMWCL: 0
+[2025-06-27 14:55:29.510] MMWCH: 0
+[2025-06-27 14:55:29.510] -------------------
+[2025-06-27 14:55:29.510] Odczytano parametry zgrzewania poprawnie.
+[2025-06-27 14:55:29.510] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-06-27 14:55:29.822] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-06-27 14:55:29.822] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-06-27 14:55:29.822] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-06-27 14:55:29.822] Status: CONNECTED
+[2025-06-27 14:55:29.822] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-06-27 14:55:29.822] ConnectedBaudRate: 115200
+[2025-06-27 14:55:29.822] GlobalCommunicationType: USR_N520
+[2025-06-27 14:55:29.822] WasUSRConnection: True
+[2025-06-27 14:55:29.822] USRConnection: istnieje
+[2025-06-27 14:55:29.822] USRConnectedPort: 192.168.0.7:23
+[2025-06-27 14:55:29.822] USRConnection.IsConnected: true
+[2025-06-27 14:55:29.822] Settings.CommType: TCP
+[2025-06-27 14:55:29.822] Settings.USR_IP: 192.168.0.7
+[2025-06-27 14:55:29.822] Settings.USR_Port: 23
+[2025-06-27 14:55:29.822] Settings.COM_Port: COM4
+[2025-06-27 14:55:29.822] Settings.COM_Baud: 115200
+[2025-06-27 14:55:29.822] === KONIEC DIAGNOSTYKI ===
+[2025-06-27 14:55:29.822] Używam globalnego typu komunikacji: USR_N520
+[2025-06-27 14:55:29.822] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-06-27 14:55:29.822] Próba 1/3 połączenia z USR-N520
+[2025-06-27 14:55:29.822] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-06-27 14:55:29.822] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-06-27 14:55:29.822] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-06-27 14:55:29.822] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-06-27 14:55:29.822] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-06-27 14:55:29.822] 
+[2025-06-27 14:55:29.850] 
+Parametry zgrzewania (USR-N520):
+[2025-06-27 14:55:29.850] Napięcie zgrzewania: 19,50 V
+[2025-06-27 14:55:29.850] Prąd zgrzewania: 2,80 A
+[2025-06-27 14:55:29.850] 
+Wartości ADC:
+[2025-06-27 14:55:29.850] ADC napięcia zgrzewania: 02F5
+[2025-06-27 14:55:29.850] ADC prądu zgrzewania: 0048
+[2025-06-27 14:55:29.850] 
+Parametry kalibracji napięcia:
+[2025-06-27 14:55:29.850] IVHC-U: 3950
+[2025-06-27 14:55:29.850] IVLC-U: 3970
+[2025-06-27 14:55:29.850] ADCIVHC-U: 1535
+[2025-06-27 14:55:29.850] ADCIVLC-U: 1535
+[2025-06-27 14:55:29.850] 
+Parametry kalibracji prądu:
+[2025-06-27 14:55:29.850] IVHC-I: 4780
+[2025-06-27 14:55:29.850] IVLC-I: 520
+[2025-06-27 14:55:29.850] ADCIVHC-I: 1084
+[2025-06-27 14:55:29.850] ADCIVLC-I: 124
+[2025-06-27 14:55:29.850] 
+Wartości multimetru:
+[2025-06-27 14:55:29.850] MMWVL: 0
+[2025-06-27 14:55:29.850] MMWVH: 0
+[2025-06-27 14:55:29.850] MMWCL: 0
+[2025-06-27 14:55:29.850] MMWCH: 0
+[2025-06-27 14:55:29.850] Pomyślnie odczytano parametry przez USR-N520
+[2025-06-27 14:55:29.850] Odebrane wartości:
+[2025-06-27 14:55:29.850] Napięcie zgrzewania: 19,50V
+[2025-06-27 14:55:29.850] Prąd zgrzewania: 2,80A
+[2025-06-27 14:55:29.850] ADC Napięcia: 0x02F5
+[2025-06-27 14:55:29.850] ADC Prądu: 0x0048
+[2025-06-27 14:55:29.850] IVHC-U: 3950
+[2025-06-27 14:55:29.850] IVLC-U: 3970
+[2025-06-27 14:55:29.850] ADCIVHC-U: 1535
+[2025-06-27 14:55:29.850] ADCIVLC-U: 1535
+[2025-06-27 14:55:29.850] IVHC-I: 4780
+[2025-06-27 14:55:29.850] IVLC-I: 520
+[2025-06-27 14:55:29.850] ADCIVHC-I: 1084
+[2025-06-27 14:55:29.850] ADCIVLC-I: 124
+[2025-06-27 14:55:29.850] MMWVL: 0
+[2025-06-27 14:55:29.850] MMWVH: 0
+[2025-06-27 14:55:29.850] MMWCL: 0
+[2025-06-27 14:55:29.850] MMWCH: 0
+[2025-06-27 14:55:29.850] -------------------
+[2025-06-27 14:55:29.850] Odczytano parametry zgrzewania poprawnie.
+[2025-06-27 14:55:29.850] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-06-27 14:55:30.173] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-06-27 14:55:30.173] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-06-27 14:55:30.173] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-06-27 14:55:30.173] Status: CONNECTED
+[2025-06-27 14:55:30.173] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-06-27 14:55:30.173] ConnectedBaudRate: 115200
+[2025-06-27 14:55:30.173] GlobalCommunicationType: USR_N520
+[2025-06-27 14:55:30.173] WasUSRConnection: True
+[2025-06-27 14:55:30.173] USRConnection: istnieje
+[2025-06-27 14:55:30.173] USRConnectedPort: 192.168.0.7:23
+[2025-06-27 14:55:30.173] USRConnection.IsConnected: true
+[2025-06-27 14:55:30.173] Settings.CommType: TCP
+[2025-06-27 14:55:30.173] Settings.USR_IP: 192.168.0.7
+[2025-06-27 14:55:30.173] Settings.USR_Port: 23
+[2025-06-27 14:55:30.173] Settings.COM_Port: COM4
+[2025-06-27 14:55:30.173] Settings.COM_Baud: 115200
+[2025-06-27 14:55:30.173] === KONIEC DIAGNOSTYKI ===
+[2025-06-27 14:55:30.173] Używam globalnego typu komunikacji: USR_N520
+[2025-06-27 14:55:30.173] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-06-27 14:55:30.173] Próba 1/3 połączenia z USR-N520
+[2025-06-27 14:55:30.173] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-06-27 14:55:30.173] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-06-27 14:55:30.174] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-06-27 14:55:30.174] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-06-27 14:55:30.174] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-06-27 14:55:30.174] 
+[2025-06-27 14:55:30.201] 
+Parametry zgrzewania (USR-N520):
+[2025-06-27 14:55:30.201] Napięcie zgrzewania: 19,50 V
+[2025-06-27 14:55:30.201] Prąd zgrzewania: 2,80 A
+[2025-06-27 14:55:30.201] 
+Wartości ADC:
+[2025-06-27 14:55:30.201] ADC napięcia zgrzewania: 02F5
+[2025-06-27 14:55:30.201] ADC prądu zgrzewania: 0048
+[2025-06-27 14:55:30.201] 
+Parametry kalibracji napięcia:
+[2025-06-27 14:55:30.201] IVHC-U: 3950
+[2025-06-27 14:55:30.201] IVLC-U: 3970
+[2025-06-27 14:55:30.201] ADCIVHC-U: 1535
+[2025-06-27 14:55:30.201] ADCIVLC-U: 1535
+[2025-06-27 14:55:30.201] 
+Parametry kalibracji prądu:
+[2025-06-27 14:55:30.201] IVHC-I: 4780
+[2025-06-27 14:55:30.201] IVLC-I: 520
+[2025-06-27 14:55:30.201] ADCIVHC-I: 1084
+[2025-06-27 14:55:30.201] ADCIVLC-I: 124
+[2025-06-27 14:55:30.201] 
+Wartości multimetru:
+[2025-06-27 14:55:30.201] MMWVL: 0
+[2025-06-27 14:55:30.201] MMWVH: 0
+[2025-06-27 14:55:30.201] MMWCL: 0
+[2025-06-27 14:55:30.201] MMWCH: 0
+[2025-06-27 14:55:30.201] Pomyślnie odczytano parametry przez USR-N520
+[2025-06-27 14:55:30.201] Odebrane wartości:
+[2025-06-27 14:55:30.201] Napięcie zgrzewania: 19,50V
+[2025-06-27 14:55:30.201] Prąd zgrzewania: 2,80A
+[2025-06-27 14:55:30.201] ADC Napięcia: 0x02F5
+[2025-06-27 14:55:30.201] ADC Prądu: 0x0048
+[2025-06-27 14:55:30.201] IVHC-U: 3950
+[2025-06-27 14:55:30.201] IVLC-U: 3970
+[2025-06-27 14:55:30.201] ADCIVHC-U: 1535
+[2025-06-27 14:55:30.201] ADCIVLC-U: 1535
+[2025-06-27 14:55:30.201] IVHC-I: 4780
+[2025-06-27 14:55:30.201] IVLC-I: 520
+[2025-06-27 14:55:30.201] ADCIVHC-I: 1084
+[2025-06-27 14:55:30.201] ADCIVLC-I: 124
+[2025-06-27 14:55:30.201] MMWVL: 0
+[2025-06-27 14:55:30.201] MMWVH: 0
+[2025-06-27 14:55:30.201] MMWCL: 0
+[2025-06-27 14:55:30.201] MMWCH: 0
+[2025-06-27 14:55:30.201] -------------------
+[2025-06-27 14:55:30.201] Odczytano parametry zgrzewania poprawnie.
+[2025-06-27 14:55:30.201] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-06-27 14:55:30.259] === ZATRZYMUJĘ RUN ===

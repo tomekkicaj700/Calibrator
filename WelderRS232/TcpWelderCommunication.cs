@@ -8,13 +8,9 @@ namespace WelderRS232
         private USRDeviceManager manager;
         public bool IsConnected { get; private set; }
 
-        public TcpWelderCommunication(string ip, int port = 23) : this(ip, port, Console.WriteLine)
+        public TcpWelderCommunication(string ip, int port = 23)
         {
-        }
-
-        public TcpWelderCommunication(string ip, int port, Action<string> logFn)
-        {
-            manager = new USRDeviceManager(ip, port, logFn);
+            manager = new USRDeviceManager(ip, port);
         }
 
         public async Task<bool> ConnectAsync()

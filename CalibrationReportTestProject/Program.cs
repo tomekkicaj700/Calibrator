@@ -26,7 +26,8 @@ namespace CalibrationReportTestProject
                 if (await Task.Run(() => welder.ReadConfigurationRegister(out configData)))
                 {
                     var konfiguracja = await Task.Run(() => CalibrationReport.ReadFromBuffer(configData));
-                    await Task.Run(() => CalibrationReport.Print(konfiguracja));
+                    var report = new CalibrationReport(Console.WriteLine);
+                    await Task.Run(() => report.Print(konfiguracja));
                 }
                 else
                 {
@@ -43,7 +44,8 @@ namespace CalibrationReportTestProject
                     try
                     {
                         var konf = CalibrationReportLib.CalibrationReport.ReadFromFile(path);
-                        CalibrationReportLib.CalibrationReport.Print(konf);
+                        var report = new CalibrationReportLib.CalibrationReport(Console.WriteLine);
+                        report.Print(konf);
                     }
                     catch (System.IO.FileNotFoundException)
                     {

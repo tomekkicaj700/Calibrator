@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using System.IO.Ports;
 using System.Management;
 using System.Threading;
+using Logger;
+using static Logger.LoggerService;
 
 namespace WelderRS232
 {
@@ -17,21 +19,12 @@ namespace WelderRS232
         private NetworkStream stream;
         private string deviceIP;
         private int devicePort;
-        private readonly Action<string> logFn;
 
-        private void Log(string msg) => logFn?.Invoke(msg);
-
-        // Konstruktor domyślny - używa Console.WriteLine
-        public USRDeviceManager(string ip, int port = 23) : this(ip, port, Console.WriteLine)
-        {
-        }
-
-        // Konstruktor z callbackiem logowania
-        public USRDeviceManager(string ip, int port = 23, Action<string> logFn = null)
+        // Konstruktor domyślny
+        public USRDeviceManager(string ip, int port = 23)
         {
             deviceIP = ip;
             devicePort = port;
-            this.logFn = logFn ?? Console.WriteLine;
         }
 
         public async Task<bool> ConnectAsync()
@@ -131,21 +124,39 @@ namespace WelderRS232
         }
 
         // Wyszukiwanie urządzeń USR w sieci - rozszerzone dla USR-N520
-        public static async Task<List<USRDeviceInfo>> FindUSRDevicesAsync(string networkBase = "192.168.0", int port = 8233, Action<string> logFn = null)
+        public static async Task<List<USRDeviceInfo>> FindUSRDevicesAsync(string networkBase = "192.168.0", int port = 8233)
         {
             var foundDevices = new List<USRDeviceInfo>();
-            logFn?.Invoke($"Sprawdzam domyślny adres IP 192.168.0.7 na porcie {port}...");
-            await CheckUSRDeviceAsync("192.168.0.7", foundDevices, port, logFn);
+
+            // Logowanie przez LoggerService
+            try
+            {
+                LoggerService.Log($"Sprawdzam domyślny adres IP 192.168.0.7 na porcie {port}...");
+            }
+            catch
+            {
+                Console.WriteLine($"Sprawdzam domyślny adres IP 192.168.0.7 na porcie {port}...");
+            }
+
+            await CheckUSRDeviceAsync("192.168.0.7", foundDevices, port);
             if (foundDevices.Count == 0)
             {
-                logFn?.Invoke($"Nie znaleziono urządzenia na 192.168.0.7:{port}, skanuję resztę sieci...");
+                try
+                {
+                    LoggerService.Log($"Nie znaleziono urządzenia na 192.168.0.7:{port}, skanuję resztę sieci...");
+                }
+                catch
+                {
+                    Console.WriteLine($"Nie znaleziono urządzenia na 192.168.0.7:{port}, skanuję resztę sieci...");
+                }
+
                 var tasks = new List<Task>();
                 for (int i = 1; i < 255; i++)
                 {
                     string ip = $"{networkBase}.{i}";
                     if (ip != "192.168.0.7")
                     {
-                        tasks.Add(CheckUSRDeviceAsync(ip, foundDevices, port, logFn));
+                        tasks.Add(CheckUSRDeviceAsync(ip, foundDevices, port));
                     }
                 }
                 await Task.WhenAll(tasks);
@@ -153,7 +164,7 @@ namespace WelderRS232
             return foundDevices;
         }
 
-        private static async Task CheckUSRDeviceAsync(string ip, List<USRDeviceInfo> foundDevices, int port = 8233, Action<string> logFn = null)
+        private static async Task CheckUSRDeviceAsync(string ip, List<USRDeviceInfo> foundDevices, int port = 8233)
         {
             try
             {
@@ -172,7 +183,15 @@ namespace WelderRS232
                                 IsAccessible = true
                             };
                             foundDevices.Add(deviceInfo);
-                            logFn?.Invoke($"Znaleziono urządzenie USR-N520 na: {ip}:{port}");
+
+                            try
+                            {
+                                LoggerService.Log($"Znaleziono urządzenie USR-N520 na: {ip}:{port}");
+                            }
+                            catch
+                            {
+                                Console.WriteLine($"Znaleziono urządzenie USR-N520 na: {ip}:{port}");
+                            }
                         }
                     }
                 }
