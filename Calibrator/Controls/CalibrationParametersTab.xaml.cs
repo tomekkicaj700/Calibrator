@@ -1,5 +1,8 @@
 using System.Windows.Controls;
 using System.Text;
+using WelderRS232;
+using CalibrationReportLib;
+using Calibrator.Services;
 
 namespace Calibrator.Controls
 {
@@ -12,32 +15,32 @@ namespace Calibrator.Controls
 
         // Publiczne właściwości dla dostępu z MainWindow
         public WelderChannels WelderChannels => welderChannels;
-        public TextBox TxtTyp => txtTyp;
-        public TextBox TxtKeypadSE => txtKeypadSE;
-        public TextBox TxtNrJezyka => txtNrJezyka;
-        public TextBox TxtNazwaZgrzewarki => txtNazwaZgrzewarki;
-        public TextBox TxtNumerSeryjny => txtNumerSeryjny;
-        public TextBox TxtDaneWlasciciela0 => txtDaneWlasciciela0;
-        public TextBox TxtDaneWlasciciela1 => txtDaneWlasciciela1;
-        public TextBox TxtDaneWlasciciela2 => txtDaneWlasciciela2;
-        public TextBox TxtDataSprzedazy => txtDataSprzedazy;
-        public TextBox TxtDataPierwszegoZgrzewu => txtDataPierwszegoZgrzewu;
-        public TextBox TxtDataOstatniejKalibracji => txtDataOstatniejKalibracji;
-        public TextBox TxtOffsetMCP3425 => txtOffsetMCP3425;
-        public TextBox TxtWolneMiejsce => txtWolneMiejsce;
-        public TextBox TxtLiczbaZgrzOstKalibr => txtLiczbaZgrzOstKalibr;
-        public TextBox TxtOkresKalibracji => txtOkresKalibracji;
-        public TextBox TxtRejestrKonfiguracji => txtRejestrKonfiguracji;
-        public TextBox TxtRejestrKonfiguracjiBankTwo => txtRejestrKonfiguracjiBankTwo;
-        public TextBox TxtTempOtRefVal => txtTempOtRefVal;
-        public TextBox TxtTempOtRefADC => txtTempOtRefADC;
-        public TextBox TxtKorekcjaTempWewn => txtKorekcjaTempWewn;
-        public TextBox TxtKorekcjaTempZewn => txtKorekcjaTempZewn;
-        public TextBox TxtKodBlokady => txtKodBlokady;
-        public TextBox TxtTypBlokady => txtTypBlokady;
-        public TextBox TxtGPSconfiguration => txtGPSconfiguration;
-        public TextBox KanalyZgrzewarkiVoltage => kanalyZgrzewarkiVoltage;
-        public TextBox KanalyZgrzewarkiCurrent => kanalyZgrzewarkiCurrent;
+        public TextBlock TxtTyp => txtTyp;
+        public TextBlock TxtKeypadSE => txtKeypadSE;
+        public TextBlock TxtNrJezyka => txtNrJezyka;
+        public TextBlock TxtNazwaZgrzewarki => txtNazwaZgrzewarki;
+        public TextBlock TxtNumerSeryjny => txtNumerSeryjny;
+        public TextBlock TxtDaneWlasciciela0 => txtDaneWlasciciela0;
+        public TextBlock TxtDaneWlasciciela1 => txtDaneWlasciciela1;
+        public TextBlock TxtDaneWlasciciela2 => txtDaneWlasciciela2;
+        public TextBlock TxtDataSprzedazy => txtDataSprzedazy;
+        public TextBlock TxtDataPierwszegoZgrzewu => txtDataPierwszegoZgrzewu;
+        public TextBlock TxtDataOstatniejKalibracji => txtDataOstatniejKalibracji;
+        public TextBlock TxtOffsetMCP3425 => txtOffsetMCP3425;
+        public TextBlock TxtWolneMiejsce => txtWolneMiejsce;
+        public TextBlock TxtLiczbaZgrzOstKalibr => txtLiczbaZgrzOstKalibr;
+        public TextBlock TxtOkresKalibracji => txtOkresKalibracji;
+        public TextBlock TxtRejestrKonfiguracji => txtRejestrKonfiguracji;
+        public TextBlock TxtRejestrKonfiguracjiBankTwo => txtRejestrKonfiguracjiBankTwo;
+        public TextBlock TxtTempOtRefVal => txtTempOtRefVal;
+        public TextBlock TxtTempOtRefADC => txtTempOtRefADC;
+        public TextBlock TxtKorekcjaTempWewn => txtKorekcjaTempWewn;
+        public TextBlock TxtKorekcjaTempZewn => txtKorekcjaTempZewn;
+        public TextBlock TxtKodBlokady => txtKodBlokady;
+        public TextBlock TxtTypBlokady => txtTypBlokady;
+        public TextBlock TxtGPSconfiguration => txtGPSconfiguration;
+        public VoltageCoefficients KanalyZgrzewarkiVoltage => kanalyZgrzewarkiVoltage;
+        public CurrentCoefficients KanalyZgrzewarkiCurrent => kanalyZgrzewarkiCurrent;
 
         public void SetConfiguration(SKonfiguracjaSystemu config)
         {

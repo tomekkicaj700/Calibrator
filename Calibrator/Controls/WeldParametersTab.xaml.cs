@@ -1,6 +1,9 @@
 using System.Windows.Controls;
 using System.Windows;
 using LiveCharts.Wpf;
+using WelderRS232;
+using CalibrationReportLib;
+using Calibrator.Services;
 
 namespace Calibrator.Controls
 {
@@ -37,17 +40,17 @@ namespace Calibrator.Controls
         // Publiczne właściwości dla dostępu z MainWindow
         public Gauge GaugeNapiecie => gaugeNapiecie;
         public Gauge GaugePrad => gaugePrad;
-        public TextBox TxtNapiecieMin => txtNapiecieMin;
-        public TextBox TxtNapiecieMax => txtNapiecieMax;
-        public TextBox TxtNapiecieAvr => txtNapiecieAvr;
-        public TextBox TxtPradMin => txtPradMin;
-        public TextBox TxtPradMax => txtPradMax;
-        public TextBox TxtPradAvr => txtPradAvr;
-        public TextBox TxtNapiecieZgrzewania => txtNapiecieZgrzewania;
-        public TextBox TxtPradZgrzewania => txtPradZgrzewania;
-        public TextBox TxtADCNapZgrzew => txtADCNapZgrzew;
-        public TextBox TxtADCPradZgrzew => txtADCPradZgrzew;
-        public TextBox WspZgrzewaniaVoltage => wspZgrzewaniaVoltage;
-        public TextBox WspZgrzewaniaCurrent => wspZgrzewaniaCurrent;
+        public TextBlock TxtNapiecieMin => txtNapiecieMin;
+        public TextBlock TxtNapiecieMax => txtNapiecieMax;
+        public TextBlock TxtNapiecieAvr => txtNapiecieAvr;
+        public TextBlock TxtPradMin => txtPradMin;
+        public TextBlock TxtPradMax => txtPradMax;
+        public TextBlock TxtPradAvr => txtPradAvr;
+        public TextBlock TxtNapiecieZgrzewania => txtNapiecieZgrzewania;
+        public TextBlock TxtPradZgrzewania => txtPradZgrzewania;
+        public TextBlock TxtADCNapZgrzew => txtADCNapZgrzew;
+        public TextBlock TxtADCPradZgrzew => txtADCPradZgrzew;
+        public VoltageCoefficients WspZgrzewaniaVoltage => wspZgrzewaniaVoltage;
+        public CurrentCoefficients WspZgrzewaniaCurrent => wspZgrzewaniaCurrent;
     }
 }

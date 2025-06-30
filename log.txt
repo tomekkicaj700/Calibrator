@@ -6839,3 +6839,24 @@ Odebrano 258 bajtów przez USR-N520:
 [2025-06-30 10:41:30.907] Zapisano bieżącą konfigurację do historii.
 [2025-06-30 10:41:30.911] Historia pomiarów została zaktualizowana. Liczba rekordów: 10
 [2025-06-30 10:41:30.911] ✓ Kalibracja została zapisana do historii i widok został odświeżony.
+[2025-06-30 16:34:22.638] Initializing services...
+[2025-06-30 16:34:22.644] Initializing ServiceContainer...
+[2025-06-30 16:34:22.674] Adres IP komputera: 192.168.0.105
+[2025-06-30 16:34:22.800] Settings loaded from file
+[2025-06-30 16:34:23.049] Brak zapisanej wysokości logów w ustawieniach, używam domyślnej.
+[2025-06-30 16:34:23.063] Detected ports loaded from file
+[2025-06-30 16:34:23.066] ConfigService initialized successfully
+[2025-06-30 16:34:23.083] ServiceContainer initialized successfully
+[2025-06-30 16:34:23.085] Services initialized successfully
+[2025-06-30 16:35:12.065] Initializing services...
+[2025-06-30 16:35:12.071] Initializing ServiceContainer...
+[2025-06-30 16:35:12.099] Adres IP komputera: 192.168.0.105
+[2025-06-30 16:35:12.223] Settings loaded from file
+[2025-06-30 16:35:12.463] Brak zapisanej wysokości logów w ustawieniach, używam domyślnej.
+[2025-06-30 16:35:12.476] Detected ports loaded from file
+[2025-06-30 16:35:12.477] ConfigService initialized successfully
+[2025-06-30 16:35:12.496] ServiceContainer initialized successfully
+[2025-06-30 16:35:12.500] Services initialized successfully
+[2025-06-30 16:35:15.054] Przełączono na zakładkę: Parametry kalibracji
+[2025-06-30 16:35:15.055] Znaleziono zapisane ustawienia komunikacji.
+[2025-06-30 16:35:15.055] Brak połączenia ze zgrzewarką. Próbuję połączyć się z zapisanymi ustawieniami...

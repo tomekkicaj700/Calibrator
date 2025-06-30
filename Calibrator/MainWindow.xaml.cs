@@ -799,7 +799,7 @@ public partial class MainWindow : Window
             }
 
             // Zapisz kalibrację
-            await welderService.SaveCalibrationAsync(lastConfig, deviceType, serialNumber);
+            welderService.SaveCalibrationToHistory(lastConfig, deviceType, serialNumber);
 
             // Przełącz na zakładkę "Historia pomiarów" używając ID (niezależne od języka)
             SwitchToTabById(TAB_ID_MEASUREMENT_HISTORY);
@@ -1116,7 +1116,7 @@ public partial class MainWindow : Window
         txtStatus.Text = GetStatusDescription(status);
 
         // Aktualizacja przycisku RUN
-        if (status == WelderStatus.Connected)
+        if (status == WelderStatus.CONNECTED)
         {
             iconRun.Text = "▶";
             txtRun.Text = "RUN";

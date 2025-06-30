@@ -32,15 +32,7 @@ namespace Calibrator.Controls
 
         private async void BtnSendSampleData_Click(object sender, RoutedEventArgs e)
         {
-            if (tcpServerService != null && tcpServerService.IsRunning)
-            {
-                await tcpServerService.SendSampleDataToAllClientsAsync();
-                UpdateStatus($"Serwer aktywny - {tcpServerService.ConnectedClientsCount} klientów", true);
-            }
-            else
-            {
-                UpdateStatus("Serwer nieaktywny", false);
-            }
+            await tcpServerService.SendToAllAsync("Przykładowe dane");
         }
 
         // Publiczne właściwości dla dostępu z MainWindow

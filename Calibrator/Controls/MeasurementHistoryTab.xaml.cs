@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 using System.Windows.Media;
+using WelderRS232;
+using Calibrator.Services;
 
 namespace Calibrator.Controls
 {
@@ -111,6 +113,6 @@ namespace Calibrator.Controls
         public Button BtnOpenFileHistory => btnOpenFileHistory;
         public Button BtnToggleDetails => btnToggleDetails;
         public Button BtnClearFilter => btnClearFilter;
-        public StackPanel HistoryDetailsPanelControl => HistoryDetailsPanel;
+        public Grid HistoryDetailsPanelControl => HistoryDetailsPanel;
     }
 }
