@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CalibrationHistory xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Record DeviceType="ZK90ECO" SerialNumber="385501          ">
-    <DateTime>2025-06-27 14:15:51</DateTime>
+    <DateTime>2025-06-30 10:40:30</DateTime>
     <MMWVH>0</MMWVH>
     <MMWVL>0</MMWVL>
     <IVHC_U>3950</IVHC_U>
@@ -39,7 +39,7 @@
     <GPSconfiguration>106</GPSconfiguration>
   </Record>
   <Record DeviceType="ZK90ECO" SerialNumber="385501          ">
-    <DateTime>2025-06-27 14:15:51</DateTime>
+    <DateTime>2025-06-30 10:40:31</DateTime>
     <MMWVH>0</MMWVH>
     <MMWVL>0</MMWVL>
     <IVHC_U>3950</IVHC_U>
@@ -77,7 +77,7 @@
     <GPSconfiguration>106</GPSconfiguration>
   </Record>
   <Record DeviceType="ZK90ECO" SerialNumber="385501          ">
-    <DateTime>2025-06-27 14:15:51</DateTime>
+    <DateTime>2025-06-30 10:40:31</DateTime>
     <MMWVH>0</MMWVH>
     <MMWVL>0</MMWVL>
     <IVHC_U>3950</IVHC_U>
@@ -115,7 +115,235 @@
     <GPSconfiguration>106</GPSconfiguration>
   </Record>
   <Record DeviceType="ZK90ECO" SerialNumber="385501          ">
-    <DateTime>2025-06-27 14:15:51</DateTime>
+    <DateTime>2025-06-30 10:40:31</DateTime>
+    <MMWVH>0</MMWVH>
+    <MMWVL>0</MMWVL>
+    <IVHC_U>3950</IVHC_U>
+    <IVLC_U>3970</IVLC_U>
+    <ADCIVHC_U>1535</ADCIVHC_U>
+    <ADCIVLC_U>1535</ADCIVLC_U>
+    <MMWCL>0</MMWCL>
+    <MMWCH>0</MMWCH>
+    <IVHC_I>4780</IVHC_I>
+    <IVLC_I>520</IVLC_I>
+    <ADCIVHC_I>1084</ADCIVHC_I>
+    <ADCIVLC_I>124</ADCIVLC_I>
+    <Typ>171</Typ>
+    <KeypadSE>0</KeypadSE>
+    <NrJezyka>0</NrJezyka>
+    <NazwaZgrzewarki>ZK90ECO</NazwaZgrzewarki>
+    <DaneWlasciciela0>.................... </DaneWlasciciela0>
+    <DaneWlasciciela1>.................... </DaneWlasciciela1>
+    <DaneWlasciciela2>.................... </DaneWlasciciela2>
+    <DataSprzedazy>15-04-2025</DataSprzedazy>
+    <DataPierwszegoZgrzewu>15-04-2020</DataPierwszegoZgrzewu>
+    <DataOstatniejKalibracji>15-04-2025</DataOstatniejKalibracji>
+    <OffsetMCP3425>0</OffsetMCP3425>
+    <WolneMiejsce>00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00</WolneMiejsce>
+    <LiczbaZgrzOstKalibr>0</LiczbaZgrzOstKalibr>
+    <OkresKalibracji>12</OkresKalibracji>
+    <RejestrKonfiguracji>49100</RejestrKonfiguracji>
+    <RejestrKonfiguracjiBankTwo>6</RejestrKonfiguracjiBankTwo>
+    <TempOtRefVal>32</TempOtRefVal>
+    <TempOtRefADC>125</TempOtRefADC>
+    <KorekcjaTempWewn>0</KorekcjaTempWewn>
+    <KorekcjaTempZewn>0</KorekcjaTempZewn>
+    <KodBlokady>0</KodBlokady>
+    <TypBlokady>0</TypBlokady>
+    <GPSconfiguration>106</GPSconfiguration>
+  </Record>
+  <Record DeviceType="ZK90ECO" SerialNumber="385501          ">
+    <DateTime>2025-06-30 10:40:34</DateTime>
+    <MMWVH>0</MMWVH>
+    <MMWVL>0</MMWVL>
+    <IVHC_U>3950</IVHC_U>
+    <IVLC_U>3970</IVLC_U>
+    <ADCIVHC_U>1535</ADCIVHC_U>
+    <ADCIVLC_U>1535</ADCIVLC_U>
+    <MMWCL>0</MMWCL>
+    <MMWCH>0</MMWCH>
+    <IVHC_I>4780</IVHC_I>
+    <IVLC_I>520</IVLC_I>
+    <ADCIVHC_I>1084</ADCIVHC_I>
+    <ADCIVLC_I>124</ADCIVLC_I>
+    <Typ>171</Typ>
+    <KeypadSE>0</KeypadSE>
+    <NrJezyka>0</NrJezyka>
+    <NazwaZgrzewarki>ZK90ECO</NazwaZgrzewarki>
+    <DaneWlasciciela0>.................... </DaneWlasciciela0>
+    <DaneWlasciciela1>.................... </DaneWlasciciela1>
+    <DaneWlasciciela2>.................... </DaneWlasciciela2>
+    <DataSprzedazy>15-04-2025</DataSprzedazy>
+    <DataPierwszegoZgrzewu>15-04-2020</DataPierwszegoZgrzewu>
+    <DataOstatniejKalibracji>15-04-2025</DataOstatniejKalibracji>
+    <OffsetMCP3425>0</OffsetMCP3425>
+    <WolneMiejsce>00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00</WolneMiejsce>
+    <LiczbaZgrzOstKalibr>0</LiczbaZgrzOstKalibr>
+    <OkresKalibracji>12</OkresKalibracji>
+    <RejestrKonfiguracji>49100</RejestrKonfiguracji>
+    <RejestrKonfiguracjiBankTwo>6</RejestrKonfiguracjiBankTwo>
+    <TempOtRefVal>32</TempOtRefVal>
+    <TempOtRefADC>125</TempOtRefADC>
+    <KorekcjaTempWewn>0</KorekcjaTempWewn>
+    <KorekcjaTempZewn>0</KorekcjaTempZewn>
+    <KodBlokady>0</KodBlokady>
+    <TypBlokady>0</TypBlokady>
+    <GPSconfiguration>106</GPSconfiguration>
+  </Record>
+  <Record DeviceType="ZK90ECO" SerialNumber="385501          ">
+    <DateTime>2025-06-30 10:40:47</DateTime>
+    <MMWVH>0</MMWVH>
+    <MMWVL>0</MMWVL>
+    <IVHC_U>3950</IVHC_U>
+    <IVLC_U>3970</IVLC_U>
+    <ADCIVHC_U>1535</ADCIVHC_U>
+    <ADCIVLC_U>1535</ADCIVLC_U>
+    <MMWCL>0</MMWCL>
+    <MMWCH>0</MMWCH>
+    <IVHC_I>4780</IVHC_I>
+    <IVLC_I>520</IVLC_I>
+    <ADCIVHC_I>1084</ADCIVHC_I>
+    <ADCIVLC_I>124</ADCIVLC_I>
+    <Typ>171</Typ>
+    <KeypadSE>0</KeypadSE>
+    <NrJezyka>0</NrJezyka>
+    <NazwaZgrzewarki>ZK90ECO</NazwaZgrzewarki>
+    <DaneWlasciciela0>.................... </DaneWlasciciela0>
+    <DaneWlasciciela1>.................... </DaneWlasciciela1>
+    <DaneWlasciciela2>.................... </DaneWlasciciela2>
+    <DataSprzedazy>15-04-2025</DataSprzedazy>
+    <DataPierwszegoZgrzewu>15-04-2020</DataPierwszegoZgrzewu>
+    <DataOstatniejKalibracji>15-04-2025</DataOstatniejKalibracji>
+    <OffsetMCP3425>0</OffsetMCP3425>
+    <WolneMiejsce>00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00</WolneMiejsce>
+    <LiczbaZgrzOstKalibr>0</LiczbaZgrzOstKalibr>
+    <OkresKalibracji>12</OkresKalibracji>
+    <RejestrKonfiguracji>49100</RejestrKonfiguracji>
+    <RejestrKonfiguracjiBankTwo>6</RejestrKonfiguracjiBankTwo>
+    <TempOtRefVal>32</TempOtRefVal>
+    <TempOtRefADC>125</TempOtRefADC>
+    <KorekcjaTempWewn>0</KorekcjaTempWewn>
+    <KorekcjaTempZewn>0</KorekcjaTempZewn>
+    <KodBlokady>0</KodBlokady>
+    <TypBlokady>0</TypBlokady>
+    <GPSconfiguration>106</GPSconfiguration>
+  </Record>
+  <Record DeviceType="ZK90ECO" SerialNumber="385501          ">
+    <DateTime>2025-06-30 10:40:48</DateTime>
+    <MMWVH>0</MMWVH>
+    <MMWVL>0</MMWVL>
+    <IVHC_U>3950</IVHC_U>
+    <IVLC_U>3970</IVLC_U>
+    <ADCIVHC_U>1535</ADCIVHC_U>
+    <ADCIVLC_U>1535</ADCIVLC_U>
+    <MMWCL>0</MMWCL>
+    <MMWCH>0</MMWCH>
+    <IVHC_I>4780</IVHC_I>
+    <IVLC_I>520</IVLC_I>
+    <ADCIVHC_I>1084</ADCIVHC_I>
+    <ADCIVLC_I>124</ADCIVLC_I>
+    <Typ>171</Typ>
+    <KeypadSE>0</KeypadSE>
+    <NrJezyka>0</NrJezyka>
+    <NazwaZgrzewarki>ZK90ECO</NazwaZgrzewarki>
+    <DaneWlasciciela0>.................... </DaneWlasciciela0>
+    <DaneWlasciciela1>.................... </DaneWlasciciela1>
+    <DaneWlasciciela2>.................... </DaneWlasciciela2>
+    <DataSprzedazy>15-04-2025</DataSprzedazy>
+    <DataPierwszegoZgrzewu>15-04-2020</DataPierwszegoZgrzewu>
+    <DataOstatniejKalibracji>15-04-2025</DataOstatniejKalibracji>
+    <OffsetMCP3425>0</OffsetMCP3425>
+    <WolneMiejsce>00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00</WolneMiejsce>
+    <LiczbaZgrzOstKalibr>0</LiczbaZgrzOstKalibr>
+    <OkresKalibracji>12</OkresKalibracji>
+    <RejestrKonfiguracji>49100</RejestrKonfiguracji>
+    <RejestrKonfiguracjiBankTwo>6</RejestrKonfiguracjiBankTwo>
+    <TempOtRefVal>32</TempOtRefVal>
+    <TempOtRefADC>125</TempOtRefADC>
+    <KorekcjaTempWewn>0</KorekcjaTempWewn>
+    <KorekcjaTempZewn>0</KorekcjaTempZewn>
+    <KodBlokady>0</KodBlokady>
+    <TypBlokady>0</TypBlokady>
+    <GPSconfiguration>106</GPSconfiguration>
+  </Record>
+  <Record DeviceType="ZK90ECO" SerialNumber="385501          ">
+    <DateTime>2025-06-30 10:40:48</DateTime>
+    <MMWVH>0</MMWVH>
+    <MMWVL>0</MMWVL>
+    <IVHC_U>3950</IVHC_U>
+    <IVLC_U>3970</IVLC_U>
+    <ADCIVHC_U>1535</ADCIVHC_U>
+    <ADCIVLC_U>1535</ADCIVLC_U>
+    <MMWCL>0</MMWCL>
+    <MMWCH>0</MMWCH>
+    <IVHC_I>4780</IVHC_I>
+    <IVLC_I>520</IVLC_I>
+    <ADCIVHC_I>1084</ADCIVHC_I>
+    <ADCIVLC_I>124</ADCIVLC_I>
+    <Typ>171</Typ>
+    <KeypadSE>0</KeypadSE>
+    <NrJezyka>0</NrJezyka>
+    <NazwaZgrzewarki>ZK90ECO</NazwaZgrzewarki>
+    <DaneWlasciciela0>.................... </DaneWlasciciela0>
+    <DaneWlasciciela1>.................... </DaneWlasciciela1>
+    <DaneWlasciciela2>.................... </DaneWlasciciela2>
+    <DataSprzedazy>15-04-2025</DataSprzedazy>
+    <DataPierwszegoZgrzewu>15-04-2020</DataPierwszegoZgrzewu>
+    <DataOstatniejKalibracji>15-04-2025</DataOstatniejKalibracji>
+    <OffsetMCP3425>0</OffsetMCP3425>
+    <WolneMiejsce>00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00</WolneMiejsce>
+    <LiczbaZgrzOstKalibr>0</LiczbaZgrzOstKalibr>
+    <OkresKalibracji>12</OkresKalibracji>
+    <RejestrKonfiguracji>49100</RejestrKonfiguracji>
+    <RejestrKonfiguracjiBankTwo>6</RejestrKonfiguracjiBankTwo>
+    <TempOtRefVal>32</TempOtRefVal>
+    <TempOtRefADC>125</TempOtRefADC>
+    <KorekcjaTempWewn>0</KorekcjaTempWewn>
+    <KorekcjaTempZewn>0</KorekcjaTempZewn>
+    <KodBlokady>0</KodBlokady>
+    <TypBlokady>0</TypBlokady>
+    <GPSconfiguration>106</GPSconfiguration>
+  </Record>
+  <Record DeviceType="ZK90ECO" SerialNumber="385501          ">
+    <DateTime>2025-06-30 10:40:48</DateTime>
+    <MMWVH>0</MMWVH>
+    <MMWVL>0</MMWVL>
+    <IVHC_U>3950</IVHC_U>
+    <IVLC_U>3970</IVLC_U>
+    <ADCIVHC_U>1535</ADCIVHC_U>
+    <ADCIVLC_U>1535</ADCIVLC_U>
+    <MMWCL>0</MMWCL>
+    <MMWCH>0</MMWCH>
+    <IVHC_I>4780</IVHC_I>
+    <IVLC_I>520</IVLC_I>
+    <ADCIVHC_I>1084</ADCIVHC_I>
+    <ADCIVLC_I>124</ADCIVLC_I>
+    <Typ>171</Typ>
+    <KeypadSE>0</KeypadSE>
+    <NrJezyka>0</NrJezyka>
+    <NazwaZgrzewarki>ZK90ECO</NazwaZgrzewarki>
+    <DaneWlasciciela0>.................... </DaneWlasciciela0>
+    <DaneWlasciciela1>.................... </DaneWlasciciela1>
+    <DaneWlasciciela2>.................... </DaneWlasciciela2>
+    <DataSprzedazy>15-04-2025</DataSprzedazy>
+    <DataPierwszegoZgrzewu>15-04-2020</DataPierwszegoZgrzewu>
+    <DataOstatniejKalibracji>15-04-2025</DataOstatniejKalibracji>
+    <OffsetMCP3425>0</OffsetMCP3425>
+    <WolneMiejsce>00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00</WolneMiejsce>
+    <LiczbaZgrzOstKalibr>0</LiczbaZgrzOstKalibr>
+    <OkresKalibracji>12</OkresKalibracji>
+    <RejestrKonfiguracji>49100</RejestrKonfiguracji>
+    <RejestrKonfiguracjiBankTwo>6</RejestrKonfiguracjiBankTwo>
+    <TempOtRefVal>32</TempOtRefVal>
+    <TempOtRefADC>125</TempOtRefADC>
+    <KorekcjaTempWewn>0</KorekcjaTempWewn>
+    <KorekcjaTempZewn>0</KorekcjaTempZewn>
+    <KodBlokady>0</KodBlokady>
+    <TypBlokady>0</TypBlokady>
+    <GPSconfiguration>106</GPSconfiguration>
+  </Record>
+  <Record DeviceType="ZK90ECO" SerialNumber="385501          ">
+    <DateTime>2025-06-30 10:41:30</DateTime>
     <MMWVH>0</MMWVH>
     <MMWVL>0</MMWVL>
     <IVHC_U>3950</IVHC_U>

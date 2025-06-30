@@ -83,6 +83,16 @@
                     Content="Odczytaj konfigurację"
                     FontSize="16"/>
                 <Button
+                    x:Name="btnSaveCalibration"
+                    Width="120"
+                    Height="40"
+                    Margin="0,0,10,0"
+                    Background="Blue"
+                    Click="btnSaveCalibration_Click"
+                    Content="Zapisz"
+                    FontSize="16"
+                    Foreground="White"/>
+                <Button
                     x:Name="btnRun"
                     Width="100"
                     Height="40"
@@ -510,17 +520,6 @@
                                                 <controls:VoltageCoefficients x:Name="kanalyZgrzewarkiVoltage"/>
                                                 <controls:CurrentCoefficients x:Name="kanalyZgrzewarkiCurrent"
                                                                               Margin="0,10,0,0"/>
-                                                <!--  Przycisk Zapisz  -->
-                                                <Button
-                                                    x:Name="btnSaveCalibration"
-                                                    Width="120"
-                                                    Height="40"
-                                                    Margin="0,20,0,0"
-                                                    Background="Blue"
-                                                    Click="btnSaveCalibration_Click"
-                                                    Content="Zapisz"
-                                                    FontSize="16"
-                                                    Foreground="White"/>
                                             </StackPanel>
                                         </GroupBox>
                                     </Grid>

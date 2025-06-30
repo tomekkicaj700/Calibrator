@@ -813,13 +813,21 @@ public partial class MainWindow : Window
     {
         try
         {
+            // Sprawdź czy welderService jest dostępny
+            if (welderService == null)
+            {
+                MessageBox.Show("Serwis zgrzewarki nie jest dostępny. Spróbuj ponownie uruchomić aplikację.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             var config = GetCurrentConfigurationFromUI();
             if (config == null)
             {
                 MessageBox.Show("Brak danych konfiguracyjnych do zapisania. Najpierw odczytaj konfigurację ze zgrzewarki.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            // Walidacja kluczowych pól (przykład, możesz dodać więcej)
+
+            // Walidacja kluczowych pól
             if (config.uInputVoltageHighCurrent == null || config.uInputVoltageHighCurrent.Length < 7)
             {
                 MessageBox.Show("Konfiguracja jest niekompletna. Najpierw odczytaj konfigurację ze zgrzewarki.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -829,12 +837,33 @@ public partial class MainWindow : Window
             string deviceType = txtNazwaZgrzewarki.Text;
             string serialNumber = txtNumerSeryjny.Text;
 
+            // Zapisz do historii
             welderService.SaveCalibrationToHistory(config, deviceType, serialNumber);
-            Log("✓ Kalibracja została zapisana do historii.");
+
+            // Wymuś odświeżenie UI historii
+            Dispatcher.BeginInvoke(() =>
+            {
+                try
+                {
+                    // Odśwież DataGrid bezpośrednio
+                    dataGridHistory.ItemsSource = null;
+                    dataGridHistory.ItemsSource = welderService.CalibrationHistory;
+
+                    // Zastosuj aktualne filtry
+                    ApplyFilter();
+
+                    Log("✓ Kalibracja została zapisana do historii i widok został odświeżony.");
+                }
+                catch (Exception ex)
+                {
+                    Log($"Błąd podczas odświeżania widoku historii: {ex.Message}");
+                }
+            });
         }
         catch (Exception ex)
         {
             Log($"Błąd podczas zapisywania kalibracji: {ex.Message}");
+            MessageBox.Show($"Błąd podczas zapisywania kalibracji: {ex.Message}", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 
@@ -917,13 +946,24 @@ public partial class MainWindow : Window
 
     private void ApplyFilter()
     {
-        if (welderService == null)
-            return;
-        string deviceTypeFilter = txtFilterDeviceType.Text?.Trim() ?? "";
-        string serialNumberFilter = txtFilterSerialNumber.Text?.Trim() ?? "";
+        try
+        {
+            if (welderService == null || dataGridHistory == null)
+                return;
 
-        var filteredHistory = welderService.GetFilteredHistory(deviceTypeFilter, serialNumberFilter);
-        dataGridHistory.ItemsSource = filteredHistory;
+            string deviceTypeFilter = txtFilterDeviceType?.Text?.Trim() ?? "";
+            string serialNumberFilter = txtFilterSerialNumber?.Text?.Trim() ?? "";
+
+            var filteredHistory = welderService.GetFilteredHistory(deviceTypeFilter, serialNumberFilter);
+
+            // Bezpieczna aktualizacja ItemsSource
+            dataGridHistory.ItemsSource = null;
+            dataGridHistory.ItemsSource = filteredHistory;
+        }
+        catch (Exception ex)
+        {
+            Log($"Błąd podczas stosowania filtrów: {ex.Message}");
+        }
     }
 
     private void dataGridHistory_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -1119,38 +1159,103 @@ public partial class MainWindow : Window
 
     private void OnWeldParametersUpdated(WeldParameters parameters)
     {
-        Dispatcher.Invoke(() =>
+        try
         {
-            // Aktualizacja UI z parametrami zgrzewania
-            UpdateWeldParametersUI(parameters);
-        });
+            Dispatcher.BeginInvoke(() =>
+            {
+                try
+                {
+                    // Aktualizacja UI z parametrami zgrzewania
+                    UpdateWeldParametersUI(parameters);
+                }
+                catch (Exception ex)
+                {
+                    Log($"Błąd podczas aktualizacji UI parametrów zgrzewania: {ex.Message}");
+                }
+            });
+        }
+        catch (Exception ex)
+        {
+            Log($"Błąd podczas obsługi zdarzenia WeldParametersUpdated: {ex.Message}");
+        }
     }
 
     private void OnConfigurationUpdated(SKonfiguracjaSystemu config)
     {
-        Dispatcher.Invoke(() =>
+        try
         {
-            // Aktualizacja UI z konfiguracją
-            DisplayConfiguration(config);
-        });
+            Dispatcher.BeginInvoke(() =>
+            {
+                try
+                {
+                    // Aktualizacja UI z konfiguracją
+                    DisplayConfiguration(config);
+                }
+                catch (Exception ex)
+                {
+                    Log($"Błąd podczas aktualizacji UI konfiguracji: {ex.Message}");
+                }
+            });
+        }
+        catch (Exception ex)
+        {
+            Log($"Błąd podczas obsługi zdarzenia ConfigurationUpdated: {ex.Message}");
+        }
     }
 
     private void OnWelderStatusChanged(WelderStatus status)
     {
-        Dispatcher.Invoke(() =>
+        try
         {
-            // Aktualizacja UI ze statusem zgrzewarki
-            UpdateWelderStatusUI(status);
-        });
+            Dispatcher.BeginInvoke(() =>
+            {
+                try
+                {
+                    // Aktualizacja UI ze statusem zgrzewarki
+                    UpdateWelderStatusUI(status);
+                }
+                catch (Exception ex)
+                {
+                    Log($"Błąd podczas aktualizacji UI statusu zgrzewarki: {ex.Message}");
+                }
+            });
+        }
+        catch (Exception ex)
+        {
+            Log($"Błąd podczas obsługi zdarzenia WelderStatusChanged: {ex.Message}");
+        }
     }
 
     private void OnHistoryUpdated(List<WelderService.CalibrationRecord> history)
     {
-        Dispatcher.Invoke(() =>
+        try
         {
-            // Aktualizacja UI z historią
-            dataGridHistory.ItemsSource = history;
-        });
+            Dispatcher.BeginInvoke(() =>
+            {
+                try
+                {
+                    // Aktualizacja UI z historią
+                    if (dataGridHistory != null)
+                    {
+                        dataGridHistory.ItemsSource = null;
+                        dataGridHistory.ItemsSource = history;
+
+                        // Zastosuj aktualne filtry
+                        ApplyFilter();
+
+                        Log($"Historia pomiarów została zaktualizowana. Liczba rekordów: {history?.Count ?? 0}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log($"Błąd podczas aktualizacji UI historii: {ex.Message}");
+                }
+            });
+        }
+        catch (Exception ex)
+        {
+            Log($"Błąd podczas obsługi zdarzenia HistoryUpdated: {ex.Message}");
+        }
     }
 
     private void UpdateStatisticsUI()
