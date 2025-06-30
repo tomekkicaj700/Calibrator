@@ -88,6 +88,42 @@ public class WindowSettings
 /// </summary>
 public partial class MainWindow : Window
 {
+    // Unikalne identyfikatory zakładek (niezależne od języka)
+    private const string TAB_ID_WELD_PARAMETERS = "weld_parameters";
+    private const string TAB_ID_CALIBRATION_PARAMETERS = "calibration_parameters";
+    private const string TAB_ID_CONFIGURATION = "configuration";
+    private const string TAB_ID_OTHER_PARAMETERS = "other_parameters";
+    private const string TAB_ID_MEASUREMENT_HISTORY = "measurement_history";
+    private const string TAB_ID_INFO = "info";
+    private const string TAB_ID_COMMUNICATION = "communication";
+
+    // Stałe dla nazw zakładek
+    private const string TAB_PARAMETRY_ZGRZEWANIA = "Parametry zgrzewania";
+    private const string TAB_PARAMETRY_KALIBRACJI = "Parametry kalibracji";
+    private const string TAB_KONFIGURACJA = "Konfiguracja";
+    private const string TAB_POZOSTALE_PARAMETRY = "Pozostałe parametry";
+    private const string TAB_HISTORIA_POMIAROW = "Historia pomiarów";
+    private const string TAB_INFO = "INFO";
+    private const string TAB_KOMUNIKACJA = "Komunikacja";
+
+    // Słownik mapujący identyfikatory na nazwy zakładek (może być rozszerzony o inne języki)
+    private readonly Dictionary<string, string> tabNames = new Dictionary<string, string>
+    {
+        { TAB_ID_WELD_PARAMETERS, "Parametry zgrzewania" },
+        { TAB_ID_CALIBRATION_PARAMETERS, "Parametry kalibracji" },
+        { TAB_ID_CONFIGURATION, "Konfiguracja" },
+        { TAB_ID_OTHER_PARAMETERS, "Pozostałe parametry" },
+        { TAB_ID_MEASUREMENT_HISTORY, "Historia pomiarów" },
+        { TAB_ID_INFO, "INFO" },
+        { TAB_ID_COMMUNICATION, "Komunikacja" }
+    };
+
+    // Metoda do pobierania nazwy zakładki na podstawie identyfikatora
+    private string GetTabName(string tabId)
+    {
+        return tabNames.TryGetValue(tabId, out string? name) ? name : tabId;
+    }
+
     // Struktura pomocnicza do mapowania wartości kanałów zgrzewarki
     private class WartosciKanalowZgrzewarki
     {
@@ -225,6 +261,8 @@ public partial class MainWindow : Window
 
         // Subskrybuj eventy serwisu TCP
         // Możesz dodać obsługę DataReceived/ClientConnected/ClientDisconnected jeśli chcesz
+        tcpServerService.ClientConnected += OnTcpClientConnected;
+        tcpServerService.ClientDisconnected += OnTcpClientDisconnected;
     }
 
     private async void InitializeServicesAsync()
@@ -540,8 +578,8 @@ public partial class MainWindow : Window
     {
         try
         {
-            // Przełącz na zakładkę 'Parametry zgrzewania' (pierwsza zakładka, indeks 0) od razu
-            mainTabControl.SelectedIndex = 0;
+            // Przełącz na zakładkę 'Parametry zgrzewania' od razu
+            SwitchToWeldParametersTab();
 
             if (welderService == null) return;
             if (!await welderService.EnsureWelderConnectionAsync("odczytu parametrów zgrzewania"))
@@ -649,8 +687,8 @@ public partial class MainWindow : Window
     {
         try
         {
-            // Przełącz na zakładkę 'Parametry kalibracji' (druga zakładka, indeks 1) od razu
-            mainTabControl.SelectedIndex = 1;
+            // Przełącz na zakładkę 'Parametry kalibracji' od razu
+            SwitchToCalibrationParametersTab();
 
             if (welderService == null) return;
             if (!await welderService.EnsureWelderConnectionAsync("odczytu konfiguracji"))
@@ -851,6 +889,9 @@ public partial class MainWindow : Window
 
                     // Zastosuj aktualne filtry
                     ApplyFilter();
+
+                    // Przełącz na zakładkę "Historia pomiarów"
+                    SwitchToHistoryTab();
 
                     Log("✓ Kalibracja została zapisana do historii i widok został odświeżony.");
                 }
@@ -1128,16 +1169,25 @@ public partial class MainWindow : Window
             if (started)
             {
                 btnTcpServer.Content = "Zatrzymaj serwer TCP";
+                txtTcpServerStatus.Text = $"Serwer aktywny - {tcpServerService.ConnectedClientsCount} klientów";
+                txtTcpServerStatus.Foreground = Brushes.Green;
+                Log($"[TCP SERVER] Serwer uruchomiony na {ip}:{port}");
             }
             else
             {
                 btnTcpServer.Content = "Uruchom serwer TCP";
+                txtTcpServerStatus.Text = "Błąd uruchomienia serwera";
+                txtTcpServerStatus.Foreground = Brushes.Red;
+                Log("[TCP SERVER] Błąd podczas uruchamiania serwera");
             }
         }
         else
         {
             tcpServerService.Stop();
             btnTcpServer.Content = "Uruchom serwer TCP";
+            txtTcpServerStatus.Text = "Serwer nieaktywny";
+            txtTcpServerStatus.Foreground = Brushes.Red;
+            Log("[TCP SERVER] Serwer zatrzymany");
         }
     }
 
@@ -1146,15 +1196,18 @@ public partial class MainWindow : Window
         if (!tcpServerService.IsRunning)
         {
             Log("[TCP SERVER] Serwer nie jest uruchomiony.");
+            MessageBox.Show("Serwer TCP nie jest uruchomiony. Najpierw uruchom serwer.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
             return;
         }
         if (tcpServerService.ConnectedClientsCount == 0)
         {
             Log("[TCP SERVER] Brak podłączonych klientów do wysłania danych.");
+            MessageBox.Show("Brak podłączonych klientów. Przykładowe dane nie zostały wysłane.", "Informacja", MessageBoxButton.OK, MessageBoxImage.Information);
             return;
         }
         string sample = $"Przykładowe dane {DateTime.Now:HH:mm:ss}";
         await tcpServerService.SendToAllAsync(sample);
+        Log($"[TCP SERVER] Wysłano przykładowe dane do {tcpServerService.ConnectedClientsCount} klientów: {sample}");
     }
 
     private void OnWeldParametersUpdated(WeldParameters parameters)
@@ -1421,5 +1474,134 @@ public partial class MainWindow : Window
     private void Log(string message)
     {
         LoggerService.Log(message);
+    }
+
+    private void OnTcpClientConnected(TcpClient client)
+    {
+        Dispatcher.BeginInvoke(() =>
+        {
+            txtTcpServerStatus.Text = $"Serwer aktywny - {tcpServerService.ConnectedClientsCount} klientów";
+            txtTcpServerStatus.Foreground = Brushes.Green;
+            Log($"[TCP SERVER] Nowy klient połączony: {client.Client.RemoteEndPoint}");
+        });
+    }
+
+    private void OnTcpClientDisconnected(TcpClient client)
+    {
+        Dispatcher.BeginInvoke(() =>
+        {
+            txtTcpServerStatus.Text = $"Serwer aktywny - {tcpServerService.ConnectedClientsCount} klientów";
+            if (tcpServerService.ConnectedClientsCount == 0)
+            {
+                txtTcpServerStatus.Text = "Serwer aktywny - brak klientów";
+            }
+            Log($"[TCP SERVER] Klient odłączony: {client.Client.RemoteEndPoint}");
+        });
+    }
+
+    private void SwitchToTab(string tabName)
+    {
+        try
+        {
+            for (int i = 0; i < mainTabControl.Items.Count; i++)
+            {
+                if (mainTabControl.Items[i] is TabItem tabItem && tabItem.Header.ToString() == tabName)
+                {
+                    mainTabControl.SelectedIndex = i;
+                    Log($"Przełączono na zakładkę: {tabName}");
+                    return;
+                }
+            }
+
+            // Jeśli nie znaleziono zakładki, zaloguj błąd
+            Log($"Nie znaleziono zakładki o nazwie: {tabName}");
+        }
+        catch (Exception ex)
+        {
+            Log($"Błąd podczas przełączania na zakładkę {tabName}: {ex.Message}");
+        }
+    }
+
+    /// <summary>
+    /// Przełącza na zakładkę historii pomiarów
+    /// </summary>
+    private void SwitchToHistoryTab()
+    {
+        SwitchToTab(TAB_HISTORIA_POMIAROW);
+    }
+
+    /// <summary>
+    /// Przełącza na zakładkę komunikacji
+    /// </summary>
+    private void SwitchToCommunicationTab()
+    {
+        SwitchToTab(TAB_KOMUNIKACJA);
+    }
+
+    /// <summary>
+    /// Przełącza na zakładkę parametrów zgrzewania
+    /// </summary>
+    private void SwitchToWeldParametersTab()
+    {
+        SwitchToTab(TAB_PARAMETRY_ZGRZEWANIA);
+    }
+
+    /// <summary>
+    /// Przełącza na zakładkę parametrów kalibracji
+    /// </summary>
+    private void SwitchToCalibrationParametersTab()
+    {
+        SwitchToTab(TAB_PARAMETRY_KALIBRACJI);
+    }
+
+    /// <summary>
+    /// Przełącza na zakładkę konfiguracji
+    /// </summary>
+    private void SwitchToConfigurationTab()
+    {
+        SwitchToTab(TAB_KONFIGURACJA);
+    }
+
+    /// <summary>
+    /// Przełącza na zakładkę pozostałych parametrów
+    /// </summary>
+    private void SwitchToOtherParametersTab()
+    {
+        SwitchToTab(TAB_POZOSTALE_PARAMETRY);
+    }
+
+    /// <summary>
+    /// Przełącza na zakładkę INFO
+    /// </summary>
+    private void SwitchToInfoTab()
+    {
+        SwitchToTab(TAB_INFO);
+    }
+
+    /// <summary>
+    /// Przełącza na zakładkę na podstawie identyfikatora (niezależne od języka)
+    /// </summary>
+    private void SwitchToTabById(string tabId)
+    {
+        try
+        {
+            string tabName = GetTabName(tabId);
+            for (int i = 0; i < mainTabControl.Items.Count; i++)
+            {
+                if (mainTabControl.Items[i] is TabItem tabItem && tabItem.Header.ToString() == tabName)
+                {
+                    mainTabControl.SelectedIndex = i;
+                    Log($"Przełączono na zakładkę: {tabName} (ID: {tabId})");
+                    return;
+                }
+            }
+
+            // Jeśli nie znaleziono zakładki, zaloguj błąd
+            Log($"Nie znaleziono zakładki o ID: {tabId} (nazwa: {tabName})");
+        }
+        catch (Exception ex)
+        {
+            Log($"Błąd podczas przełączania na zakładkę {tabId}: {ex.Message}");
+        }
     }
 }
