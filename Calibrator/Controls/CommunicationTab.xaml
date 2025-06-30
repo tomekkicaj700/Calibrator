@@ -1,0 +1,100 @@
+<UserControl x:Class="Calibrator.Controls.CommunicationTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="600"
+             d:DesignWidth="900">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="351*"/>
+            <ColumnDefinition Width="823*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!--  GroupBox z ustawieniami serwera  -->
+        <GroupBox Grid.Row="0"
+                  Grid.ColumnSpan="2"
+                  Margin="0,0,0,20"
+                  Padding="10"
+                  Header="Ustawienia serwera TCP">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!--  Adres IP  -->
+                <TextBlock Grid.Row="0"
+                           Grid.Column="0"
+                           Margin="0,0,10,0"
+                           VerticalAlignment="Center"
+                           FontSize="16"
+                           Text="Adres IP:"/>
+                <TextBox x:Name="txtTcpServerIp"
+                         Grid.Row="0"
+                         Grid.Column="1"
+                         Width="150"
+                         Margin="0,0,20,0"
+                         FontSize="16"
+                         IsReadOnly="True"
+                         Text="0.0.0.0"/>
+
+                <!--  Port  -->
+                <TextBlock Grid.Row="1"
+                           Grid.Column="0"
+                           Margin="0,0,10,0"
+                           VerticalAlignment="Center"
+                           FontSize="16"
+                           Text="Port:"/>
+                <TextBox x:Name="txtTcpServerPort"
+                         Grid.Row="1"
+                         Grid.Column="1"
+                         Width="100"
+                         Margin="0,0,20,0"
+                         FontSize="16"
+                         IsReadOnly="True"
+                         Text="20108"/>
+
+                <!--  Status serwera  -->
+                <TextBlock x:Name="txtTcpServerStatus"
+                           Grid.Row="0"
+                           Grid.RowSpan="2"
+                           Grid.Column="2"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           FontSize="16"
+                           Foreground="Red"
+                           Text="Serwer nieaktywny"/>
+            </Grid>
+        </GroupBox>
+
+        <!--  GroupBox z akcjami  -->
+        <GroupBox Grid.Row="1"
+                  Grid.ColumnSpan="2"
+                  Padding="10"
+                  Header="Akcje serwera">
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="btnSendSampleData"
+                        Width="200"
+                        Height="40"
+                        Margin="0,0,10,0"
+                        Content="Wyślij przykładowe dane"
+                        FontSize="16"/>
+                <TextBlock VerticalAlignment="Center"
+                           FontSize="14"
+                           Foreground="Gray"
+                           Text="Kliknij aby wysłać przykładowe dane do podłączonych klientów"/>
+            </StackPanel>
+        </GroupBox>
+    </Grid>
+</UserControl> 

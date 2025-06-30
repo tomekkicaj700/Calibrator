@@ -26,6 +26,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Collections.Concurrent;
 using Calibrator.Services;
+using Calibrator.Controls;
 using Logger;
 using static Logger.LoggerService;
 using System.Text.Json;
@@ -143,6 +144,13 @@ public partial class MainWindow : Window
 
     private SKonfiguracjaSystemu? lastConfig;
 
+    // Właściwości pomocnicze do dostępu do kontrolek w UserControl
+    private WeldParametersTab WeldParametersTab => weldParametersTab;
+    private CalibrationParametersTab CalibrationParametersTab => calibrationParametersTab;
+    private MeasurementHistoryTab MeasurementHistoryTab => measurementHistoryTab;
+    private InfoTab InfoTab => infoTab;
+    private CommunicationTab CommunicationTab => communicationTab;
+
     public MainWindow()
     {
         InitializeComponent();
@@ -151,8 +159,7 @@ public partial class MainWindow : Window
         InitializeServicesAsync();
 
         // Ustaw LabelFormatter dla gaugeNapiecie i gaugePrad
-        gaugeNapiecie.LabelFormatter = value => value.ToString("F1");
-        gaugePrad.LabelFormatter = value => value.ToString("F1");
+        // Przeniesione do WeldParametersTab
 
         // Subscribe to ConfigService events
         var configService = ServiceContainer.ConfigService;
@@ -255,10 +262,6 @@ public partial class MainWindow : Window
         LoggerService.Instance.LogHistoryLoaded += LoadLogHistoryToUI;
         LoggerService.Instance.LoadLogHistory();
 
-        // 3. Numeracja wierszy historii pomiarów
-        // Dodaj event do DataGrid:
-        dataGridHistory.LoadingRow += dataGridHistory_LoadingRow;
-
         // Subskrybuj eventy serwisu TCP
         // Możesz dodać obsługę DataReceived/ClientConnected/ClientDisconnected jeśli chcesz
         tcpServerService.ClientConnected += OnTcpClientConnected;
@@ -284,7 +287,7 @@ public partial class MainWindow : Window
                 welderService.HistoryUpdated += OnHistoryUpdated;
 
                 // Inicjalizacja historii pomiarów
-                dataGridHistory.ItemsSource = welderService.CalibrationHistory;
+                // Przeniesione do MeasurementHistoryTab
             }
 
             Log("Services initialized successfully");
@@ -347,34 +350,36 @@ public partial class MainWindow : Window
 
     private async void btnRun_Click(object sender, RoutedEventArgs e)
     {
-        if (!isRunning)
+        try
         {
-            Log("=== ROZPOCZYNAM RUN ===");
-
-            if (!await EnsureWelderConnectionAsync("funkcji RUN"))
+            if (!isRunning)
             {
-                return; // Połączenie się nie udało, przerwij
+                // Sprawdź połączenie przed uruchomieniem
+                if (!await EnsureWelderConnectionAsync("uruchomienia pomiarów"))
+                    return;
+
+                isRunning = true;
+                iconRun.Text = "⏸";
+                txtRun.Text = "STOP";
+                btnRun.IsEnabled = true;
+
+                configTimer.Start();
+                Log("▶ Pomiar parametrów uruchomiony");
             }
+            else
+            {
+                isRunning = false;
+                iconRun.Text = "▶";
+                txtRun.Text = "RUN";
+                btnRun.IsEnabled = true;
 
-            Log("✓ Połączenie udane! Uruchamiam timer odczytu parametrów zgrzewania...");
-
-            configTimer.Interval = TimeSpan.FromMilliseconds(GetSelectedInterval());
-            configTimer.Start();
-            iconRun.Text = "⏹";
-            txtRun.Text = "STOP";
-            btnRun.Background = new SolidColorBrush(Colors.Red);
-            btnRun.Foreground = Brushes.White;
-            isRunning = true;
+                configTimer.Stop();
+                Log("⏸ Pomiar parametrów zatrzymany");
+            }
         }
-        else
+        catch (Exception ex)
         {
-            Log("=== ZATRZYMUJĘ RUN ===");
-            configTimer.Stop();
-            iconRun.Text = "▶";
-            txtRun.Text = "RUN";
-            btnRun.Background = new SolidColorBrush(Colors.Green);
-            btnRun.Foreground = Brushes.White;
-            isRunning = false;
+            Log($"Błąd podczas przełączania trybu pomiaru: {ex.Message}");
         }
     }
 
@@ -579,7 +584,7 @@ public partial class MainWindow : Window
         try
         {
             // Przełącz na zakładkę 'Parametry zgrzewania' od razu
-            SwitchToWeldParametersTab();
+            SwitchToTab(TAB_PARAMETRY_ZGRZEWANIA);
 
             if (welderService == null) return;
             if (!await welderService.EnsureWelderConnectionAsync("odczytu parametrów zgrzewania"))
@@ -633,54 +638,7 @@ public partial class MainWindow : Window
     private void DisplayConfiguration(SKonfiguracjaSystemu config)
     {
         lastConfig = config;
-        try
-        {
-            // Logi diagnostyczne
-            Log("=== DIAGNOSTYKA DISPLAYCONFIGURATION ===");
-            Log($"config.uMultimeterWeldVoltageHighCurrent: {config.uMultimeterWeldVoltageHighCurrent}");
-            Log($"config.uMultimeterWeldVoltageLowCurrent: {config.uMultimeterWeldVoltageLowCurrent}");
-            Log($"config.uInputVoltageHighCurrent[5]: {(config.uInputVoltageHighCurrent.Length > 5 ? config.uInputVoltageHighCurrent[5].ToString() : "BRAK")}");
-            Log($"config.uInputVoltageLowCurrent[5]: {(config.uInputVoltageLowCurrent.Length > 5 ? config.uInputVoltageLowCurrent[5].ToString() : "BRAK")}");
-            Log($"config.uADCValueHighCurrent[5]: {(config.uADCValueHighCurrent.Length > 5 ? config.uADCValueHighCurrent[5].ToString() : "BRAK")}");
-            Log($"config.uADCValueLowCurrent[5]: {(config.uADCValueLowCurrent.Length > 5 ? config.uADCValueLowCurrent[5].ToString() : "BRAK")}");
-            Log("=== KONIEC DIAGNOSTYKI ===");
-
-            welderChannels.SetConfiguration(config);
-            kanalyZgrzewarkiVoltage.SetConfiguration(config);
-            kanalyZgrzewarkiCurrent.SetConfiguration(config);
-
-            // Pozostałe parametry (Tab 2)
-            txtTyp.Text = config.Typ.ToString();
-            txtKeypadSE.Text = config.KeypadSE.ToString();
-            txtNrJezyka.Text = config.nrJezyka.ToString();
-            txtNazwaZgrzewarki.Text = WelderService.GetWelderName(config.NazwaZgrzewarki);
-            txtNumerSeryjny.Text = Encoding.ASCII.GetString(config.NumerSeryjny).TrimEnd('\0');
-            txtDaneWlasciciela0.Text = Encoding.ASCII.GetString(config.DaneWlasciciela0).TrimEnd('\0');
-            txtDaneWlasciciela1.Text = Encoding.ASCII.GetString(config.DaneWlasciciela1).TrimEnd('\0');
-            txtDaneWlasciciela2.Text = Encoding.ASCII.GetString(config.DaneWlasciciela2).TrimEnd('\0');
-            txtDataSprzedazy.Text = FormatDate(config.DataSprzedazy);
-            txtDataPierwszegoZgrzewu.Text = FormatDate(config.DataPierwszegoZgrzewu);
-            txtDataOstatniejKalibracji.Text = FormatDate(config.DataOstatniejKalibracji);
-            txtOffsetMCP3425.Text = config.Offset_MCP3425.ToString();
-            txtWolneMiejsce.Text = BitConverter.ToString(config.WolneMiejsce);
-            txtLiczbaZgrzOstKalibr.Text = config.LiczbaZgrzOstKalibr.ToString();
-            txtOkresKalibracji.Text = config.OkresKalibracji.ToString();
-            txtRejestrKonfiguracji.Text = config.RejestrKonfiguracji.ToString();
-            txtRejestrKonfiguracjiBankTwo.Text = config.RejestrKonfiguracjiBankTwo.ToString();
-            txtTempOtRefVal.Text = config.TempOtRefVal.ToString();
-            txtTempOtRefADC.Text = config.TempOtRefADC.ToString();
-            txtKorekcjaTempWewn.Text = config.KorekcjaTempWewn.ToString();
-            txtKorekcjaTempZewn.Text = config.KorekcjaTempZewn.ToString();
-            txtKodBlokady.Text = config.KodBlokady.ToString();
-            txtTypBlokady.Text = config.TypBlokady.ToString();
-            txtGPSconfiguration.Text = config.GPSconfiguration.ToString();
-
-            Log("Konfiguracja została odczytana i wyświetlona w UI.");
-        }
-        catch (Exception ex)
-        {
-            Log($"Błąd podczas wyświetlania konfiguracji: {ex.Message}");
-        }
+        CalibrationParametersTab.SetConfiguration(config);
     }
 
     private async void btnReadConfig_Click(object sender, RoutedEventArgs e)
@@ -688,7 +646,7 @@ public partial class MainWindow : Window
         try
         {
             // Przełącz na zakładkę 'Parametry kalibracji' od razu
-            SwitchToCalibrationParametersTab();
+            SwitchToTab(TAB_PARAMETRY_KALIBRACJI);
 
             if (welderService == null) return;
             if (!await welderService.EnsureWelderConnectionAsync("odczytu konfiguracji"))
@@ -747,33 +705,6 @@ public partial class MainWindow : Window
         else
         {
             Log("Brak zapisanej wysokości logów w ustawieniach, używam domyślnej.");
-        }
-
-        // Inicjalizacja WebView2 z treścią HTML
-        InitializeInfoWebView();
-    }
-
-    private async void InitializeInfoWebView()
-    {
-        try
-        {
-            await InfoWebView.EnsureCoreWebView2Async();
-
-            // Wczytaj HTML z pliku
-            string htmlFilePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "InfoContent.html");
-            if (File.Exists(htmlFilePath))
-            {
-                string htmlContent = await File.ReadAllTextAsync(htmlFilePath);
-                InfoWebView.NavigateToString(htmlContent);
-            }
-            else
-            {
-                Log($"Plik HTML nie został znaleziony: {htmlFilePath}");
-            }
-        }
-        catch (Exception ex)
-        {
-            Log($"Błąd podczas inicjalizacji WebView2: {ex.Message}");
         }
     }
 
@@ -847,59 +778,33 @@ public partial class MainWindow : Window
         Log($"[Splitter] Zapisano wysokość logów: {newHeight:F0} px do ustawień.");
     }
 
-    private void btnSaveCalibration_Click(object sender, RoutedEventArgs e)
+    private async void btnSaveCalibration_Click(object sender, RoutedEventArgs e)
     {
         try
         {
-            // Sprawdź czy welderService jest dostępny
-            if (welderService == null)
+            if (lastConfig == null)
             {
-                MessageBox.Show("Serwis zgrzewarki nie jest dostępny. Spróbuj ponownie uruchomić aplikację.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Brak danych konfiguracyjnych do zapisania. Najpierw odczytaj konfigurację.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
-            var config = GetCurrentConfigurationFromUI();
-            if (config == null)
+            // Pobierz dane z UI
+            string deviceType = CalibrationParametersTab.TxtNazwaZgrzewarki.Text;
+            string serialNumber = CalibrationParametersTab.TxtNumerSeryjny.Text;
+
+            if (string.IsNullOrEmpty(deviceType) || string.IsNullOrEmpty(serialNumber))
             {
-                MessageBox.Show("Brak danych konfiguracyjnych do zapisania. Najpierw odczytaj konfigurację ze zgrzewarki.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Brak danych o typie urządzenia lub numerze seryjnym. Sprawdź czy konfiguracja została poprawnie odczytana.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
-            // Walidacja kluczowych pól
-            if (config.uInputVoltageHighCurrent == null || config.uInputVoltageHighCurrent.Length < 7)
-            {
-                MessageBox.Show("Konfiguracja jest niekompletna. Najpierw odczytaj konfigurację ze zgrzewarki.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
+            // Zapisz kalibrację
+            await welderService.SaveCalibrationAsync(lastConfig, deviceType, serialNumber);
 
-            string deviceType = txtNazwaZgrzewarki.Text;
-            string serialNumber = txtNumerSeryjny.Text;
+            // Przełącz na zakładkę "Historia pomiarów" używając ID (niezależne od języka)
+            SwitchToTabById(TAB_ID_MEASUREMENT_HISTORY);
 
-            // Zapisz do historii
-            welderService.SaveCalibrationToHistory(config, deviceType, serialNumber);
-
-            // Wymuś odświeżenie UI historii
-            Dispatcher.BeginInvoke(() =>
-            {
-                try
-                {
-                    // Odśwież DataGrid bezpośrednio
-                    dataGridHistory.ItemsSource = null;
-                    dataGridHistory.ItemsSource = welderService.CalibrationHistory;
-
-                    // Zastosuj aktualne filtry
-                    ApplyFilter();
-
-                    // Przełącz na zakładkę "Historia pomiarów"
-                    SwitchToHistoryTab();
-
-                    Log("✓ Kalibracja została zapisana do historii i widok został odświeżony.");
-                }
-                catch (Exception ex)
-                {
-                    Log($"Błąd podczas odświeżania widoku historii: {ex.Message}");
-                }
-            });
+            Log("✓ Kalibracja została zapisana do historii i widok został odświeżony.");
         }
         catch (Exception ex)
         {
@@ -910,23 +815,12 @@ public partial class MainWindow : Window
 
     private void btnRefreshHistory_Click(object sender, RoutedEventArgs e)
     {
-        welderService.RefreshHistory();
+        // Przeniesione do MeasurementHistoryTab
     }
 
     private void btnClearHistory_Click(object sender, RoutedEventArgs e)
     {
-        var result = MessageBox.Show(
-            "Czy na pewno chcesz wyczyścić całą historię pomiarów?",
-            "Potwierdzenie",
-            MessageBoxButton.YesNo,
-            MessageBoxImage.Question);
-
-        if (result == MessageBoxResult.Yes)
-        {
-            welderService.ClearHistory();
-            dataGridHistory.ItemsSource = null;
-            dataGridHistory.ItemsSource = welderService.CalibrationHistory;
-        }
+        // Przeniesione do MeasurementHistoryTab
     }
 
     private SKonfiguracjaSystemu? GetCurrentConfigurationFromUI()
@@ -936,104 +830,37 @@ public partial class MainWindow : Window
 
     private void btnOpenFileHistory_Click(object sender, RoutedEventArgs e)
     {
-        var historyFilePath = "calibration_history.xml";
-        if (File.Exists(historyFilePath))
-        {
-            try
-            {
-                var process = new System.Diagnostics.Process
-                {
-                    StartInfo = new System.Diagnostics.ProcessStartInfo(historyFilePath)
-                    {
-                        UseShellExecute = true
-                    }
-                };
-                process.Start();
-            }
-            catch (Exception ex)
-            {
-                Log($"Nie udało się otworzyć pliku historii: {ex.Message}");
-                MessageBox.Show($"Nie udało się otworzyć pliku. Możesz go znaleźć tutaj: {System.IO.Path.GetFullPath(historyFilePath)}", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-        else
-        {
-            MessageBox.Show("Plik historii jeszcze nie istnieje.", "Informacja", MessageBoxButton.OK, MessageBoxImage.Information);
-        }
+        // Przeniesione do MeasurementHistoryTab
     }
 
     private void btnToggleDetails_Click(object sender, RoutedEventArgs e)
     {
-        if (HistoryDetailsPanel.Visibility == Visibility.Collapsed)
-        {
-            HistoryDetailsPanel.Visibility = Visibility.Visible;
-        }
-        else
-        {
-            HistoryDetailsPanel.Visibility = Visibility.Collapsed;
-        }
+        // Przeniesione do MeasurementHistoryTab
     }
 
     private void txtFilter_TextChanged(object sender, TextChangedEventArgs e)
     {
-        ApplyFilter();
+        // Przeniesione do MeasurementHistoryTab
     }
 
     private void btnClearFilter_Click(object sender, RoutedEventArgs e)
     {
-        // TODO: Wyczyść filtry
-        ApplyFilter();
+        // Przeniesione do MeasurementHistoryTab
     }
 
     private void ApplyFilter()
     {
-        try
-        {
-            if (welderService == null || dataGridHistory == null)
-                return;
-
-            string deviceTypeFilter = txtFilterDeviceType?.Text?.Trim() ?? "";
-            string serialNumberFilter = txtFilterSerialNumber?.Text?.Trim() ?? "";
-
-            var filteredHistory = welderService.GetFilteredHistory(deviceTypeFilter, serialNumberFilter);
-
-            // Bezpieczna aktualizacja ItemsSource
-            dataGridHistory.ItemsSource = null;
-            dataGridHistory.ItemsSource = filteredHistory;
-        }
-        catch (Exception ex)
-        {
-            Log($"Błąd podczas stosowania filtrów: {ex.Message}");
-        }
+        // Przeniesione do MeasurementHistoryTab
     }
 
     private void dataGridHistory_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
-        try
-        {
-            if (dataGridHistory.SelectedItem is WelderService.CalibrationRecord selectedRecord)
-            {
-                // TODO: Implementuj kopiowanie wartości do UI
-                Log($"Wybrano rekord z historii: {selectedRecord.DateTime}");
-            }
-        }
-        catch (Exception ex)
-        {
-            Log($"Błąd podczas ładowania danych z historii: {ex.Message}");
-        }
+        // Przeniesione do MeasurementHistoryTab
     }
 
     private void dataGridHistory_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (dataGridHistory.SelectedItem is WelderService.CalibrationRecord selectedRecord)
-        {
-            // TODO: Implementuj aktualizację UI z wybranym rekordem
-            Log($"Wybrano rekord: {selectedRecord.DateTime}");
-        }
-        else
-        {
-            // TODO: Wyczyść szczegóły, jeśli nic nie jest zaznaczone
-        }
+        // Przeniesione do MeasurementHistoryTab
     }
 
     private void welderChannels_Loaded(object sender, RoutedEventArgs e)
@@ -1161,53 +988,36 @@ public partial class MainWindow : Window
 
     private async void btnTcpServer_Click(object sender, RoutedEventArgs e)
     {
-        string ip = txtTcpServerIp.Text.Trim();
-        int port = int.TryParse(txtTcpServerPort.Text.Trim(), out int p) ? p : 20108;
-        if (!tcpServerService.IsRunning)
+        try
         {
-            bool started = await tcpServerService.StartAsync(ip, port);
-            if (started)
+            if (!tcpServerService.IsRunning)
             {
-                btnTcpServer.Content = "Zatrzymaj serwer TCP";
-                txtTcpServerStatus.Text = $"Serwer aktywny - {tcpServerService.ConnectedClientsCount} klientów";
-                txtTcpServerStatus.Foreground = Brushes.Green;
-                Log($"[TCP SERVER] Serwer uruchomiony na {ip}:{port}");
+                string ip = CommunicationTab.ServerIp;
+                int port = CommunicationTab.ServerPort;
+
+                var success = await tcpServerService.StartAsync(ip, port);
+                if (success)
+                {
+                    CommunicationTab.UpdateStatus($"Serwer aktywny - {tcpServerService.ConnectedClientsCount} klientów", true);
+                    Log($"[TCP SERVER] Serwer uruchomiony na {ip}:{port}");
+                }
+                else
+                {
+                    CommunicationTab.UpdateStatus("Błąd uruchomienia serwera", false);
+                    Log("[TCP SERVER] Błąd uruchomienia serwera");
+                }
             }
             else
             {
-                btnTcpServer.Content = "Uruchom serwer TCP";
-                txtTcpServerStatus.Text = "Błąd uruchomienia serwera";
-                txtTcpServerStatus.Foreground = Brushes.Red;
-                Log("[TCP SERVER] Błąd podczas uruchamiania serwera");
+                tcpServerService.Stop();
+                CommunicationTab.UpdateStatus("Serwer nieaktywny", false);
+                Log("[TCP SERVER] Serwer zatrzymany");
             }
         }
-        else
+        catch (Exception ex)
         {
-            tcpServerService.Stop();
-            btnTcpServer.Content = "Uruchom serwer TCP";
-            txtTcpServerStatus.Text = "Serwer nieaktywny";
-            txtTcpServerStatus.Foreground = Brushes.Red;
-            Log("[TCP SERVER] Serwer zatrzymany");
+            Log($"[TCP SERVER] Błąd: {ex.Message}");
         }
-    }
-
-    private async void btnSendSampleData_Click(object sender, RoutedEventArgs e)
-    {
-        if (!tcpServerService.IsRunning)
-        {
-            Log("[TCP SERVER] Serwer nie jest uruchomiony.");
-            MessageBox.Show("Serwer TCP nie jest uruchomiony. Najpierw uruchom serwer.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
-            return;
-        }
-        if (tcpServerService.ConnectedClientsCount == 0)
-        {
-            Log("[TCP SERVER] Brak podłączonych klientów do wysłania danych.");
-            MessageBox.Show("Brak podłączonych klientów. Przykładowe dane nie zostały wysłane.", "Informacja", MessageBoxButton.OK, MessageBoxImage.Information);
-            return;
-        }
-        string sample = $"Przykładowe dane {DateTime.Now:HH:mm:ss}";
-        await tcpServerService.SendToAllAsync(sample);
-        Log($"[TCP SERVER] Wysłano przykładowe dane do {tcpServerService.ConnectedClientsCount} klientów: {sample}");
     }
 
     private void OnWeldParametersUpdated(WeldParameters parameters)
@@ -1281,112 +1091,42 @@ public partial class MainWindow : Window
 
     private void OnHistoryUpdated(List<WelderService.CalibrationRecord> history)
     {
-        try
+        Dispatcher.BeginInvoke(() =>
         {
-            Dispatcher.BeginInvoke(() =>
-            {
-                try
-                {
-                    // Aktualizacja UI z historią
-                    if (dataGridHistory != null)
-                    {
-                        dataGridHistory.ItemsSource = null;
-                        dataGridHistory.ItemsSource = history;
-
-                        // Zastosuj aktualne filtry
-                        ApplyFilter();
-
-                        Log($"Historia pomiarów została zaktualizowana. Liczba rekordów: {history?.Count ?? 0}");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Log($"Błąd podczas aktualizacji UI historii: {ex.Message}");
-                }
-            });
-        }
-        catch (Exception ex)
-        {
-            Log($"Błąd podczas obsługi zdarzenia HistoryUpdated: {ex.Message}");
-        }
+            MeasurementHistoryTab.SetHistory(history);
+        });
     }
 
     private void UpdateStatisticsUI()
     {
-        txtNapiecieMin.Text = welderService.NapiecieMin.ToString("F2");
-        txtNapiecieMax.Text = welderService.NapiecieMax.ToString("F2");
-        txtNapiecieAvr.Text = welderService.NapiecieAverage.ToString("F2");
-        txtPradMin.Text = welderService.PradMin.ToString("F2");
-        txtPradMax.Text = welderService.PradMax.ToString("F2");
-        txtPradAvr.Text = welderService.PradAverage.ToString("F2");
+        if (welderService != null)
+        {
+            WeldParametersTab.UpdateStatistics(welderService);
+        }
     }
 
     private void UpdateWeldParametersUI(WeldParameters parameters)
     {
-        // Aktualizacja UI z parametrami zgrzewania
-        txtNapiecieZgrzewania.Text = parameters.NapiecieZgrzewania.ToString("F2");
-        txtPradZgrzewania.Text = parameters.PradZgrzewania.ToString("F2");
-        txtADCNapZgrzew.Text = $"0x{parameters.ADCNapZgrzew:X4}";
-        txtADCPradZgrzew.Text = $"0x{parameters.ADCPradZgrzew:X4}";
-
-        // Aktualizacja Gauge
-        gaugeNapiecie.Value = parameters.NapiecieZgrzewania;
-        gaugePrad.Value = parameters.PradZgrzewania;
-
-        // Aktualizacja współczynników kalibracji - tylko na karcie 'Parametry zgrzewania'
-        wspZgrzewaniaVoltage.MMWVHValue = parameters.MMWVH.ToString();
-        wspZgrzewaniaVoltage.MMWVLValue = parameters.MMWVL.ToString();
-        wspZgrzewaniaVoltage.IVHC_U_Value = parameters.IVHC_U.ToString();
-        wspZgrzewaniaVoltage.IVLC_U_Value = parameters.IVLC_U.ToString();
-        wspZgrzewaniaVoltage.ADCIVHC_U_Value = parameters.ADCIVHC_U.ToString();
-        wspZgrzewaniaVoltage.ADCIVLC_U_Value = parameters.ADCIVLC_U.ToString();
-
-        wspZgrzewaniaCurrent.MMWCHValue = parameters.MMWCH.ToString();
-        wspZgrzewaniaCurrent.MMWCLValue = parameters.MMWCL.ToString();
-        wspZgrzewaniaCurrent.IVHC_I_Value = parameters.IMHC_I.ToString();
-        wspZgrzewaniaCurrent.IVLC_I_Value = parameters.IMLC_I.ToString();
-        wspZgrzewaniaCurrent.ADCIVHC_I_Value = parameters.ADCIVHC_I.ToString();
-        wspZgrzewaniaCurrent.ADCIVLC_I_Value = parameters.ADCIVLC_I.ToString();
-
-        // NIE aktualizuję kanalyZgrzewarkiVoltage ani kanalyZgrzewarkiCurrent!
-
-        // Aktualizacja statystyk
-        UpdateStatisticsUI();
+        WeldParametersTab.UpdateWeldParameters(parameters);
     }
 
     private void UpdateWelderStatusUI(WelderStatus status)
     {
-        // Aktualizacja UI ze statusem zgrzewarki
-        var statusDescription = GetStatusDescription(status);
-        txtStatus.Text = statusDescription;
+        // Aktualizacja statusu zgrzewarki
+        txtStatus.Text = GetStatusDescription(status);
 
-        // Aktualizacja koloru statusu
-        switch (status)
+        // Aktualizacja przycisku RUN
+        if (status == WelderStatus.Connected)
         {
-            case WelderStatus.CONNECTED:
-            case WelderStatus.NEW_WELDER:
-                txtStatus.Foreground = Brushes.Green;
-                break;
-            case WelderStatus.NO_CONNECTION:
-                txtStatus.Foreground = Brushes.Red;
-                break;
-            default:
-                txtStatus.Foreground = Brushes.Orange;
-                break;
-        }
-
-        // Aktualizacja informacji o połączeniu
-        var connectedPort = welderService.ConnectedPort;
-        var connectedBaudRate = welderService.ConnectedBaudRate;
-
-        if (!string.IsNullOrEmpty(connectedPort))
-        {
-            // Aktualizuj odpowiednie kontrolki w UI
-            Log($"Połączono: {connectedPort} {(connectedBaudRate.HasValue ? $"({connectedBaudRate} baud)" : "")}");
+            iconRun.Text = "▶";
+            txtRun.Text = "RUN";
+            btnRun.IsEnabled = true;
         }
         else
         {
-            Log("Brak połączenia");
+            iconRun.Text = "⏸";
+            txtRun.Text = "STOP";
+            btnRun.IsEnabled = false;
         }
     }
 
@@ -1411,8 +1151,8 @@ public partial class MainWindow : Window
 
     private string FormatDate(byte[] date)
     {
-        if (date.Length != 3) return "-";
-        return $"{date[0]:D2}-{date[1]:D2}-{2000 + date[2]}";
+        // Przeniesione do CalibrationParametersTab
+        return "";
     }
 
     // 1. Handler do czyszczenia pliku logu
@@ -1441,13 +1181,6 @@ public partial class MainWindow : Window
         {
             MessageBox.Show($"Błąd podczas usuwania pliku logu: {ex.Message}", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
         }
-    }
-
-    // 3. Numeracja wierszy historii pomiarów
-    // Dodaj event do DataGrid:
-    private void dataGridHistory_LoadingRow(object sender, DataGridRowEventArgs e)
-    {
-        e.Row.Header = (e.Row.GetIndex() + 1).ToString();
     }
 
     // ConfigService event handlers
@@ -1480,9 +1213,7 @@ public partial class MainWindow : Window
     {
         Dispatcher.BeginInvoke(() =>
         {
-            txtTcpServerStatus.Text = $"Serwer aktywny - {tcpServerService.ConnectedClientsCount} klientów";
-            txtTcpServerStatus.Foreground = Brushes.Green;
-            Log($"[TCP SERVER] Nowy klient połączony: {client.Client.RemoteEndPoint}");
+            CommunicationTab.UpdateStatus($"Serwer aktywny - {tcpServerService.ConnectedClientsCount} klientów", true);
         });
     }
 
@@ -1490,12 +1221,14 @@ public partial class MainWindow : Window
     {
         Dispatcher.BeginInvoke(() =>
         {
-            txtTcpServerStatus.Text = $"Serwer aktywny - {tcpServerService.ConnectedClientsCount} klientów";
-            if (tcpServerService.ConnectedClientsCount == 0)
+            if (tcpServerService.ConnectedClientsCount > 0)
             {
-                txtTcpServerStatus.Text = "Serwer aktywny - brak klientów";
+                CommunicationTab.UpdateStatus($"Serwer aktywny - {tcpServerService.ConnectedClientsCount} klientów", true);
             }
-            Log($"[TCP SERVER] Klient odłączony: {client.Client.RemoteEndPoint}");
+            else
+            {
+                CommunicationTab.UpdateStatus("Serwer aktywny - brak klientów", true);
+            }
         });
     }
 
@@ -1527,7 +1260,7 @@ public partial class MainWindow : Window
     /// </summary>
     private void SwitchToHistoryTab()
     {
-        SwitchToTab(TAB_HISTORIA_POMIAROW);
+        SwitchToTabById(TAB_ID_MEASUREMENT_HISTORY);
     }
 
     /// <summary>
@@ -1535,7 +1268,7 @@ public partial class MainWindow : Window
     /// </summary>
     private void SwitchToCommunicationTab()
     {
-        SwitchToTab(TAB_KOMUNIKACJA);
+        SwitchToTabById(TAB_ID_COMMUNICATION);
     }
 
     /// <summary>
@@ -1543,7 +1276,7 @@ public partial class MainWindow : Window
     /// </summary>
     private void SwitchToWeldParametersTab()
     {
-        SwitchToTab(TAB_PARAMETRY_ZGRZEWANIA);
+        SwitchToTabById(TAB_ID_WELD_PARAMETERS);
     }
 
     /// <summary>
@@ -1551,7 +1284,7 @@ public partial class MainWindow : Window
     /// </summary>
     private void SwitchToCalibrationParametersTab()
     {
-        SwitchToTab(TAB_PARAMETRY_KALIBRACJI);
+        SwitchToTabById(TAB_ID_CALIBRATION_PARAMETERS);
     }
 
     /// <summary>
@@ -1559,7 +1292,7 @@ public partial class MainWindow : Window
     /// </summary>
     private void SwitchToConfigurationTab()
     {
-        SwitchToTab(TAB_KONFIGURACJA);
+        SwitchToTabById(TAB_ID_CONFIGURATION);
     }
 
     /// <summary>
@@ -1567,7 +1300,7 @@ public partial class MainWindow : Window
     /// </summary>
     private void SwitchToOtherParametersTab()
     {
-        SwitchToTab(TAB_POZOSTALE_PARAMETRY);
+        SwitchToTabById(TAB_ID_OTHER_PARAMETERS);
     }
 
     /// <summary>
@@ -1575,7 +1308,7 @@ public partial class MainWindow : Window
     /// </summary>
     private void SwitchToInfoTab()
     {
-        SwitchToTab(TAB_INFO);
+        SwitchToTabById(TAB_ID_INFO);
     }
 
     /// <summary>
