@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="clr-namespace:Calibrator.Controls"
     d:DesignHeight="600"
     d:DesignWidth="800"
     mc:Ignorable="d">
@@ -18,9 +19,9 @@
         <!--  Górny wiersz: podzielony na 2 kolumny  -->
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="6"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="6"/>
+                <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
 
             <!--  Tabela pomiarów  -->
@@ -110,7 +111,7 @@
                     <Style TargetType="DataGridRow">
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding IsSessionSeparator}"
-                                    Value="True">
+                                         Value="True">
                                 <Setter Property="Background"
                                         Value="#FFFDE7"/>
                                 <Setter Property="FontWeight"
@@ -136,8 +137,9 @@
                 Background="#B0BEC5"
                 ShowsPreview="True"/>
 
-            <!--  Pusta prawa kolumna  -->
-            <StackPanel Grid.Column="2"/>
+            <!--  Prawa kolumna: komponent pomiarów zgrzewania  -->
+            <controls:WeldMeasurementsComponent x:Name="weldMeasurementsComponent"
+                                                Grid.Column="2"/>
         </Grid>
 
         <!--  Dolny wiersz: statystyki na całą szerokość  -->
@@ -408,13 +410,13 @@
                 Click="btnResetStats_Click"
                 Foreground="White">
                 <StackPanel HorizontalAlignment="Center"
-                        Orientation="Horizontal">
+                            Orientation="Horizontal">
                     <TextBlock
                         Margin="0,0,5,0"
                         FontSize="18"
                         Text="↺"/>
                     <TextBlock FontSize="16"
-                            Text="Resetuj statystyki"/>
+                               Text="Resetuj statystyki"/>
                 </StackPanel>
             </Button>
         </StackPanel>

@@ -108,8 +108,19 @@ namespace Calibrator.Controls
                 measurementBuffer.Add(record);
             }
 
+            // Aktualizuj komponent pomiarów zgrzewania
+            UpdateWeldMeasurementsComponent(parameters);
+
             // Uruchom przetwarzanie bufora w tle
             ProcessBufferInBackground();
+        }
+
+        public void UpdateWeldMeasurementsComponent(WeldParameters parameters)
+        {
+            Dispatcher.BeginInvoke(() =>
+            {
+                weldMeasurementsComponent.UpdateWeldParameters(parameters);
+            });
         }
 
         public void ClearData()
@@ -120,6 +131,12 @@ namespace Calibrator.Controls
             }
             measurements.Clear();
             ClearStatistics();
+
+            // Wyczyść komponent pomiarów zgrzewania
+            Dispatcher.BeginInvoke(() =>
+            {
+                weldMeasurementsComponent.UpdateWeldParameters(new WeldParameters());
+            });
         }
 
         public void SaveDataToFile()
@@ -250,6 +267,20 @@ namespace Calibrator.Controls
             txtCurrentADCDelta.Text = $"Δ: {(cADCMax - cADCMin):D5}";
 
             Log($"Obliczono statystyki dla {statsMeasurements.Count} pomiarów od ostatniego resetu");
+
+            // Aktualizuj komponent pomiarów zgrzewania z najnowszymi danymi
+            if (statsMeasurements.Count > 0)
+            {
+                var latestMeasurement = statsMeasurements.Last();
+                var latestParameters = new WeldParameters
+                {
+                    NapiecieZgrzewania = latestMeasurement.Voltage,
+                    PradZgrzewania = latestMeasurement.Current,
+                    ADCNapZgrzew = latestMeasurement.VoltageADC,
+                    ADCPradZgrzew = latestMeasurement.CurrentADC
+                };
+                UpdateWeldMeasurementsComponent(latestParameters);
+            }
         }
 
         private void ClearStatistics()

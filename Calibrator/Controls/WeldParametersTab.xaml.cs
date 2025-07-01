@@ -12,18 +12,12 @@ namespace Calibrator.Controls
         public WeldParametersTab()
         {
             InitializeComponent();
-            GaugeNapiecie.LabelFormatter = value => value.ToString("F1");
-            GaugePrad.LabelFormatter = value => value.ToString("F1");
         }
 
         public void UpdateWeldParameters(WelderRS232.WeldParameters parameters)
         {
-            GaugeNapiecie.Value = parameters.NapiecieZgrzewania;
-            GaugePrad.Value = parameters.PradZgrzewania;
-            TxtNapiecieZgrzewania.Text = parameters.NapiecieZgrzewania.ToString("F2");
-            TxtPradZgrzewania.Text = parameters.PradZgrzewania.ToString("F2");
-            TxtADCNapZgrzew.Text = $"0x{parameters.ADCNapZgrzew:X4}";
-            TxtADCPradZgrzew.Text = $"0x{parameters.ADCPradZgrzew:X4}";
+            // Aktualizuj komponent pomiarów zgrzewania
+            weldMeasurementsComponent.UpdateWeldParameters(parameters);
 
             // Współczynniki kalibracji napięcia
             WspZgrzewaniaVoltage.MMWVHValue = parameters.MMWVH.ToString();
@@ -44,28 +38,13 @@ namespace Calibrator.Controls
 
         public void UpdateStatistics(WelderService welderService)
         {
-            TxtNapiecieMin.Text = welderService.NapiecieSamples > 0 ? welderService.NapiecieMin.ToString("F2") : "—";
-            TxtNapiecieMax.Text = welderService.NapiecieSamples > 0 ? welderService.NapiecieMax.ToString("F2") : "—";
-            TxtNapiecieAvr.Text = welderService.NapiecieSamples > 0 ? welderService.NapiecieAverage.ToString("F2") : "—";
-            TxtPradMin.Text = welderService.PradSamples > 0 ? welderService.PradMin.ToString("F2") : "—";
-            TxtPradMax.Text = welderService.PradSamples > 0 ? welderService.PradMax.ToString("F2") : "—";
-            TxtPradAvr.Text = welderService.PradSamples > 0 ? welderService.PradAverage.ToString("F2") : "—";
+            // Aktualizuj statystyki w komponencie pomiarów zgrzewania
+            weldMeasurementsComponent.UpdateStatistics(welderService);
         }
 
         // Publiczne właściwości dla dostępu z MainWindow
-        public Gauge GaugeNapiecie => gaugeNapiecie;
-        public Gauge GaugePrad => gaugePrad;
-        public TextBlock TxtNapiecieMin => txtNapiecieMin;
-        public TextBlock TxtNapiecieMax => txtNapiecieMax;
-        public TextBlock TxtNapiecieAvr => txtNapiecieAvr;
-        public TextBlock TxtPradMin => txtPradMin;
-        public TextBlock TxtPradMax => txtPradMax;
-        public TextBlock TxtPradAvr => txtPradAvr;
-        public TextBlock TxtNapiecieZgrzewania => txtNapiecieZgrzewania;
-        public TextBlock TxtPradZgrzewania => txtPradZgrzewania;
-        public TextBlock TxtADCNapZgrzew => txtADCNapZgrzew;
-        public TextBlock TxtADCPradZgrzew => txtADCPradZgrzew;
         public VoltageCoefficients WspZgrzewaniaVoltage => wspZgrzewaniaVoltage;
         public CurrentCoefficients WspZgrzewaniaCurrent => wspZgrzewaniaCurrent;
+        public WeldMeasurementsComponent WeldMeasurementsComponent => weldMeasurementsComponent;
     }
 }

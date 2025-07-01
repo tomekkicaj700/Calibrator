@@ -1,8 +1,9 @@
 {
-  "WindowWidth": 2411,
-  "WindowHeight": 1045,
+  "WindowWidth": 1313,
+  "WindowHeight": 1016,
   "WindowMaximized": false,
-  "WindowLeft": 54,
-  "WindowTop": 82,
-  "LogPanelHeight": null
+  "WindowLeft": 399,
+  "WindowTop": 139,
+  "LogPanelHeight": null,
+  "LogEnabled": null
 }
