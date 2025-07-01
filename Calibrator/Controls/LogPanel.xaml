@@ -59,17 +59,17 @@
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"/>
             </Button>
-            <CheckBox x:Name="chkShowLog"
-                      Content="Wyświetlaj log"
-                      IsChecked="True"
-                      Margin="16,0,0,0"
-                      VerticalAlignment="Center"
-                      FontSize="20"
-                      FontWeight="Bold"
-                      Height="32"
-                      MinWidth="180"
-                      Checked="chkShowLog_Checked"
-                      Unchecked="chkShowLog_Unchecked"/>
+            <Button x:Name="btnToggleLog"
+                    Content="Wyłącz log"
+                    Margin="16,0,0,0"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    FontWeight="Bold"
+                    Height="32"
+                    MinWidth="180"
+                    Click="btnToggleLog_Click"
+                    Background="Red"
+                    Foreground="White"/>
         </StackPanel>
         <!-- Okno logowania -->
         <TextBox x:Name="txtLog"

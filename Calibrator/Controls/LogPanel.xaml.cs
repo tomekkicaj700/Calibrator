@@ -1,6 +1,8 @@
 using System.Windows;
 using System.Windows.Controls;
 using Logger;
+using System.IO;
+using System.Text.Json;
 
 namespace Calibrator.Controls
 {
@@ -11,6 +13,14 @@ namespace Calibrator.Controls
         public LogPanel()
         {
             InitializeComponent();
+            // Odczytaj stan logowania z ustawień
+            var settings = Calibrator.WindowSettings.Load();
+            if (settings.LogEnabled.HasValue)
+                EnableLogging = LoggerService.Instance.EnableLogging = settings.LogEnabled.Value;
+            if (btnToggleLog != null)
+                btnToggleLog.Content = EnableLogging ? "Wyłącz log" : "Włącz log";
+            btnToggleLog.Background = EnableLogging ? System.Windows.Media.Brushes.Red : System.Windows.Media.Brushes.Green;
+            btnToggleLog.Foreground = System.Windows.Media.Brushes.White;
         }
 
         public void AppendLog(string text)
@@ -49,16 +59,20 @@ namespace Calibrator.Controls
                 Clipboard.SetText(txtLog.SelectedText);
         }
 
-        private void chkShowLog_Checked(object sender, RoutedEventArgs e)
+        private void btnToggleLog_Click(object sender, RoutedEventArgs e)
         {
-            EnableLogging = true;
-            LoggerService.Instance.EnableLogging = true;
-        }
-
-        private void chkShowLog_Unchecked(object sender, RoutedEventArgs e)
-        {
-            EnableLogging = false;
-            LoggerService.Instance.EnableLogging = false;
+            EnableLogging = !EnableLogging;
+            LoggerService.Instance.EnableLogging = EnableLogging;
+            if (btnToggleLog != null)
+            {
+                btnToggleLog.Content = EnableLogging ? "Wyłącz log" : "Włącz log";
+                btnToggleLog.Background = EnableLogging ? System.Windows.Media.Brushes.Red : System.Windows.Media.Brushes.Green;
+                btnToggleLog.Foreground = System.Windows.Media.Brushes.White;
+            }
+            // Zapisz stan do ustawień
+            var settings = Calibrator.WindowSettings.Load();
+            settings.LogEnabled = EnableLogging;
+            settings.Save();
         }
 
         public string GetLogText()

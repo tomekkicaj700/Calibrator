@@ -46,6 +46,7 @@ public class WindowSettings
     public double? WindowLeft { get; set; }
     public double? WindowTop { get; set; }
     public double? LogPanelHeight { get; set; }
+    public bool? LogEnabled { get; set; }
 
     public static WindowSettings Load()
     {

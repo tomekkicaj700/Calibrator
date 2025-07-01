@@ -13685,3 +13685,9 @@ Wartości multimetru:
 [2025-07-01 15:43:33.396] Obliczono statystyki dla 90 pomiarów od ostatniego resetu
 [2025-07-01 15:43:33.940] Wczytano 90 pomiarów z pliku measurement_data.csv
 [2025-07-01 15:43:33.957] Obliczono statystyki dla 90 pomiarów od ostatniego resetu
+[2025-07-01 15:46:28.359] Wczytano 90 pomiarów z pliku measurement_data.csv
+[2025-07-01 15:46:28.377] Obliczono statystyki dla 90 pomiarów od ostatniego resetu
+[2025-07-01 15:47:35.418] Wczytano 90 pomiarów z pliku measurement_data.csv
+[2025-07-01 15:47:35.436] Obliczono statystyki dla 90 pomiarów od ostatniego resetu
+[2025-07-01 15:49:13.557] Wczytano 90 pomiarów z pliku measurement_data.csv
+[2025-07-01 15:49:13.576] Obliczono statystyki dla 90 pomiarów od ostatniego resetu
