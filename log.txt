@@ -13691,3 +13691,27 @@ Wartości multimetru:
 [2025-07-01 15:47:35.436] Obliczono statystyki dla 90 pomiarów od ostatniego resetu
 [2025-07-01 15:49:13.557] Wczytano 90 pomiarów z pliku measurement_data.csv
 [2025-07-01 15:49:13.576] Obliczono statystyki dla 90 pomiarów od ostatniego resetu
+[2025-07-01 15:53:43.801] Wczytano 90 pomiarów z pliku measurement_data.csv
+[2025-07-01 15:53:43.818] Obliczono statystyki dla 90 pomiarów od ostatniego resetu
+[2025-07-01 15:54:49.101] Wczytano 90 pomiarów z pliku measurement_data.csv
+[2025-07-01 15:54:49.118] Obliczono statystyki dla 90 pomiarów od ostatniego resetu
+[2025-07-01 15:55:01.621] Wczytano 90 pomiarów z pliku measurement_data.csv
+[2025-07-01 15:55:01.621] Obliczono statystyki dla 90 pomiarów od ostatniego resetu
+[2025-07-01 15:56:12.889] Wczytano 90 pomiarów z pliku measurement_data.csv
+[2025-07-01 15:56:12.906] Obliczono statystyki dla 90 pomiarów od ostatniego resetu
+[2025-07-01 15:56:54.174] Wczytano 90 pomiarów z pliku measurement_data.csv
+[2025-07-01 15:56:54.175] Obliczono statystyki dla 90 pomiarów od ostatniego resetu
+[2025-07-01 15:56:55.530] Wczytano 90 pomiarów z pliku measurement_data.csv
+[2025-07-01 15:56:55.530] Obliczono statystyki dla 90 pomiarów od ostatniego resetu
+[2025-07-01 15:59:04.017] Wczytano 90 pomiarów z pliku measurement_data.csv
+[2025-07-01 15:59:04.035] Obliczono statystyki dla 90 pomiarów od ostatniego resetu
+[2025-07-01 16:00:14.454] Wczytano 90 pomiarów z pliku measurement_data.csv
+[2025-07-01 16:00:14.473] Obliczono statystyki dla 90 pomiarów od ostatniego resetu
+[2025-07-01 16:00:38.764] Wczytano 90 pomiarów z pliku measurement_data.csv
+[2025-07-01 16:00:38.781] Obliczono statystyki dla 90 pomiarów od ostatniego resetu
+[2025-07-01 16:02:27.953] Wczytano 90 pomiarów z pliku measurement_data.csv
+[2025-07-01 16:02:27.969] Obliczono statystyki dla 90 pomiarów od ostatniego resetu
+[2025-07-01 16:03:37.593] Wczytano 90 pomiarów z pliku measurement_data.csv
+[2025-07-01 16:03:37.609] Obliczono statystyki dla 90 pomiarów od ostatniego resetu
+[2025-07-01 16:08:00.862] Wczytano 90 pomiarów z pliku measurement_data.csv
+[2025-07-01 16:08:00.880] Obliczono statystyki dla 90 pomiarów od ostatniego resetu

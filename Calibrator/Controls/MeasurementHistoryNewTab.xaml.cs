@@ -319,7 +319,7 @@ namespace Calibrator.Controls
             var separator = new MeasurementDataRecord
             {
                 Index = 0,
-                Timestamp = "--- NOWA SESJA STATYSTYK ---",
+                Timestamp = "--- RESET ---",
                 Voltage = 0,
                 Current = 0,
                 VoltageADC = 0,

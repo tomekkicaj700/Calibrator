@@ -110,15 +110,15 @@ public partial class MainWindow : Window
 
     // Słownik mapujący identyfikatory na nazwy zakładek (może być rozszerzony o inne języki)
     private readonly Dictionary<string, string> tabNames = new Dictionary<string, string>
-    {
-        { TAB_ID_WELD_PARAMETERS, "Parametry zgrzewania" },
-        { TAB_ID_CALIBRATION_PARAMETERS, "Parametry kalibracji" },
-        { TAB_ID_CONFIGURATION, "Konfiguracja" },
-        { TAB_ID_OTHER_PARAMETERS, "Pozostałe parametry" },
-        { TAB_ID_MEASUREMENT_HISTORY, "Historia pomiarów" },
-        { TAB_ID_INFO, "INFO" },
-        { TAB_ID_COMMUNICATION, "Komunikacja" }
-    };
+            {
+            { TAB_ID_WELD_PARAMETERS, "Parametry zgrzewania" },
+            { TAB_ID_CALIBRATION_PARAMETERS, "Parametry kalibracji" },
+            { TAB_ID_CONFIGURATION, "Konfiguracja" },
+            { TAB_ID_OTHER_PARAMETERS, "Pozostałe parametry" },
+            { TAB_ID_MEASUREMENT_HISTORY, "Historia pomiarów" },
+            { TAB_ID_INFO, "INFO" },
+            { TAB_ID_COMMUNICATION, "Komunikacja" }
+            };
 
     // Metoda do pobierania nazwy zakładki na podstawie identyfikatora
     private string GetTabName(string tabId)
@@ -184,7 +184,7 @@ public partial class MainWindow : Window
         // Przywracanie rozmiaru i stanu okna przed wyświetleniem
         var windowSettings = WindowSettings.Load();
         if (windowSettings.WindowWidth.HasValue && windowSettings.WindowHeight.HasValue &&
-            windowSettings.WindowWidth.Value > 0 && windowSettings.WindowHeight.Value > 0)
+windowSettings.WindowWidth.Value > 0 && windowSettings.WindowHeight.Value > 0)
         {
             // Sprawdź rozmiar ekranu przed ustawieniem rozmiaru okna
             double screenWidth = SystemParameters.PrimaryScreenWidth;
@@ -225,9 +225,9 @@ public partial class MainWindow : Window
                     windowTop = (screenHeight - windowHeight) / 2;
 
                     Dispatcher.BeginInvoke(() =>
-                    {
-                        Log("Okno było poza ekranem - wycentrowano na ekranie");
-                    });
+                      {
+                          Log("Okno było poza ekranem - wycentrowano na ekranie");
+                      });
                 }
 
                 // Ustaw pozycję okna
@@ -238,11 +238,11 @@ public partial class MainWindow : Window
                 if (windowLeft != windowSettings.WindowLeft.Value || windowTop != windowSettings.WindowTop.Value)
                 {
                     Dispatcher.BeginInvoke(() =>
-                    {
-                        Log($"Dostosowano pozycję okna do rozmiaru ekranu: {screenWidth}x{screenHeight}");
-                        Log($"Zapisana pozycja: {windowSettings.WindowLeft.Value},{windowSettings.WindowTop.Value}");
-                        Log($"Ustawiona pozycja: {windowLeft},{windowTop}");
-                    });
+                          {
+                              Log($"Dostosowano pozycję okna do rozmiaru ekranu: {screenWidth}x{screenHeight}");
+                              Log($"Zapisana pozycja: {windowSettings.WindowLeft.Value},{windowSettings.WindowTop.Value}");
+                              Log($"Ustawiona pozycja: {windowLeft},{windowTop}");
+                          });
                 }
             }
 
@@ -251,11 +251,11 @@ public partial class MainWindow : Window
             {
                 // Użyj Dispatcher.BeginInvoke aby logowanie nastąpiło po inicjalizacji komponentów
                 Dispatcher.BeginInvoke(() =>
-                {
-                    Log($"Dostosowano rozmiar okna do rozmiaru ekranu: {screenWidth}x{screenHeight}");
-                    Log($"Zapisany rozmiar: {windowSettings.WindowWidth.Value}x{windowSettings.WindowHeight.Value}");
-                    Log($"Ustawiony rozmiar: {windowWidth}x{windowHeight}");
-                });
+                          {
+                              Log($"Dostosowano rozmiar okna do rozmiaru ekranu: {screenWidth}x{screenHeight}");
+                              Log($"Zapisany rozmiar: {windowSettings.WindowWidth.Value}x{windowSettings.WindowHeight.Value}");
+                              Log($"Ustawiony rozmiar: {windowWidth}x{windowHeight}");
+                          });
             }
         }
         if (windowSettings.WindowMaximized.HasValue)
@@ -947,8 +947,8 @@ public partial class MainWindow : Window
             // Zapisz kalibrację
             welderService.SaveCalibrationToHistory(lastConfig, deviceType, serialNumber);
 
-            // Przełącz na zakładkę "Historia pomiarów" używając ID (niezależne od języka)
-            SwitchToTabById(TAB_ID_MEASUREMENT_HISTORY);
+            // Przełącz na zakładkę "Historia kalibracji" używając ID (niezależne od języka)
+            SwitchToTabById("measurement_history");
 
             Log("✓ Kalibracja została zapisana do historii i widok został odświeżony.");
         }
@@ -1173,22 +1173,22 @@ public partial class MainWindow : Window
         try
         {
             Dispatcher.BeginInvoke(() =>
-            {
-                try
-                {
-                    // Aktualizacja UI z parametrami zgrzewania
-                    UpdateWeldParametersUI(parameters);
-                    // Aktualizacja statystyk (min/max/średnia)
-                    UpdateStatisticsUI();
+                                                          {
+                                                              try
+                                                              {
+                                                                  // Aktualizacja UI z parametrami zgrzewania
+                                                                  UpdateWeldParametersUI(parameters);
+                                                                  // Aktualizacja statystyk (min/max/średnia)
+                                                                  UpdateStatisticsUI();
 
-                    if (isRunning) measurementHistoryNewTab.AddMeasurement(parameters);
+                                                                  if (isRunning) measurementHistoryNewTab.AddMeasurement(parameters);
 
-                }
-                catch (Exception ex)
-                {
-                    Log($"Błąd podczas aktualizacji UI parametrów zgrzewania: {ex.Message}");
-                }
-            });
+                                                              }
+                                                              catch (Exception ex)
+                                                              {
+                                                                  Log($"Błąd podczas aktualizacji UI parametrów zgrzewania: {ex.Message}");
+                                                              }
+                                                          });
         }
         catch (Exception ex)
         {
@@ -1201,17 +1201,17 @@ public partial class MainWindow : Window
         try
         {
             Dispatcher.BeginInvoke(() =>
-            {
-                try
-                {
-                    // Aktualizacja UI z konfiguracją
-                    DisplayConfiguration(config);
-                }
-                catch (Exception ex)
-                {
-                    Log($"Błąd podczas aktualizacji UI konfiguracji: {ex.Message}");
-                }
-            });
+                                                              {
+                                                                  try
+                                                                  {
+                                                                      // Aktualizacja UI z konfiguracją
+                                                                      DisplayConfiguration(config);
+                                                                  }
+                                                                  catch (Exception ex)
+                                                                  {
+                                                                      Log($"Błąd podczas aktualizacji UI konfiguracji: {ex.Message}");
+                                                                  }
+                                                              });
         }
         catch (Exception ex)
         {
@@ -1224,17 +1224,17 @@ public partial class MainWindow : Window
         try
         {
             Dispatcher.BeginInvoke(() =>
-            {
-                try
-                {
-                    // Aktualizacja UI ze statusem zgrzewarki
-                    UpdateWelderStatusUI(status);
-                }
-                catch (Exception ex)
-                {
-                    Log($"Błąd podczas aktualizacji UI statusu zgrzewarki: {ex.Message}");
-                }
-            });
+                                                                  {
+                                                                      try
+                                                                      {
+                                                                          // Aktualizacja UI ze statusem zgrzewarki
+                                                                          UpdateWelderStatusUI(status);
+                                                                      }
+                                                                      catch (Exception ex)
+                                                                      {
+                                                                          Log($"Błąd podczas aktualizacji UI statusu zgrzewarki: {ex.Message}");
+                                                                      }
+                                                                  });
         }
         catch (Exception ex)
         {
@@ -1245,9 +1245,9 @@ public partial class MainWindow : Window
     private void OnHistoryUpdated(List<WelderService.CalibrationRecord> history)
     {
         Dispatcher.BeginInvoke(() =>
-        {
-            MeasurementHistoryTab.SetHistory(history);
-        });
+                                                                      {
+                                                                          MeasurementHistoryTab.SetHistory(history);
+                                                                      });
     }
 
     private void UpdateStatisticsUI()
@@ -1314,10 +1314,10 @@ public partial class MainWindow : Window
         try
         {
             var result = MessageBox.Show(
-                "Czy na pewno chcesz trwale usunąć cały plik logu (log.txt)?\nTej operacji nie można cofnąć.",
-                "Potwierdzenie",
-                MessageBoxButton.YesNo,
-                MessageBoxImage.Warning);
+            "Czy na pewno chcesz trwale usunąć cały plik logu (log.txt)?\nTej operacji nie można cofnąć.",
+            "Potwierdzenie",
+            MessageBoxButton.YesNo,
+            MessageBoxImage.Warning);
 
             if (result == MessageBoxResult.Yes)
             {
@@ -1340,21 +1340,21 @@ public partial class MainWindow : Window
     private void OnConfigSettingsChanged(WelderSettings settings)
     {
         Dispatcher.Invoke(() =>
-        {
-            Log($"Configuration settings changed: {settings.CommType}");
-            // Update UI elements that depend on configuration
-            UpdateWelderInfo();
-        });
+                                                                                                          {
+                                                                                                              Log($"Configuration settings changed: {settings.CommType}");
+                                                                                                              // Update UI elements that depend on configuration
+                                                                                                              UpdateWelderInfo();
+                                                                                                          });
     }
 
     private void OnConfigDetectedPortsChanged(List<DetectedPort> ports)
     {
         Dispatcher.Invoke(() =>
-        {
-            Log($"Detected ports updated: {ports.Count} ports");
-            // Update UI elements that show detected ports
-            // This could update a list of available ports in the UI
-        });
+                                                                                                                  {
+                                                                                                                      Log($"Detected ports updated: {ports.Count} ports");
+                                                                                                                      // Update UI elements that show detected ports
+                                                                                                                      // This could update a list of available ports in the UI
+                                                                                                                  });
     }
 
     private void Log(string message)
@@ -1365,24 +1365,24 @@ public partial class MainWindow : Window
     private void OnTcpClientConnected(TcpClient client)
     {
         Dispatcher.BeginInvoke(() =>
-        {
-            CommunicationTab.UpdateStatus($"Serwer aktywny - {tcpServerService.ConnectedClientsCount} klientów", true);
-        });
+                                                                                                                      {
+                                                                                                                          CommunicationTab.UpdateStatus($"Serwer aktywny - {tcpServerService.ConnectedClientsCount} klientów", true);
+                                                                                                                      });
     }
 
     private void OnTcpClientDisconnected(TcpClient client)
     {
         Dispatcher.BeginInvoke(() =>
-        {
-            if (tcpServerService.ConnectedClientsCount > 0)
-            {
-                CommunicationTab.UpdateStatus($"Serwer aktywny - {tcpServerService.ConnectedClientsCount} klientów", true);
-            }
-            else
-            {
-                CommunicationTab.UpdateStatus("Serwer aktywny - brak klientów", true);
-            }
-        });
+                                                                                                                          {
+                                                                                                                              if (tcpServerService.ConnectedClientsCount > 0)
+                                                                                                                              {
+                                                                                                                                  CommunicationTab.UpdateStatus($"Serwer aktywny - {tcpServerService.ConnectedClientsCount} klientów", true);
+                                                                                                                              }
+                                                                                                                              else
+                                                                                                                              {
+                                                                                                                                  CommunicationTab.UpdateStatus("Serwer aktywny - brak klientów", true);
+                                                                                                                              }
+                                                                                                                          });
     }
 
     private void SwitchToTab(string tabName)
@@ -1443,5 +1443,10 @@ public partial class MainWindow : Window
         {
             Log($"Błąd podczas przełączania na zakładkę {tabId}: {ex.Message}");
         }
+    }
+
+    private void measurementHistoryNewTab_Loaded(object sender, RoutedEventArgs e)
+    {
+
     }
 }
