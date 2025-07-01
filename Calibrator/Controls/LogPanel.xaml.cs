@@ -13,18 +13,15 @@ namespace Calibrator.Controls
             InitializeComponent();
         }
 
-        private TextBox txtLog => this.FindName("txtLog") as TextBox;
-
         public void AppendLog(string text)
         {
-            if (!EnableLogging || txtLog == null) return;
-            txtLog.AppendText(text + "\n");
+            if (!EnableLogging) return;
+            txtLog.AppendText(text);
             txtLog.ScrollToEnd();
         }
 
         public void ClearLog()
         {
-            if (txtLog == null) return;
             txtLog.Clear();
         }
 
