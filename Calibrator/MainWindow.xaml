@@ -254,73 +254,8 @@
             ShowsPreview="True"/>
 
         <!--  Logger na dole  -->
-        <Grid x:Name="LogPanel"
-              Grid.Row="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <TextBox
-                x:Name="txtLog"
-                Grid.Row="1"
-                Margin="5"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                Background="Black"
-                FontFamily="Consolas"
-                FontSize="14"
-                Foreground="Lime"
-                HorizontalScrollBarVisibility="Auto"
-                IsReadOnly="True"
-                TextWrapping="NoWrap"
-                VerticalScrollBarVisibility="Auto">
-                <TextBox.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem
-                            x:Name="menuClearLog"
-                            Click="menuClearLog_Click"
-                            Header="Wyczyść ekran"
-                            ToolTip="Usuwa wszystkie wpisy z logu">
-                            <MenuItem.Icon>
-                                <TextBlock FontSize="14"
-                                           Text="🗑"/>
-                            </MenuItem.Icon>
-                        </MenuItem>
-                        <MenuItem
-                            x:Name="menuClearLogFile"
-                            Click="menuClearLogFile_Click"
-                            Header="Wyczyść plik LOG-u"
-                            ToolTip="Usuwa cały plik logu (log.txt) z dysku">
-                            <MenuItem.Icon>
-                                <TextBlock FontSize="14"
-                                           Text="🧹"/>
-                            </MenuItem.Icon>
-                        </MenuItem>
-                        <Separator/>
-                        <MenuItem
-                            x:Name="menuCopyLog"
-                            Click="menuCopyLog_Click"
-                            Header="Kopiuj wszystko"
-                            ToolTip="Kopiuje całą zawartość logu do schowka">
-                            <MenuItem.Icon>
-                                <TextBlock FontSize="14"
-                                           Text="📋"/>
-                            </MenuItem.Icon>
-                        </MenuItem>
-                        <MenuItem
-                            x:Name="menuCopySelected"
-                            Click="menuCopySelected_Click"
-                            Header="Kopiuj zaznaczone"
-                            ToolTip="Kopiuje zaznaczony tekst do schowka">
-                            <MenuItem.Icon>
-                                <TextBlock FontSize="14"
-                                           Text="✂"/>
-                            </MenuItem.Icon>
-                        </MenuItem>
-                    </ContextMenu>
-                </TextBox.ContextMenu>
-            </TextBox>
-        </Grid>
+        <controls:LogPanel x:Name="logPanel"
+                           Grid.Row="2"/>
 
         <!--  Status Bar  -->
         <StatusBar Grid.Row="3"

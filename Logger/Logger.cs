@@ -27,6 +27,8 @@ namespace Logger
         public event Action<string>? LogMessageAppended;
         public event Action<IReadOnlyList<string>>? LogHistoryLoaded;
 
+        public bool EnableLogging { get; set; } = true;
+
         private LoggerService()
         {
             // Start background log flusher
@@ -53,11 +55,14 @@ namespace Logger
             {
                 while (_logQueue.TryDequeue(out var msg))
                 {
-                    lock (_fileLock)
+                    if (EnableLogging)
                     {
-                        File.AppendAllText(_logFilePath, msg + Environment.NewLine, Encoding.UTF8);
+                        lock (_fileLock)
+                        {
+                            File.AppendAllText(_logFilePath, msg + Environment.NewLine, Encoding.UTF8);
+                        }
+                        _logHistory.Add(msg);
                     }
-                    _logHistory.Add(msg);
                     LogMessageAppended?.Invoke(msg);
                 }
                 await Task.Delay(_flushInterval, token);
@@ -82,8 +87,11 @@ namespace Logger
 
         private void EnqueueLog(string message)
         {
-            var timestamped = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}] {message}";
-            _logQueue.Enqueue(timestamped);
+            if (EnableLogging)
+            {
+                var timestamped = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}] {message}";
+                _logQueue.Enqueue(timestamped);
+            }
         }
     }
 }

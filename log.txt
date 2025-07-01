@@ -11064,3 +11064,2612 @@ Wartości multimetru:
 [2025-07-01 13:28:04.902] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
 [2025-07-01 13:28:04.902] Wysyłanie polecenia: Odczytaj parametry zgrzewania
 [2025-07-01 15:00:52.949] Plik z danymi pomiarowymi nie istnieje
+[2025-07-01 15:05:20.574] Plik z danymi pomiarowymi nie istnieje
+[2025-07-01 15:10:08.035] Plik z danymi pomiarowymi nie istnieje
+[2025-07-01 15:18:03.051] Plik z danymi pomiarowymi nie istnieje
+[2025-07-01 15:18:03.565] Plik z danymi pomiarowymi nie istnieje
+[2025-07-01 15:18:03.685] Plik z danymi pomiarowymi nie istnieje
+[2025-07-01 15:18:51.214] Plik z danymi pomiarowymi nie istnieje
+[2025-07-01 15:18:51.785] Plik z danymi pomiarowymi nie istnieje
+[2025-07-01 15:18:51.897] Plik z danymi pomiarowymi nie istnieje
+[2025-07-01 15:22:38.941] Plik z danymi pomiarowymi nie istnieje
+[2025-07-01 15:22:38.958] Initializing services...
+[2025-07-01 15:22:38.958] Initializing ServiceContainer...
+[2025-07-01 15:22:38.988] Adres IP komputera: 192.168.0.105
+[2025-07-01 15:22:38.993] Settings loaded from file
+[2025-07-01 15:22:39.154] Brak zapisanej wysokości logów w ustawieniach, używam domyślnej.
+[2025-07-01 15:22:39.167] Detected ports loaded from file
+[2025-07-01 15:22:39.168] ConfigService initialized successfully
+[2025-07-01 15:22:39.183] ServiceContainer initialized successfully
+[2025-07-01 15:22:39.184] Services initialized successfully
+[2025-07-01 15:22:44.667] Znaleziono zapisane ustawienia komunikacji.
+[2025-07-01 15:22:44.667] Brak połączenia ze zgrzewarką. Próbuję połączyć się z zapisanymi ustawieniami...
+[2025-07-01 15:22:44.668] Znaleziono zapisane ustawienia komunikacji.
+[2025-07-01 15:22:44.668] Brak połączenia ze zgrzewarką. Próbuję połączyć się z zapisanymi ustawieniami...
+[2025-07-01 15:22:44.672] Połączono z USR-N520 na 192.168.0.7:23
+[2025-07-01 15:22:44.672] Połączono z USR-N520 na 192.168.0.7:23
+[2025-07-01 15:22:44.700] Odpowiedź: U:0.7;I:0.0;ADCU:0001F;ADCI:00006;IVHC-U:03950;IVLC-U:03970;ADCIVHC-U:1535;ADCIVLC-U:1535;IVHC-I:04780;IVLC-I:00520;ADCIVHC-I:1084;ADCIVLC-I:0124;MMWVL:0000;MMWVH:0000;MMWCL:0000;MMWCH:0000
+
+[2025-07-01 15:22:44.701] ✓ Połączenie z zapisanymi ustawieniami udane. Kontynuuję uruchomienia pomiarów.
+[2025-07-01 15:22:44.701] ✓ Połączenie z zapisanymi ustawieniami udane. Kontynuuję uruchomienia pomiarów.
+[2025-07-01 15:22:44.701] ▶ Pomiar parametrów uruchomiony
+[2025-07-01 15:22:45.055] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-07-01 15:22:45.056] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-07-01 15:22:45.056] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-07-01 15:22:45.057] Status: CONNECTED
+[2025-07-01 15:22:45.057] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-07-01 15:22:45.057] ConnectedBaudRate: 115200
+[2025-07-01 15:22:45.058] GlobalCommunicationType: USR_N520
+[2025-07-01 15:22:45.058] WasUSRConnection: True
+[2025-07-01 15:22:45.058] USRConnection: istnieje
+[2025-07-01 15:22:45.058] USRConnectedPort: 192.168.0.7:23
+[2025-07-01 15:22:45.058] USRConnection.IsConnected: true
+[2025-07-01 15:22:45.058] Settings.CommType: TCP
+[2025-07-01 15:22:45.058] Settings.USR_IP: 192.168.0.7
+[2025-07-01 15:22:45.058] Settings.USR_Port: 23
+[2025-07-01 15:22:45.058] Settings.COM_Port: COM4
+[2025-07-01 15:22:45.058] Settings.COM_Baud: 115200
+[2025-07-01 15:22:45.058] === KONIEC DIAGNOSTYKI ===
+[2025-07-01 15:22:45.058] Używam globalnego typu komunikacji: USR_N520
+[2025-07-01 15:22:45.058] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-07-01 15:22:45.058] Próba 1/3 połączenia z USR-N520
+[2025-07-01 15:22:45.058] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-07-01 15:22:45.058] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-07-01 15:22:45.059] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-07-01 15:22:45.059] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-07-01 15:22:45.059] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-07-01 15:22:45.059] 
+[2025-07-01 15:22:45.088] 
+Parametry zgrzewania (USR-N520):
+[2025-07-01 15:22:45.088] Napięcie zgrzewania: 0,70 V
+[2025-07-01 15:22:45.088] Prąd zgrzewania: 0,00 A
+[2025-07-01 15:22:45.088] 
+Wartości ADC:
+[2025-07-01 15:22:45.088] ADC napięcia zgrzewania: 0000
+[2025-07-01 15:22:45.088] ADC prądu zgrzewania: 0007
+[2025-07-01 15:22:45.088] 
+Parametry kalibracji napięcia:
+[2025-07-01 15:22:45.088] IVHC-U: 3950
+[2025-07-01 15:22:45.088] IVLC-U: 3970
+[2025-07-01 15:22:45.088] ADCIVHC-U: 1535
+[2025-07-01 15:22:45.088] ADCIVLC-U: 1535
+[2025-07-01 15:22:45.088] 
+Parametry kalibracji prądu:
+[2025-07-01 15:22:45.088] IVHC-I: 4780
+[2025-07-01 15:22:45.088] IVLC-I: 520
+[2025-07-01 15:22:45.088] ADCIVHC-I: 1084
+[2025-07-01 15:22:45.088] ADCIVLC-I: 124
+[2025-07-01 15:22:45.088] 
+Wartości multimetru:
+[2025-07-01 15:22:45.088] MMWVL: 0
+[2025-07-01 15:22:45.088] MMWVH: 0
+[2025-07-01 15:22:45.088] MMWCL: 0
+[2025-07-01 15:22:45.088] MMWCH: 0
+[2025-07-01 15:22:45.088] Pomyślnie odczytano parametry przez USR-N520
+[2025-07-01 15:22:45.089] Odebrane wartości:
+[2025-07-01 15:22:45.089] Napięcie zgrzewania: 0,70V
+[2025-07-01 15:22:45.089] Prąd zgrzewania: 0,00A
+[2025-07-01 15:22:45.089] ADC Napięcia: 0x0000
+[2025-07-01 15:22:45.089] ADC Prądu: 0x0007
+[2025-07-01 15:22:45.089] IVHC-U: 3950
+[2025-07-01 15:22:45.089] IVLC-U: 3970
+[2025-07-01 15:22:45.089] ADCIVHC-U: 1535
+[2025-07-01 15:22:45.089] ADCIVLC-U: 1535
+[2025-07-01 15:22:45.089] IVHC-I: 4780
+[2025-07-01 15:22:45.089] IVLC-I: 520
+[2025-07-01 15:22:45.089] ADCIVHC-I: 1084
+[2025-07-01 15:22:45.089] ADCIVLC-I: 124
+[2025-07-01 15:22:45.089] MMWVL: 0
+[2025-07-01 15:22:45.089] MMWVH: 0
+[2025-07-01 15:22:45.089] MMWCL: 0
+[2025-07-01 15:22:45.089] MMWCH: 0
+[2025-07-01 15:22:45.089] -------------------
+[2025-07-01 15:22:45.089] Odczytano parametry zgrzewania poprawnie.
+[2025-07-01 15:22:45.094] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-07-01 15:22:45.107] Obliczono statystyki dla 2 pomiarów od ostatniego resetu
+[2025-07-01 15:22:45.408] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-07-01 15:22:45.408] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-07-01 15:22:45.408] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-07-01 15:22:45.408] Status: CONNECTED
+[2025-07-01 15:22:45.408] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-07-01 15:22:45.408] ConnectedBaudRate: 115200
+[2025-07-01 15:22:45.408] GlobalCommunicationType: USR_N520
+[2025-07-01 15:22:45.408] WasUSRConnection: True
+[2025-07-01 15:22:45.408] USRConnection: istnieje
+[2025-07-01 15:22:45.408] USRConnectedPort: 192.168.0.7:23
+[2025-07-01 15:22:45.408] USRConnection.IsConnected: true
+[2025-07-01 15:22:45.408] Settings.CommType: TCP
+[2025-07-01 15:22:45.408] Settings.USR_IP: 192.168.0.7
+[2025-07-01 15:22:45.408] Settings.USR_Port: 23
+[2025-07-01 15:22:45.408] Settings.COM_Port: COM4
+[2025-07-01 15:22:45.408] Settings.COM_Baud: 115200
+[2025-07-01 15:22:45.408] === KONIEC DIAGNOSTYKI ===
+[2025-07-01 15:22:45.408] Używam globalnego typu komunikacji: USR_N520
+[2025-07-01 15:22:45.408] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-07-01 15:22:45.408] Próba 1/3 połączenia z USR-N520
+[2025-07-01 15:22:45.408] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-07-01 15:22:45.408] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-07-01 15:22:45.408] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-07-01 15:22:45.408] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-07-01 15:22:45.408] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-07-01 15:22:45.408] 
+[2025-07-01 15:22:45.436] 
+Parametry zgrzewania (USR-N520):
+[2025-07-01 15:22:45.436] Napięcie zgrzewania: 0,70 V
+[2025-07-01 15:22:45.436] Prąd zgrzewania: 0,00 A
+[2025-07-01 15:22:45.436] 
+Wartości ADC:
+[2025-07-01 15:22:45.436] ADC napięcia zgrzewania: 0000
+[2025-07-01 15:22:45.436] ADC prądu zgrzewania: 0007
+[2025-07-01 15:22:45.436] 
+Parametry kalibracji napięcia:
+[2025-07-01 15:22:45.436] IVHC-U: 3950
+[2025-07-01 15:22:45.436] IVLC-U: 3970
+[2025-07-01 15:22:45.436] ADCIVHC-U: 1535
+[2025-07-01 15:22:45.436] ADCIVLC-U: 1535
+[2025-07-01 15:22:45.436] 
+Parametry kalibracji prądu:
+[2025-07-01 15:22:45.436] IVHC-I: 4780
+[2025-07-01 15:22:45.436] IVLC-I: 520
+[2025-07-01 15:22:45.436] ADCIVHC-I: 1084
+[2025-07-01 15:22:45.436] ADCIVLC-I: 124
+[2025-07-01 15:22:45.436] 
+Wartości multimetru:
+[2025-07-01 15:22:45.436] MMWVL: 0
+[2025-07-01 15:22:45.436] MMWVH: 0
+[2025-07-01 15:22:45.436] MMWCL: 0
+[2025-07-01 15:22:45.436] MMWCH: 0
+[2025-07-01 15:22:45.436] Pomyślnie odczytano parametry przez USR-N520
+[2025-07-01 15:22:45.436] Odebrane wartości:
+[2025-07-01 15:22:45.436] Napięcie zgrzewania: 0,70V
+[2025-07-01 15:22:45.436] Prąd zgrzewania: 0,00A
+[2025-07-01 15:22:45.436] ADC Napięcia: 0x0000
+[2025-07-01 15:22:45.436] ADC Prądu: 0x0007
+[2025-07-01 15:22:45.436] IVHC-U: 3950
+[2025-07-01 15:22:45.436] IVLC-U: 3970
+[2025-07-01 15:22:45.436] ADCIVHC-U: 1535
+[2025-07-01 15:22:45.436] ADCIVLC-U: 1535
+[2025-07-01 15:22:45.436] IVHC-I: 4780
+[2025-07-01 15:22:45.436] IVLC-I: 520
+[2025-07-01 15:22:45.436] ADCIVHC-I: 1084
+[2025-07-01 15:22:45.436] ADCIVLC-I: 124
+[2025-07-01 15:22:45.436] MMWVL: 0
+[2025-07-01 15:22:45.436] MMWVH: 0
+[2025-07-01 15:22:45.436] MMWCL: 0
+[2025-07-01 15:22:45.436] MMWCH: 0
+[2025-07-01 15:22:45.436] -------------------
+[2025-07-01 15:22:45.436] Odczytano parametry zgrzewania poprawnie.
+[2025-07-01 15:22:45.436] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-07-01 15:22:45.442] Obliczono statystyki dla 4 pomiarów od ostatniego resetu
+[2025-07-01 15:22:45.744] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-07-01 15:22:45.744] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-07-01 15:22:45.744] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-07-01 15:22:45.744] Status: CONNECTED
+[2025-07-01 15:22:45.744] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-07-01 15:22:45.744] ConnectedBaudRate: 115200
+[2025-07-01 15:22:45.744] GlobalCommunicationType: USR_N520
+[2025-07-01 15:22:45.744] WasUSRConnection: True
+[2025-07-01 15:22:45.744] USRConnection: istnieje
+[2025-07-01 15:22:45.744] USRConnectedPort: 192.168.0.7:23
+[2025-07-01 15:22:45.744] USRConnection.IsConnected: true
+[2025-07-01 15:22:45.744] Settings.CommType: TCP
+[2025-07-01 15:22:45.744] Settings.USR_IP: 192.168.0.7
+[2025-07-01 15:22:45.744] Settings.USR_Port: 23
+[2025-07-01 15:22:45.744] Settings.COM_Port: COM4
+[2025-07-01 15:22:45.744] Settings.COM_Baud: 115200
+[2025-07-01 15:22:45.744] === KONIEC DIAGNOSTYKI ===
+[2025-07-01 15:22:45.744] Używam globalnego typu komunikacji: USR_N520
+[2025-07-01 15:22:45.744] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-07-01 15:22:45.744] Próba 1/3 połączenia z USR-N520
+[2025-07-01 15:22:45.744] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-07-01 15:22:45.744] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-07-01 15:22:45.744] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-07-01 15:22:45.744] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-07-01 15:22:45.744] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-07-01 15:22:45.744] 
+[2025-07-01 15:22:45.771] 
+Parametry zgrzewania (USR-N520):
+[2025-07-01 15:22:45.771] Napięcie zgrzewania: 0,70 V
+[2025-07-01 15:22:45.771] Prąd zgrzewania: 0,00 A
+[2025-07-01 15:22:45.771] 
+Wartości ADC:
+[2025-07-01 15:22:45.771] ADC napięcia zgrzewania: 0000
+[2025-07-01 15:22:45.771] ADC prądu zgrzewania: 0007
+[2025-07-01 15:22:45.771] 
+Parametry kalibracji napięcia:
+[2025-07-01 15:22:45.771] IVHC-U: 3950
+[2025-07-01 15:22:45.771] IVLC-U: 3970
+[2025-07-01 15:22:45.771] ADCIVHC-U: 1535
+[2025-07-01 15:22:45.771] ADCIVLC-U: 1535
+[2025-07-01 15:22:45.771] 
+Parametry kalibracji prądu:
+[2025-07-01 15:22:45.771] IVHC-I: 4780
+[2025-07-01 15:22:45.771] IVLC-I: 520
+[2025-07-01 15:22:45.771] ADCIVHC-I: 1084
+[2025-07-01 15:22:45.771] ADCIVLC-I: 124
+[2025-07-01 15:22:45.771] 
+Wartości multimetru:
+[2025-07-01 15:22:45.771] MMWVL: 0
+[2025-07-01 15:22:45.771] MMWVH: 0
+[2025-07-01 15:22:45.771] MMWCL: 0
+[2025-07-01 15:22:45.771] MMWCH: 0
+[2025-07-01 15:22:45.771] Pomyślnie odczytano parametry przez USR-N520
+[2025-07-01 15:22:45.771] Odebrane wartości:
+[2025-07-01 15:22:45.771] Napięcie zgrzewania: 0,70V
+[2025-07-01 15:22:45.771] Prąd zgrzewania: 0,00A
+[2025-07-01 15:22:45.771] ADC Napięcia: 0x0000
+[2025-07-01 15:22:45.771] ADC Prądu: 0x0007
+[2025-07-01 15:22:45.771] IVHC-U: 3950
+[2025-07-01 15:22:45.771] IVLC-U: 3970
+[2025-07-01 15:22:45.771] ADCIVHC-U: 1535
+[2025-07-01 15:22:45.771] ADCIVLC-U: 1535
+[2025-07-01 15:22:45.771] IVHC-I: 4780
+[2025-07-01 15:22:45.771] IVLC-I: 520
+[2025-07-01 15:22:45.771] ADCIVHC-I: 1084
+[2025-07-01 15:22:45.771] ADCIVLC-I: 124
+[2025-07-01 15:22:45.771] MMWVL: 0
+[2025-07-01 15:22:45.771] MMWVH: 0
+[2025-07-01 15:22:45.771] MMWCL: 0
+[2025-07-01 15:22:45.771] MMWCH: 0
+[2025-07-01 15:22:45.771] -------------------
+[2025-07-01 15:22:45.771] Odczytano parametry zgrzewania poprawnie.
+[2025-07-01 15:22:45.771] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-07-01 15:22:45.776] Obliczono statystyki dla 6 pomiarów od ostatniego resetu
+[2025-07-01 15:22:46.092] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-07-01 15:22:46.092] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-07-01 15:22:46.092] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-07-01 15:22:46.092] Status: CONNECTED
+[2025-07-01 15:22:46.092] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-07-01 15:22:46.092] ConnectedBaudRate: 115200
+[2025-07-01 15:22:46.092] GlobalCommunicationType: USR_N520
+[2025-07-01 15:22:46.092] WasUSRConnection: True
+[2025-07-01 15:22:46.092] USRConnection: istnieje
+[2025-07-01 15:22:46.092] USRConnectedPort: 192.168.0.7:23
+[2025-07-01 15:22:46.092] USRConnection.IsConnected: true
+[2025-07-01 15:22:46.092] Settings.CommType: TCP
+[2025-07-01 15:22:46.092] Settings.USR_IP: 192.168.0.7
+[2025-07-01 15:22:46.092] Settings.USR_Port: 23
+[2025-07-01 15:22:46.092] Settings.COM_Port: COM4
+[2025-07-01 15:22:46.092] Settings.COM_Baud: 115200
+[2025-07-01 15:22:46.092] === KONIEC DIAGNOSTYKI ===
+[2025-07-01 15:22:46.092] Używam globalnego typu komunikacji: USR_N520
+[2025-07-01 15:22:46.092] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-07-01 15:22:46.092] Próba 1/3 połączenia z USR-N520
+[2025-07-01 15:22:46.092] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-07-01 15:22:46.092] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-07-01 15:22:46.092] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-07-01 15:22:46.092] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-07-01 15:22:46.092] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-07-01 15:22:46.092] 
+[2025-07-01 15:22:46.119] 
+Parametry zgrzewania (USR-N520):
+[2025-07-01 15:22:46.119] Napięcie zgrzewania: 0,70 V
+[2025-07-01 15:22:46.119] Prąd zgrzewania: 0,00 A
+[2025-07-01 15:22:46.119] 
+Wartości ADC:
+[2025-07-01 15:22:46.119] ADC napięcia zgrzewania: 001F
+[2025-07-01 15:22:46.119] ADC prądu zgrzewania: 0006
+[2025-07-01 15:22:46.119] 
+Parametry kalibracji napięcia:
+[2025-07-01 15:22:46.119] IVHC-U: 3950
+[2025-07-01 15:22:46.119] IVLC-U: 3970
+[2025-07-01 15:22:46.119] ADCIVHC-U: 1535
+[2025-07-01 15:22:46.119] ADCIVLC-U: 1535
+[2025-07-01 15:22:46.119] 
+Parametry kalibracji prądu:
+[2025-07-01 15:22:46.119] IVHC-I: 4780
+[2025-07-01 15:22:46.119] IVLC-I: 520
+[2025-07-01 15:22:46.119] ADCIVHC-I: 1084
+[2025-07-01 15:22:46.119] ADCIVLC-I: 124
+[2025-07-01 15:22:46.119] 
+Wartości multimetru:
+[2025-07-01 15:22:46.119] MMWVL: 0
+[2025-07-01 15:22:46.119] MMWVH: 0
+[2025-07-01 15:22:46.119] MMWCL: 0
+[2025-07-01 15:22:46.119] MMWCH: 0
+[2025-07-01 15:22:46.119] Pomyślnie odczytano parametry przez USR-N520
+[2025-07-01 15:22:46.119] Odebrane wartości:
+[2025-07-01 15:22:46.119] Napięcie zgrzewania: 0,70V
+[2025-07-01 15:22:46.119] Prąd zgrzewania: 0,00A
+[2025-07-01 15:22:46.119] ADC Napięcia: 0x001F
+[2025-07-01 15:22:46.119] ADC Prądu: 0x0006
+[2025-07-01 15:22:46.119] IVHC-U: 3950
+[2025-07-01 15:22:46.119] IVLC-U: 3970
+[2025-07-01 15:22:46.119] ADCIVHC-U: 1535
+[2025-07-01 15:22:46.119] ADCIVLC-U: 1535
+[2025-07-01 15:22:46.119] IVHC-I: 4780
+[2025-07-01 15:22:46.119] IVLC-I: 520
+[2025-07-01 15:22:46.119] ADCIVHC-I: 1084
+[2025-07-01 15:22:46.119] ADCIVLC-I: 124
+[2025-07-01 15:22:46.119] MMWVL: 0
+[2025-07-01 15:22:46.119] MMWVH: 0
+[2025-07-01 15:22:46.119] MMWCL: 0
+[2025-07-01 15:22:46.119] MMWCH: 0
+[2025-07-01 15:22:46.119] -------------------
+[2025-07-01 15:22:46.119] Odczytano parametry zgrzewania poprawnie.
+[2025-07-01 15:22:46.120] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-07-01 15:22:46.138] Obliczono statystyki dla 8 pomiarów od ostatniego resetu
+[2025-07-01 15:22:46.448] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-07-01 15:22:46.448] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-07-01 15:22:46.448] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-07-01 15:22:46.448] Status: CONNECTED
+[2025-07-01 15:22:46.448] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-07-01 15:22:46.449] ConnectedBaudRate: 115200
+[2025-07-01 15:22:46.449] GlobalCommunicationType: USR_N520
+[2025-07-01 15:22:46.449] WasUSRConnection: True
+[2025-07-01 15:22:46.449] USRConnection: istnieje
+[2025-07-01 15:22:46.449] USRConnectedPort: 192.168.0.7:23
+[2025-07-01 15:22:46.449] USRConnection.IsConnected: true
+[2025-07-01 15:22:46.449] Settings.CommType: TCP
+[2025-07-01 15:22:46.449] Settings.USR_IP: 192.168.0.7
+[2025-07-01 15:22:46.449] Settings.USR_Port: 23
+[2025-07-01 15:22:46.449] Settings.COM_Port: COM4
+[2025-07-01 15:22:46.449] Settings.COM_Baud: 115200
+[2025-07-01 15:22:46.449] === KONIEC DIAGNOSTYKI ===
+[2025-07-01 15:22:46.449] Używam globalnego typu komunikacji: USR_N520
+[2025-07-01 15:22:46.449] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-07-01 15:22:46.449] Próba 1/3 połączenia z USR-N520
+[2025-07-01 15:22:46.449] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-07-01 15:22:46.449] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-07-01 15:22:46.449] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-07-01 15:22:46.449] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-07-01 15:22:46.449] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-07-01 15:22:46.449] 
+[2025-07-01 15:22:46.475] 
+Parametry zgrzewania (USR-N520):
+[2025-07-01 15:22:46.475] Napięcie zgrzewania: 0,70 V
+[2025-07-01 15:22:46.476] Prąd zgrzewania: 0,00 A
+[2025-07-01 15:22:46.476] 
+Wartości ADC:
+[2025-07-01 15:22:46.476] ADC napięcia zgrzewania: 001F
+[2025-07-01 15:22:46.476] ADC prądu zgrzewania: 0006
+[2025-07-01 15:22:46.476] 
+Parametry kalibracji napięcia:
+[2025-07-01 15:22:46.476] IVHC-U: 3950
+[2025-07-01 15:22:46.476] IVLC-U: 3970
+[2025-07-01 15:22:46.476] ADCIVHC-U: 1535
+[2025-07-01 15:22:46.476] ADCIVLC-U: 1535
+[2025-07-01 15:22:46.476] 
+Parametry kalibracji prądu:
+[2025-07-01 15:22:46.476] IVHC-I: 4780
+[2025-07-01 15:22:46.476] IVLC-I: 520
+[2025-07-01 15:22:46.476] ADCIVHC-I: 1084
+[2025-07-01 15:22:46.476] ADCIVLC-I: 124
+[2025-07-01 15:22:46.476] 
+Wartości multimetru:
+[2025-07-01 15:22:46.476] MMWVL: 0
+[2025-07-01 15:22:46.476] MMWVH: 0
+[2025-07-01 15:22:46.476] MMWCL: 0
+[2025-07-01 15:22:46.476] MMWCH: 0
+[2025-07-01 15:22:46.476] Pomyślnie odczytano parametry przez USR-N520
+[2025-07-01 15:22:46.476] Odebrane wartości:
+[2025-07-01 15:22:46.476] Napięcie zgrzewania: 0,70V
+[2025-07-01 15:22:46.476] Prąd zgrzewania: 0,00A
+[2025-07-01 15:22:46.476] ADC Napięcia: 0x001F
+[2025-07-01 15:22:46.476] ADC Prądu: 0x0006
+[2025-07-01 15:22:46.476] IVHC-U: 3950
+[2025-07-01 15:22:46.476] IVLC-U: 3970
+[2025-07-01 15:22:46.476] ADCIVHC-U: 1535
+[2025-07-01 15:22:46.476] ADCIVLC-U: 1535
+[2025-07-01 15:22:46.476] IVHC-I: 4780
+[2025-07-01 15:22:46.476] IVLC-I: 520
+[2025-07-01 15:22:46.476] ADCIVHC-I: 1084
+[2025-07-01 15:22:46.476] ADCIVLC-I: 124
+[2025-07-01 15:22:46.476] MMWVL: 0
+[2025-07-01 15:22:46.476] MMWVH: 0
+[2025-07-01 15:22:46.476] MMWCL: 0
+[2025-07-01 15:22:46.476] MMWCH: 0
+[2025-07-01 15:22:46.476] -------------------
+[2025-07-01 15:22:46.476] Odczytano parametry zgrzewania poprawnie.
+[2025-07-01 15:22:46.476] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-07-01 15:22:46.495] Obliczono statystyki dla 10 pomiarów od ostatniego resetu
+[2025-07-01 15:22:46.837] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-07-01 15:22:46.837] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-07-01 15:22:46.837] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-07-01 15:22:46.837] Status: CONNECTED
+[2025-07-01 15:22:46.837] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-07-01 15:22:46.837] ConnectedBaudRate: 115200
+[2025-07-01 15:22:46.837] GlobalCommunicationType: USR_N520
+[2025-07-01 15:22:46.837] WasUSRConnection: True
+[2025-07-01 15:22:46.837] USRConnection: istnieje
+[2025-07-01 15:22:46.837] USRConnectedPort: 192.168.0.7:23
+[2025-07-01 15:22:46.837] USRConnection.IsConnected: true
+[2025-07-01 15:22:46.837] Settings.CommType: TCP
+[2025-07-01 15:22:46.837] Settings.USR_IP: 192.168.0.7
+[2025-07-01 15:22:46.837] Settings.USR_Port: 23
+[2025-07-01 15:22:46.837] Settings.COM_Port: COM4
+[2025-07-01 15:22:46.837] Settings.COM_Baud: 115200
+[2025-07-01 15:22:46.837] === KONIEC DIAGNOSTYKI ===
+[2025-07-01 15:22:46.837] Używam globalnego typu komunikacji: USR_N520
+[2025-07-01 15:22:46.837] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-07-01 15:22:46.837] Próba 1/3 połączenia z USR-N520
+[2025-07-01 15:22:46.837] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-07-01 15:22:46.837] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-07-01 15:22:46.837] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-07-01 15:22:46.837] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-07-01 15:22:46.837] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-07-01 15:22:46.837] 
+[2025-07-01 15:22:47.187] ⏸ Pomijam odczyt - trwa inna operacja komunikacji
+[2025-07-01 15:22:47.525] ⏸ Pomijam odczyt - trwa inna operacja komunikacji
+[2025-07-01 15:22:47.895] ⏸ Pomijam odczyt - trwa inna operacja komunikacji
+[2025-07-01 15:22:48.228] ⏸ Pomijam odczyt - trwa inna operacja komunikacji
+[2025-07-01 15:22:48.245] 
+Parametry zgrzewania (USR-N520):
+[2025-07-01 15:22:48.245] Napięcie zgrzewania: 0,70 V
+[2025-07-01 15:22:48.245] Prąd zgrzewania: 0,00 A
+[2025-07-01 15:22:48.245] 
+Wartości ADC:
+[2025-07-01 15:22:48.245] ADC napięcia zgrzewania: 001F
+[2025-07-01 15:22:48.245] ADC prądu zgrzewania: 0007
+[2025-07-01 15:22:48.245] 
+Parametry kalibracji napięcia:
+[2025-07-01 15:22:48.245] IVHC-U: 3950
+[2025-07-01 15:22:48.245] IVLC-U: 3970
+[2025-07-01 15:22:48.245] ADCIVHC-U: 1535
+[2025-07-01 15:22:48.245] ADCIVLC-U: 1535
+[2025-07-01 15:22:48.245] 
+Parametry kalibracji prądu:
+[2025-07-01 15:22:48.245] IVHC-I: 4780
+[2025-07-01 15:22:48.245] IVLC-I: 520
+[2025-07-01 15:22:48.245] ADCIVHC-I: 1084
+[2025-07-01 15:22:48.245] ADCIVLC-I: 124
+[2025-07-01 15:22:48.245] 
+Wartości multimetru:
+[2025-07-01 15:22:48.245] MMWVL: 0
+[2025-07-01 15:22:48.245] MMWVH: 0
+[2025-07-01 15:22:48.245] MMWCL: 0
+[2025-07-01 15:22:48.245] MMWCH: 0
+[2025-07-01 15:22:48.245] Pomyślnie odczytano parametry przez USR-N520
+[2025-07-01 15:22:48.250] Odebrane wartości:
+[2025-07-01 15:22:48.250] Napięcie zgrzewania: 0,70V
+[2025-07-01 15:22:48.250] Prąd zgrzewania: 0,00A
+[2025-07-01 15:22:48.250] ADC Napięcia: 0x001F
+[2025-07-01 15:22:48.250] ADC Prądu: 0x0007
+[2025-07-01 15:22:48.250] IVHC-U: 3950
+[2025-07-01 15:22:48.250] IVLC-U: 3970
+[2025-07-01 15:22:48.250] ADCIVHC-U: 1535
+[2025-07-01 15:22:48.250] ADCIVLC-U: 1535
+[2025-07-01 15:22:48.250] IVHC-I: 4780
+[2025-07-01 15:22:48.250] IVLC-I: 520
+[2025-07-01 15:22:48.250] ADCIVHC-I: 1084
+[2025-07-01 15:22:48.250] ADCIVLC-I: 124
+[2025-07-01 15:22:48.250] MMWVL: 0
+[2025-07-01 15:22:48.250] MMWVH: 0
+[2025-07-01 15:22:48.250] MMWCL: 0
+[2025-07-01 15:22:48.250] MMWCH: 0
+[2025-07-01 15:22:48.250] -------------------
+[2025-07-01 15:22:48.250] Odczytano parametry zgrzewania poprawnie.
+[2025-07-01 15:22:48.251] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-07-01 15:22:48.266] Obliczono statystyki dla 12 pomiarów od ostatniego resetu
+[2025-07-01 15:22:48.577] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-07-01 15:22:48.577] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-07-01 15:22:48.577] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-07-01 15:22:48.577] Status: CONNECTED
+[2025-07-01 15:22:48.577] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-07-01 15:22:48.577] ConnectedBaudRate: 115200
+[2025-07-01 15:22:48.577] GlobalCommunicationType: USR_N520
+[2025-07-01 15:22:48.577] WasUSRConnection: True
+[2025-07-01 15:22:48.577] USRConnection: istnieje
+[2025-07-01 15:22:48.577] USRConnectedPort: 192.168.0.7:23
+[2025-07-01 15:22:48.577] USRConnection.IsConnected: true
+[2025-07-01 15:22:48.577] Settings.CommType: TCP
+[2025-07-01 15:22:48.577] Settings.USR_IP: 192.168.0.7
+[2025-07-01 15:22:48.577] Settings.USR_Port: 23
+[2025-07-01 15:22:48.577] Settings.COM_Port: COM4
+[2025-07-01 15:22:48.577] Settings.COM_Baud: 115200
+[2025-07-01 15:22:48.577] === KONIEC DIAGNOSTYKI ===
+[2025-07-01 15:22:48.577] Używam globalnego typu komunikacji: USR_N520
+[2025-07-01 15:22:48.577] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-07-01 15:22:48.577] Próba 1/3 połączenia z USR-N520
+[2025-07-01 15:22:48.577] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-07-01 15:22:48.577] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-07-01 15:22:48.577] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-07-01 15:22:48.577] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-07-01 15:22:48.577] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-07-01 15:22:48.577] 
+[2025-07-01 15:22:48.604] 
+Parametry zgrzewania (USR-N520):
+[2025-07-01 15:22:48.604] Napięcie zgrzewania: 0,70 V
+[2025-07-01 15:22:48.604] Prąd zgrzewania: 0,00 A
+[2025-07-01 15:22:48.604] 
+Wartości ADC:
+[2025-07-01 15:22:48.604] ADC napięcia zgrzewania: 001F
+[2025-07-01 15:22:48.604] ADC prądu zgrzewania: 0006
+[2025-07-01 15:22:48.604] 
+Parametry kalibracji napięcia:
+[2025-07-01 15:22:48.604] IVHC-U: 3950
+[2025-07-01 15:22:48.604] IVLC-U: 3970
+[2025-07-01 15:22:48.604] ADCIVHC-U: 1535
+[2025-07-01 15:22:48.604] ADCIVLC-U: 1535
+[2025-07-01 15:22:48.604] 
+Parametry kalibracji prądu:
+[2025-07-01 15:22:48.604] IVHC-I: 4780
+[2025-07-01 15:22:48.604] IVLC-I: 520
+[2025-07-01 15:22:48.604] ADCIVHC-I: 1084
+[2025-07-01 15:22:48.604] ADCIVLC-I: 124
+[2025-07-01 15:22:48.604] 
+Wartości multimetru:
+[2025-07-01 15:22:48.604] MMWVL: 0
+[2025-07-01 15:22:48.604] MMWVH: 0
+[2025-07-01 15:22:48.604] MMWCL: 0
+[2025-07-01 15:22:48.604] MMWCH: 0
+[2025-07-01 15:22:48.604] Pomyślnie odczytano parametry przez USR-N520
+[2025-07-01 15:22:48.604] Odebrane wartości:
+[2025-07-01 15:22:48.604] Napięcie zgrzewania: 0,70V
+[2025-07-01 15:22:48.604] Prąd zgrzewania: 0,00A
+[2025-07-01 15:22:48.604] ADC Napięcia: 0x001F
+[2025-07-01 15:22:48.604] ADC Prądu: 0x0006
+[2025-07-01 15:22:48.604] IVHC-U: 3950
+[2025-07-01 15:22:48.604] IVLC-U: 3970
+[2025-07-01 15:22:48.604] ADCIVHC-U: 1535
+[2025-07-01 15:22:48.604] ADCIVLC-U: 1535
+[2025-07-01 15:22:48.604] IVHC-I: 4780
+[2025-07-01 15:22:48.604] IVLC-I: 520
+[2025-07-01 15:22:48.604] ADCIVHC-I: 1084
+[2025-07-01 15:22:48.604] ADCIVLC-I: 124
+[2025-07-01 15:22:48.604] MMWVL: 0
+[2025-07-01 15:22:48.604] MMWVH: 0
+[2025-07-01 15:22:48.604] MMWCL: 0
+[2025-07-01 15:22:48.604] MMWCH: 0
+[2025-07-01 15:22:48.604] -------------------
+[2025-07-01 15:22:48.605] Odczytano parametry zgrzewania poprawnie.
+[2025-07-01 15:22:48.605] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-07-01 15:22:48.625] Obliczono statystyki dla 14 pomiarów od ostatniego resetu
+[2025-07-01 15:22:48.920] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-07-01 15:22:48.920] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-07-01 15:22:48.920] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-07-01 15:22:48.920] Status: CONNECTED
+[2025-07-01 15:22:48.920] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-07-01 15:22:48.920] ConnectedBaudRate: 115200
+[2025-07-01 15:22:48.920] GlobalCommunicationType: USR_N520
+[2025-07-01 15:22:48.920] WasUSRConnection: True
+[2025-07-01 15:22:48.920] USRConnection: istnieje
+[2025-07-01 15:22:48.920] USRConnectedPort: 192.168.0.7:23
+[2025-07-01 15:22:48.920] USRConnection.IsConnected: true
+[2025-07-01 15:22:48.920] Settings.CommType: TCP
+[2025-07-01 15:22:48.920] Settings.USR_IP: 192.168.0.7
+[2025-07-01 15:22:48.920] Settings.USR_Port: 23
+[2025-07-01 15:22:48.920] Settings.COM_Port: COM4
+[2025-07-01 15:22:48.920] Settings.COM_Baud: 115200
+[2025-07-01 15:22:48.920] === KONIEC DIAGNOSTYKI ===
+[2025-07-01 15:22:48.920] Używam globalnego typu komunikacji: USR_N520
+[2025-07-01 15:22:48.920] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-07-01 15:22:48.920] Próba 1/3 połączenia z USR-N520
+[2025-07-01 15:22:48.920] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-07-01 15:22:48.920] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-07-01 15:22:48.920] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-07-01 15:22:48.920] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-07-01 15:22:48.920] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-07-01 15:22:48.920] 
+[2025-07-01 15:22:48.947] 
+Parametry zgrzewania (USR-N520):
+[2025-07-01 15:22:48.947] Napięcie zgrzewania: 0,70 V
+[2025-07-01 15:22:48.947] Prąd zgrzewania: 0,00 A
+[2025-07-01 15:22:48.947] 
+Wartości ADC:
+[2025-07-01 15:22:48.947] ADC napięcia zgrzewania: 001F
+[2025-07-01 15:22:48.947] ADC prądu zgrzewania: 0000
+[2025-07-01 15:22:48.947] 
+Parametry kalibracji napięcia:
+[2025-07-01 15:22:48.947] IVHC-U: 3950
+[2025-07-01 15:22:48.947] IVLC-U: 3970
+[2025-07-01 15:22:48.947] ADCIVHC-U: 1535
+[2025-07-01 15:22:48.947] ADCIVLC-U: 1535
+[2025-07-01 15:22:48.947] 
+Parametry kalibracji prądu:
+[2025-07-01 15:22:48.947] IVHC-I: 4780
+[2025-07-01 15:22:48.947] IVLC-I: 520
+[2025-07-01 15:22:48.947] ADCIVHC-I: 1084
+[2025-07-01 15:22:48.947] ADCIVLC-I: 124
+[2025-07-01 15:22:48.947] 
+Wartości multimetru:
+[2025-07-01 15:22:48.947] MMWVL: 0
+[2025-07-01 15:22:48.947] MMWVH: 0
+[2025-07-01 15:22:48.947] MMWCL: 0
+[2025-07-01 15:22:48.947] MMWCH: 0
+[2025-07-01 15:22:48.947] Pomyślnie odczytano parametry przez USR-N520
+[2025-07-01 15:22:48.950] Odebrane wartości:
+[2025-07-01 15:22:48.950] Napięcie zgrzewania: 0,70V
+[2025-07-01 15:22:48.950] Prąd zgrzewania: 0,00A
+[2025-07-01 15:22:48.950] ADC Napięcia: 0x001F
+[2025-07-01 15:22:48.950] ADC Prądu: 0x0000
+[2025-07-01 15:22:48.950] IVHC-U: 3950
+[2025-07-01 15:22:48.950] IVLC-U: 3970
+[2025-07-01 15:22:48.950] ADCIVHC-U: 1535
+[2025-07-01 15:22:48.950] ADCIVLC-U: 1535
+[2025-07-01 15:22:48.950] IVHC-I: 4780
+[2025-07-01 15:22:48.950] IVLC-I: 520
+[2025-07-01 15:22:48.950] ADCIVHC-I: 1084
+[2025-07-01 15:22:48.950] ADCIVLC-I: 124
+[2025-07-01 15:22:48.950] MMWVL: 0
+[2025-07-01 15:22:48.950] MMWVH: 0
+[2025-07-01 15:22:48.950] MMWCL: 0
+[2025-07-01 15:22:48.950] MMWCH: 0
+[2025-07-01 15:22:48.950] -------------------
+[2025-07-01 15:22:48.950] Odczytano parametry zgrzewania poprawnie.
+[2025-07-01 15:22:48.952] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-07-01 15:22:48.966] Obliczono statystyki dla 16 pomiarów od ostatniego resetu
+[2025-07-01 15:22:49.259] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-07-01 15:22:49.259] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-07-01 15:22:49.259] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-07-01 15:22:49.259] Status: CONNECTED
+[2025-07-01 15:22:49.259] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-07-01 15:22:49.259] ConnectedBaudRate: 115200
+[2025-07-01 15:22:49.259] GlobalCommunicationType: USR_N520
+[2025-07-01 15:22:49.260] WasUSRConnection: True
+[2025-07-01 15:22:49.260] USRConnection: istnieje
+[2025-07-01 15:22:49.260] USRConnectedPort: 192.168.0.7:23
+[2025-07-01 15:22:49.260] USRConnection.IsConnected: true
+[2025-07-01 15:22:49.260] Settings.CommType: TCP
+[2025-07-01 15:22:49.260] Settings.USR_IP: 192.168.0.7
+[2025-07-01 15:22:49.260] Settings.USR_Port: 23
+[2025-07-01 15:22:49.260] Settings.COM_Port: COM4
+[2025-07-01 15:22:49.260] Settings.COM_Baud: 115200
+[2025-07-01 15:22:49.260] === KONIEC DIAGNOSTYKI ===
+[2025-07-01 15:22:49.260] Używam globalnego typu komunikacji: USR_N520
+[2025-07-01 15:22:49.260] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-07-01 15:22:49.260] Próba 1/3 połączenia z USR-N520
+[2025-07-01 15:22:49.260] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-07-01 15:22:49.260] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-07-01 15:22:49.260] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-07-01 15:22:49.260] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-07-01 15:22:49.260] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-07-01 15:22:49.260] 
+[2025-07-01 15:22:49.287] 
+Parametry zgrzewania (USR-N520):
+[2025-07-01 15:22:49.287] Napięcie zgrzewania: 0,70 V
+[2025-07-01 15:22:49.287] Prąd zgrzewania: 0,00 A
+[2025-07-01 15:22:49.287] 
+Wartości ADC:
+[2025-07-01 15:22:49.287] ADC napięcia zgrzewania: 001F
+[2025-07-01 15:22:49.287] ADC prądu zgrzewania: 0007
+[2025-07-01 15:22:49.287] 
+Parametry kalibracji napięcia:
+[2025-07-01 15:22:49.287] IVHC-U: 3950
+[2025-07-01 15:22:49.287] IVLC-U: 3970
+[2025-07-01 15:22:49.287] ADCIVHC-U: 1535
+[2025-07-01 15:22:49.287] ADCIVLC-U: 1535
+[2025-07-01 15:22:49.287] 
+Parametry kalibracji prądu:
+[2025-07-01 15:22:49.287] IVHC-I: 4780
+[2025-07-01 15:22:49.287] IVLC-I: 520
+[2025-07-01 15:22:49.287] ADCIVHC-I: 1084
+[2025-07-01 15:22:49.287] ADCIVLC-I: 124
+[2025-07-01 15:22:49.287] 
+Wartości multimetru:
+[2025-07-01 15:22:49.287] MMWVL: 0
+[2025-07-01 15:22:49.287] MMWVH: 0
+[2025-07-01 15:22:49.287] MMWCL: 0
+[2025-07-01 15:22:49.287] MMWCH: 0
+[2025-07-01 15:22:49.287] Pomyślnie odczytano parametry przez USR-N520
+[2025-07-01 15:22:49.287] Odebrane wartości:
+[2025-07-01 15:22:49.287] Napięcie zgrzewania: 0,70V
+[2025-07-01 15:22:49.287] Prąd zgrzewania: 0,00A
+[2025-07-01 15:22:49.287] ADC Napięcia: 0x001F
+[2025-07-01 15:22:49.287] ADC Prądu: 0x0007
+[2025-07-01 15:22:49.287] IVHC-U: 3950
+[2025-07-01 15:22:49.287] IVLC-U: 3970
+[2025-07-01 15:22:49.287] ADCIVHC-U: 1535
+[2025-07-01 15:22:49.287] ADCIVLC-U: 1535
+[2025-07-01 15:22:49.287] IVHC-I: 4780
+[2025-07-01 15:22:49.287] IVLC-I: 520
+[2025-07-01 15:22:49.287] ADCIVHC-I: 1084
+[2025-07-01 15:22:49.287] ADCIVLC-I: 124
+[2025-07-01 15:22:49.287] MMWVL: 0
+[2025-07-01 15:22:49.287] MMWVH: 0
+[2025-07-01 15:22:49.287] MMWCL: 0
+[2025-07-01 15:22:49.287] MMWCH: 0
+[2025-07-01 15:22:49.287] -------------------
+[2025-07-01 15:22:49.287] Odczytano parametry zgrzewania poprawnie.
+[2025-07-01 15:22:49.288] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-07-01 15:22:49.307] Obliczono statystyki dla 18 pomiarów od ostatniego resetu
+[2025-07-01 15:22:49.607] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-07-01 15:22:49.607] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-07-01 15:22:49.607] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-07-01 15:22:49.607] Status: CONNECTED
+[2025-07-01 15:22:49.607] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-07-01 15:22:49.607] ConnectedBaudRate: 115200
+[2025-07-01 15:22:49.607] GlobalCommunicationType: USR_N520
+[2025-07-01 15:22:49.607] WasUSRConnection: True
+[2025-07-01 15:22:49.607] USRConnection: istnieje
+[2025-07-01 15:22:49.607] USRConnectedPort: 192.168.0.7:23
+[2025-07-01 15:22:49.607] USRConnection.IsConnected: true
+[2025-07-01 15:22:49.607] Settings.CommType: TCP
+[2025-07-01 15:22:49.607] Settings.USR_IP: 192.168.0.7
+[2025-07-01 15:22:49.607] Settings.USR_Port: 23
+[2025-07-01 15:22:49.607] Settings.COM_Port: COM4
+[2025-07-01 15:22:49.607] Settings.COM_Baud: 115200
+[2025-07-01 15:22:49.607] === KONIEC DIAGNOSTYKI ===
+[2025-07-01 15:22:49.607] Używam globalnego typu komunikacji: USR_N520
+[2025-07-01 15:22:49.607] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-07-01 15:22:49.607] Próba 1/3 połączenia z USR-N520
+[2025-07-01 15:22:49.607] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-07-01 15:22:49.607] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-07-01 15:22:49.607] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-07-01 15:22:49.607] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-07-01 15:22:49.607] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-07-01 15:22:49.607] 
+[2025-07-01 15:22:49.634] 
+Parametry zgrzewania (USR-N520):
+[2025-07-01 15:22:49.634] Napięcie zgrzewania: 0,70 V
+[2025-07-01 15:22:49.634] Prąd zgrzewania: 0,00 A
+[2025-07-01 15:22:49.634] 
+Wartości ADC:
+[2025-07-01 15:22:49.634] ADC napięcia zgrzewania: 001F
+[2025-07-01 15:22:49.634] ADC prądu zgrzewania: 0000
+[2025-07-01 15:22:49.634] 
+Parametry kalibracji napięcia:
+[2025-07-01 15:22:49.634] IVHC-U: 3950
+[2025-07-01 15:22:49.634] IVLC-U: 3970
+[2025-07-01 15:22:49.634] ADCIVHC-U: 1535
+[2025-07-01 15:22:49.634] ADCIVLC-U: 1535
+[2025-07-01 15:22:49.634] 
+Parametry kalibracji prądu:
+[2025-07-01 15:22:49.634] IVHC-I: 4780
+[2025-07-01 15:22:49.634] IVLC-I: 520
+[2025-07-01 15:22:49.634] ADCIVHC-I: 1084
+[2025-07-01 15:22:49.634] ADCIVLC-I: 124
+[2025-07-01 15:22:49.634] 
+Wartości multimetru:
+[2025-07-01 15:22:49.634] MMWVL: 0
+[2025-07-01 15:22:49.634] MMWVH: 0
+[2025-07-01 15:22:49.634] MMWCL: 0
+[2025-07-01 15:22:49.634] MMWCH: 0
+[2025-07-01 15:22:49.634] Pomyślnie odczytano parametry przez USR-N520
+[2025-07-01 15:22:49.634] Odebrane wartości:
+[2025-07-01 15:22:49.634] Napięcie zgrzewania: 0,70V
+[2025-07-01 15:22:49.634] Prąd zgrzewania: 0,00A
+[2025-07-01 15:22:49.634] ADC Napięcia: 0x001F
+[2025-07-01 15:22:49.634] ADC Prądu: 0x0000
+[2025-07-01 15:22:49.634] IVHC-U: 3950
+[2025-07-01 15:22:49.634] IVLC-U: 3970
+[2025-07-01 15:22:49.634] ADCIVHC-U: 1535
+[2025-07-01 15:22:49.634] ADCIVLC-U: 1535
+[2025-07-01 15:22:49.634] IVHC-I: 4780
+[2025-07-01 15:22:49.634] IVLC-I: 520
+[2025-07-01 15:22:49.634] ADCIVHC-I: 1084
+[2025-07-01 15:22:49.634] ADCIVLC-I: 124
+[2025-07-01 15:22:49.634] MMWVL: 0
+[2025-07-01 15:22:49.634] MMWVH: 0
+[2025-07-01 15:22:49.634] MMWCL: 0
+[2025-07-01 15:22:49.634] MMWCH: 0
+[2025-07-01 15:22:49.634] -------------------
+[2025-07-01 15:22:49.634] Odczytano parametry zgrzewania poprawnie.
+[2025-07-01 15:22:49.635] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-07-01 15:22:49.653] Obliczono statystyki dla 20 pomiarów od ostatniego resetu
+[2025-07-01 15:22:49.949] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-07-01 15:22:49.949] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-07-01 15:22:49.949] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-07-01 15:22:49.949] Status: CONNECTED
+[2025-07-01 15:22:49.949] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-07-01 15:22:49.949] ConnectedBaudRate: 115200
+[2025-07-01 15:22:49.949] GlobalCommunicationType: USR_N520
+[2025-07-01 15:22:49.949] WasUSRConnection: True
+[2025-07-01 15:22:49.949] USRConnection: istnieje
+[2025-07-01 15:22:49.949] USRConnectedPort: 192.168.0.7:23
+[2025-07-01 15:22:49.949] USRConnection.IsConnected: true
+[2025-07-01 15:22:49.949] Settings.CommType: TCP
+[2025-07-01 15:22:49.949] Settings.USR_IP: 192.168.0.7
+[2025-07-01 15:22:49.949] Settings.USR_Port: 23
+[2025-07-01 15:22:49.949] Settings.COM_Port: COM4
+[2025-07-01 15:22:49.949] Settings.COM_Baud: 115200
+[2025-07-01 15:22:49.949] === KONIEC DIAGNOSTYKI ===
+[2025-07-01 15:22:49.949] Używam globalnego typu komunikacji: USR_N520
+[2025-07-01 15:22:49.949] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-07-01 15:22:49.949] Próba 1/3 połączenia z USR-N520
+[2025-07-01 15:22:49.949] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-07-01 15:22:49.949] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-07-01 15:22:49.949] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-07-01 15:22:49.949] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-07-01 15:22:49.949] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-07-01 15:22:49.949] 
+[2025-07-01 15:22:49.977] 
+Parametry zgrzewania (USR-N520):
+[2025-07-01 15:22:49.977] Napięcie zgrzewania: 0,70 V
+[2025-07-01 15:22:49.977] Prąd zgrzewania: 0,00 A
+[2025-07-01 15:22:49.977] 
+Wartości ADC:
+[2025-07-01 15:22:49.977] ADC napięcia zgrzewania: 001F
+[2025-07-01 15:22:49.977] ADC prądu zgrzewania: 0006
+[2025-07-01 15:22:49.977] 
+Parametry kalibracji napięcia:
+[2025-07-01 15:22:49.977] IVHC-U: 3950
+[2025-07-01 15:22:49.977] IVLC-U: 3970
+[2025-07-01 15:22:49.977] ADCIVHC-U: 1535
+[2025-07-01 15:22:49.977] ADCIVLC-U: 1535
+[2025-07-01 15:22:49.977] 
+Parametry kalibracji prądu:
+[2025-07-01 15:22:49.977] IVHC-I: 4780
+[2025-07-01 15:22:49.977] IVLC-I: 520
+[2025-07-01 15:22:49.977] ADCIVHC-I: 1084
+[2025-07-01 15:22:49.977] ADCIVLC-I: 124
+[2025-07-01 15:22:49.977] 
+Wartości multimetru:
+[2025-07-01 15:22:49.977] MMWVL: 0
+[2025-07-01 15:22:49.977] MMWVH: 0
+[2025-07-01 15:22:49.977] MMWCL: 0
+[2025-07-01 15:22:49.977] MMWCH: 0
+[2025-07-01 15:22:49.977] Pomyślnie odczytano parametry przez USR-N520
+[2025-07-01 15:22:49.977] Odebrane wartości:
+[2025-07-01 15:22:49.977] Napięcie zgrzewania: 0,70V
+[2025-07-01 15:22:49.977] Prąd zgrzewania: 0,00A
+[2025-07-01 15:22:49.977] ADC Napięcia: 0x001F
+[2025-07-01 15:22:49.977] ADC Prądu: 0x0006
+[2025-07-01 15:22:49.977] IVHC-U: 3950
+[2025-07-01 15:22:49.977] IVLC-U: 3970
+[2025-07-01 15:22:49.977] ADCIVHC-U: 1535
+[2025-07-01 15:22:49.977] ADCIVLC-U: 1535
+[2025-07-01 15:22:49.977] IVHC-I: 4780
+[2025-07-01 15:22:49.977] IVLC-I: 520
+[2025-07-01 15:22:49.977] ADCIVHC-I: 1084
+[2025-07-01 15:22:49.977] ADCIVLC-I: 124
+[2025-07-01 15:22:49.977] MMWVL: 0
+[2025-07-01 15:22:49.977] MMWVH: 0
+[2025-07-01 15:22:49.977] MMWCL: 0
+[2025-07-01 15:22:49.977] MMWCH: 0
+[2025-07-01 15:22:49.977] -------------------
+[2025-07-01 15:22:49.977] Odczytano parametry zgrzewania poprawnie.
+[2025-07-01 15:22:49.979] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-07-01 15:22:49.995] Obliczono statystyki dla 22 pomiarów od ostatniego resetu
+[2025-07-01 15:22:50.306] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-07-01 15:22:50.306] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-07-01 15:22:50.306] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-07-01 15:22:50.306] Status: CONNECTED
+[2025-07-01 15:22:50.306] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-07-01 15:22:50.306] ConnectedBaudRate: 115200
+[2025-07-01 15:22:50.306] GlobalCommunicationType: USR_N520
+[2025-07-01 15:22:50.306] WasUSRConnection: True
+[2025-07-01 15:22:50.306] USRConnection: istnieje
+[2025-07-01 15:22:50.306] USRConnectedPort: 192.168.0.7:23
+[2025-07-01 15:22:50.306] USRConnection.IsConnected: true
+[2025-07-01 15:22:50.306] Settings.CommType: TCP
+[2025-07-01 15:22:50.306] Settings.USR_IP: 192.168.0.7
+[2025-07-01 15:22:50.306] Settings.USR_Port: 23
+[2025-07-01 15:22:50.306] Settings.COM_Port: COM4
+[2025-07-01 15:22:50.306] Settings.COM_Baud: 115200
+[2025-07-01 15:22:50.306] === KONIEC DIAGNOSTYKI ===
+[2025-07-01 15:22:50.306] Używam globalnego typu komunikacji: USR_N520
+[2025-07-01 15:22:50.306] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-07-01 15:22:50.306] Próba 1/3 połączenia z USR-N520
+[2025-07-01 15:22:50.306] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-07-01 15:22:50.306] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-07-01 15:22:50.306] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-07-01 15:22:50.306] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-07-01 15:22:50.306] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-07-01 15:22:50.306] 
+[2025-07-01 15:22:50.333] 
+Parametry zgrzewania (USR-N520):
+[2025-07-01 15:22:50.333] Napięcie zgrzewania: 0,70 V
+[2025-07-01 15:22:50.333] Prąd zgrzewania: 0,00 A
+[2025-07-01 15:22:50.333] 
+Wartości ADC:
+[2025-07-01 15:22:50.333] ADC napięcia zgrzewania: 001F
+[2025-07-01 15:22:50.333] ADC prądu zgrzewania: 0000
+[2025-07-01 15:22:50.333] 
+Parametry kalibracji napięcia:
+[2025-07-01 15:22:50.333] IVHC-U: 3950
+[2025-07-01 15:22:50.333] IVLC-U: 3970
+[2025-07-01 15:22:50.333] ADCIVHC-U: 1535
+[2025-07-01 15:22:50.333] ADCIVLC-U: 1535
+[2025-07-01 15:22:50.333] 
+Parametry kalibracji prądu:
+[2025-07-01 15:22:50.333] IVHC-I: 4780
+[2025-07-01 15:22:50.333] IVLC-I: 520
+[2025-07-01 15:22:50.333] ADCIVHC-I: 1084
+[2025-07-01 15:22:50.333] ADCIVLC-I: 124
+[2025-07-01 15:22:50.333] 
+Wartości multimetru:
+[2025-07-01 15:22:50.333] MMWVL: 0
+[2025-07-01 15:22:50.333] MMWVH: 0
+[2025-07-01 15:22:50.333] MMWCL: 0
+[2025-07-01 15:22:50.333] MMWCH: 0
+[2025-07-01 15:22:50.333] Pomyślnie odczytano parametry przez USR-N520
+[2025-07-01 15:22:50.354] Odebrane wartości:
+[2025-07-01 15:22:50.354] Napięcie zgrzewania: 0,70V
+[2025-07-01 15:22:50.354] Prąd zgrzewania: 0,00A
+[2025-07-01 15:22:50.354] ADC Napięcia: 0x001F
+[2025-07-01 15:22:50.354] ADC Prądu: 0x0000
+[2025-07-01 15:22:50.354] IVHC-U: 3950
+[2025-07-01 15:22:50.354] IVLC-U: 3970
+[2025-07-01 15:22:50.354] ADCIVHC-U: 1535
+[2025-07-01 15:22:50.354] ADCIVLC-U: 1535
+[2025-07-01 15:22:50.354] IVHC-I: 4780
+[2025-07-01 15:22:50.354] IVLC-I: 520
+[2025-07-01 15:22:50.354] ADCIVHC-I: 1084
+[2025-07-01 15:22:50.354] ADCIVLC-I: 124
+[2025-07-01 15:22:50.354] MMWVL: 0
+[2025-07-01 15:22:50.354] MMWVH: 0
+[2025-07-01 15:22:50.354] MMWCL: 0
+[2025-07-01 15:22:50.354] MMWCH: 0
+[2025-07-01 15:22:50.354] -------------------
+[2025-07-01 15:22:50.354] Odczytano parametry zgrzewania poprawnie.
+[2025-07-01 15:22:50.370] Obliczono statystyki dla 23 pomiarów od ostatniego resetu
+[2025-07-01 15:22:50.401] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-07-01 15:22:50.416] Obliczono statystyki dla 24 pomiarów od ostatniego resetu
+[2025-07-01 15:22:50.663] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-07-01 15:22:50.663] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-07-01 15:22:50.663] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-07-01 15:22:50.663] Status: CONNECTED
+[2025-07-01 15:22:50.663] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-07-01 15:22:50.663] ConnectedBaudRate: 115200
+[2025-07-01 15:22:50.663] GlobalCommunicationType: USR_N520
+[2025-07-01 15:22:50.663] WasUSRConnection: True
+[2025-07-01 15:22:50.663] USRConnection: istnieje
+[2025-07-01 15:22:50.663] USRConnectedPort: 192.168.0.7:23
+[2025-07-01 15:22:50.663] USRConnection.IsConnected: true
+[2025-07-01 15:22:50.663] Settings.CommType: TCP
+[2025-07-01 15:22:50.663] Settings.USR_IP: 192.168.0.7
+[2025-07-01 15:22:50.663] Settings.USR_Port: 23
+[2025-07-01 15:22:50.663] Settings.COM_Port: COM4
+[2025-07-01 15:22:50.663] Settings.COM_Baud: 115200
+[2025-07-01 15:22:50.663] === KONIEC DIAGNOSTYKI ===
+[2025-07-01 15:22:50.663] Używam globalnego typu komunikacji: USR_N520
+[2025-07-01 15:22:50.663] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-07-01 15:22:50.663] Próba 1/3 połączenia z USR-N520
+[2025-07-01 15:22:50.663] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-07-01 15:22:50.663] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-07-01 15:22:50.663] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-07-01 15:22:50.663] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-07-01 15:22:50.663] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-07-01 15:22:50.663] 
+[2025-07-01 15:22:50.691] 
+Parametry zgrzewania (USR-N520):
+[2025-07-01 15:22:50.691] Napięcie zgrzewania: 0,70 V
+[2025-07-01 15:22:50.691] Prąd zgrzewania: 0,00 A
+[2025-07-01 15:22:50.691] 
+Wartości ADC:
+[2025-07-01 15:22:50.691] ADC napięcia zgrzewania: 001F
+[2025-07-01 15:22:50.691] ADC prądu zgrzewania: 0000
+[2025-07-01 15:22:50.691] 
+Parametry kalibracji napięcia:
+[2025-07-01 15:22:50.691] IVHC-U: 3950
+[2025-07-01 15:22:50.691] IVLC-U: 3970
+[2025-07-01 15:22:50.691] ADCIVHC-U: 1535
+[2025-07-01 15:22:50.691] ADCIVLC-U: 1535
+[2025-07-01 15:22:50.691] 
+Parametry kalibracji prądu:
+[2025-07-01 15:22:50.691] IVHC-I: 4780
+[2025-07-01 15:22:50.691] IVLC-I: 520
+[2025-07-01 15:22:50.691] ADCIVHC-I: 1084
+[2025-07-01 15:22:50.691] ADCIVLC-I: 124
+[2025-07-01 15:22:50.691] 
+Wartości multimetru:
+[2025-07-01 15:22:50.691] MMWVL: 0
+[2025-07-01 15:22:50.691] MMWVH: 0
+[2025-07-01 15:22:50.691] MMWCL: 0
+[2025-07-01 15:22:50.691] MMWCH: 0
+[2025-07-01 15:22:50.691] Pomyślnie odczytano parametry przez USR-N520
+[2025-07-01 15:22:50.695] Odebrane wartości:
+[2025-07-01 15:22:50.695] Napięcie zgrzewania: 0,70V
+[2025-07-01 15:22:50.695] Prąd zgrzewania: 0,00A
+[2025-07-01 15:22:50.695] ADC Napięcia: 0x001F
+[2025-07-01 15:22:50.695] ADC Prądu: 0x0000
+[2025-07-01 15:22:50.695] IVHC-U: 3950
+[2025-07-01 15:22:50.695] IVLC-U: 3970
+[2025-07-01 15:22:50.695] ADCIVHC-U: 1535
+[2025-07-01 15:22:50.695] ADCIVLC-U: 1535
+[2025-07-01 15:22:50.695] IVHC-I: 4780
+[2025-07-01 15:22:50.695] IVLC-I: 520
+[2025-07-01 15:22:50.695] ADCIVHC-I: 1084
+[2025-07-01 15:22:50.695] ADCIVLC-I: 124
+[2025-07-01 15:22:50.695] MMWVL: 0
+[2025-07-01 15:22:50.695] MMWVH: 0
+[2025-07-01 15:22:50.695] MMWCL: 0
+[2025-07-01 15:22:50.695] MMWCH: 0
+[2025-07-01 15:22:50.695] -------------------
+[2025-07-01 15:22:50.695] Odczytano parametry zgrzewania poprawnie.
+[2025-07-01 15:22:50.696] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-07-01 15:22:50.711] Obliczono statystyki dla 26 pomiarów od ostatniego resetu
+[2025-07-01 15:22:51.069] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-07-01 15:22:51.069] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-07-01 15:22:51.069] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-07-01 15:22:51.069] Status: CONNECTED
+[2025-07-01 15:22:51.069] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-07-01 15:22:51.069] ConnectedBaudRate: 115200
+[2025-07-01 15:22:51.069] GlobalCommunicationType: USR_N520
+[2025-07-01 15:22:51.069] WasUSRConnection: True
+[2025-07-01 15:22:51.069] USRConnection: istnieje
+[2025-07-01 15:22:51.069] USRConnectedPort: 192.168.0.7:23
+[2025-07-01 15:22:51.069] USRConnection.IsConnected: true
+[2025-07-01 15:22:51.069] Settings.CommType: TCP
+[2025-07-01 15:22:51.069] Settings.USR_IP: 192.168.0.7
+[2025-07-01 15:22:51.069] Settings.USR_Port: 23
+[2025-07-01 15:22:51.069] Settings.COM_Port: COM4
+[2025-07-01 15:22:51.069] Settings.COM_Baud: 115200
+[2025-07-01 15:22:51.069] === KONIEC DIAGNOSTYKI ===
+[2025-07-01 15:22:51.069] Używam globalnego typu komunikacji: USR_N520
+[2025-07-01 15:22:51.069] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-07-01 15:22:51.069] Próba 1/3 połączenia z USR-N520
+[2025-07-01 15:22:51.069] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-07-01 15:22:51.069] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-07-01 15:22:51.069] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-07-01 15:22:51.069] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-07-01 15:22:51.069] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-07-01 15:22:51.069] 
+[2025-07-01 15:22:51.096] 
+Parametry zgrzewania (USR-N520):
+[2025-07-01 15:22:51.096] Napięcie zgrzewania: 0,70 V
+[2025-07-01 15:22:51.096] Prąd zgrzewania: 0,00 A
+[2025-07-01 15:22:51.096] 
+Wartości ADC:
+[2025-07-01 15:22:51.096] ADC napięcia zgrzewania: 001F
+[2025-07-01 15:22:51.096] ADC prądu zgrzewania: 0007
+[2025-07-01 15:22:51.096] 
+Parametry kalibracji napięcia:
+[2025-07-01 15:22:51.096] IVHC-U: 3950
+[2025-07-01 15:22:51.096] IVLC-U: 3970
+[2025-07-01 15:22:51.096] ADCIVHC-U: 1535
+[2025-07-01 15:22:51.096] ADCIVLC-U: 1535
+[2025-07-01 15:22:51.096] 
+Parametry kalibracji prądu:
+[2025-07-01 15:22:51.096] IVHC-I: 4780
+[2025-07-01 15:22:51.096] IVLC-I: 520
+[2025-07-01 15:22:51.096] ADCIVHC-I: 1084
+[2025-07-01 15:22:51.096] ADCIVLC-I: 124
+[2025-07-01 15:22:51.096] 
+Wartości multimetru:
+[2025-07-01 15:22:51.096] MMWVL: 0
+[2025-07-01 15:22:51.096] MMWVH: 0
+[2025-07-01 15:22:51.096] MMWCL: 0
+[2025-07-01 15:22:51.096] MMWCH: 0
+[2025-07-01 15:22:51.096] Pomyślnie odczytano parametry przez USR-N520
+[2025-07-01 15:22:51.096] Odebrane wartości:
+[2025-07-01 15:22:51.096] Napięcie zgrzewania: 0,70V
+[2025-07-01 15:22:51.096] Prąd zgrzewania: 0,00A
+[2025-07-01 15:22:51.096] ADC Napięcia: 0x001F
+[2025-07-01 15:22:51.096] ADC Prądu: 0x0007
+[2025-07-01 15:22:51.096] IVHC-U: 3950
+[2025-07-01 15:22:51.096] IVLC-U: 3970
+[2025-07-01 15:22:51.096] ADCIVHC-U: 1535
+[2025-07-01 15:22:51.096] ADCIVLC-U: 1535
+[2025-07-01 15:22:51.096] IVHC-I: 4780
+[2025-07-01 15:22:51.096] IVLC-I: 520
+[2025-07-01 15:22:51.096] ADCIVHC-I: 1084
+[2025-07-01 15:22:51.096] ADCIVLC-I: 124
+[2025-07-01 15:22:51.096] MMWVL: 0
+[2025-07-01 15:22:51.096] MMWVH: 0
+[2025-07-01 15:22:51.096] MMWCL: 0
+[2025-07-01 15:22:51.096] MMWCH: 0
+[2025-07-01 15:22:51.096] -------------------
+[2025-07-01 15:22:51.096] Odczytano parametry zgrzewania poprawnie.
+[2025-07-01 15:22:51.096] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-07-01 15:22:51.115] Obliczono statystyki dla 28 pomiarów od ostatniego resetu
+[2025-07-01 15:22:51.411] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-07-01 15:22:51.411] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-07-01 15:22:51.411] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-07-01 15:22:51.411] Status: CONNECTED
+[2025-07-01 15:22:51.411] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-07-01 15:22:51.411] ConnectedBaudRate: 115200
+[2025-07-01 15:22:51.411] GlobalCommunicationType: USR_N520
+[2025-07-01 15:22:51.411] WasUSRConnection: True
+[2025-07-01 15:22:51.411] USRConnection: istnieje
+[2025-07-01 15:22:51.411] USRConnectedPort: 192.168.0.7:23
+[2025-07-01 15:22:51.411] USRConnection.IsConnected: true
+[2025-07-01 15:22:51.411] Settings.CommType: TCP
+[2025-07-01 15:22:51.411] Settings.USR_IP: 192.168.0.7
+[2025-07-01 15:22:51.411] Settings.USR_Port: 23
+[2025-07-01 15:22:51.411] Settings.COM_Port: COM4
+[2025-07-01 15:22:51.411] Settings.COM_Baud: 115200
+[2025-07-01 15:22:51.411] === KONIEC DIAGNOSTYKI ===
+[2025-07-01 15:22:51.411] Używam globalnego typu komunikacji: USR_N520
+[2025-07-01 15:22:51.411] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-07-01 15:22:51.411] Próba 1/3 połączenia z USR-N520
+[2025-07-01 15:22:51.411] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-07-01 15:22:51.411] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-07-01 15:22:51.411] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-07-01 15:22:51.411] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-07-01 15:22:51.411] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-07-01 15:22:51.411] 
+[2025-07-01 15:22:51.438] 
+Parametry zgrzewania (USR-N520):
+[2025-07-01 15:22:51.438] Napięcie zgrzewania: 0,70 V
+[2025-07-01 15:22:51.438] Prąd zgrzewania: 0,00 A
+[2025-07-01 15:22:51.438] 
+Wartości ADC:
+[2025-07-01 15:22:51.438] ADC napięcia zgrzewania: 0000
+[2025-07-01 15:22:51.438] ADC prądu zgrzewania: 0007
+[2025-07-01 15:22:51.438] 
+Parametry kalibracji napięcia:
+[2025-07-01 15:22:51.438] IVHC-U: 3950
+[2025-07-01 15:22:51.438] IVLC-U: 3970
+[2025-07-01 15:22:51.438] ADCIVHC-U: 1535
+[2025-07-01 15:22:51.438] ADCIVLC-U: 1535
+[2025-07-01 15:22:51.438] 
+Parametry kalibracji prądu:
+[2025-07-01 15:22:51.438] IVHC-I: 4780
+[2025-07-01 15:22:51.438] IVLC-I: 520
+[2025-07-01 15:22:51.438] ADCIVHC-I: 1084
+[2025-07-01 15:22:51.438] ADCIVLC-I: 124
+[2025-07-01 15:22:51.438] 
+Wartości multimetru:
+[2025-07-01 15:22:51.438] MMWVL: 0
+[2025-07-01 15:22:51.438] MMWVH: 0
+[2025-07-01 15:22:51.438] MMWCL: 0
+[2025-07-01 15:22:51.438] MMWCH: 0
+[2025-07-01 15:22:51.438] Pomyślnie odczytano parametry przez USR-N520
+[2025-07-01 15:22:51.438] Odebrane wartości:
+[2025-07-01 15:22:51.438] Napięcie zgrzewania: 0,70V
+[2025-07-01 15:22:51.438] Prąd zgrzewania: 0,00A
+[2025-07-01 15:22:51.438] ADC Napięcia: 0x0000
+[2025-07-01 15:22:51.438] ADC Prądu: 0x0007
+[2025-07-01 15:22:51.438] IVHC-U: 3950
+[2025-07-01 15:22:51.438] IVLC-U: 3970
+[2025-07-01 15:22:51.438] ADCIVHC-U: 1535
+[2025-07-01 15:22:51.438] ADCIVLC-U: 1535
+[2025-07-01 15:22:51.438] IVHC-I: 4780
+[2025-07-01 15:22:51.438] IVLC-I: 520
+[2025-07-01 15:22:51.438] ADCIVHC-I: 1084
+[2025-07-01 15:22:51.438] ADCIVLC-I: 124
+[2025-07-01 15:22:51.438] MMWVL: 0
+[2025-07-01 15:22:51.438] MMWVH: 0
+[2025-07-01 15:22:51.438] MMWCL: 0
+[2025-07-01 15:22:51.438] MMWCH: 0
+[2025-07-01 15:22:51.438] -------------------
+[2025-07-01 15:22:51.438] Odczytano parametry zgrzewania poprawnie.
+[2025-07-01 15:22:51.438] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-07-01 15:22:51.456] Obliczono statystyki dla 30 pomiarów od ostatniego resetu
+[2025-07-01 15:22:51.750] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-07-01 15:22:51.750] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-07-01 15:22:51.750] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-07-01 15:22:51.750] Status: CONNECTED
+[2025-07-01 15:22:51.750] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-07-01 15:22:51.750] ConnectedBaudRate: 115200
+[2025-07-01 15:22:51.750] GlobalCommunicationType: USR_N520
+[2025-07-01 15:22:51.750] WasUSRConnection: True
+[2025-07-01 15:22:51.750] USRConnection: istnieje
+[2025-07-01 15:22:51.750] USRConnectedPort: 192.168.0.7:23
+[2025-07-01 15:22:51.750] USRConnection.IsConnected: true
+[2025-07-01 15:22:51.750] Settings.CommType: TCP
+[2025-07-01 15:22:51.750] Settings.USR_IP: 192.168.0.7
+[2025-07-01 15:22:51.750] Settings.USR_Port: 23
+[2025-07-01 15:22:51.750] Settings.COM_Port: COM4
+[2025-07-01 15:22:51.750] Settings.COM_Baud: 115200
+[2025-07-01 15:22:51.750] === KONIEC DIAGNOSTYKI ===
+[2025-07-01 15:22:51.750] Używam globalnego typu komunikacji: USR_N520
+[2025-07-01 15:22:51.750] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-07-01 15:22:51.750] Próba 1/3 połączenia z USR-N520
+[2025-07-01 15:22:51.750] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-07-01 15:22:51.750] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-07-01 15:22:51.750] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-07-01 15:22:51.750] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-07-01 15:22:51.750] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-07-01 15:22:51.750] 
+[2025-07-01 15:22:51.777] 
+Parametry zgrzewania (USR-N520):
+[2025-07-01 15:22:51.777] Napięcie zgrzewania: 0,70 V
+[2025-07-01 15:22:51.777] Prąd zgrzewania: 0,00 A
+[2025-07-01 15:22:51.777] 
+Wartości ADC:
+[2025-07-01 15:22:51.777] ADC napięcia zgrzewania: 001F
+[2025-07-01 15:22:51.777] ADC prądu zgrzewania: 0007
+[2025-07-01 15:22:51.777] 
+Parametry kalibracji napięcia:
+[2025-07-01 15:22:51.777] IVHC-U: 3950
+[2025-07-01 15:22:51.777] IVLC-U: 3970
+[2025-07-01 15:22:51.777] ADCIVHC-U: 1535
+[2025-07-01 15:22:51.777] ADCIVLC-U: 1535
+[2025-07-01 15:22:51.777] 
+Parametry kalibracji prądu:
+[2025-07-01 15:22:51.777] IVHC-I: 4780
+[2025-07-01 15:22:51.777] IVLC-I: 520
+[2025-07-01 15:22:51.777] ADCIVHC-I: 1084
+[2025-07-01 15:22:51.777] ADCIVLC-I: 124
+[2025-07-01 15:22:51.777] 
+Wartości multimetru:
+[2025-07-01 15:22:51.777] MMWVL: 0
+[2025-07-01 15:22:51.777] MMWVH: 0
+[2025-07-01 15:22:51.777] MMWCL: 0
+[2025-07-01 15:22:51.777] MMWCH: 0
+[2025-07-01 15:22:51.777] Pomyślnie odczytano parametry przez USR-N520
+[2025-07-01 15:22:51.780] Odebrane wartości:
+[2025-07-01 15:22:51.780] Napięcie zgrzewania: 0,70V
+[2025-07-01 15:22:51.780] Prąd zgrzewania: 0,00A
+[2025-07-01 15:22:51.780] ADC Napięcia: 0x001F
+[2025-07-01 15:22:51.780] ADC Prądu: 0x0007
+[2025-07-01 15:22:51.780] IVHC-U: 3950
+[2025-07-01 15:22:51.780] IVLC-U: 3970
+[2025-07-01 15:22:51.780] ADCIVHC-U: 1535
+[2025-07-01 15:22:51.780] ADCIVLC-U: 1535
+[2025-07-01 15:22:51.780] IVHC-I: 4780
+[2025-07-01 15:22:51.780] IVLC-I: 520
+[2025-07-01 15:22:51.780] ADCIVHC-I: 1084
+[2025-07-01 15:22:51.780] ADCIVLC-I: 124
+[2025-07-01 15:22:51.780] MMWVL: 0
+[2025-07-01 15:22:51.780] MMWVH: 0
+[2025-07-01 15:22:51.780] MMWCL: 0
+[2025-07-01 15:22:51.780] MMWCH: 0
+[2025-07-01 15:22:51.780] -------------------
+[2025-07-01 15:22:51.780] Odczytano parametry zgrzewania poprawnie.
+[2025-07-01 15:22:51.780] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-07-01 15:22:51.796] Obliczono statystyki dla 32 pomiarów od ostatniego resetu
+[2025-07-01 15:22:52.108] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-07-01 15:22:52.108] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-07-01 15:22:52.108] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-07-01 15:22:52.108] Status: CONNECTED
+[2025-07-01 15:22:52.108] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-07-01 15:22:52.108] ConnectedBaudRate: 115200
+[2025-07-01 15:22:52.108] GlobalCommunicationType: USR_N520
+[2025-07-01 15:22:52.108] WasUSRConnection: True
+[2025-07-01 15:22:52.108] USRConnection: istnieje
+[2025-07-01 15:22:52.108] USRConnectedPort: 192.168.0.7:23
+[2025-07-01 15:22:52.108] USRConnection.IsConnected: true
+[2025-07-01 15:22:52.108] Settings.CommType: TCP
+[2025-07-01 15:22:52.108] Settings.USR_IP: 192.168.0.7
+[2025-07-01 15:22:52.108] Settings.USR_Port: 23
+[2025-07-01 15:22:52.108] Settings.COM_Port: COM4
+[2025-07-01 15:22:52.108] Settings.COM_Baud: 115200
+[2025-07-01 15:22:52.108] === KONIEC DIAGNOSTYKI ===
+[2025-07-01 15:22:52.108] Używam globalnego typu komunikacji: USR_N520
+[2025-07-01 15:22:52.108] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-07-01 15:22:52.108] Próba 1/3 połączenia z USR-N520
+[2025-07-01 15:22:52.108] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-07-01 15:22:52.108] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-07-01 15:22:52.108] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-07-01 15:22:52.108] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-07-01 15:22:52.108] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-07-01 15:22:52.108] 
+[2025-07-01 15:22:52.136] 
+Parametry zgrzewania (USR-N520):
+[2025-07-01 15:22:52.136] Napięcie zgrzewania: 0,70 V
+[2025-07-01 15:22:52.136] Prąd zgrzewania: 0,00 A
+[2025-07-01 15:22:52.136] 
+Wartości ADC:
+[2025-07-01 15:22:52.136] ADC napięcia zgrzewania: 001F
+[2025-07-01 15:22:52.136] ADC prądu zgrzewania: 0006
+[2025-07-01 15:22:52.136] 
+Parametry kalibracji napięcia:
+[2025-07-01 15:22:52.136] IVHC-U: 3950
+[2025-07-01 15:22:52.136] IVLC-U: 3970
+[2025-07-01 15:22:52.136] ADCIVHC-U: 1535
+[2025-07-01 15:22:52.136] ADCIVLC-U: 1535
+[2025-07-01 15:22:52.136] 
+Parametry kalibracji prądu:
+[2025-07-01 15:22:52.136] IVHC-I: 4780
+[2025-07-01 15:22:52.136] IVLC-I: 520
+[2025-07-01 15:22:52.136] ADCIVHC-I: 1084
+[2025-07-01 15:22:52.136] ADCIVLC-I: 124
+[2025-07-01 15:22:52.136] 
+Wartości multimetru:
+[2025-07-01 15:22:52.136] MMWVL: 0
+[2025-07-01 15:22:52.136] MMWVH: 0
+[2025-07-01 15:22:52.136] MMWCL: 0
+[2025-07-01 15:22:52.136] MMWCH: 0
+[2025-07-01 15:22:52.136] Pomyślnie odczytano parametry przez USR-N520
+[2025-07-01 15:22:52.136] Odebrane wartości:
+[2025-07-01 15:22:52.136] Napięcie zgrzewania: 0,70V
+[2025-07-01 15:22:52.136] Prąd zgrzewania: 0,00A
+[2025-07-01 15:22:52.136] ADC Napięcia: 0x001F
+[2025-07-01 15:22:52.136] ADC Prądu: 0x0006
+[2025-07-01 15:22:52.136] IVHC-U: 3950
+[2025-07-01 15:22:52.136] IVLC-U: 3970
+[2025-07-01 15:22:52.136] ADCIVHC-U: 1535
+[2025-07-01 15:22:52.136] ADCIVLC-U: 1535
+[2025-07-01 15:22:52.136] IVHC-I: 4780
+[2025-07-01 15:22:52.136] IVLC-I: 520
+[2025-07-01 15:22:52.136] ADCIVHC-I: 1084
+[2025-07-01 15:22:52.136] ADCIVLC-I: 124
+[2025-07-01 15:22:52.136] MMWVL: 0
+[2025-07-01 15:22:52.136] MMWVH: 0
+[2025-07-01 15:22:52.136] MMWCL: 0
+[2025-07-01 15:22:52.136] MMWCH: 0
+[2025-07-01 15:22:52.136] -------------------
+[2025-07-01 15:22:52.136] Odczytano parametry zgrzewania poprawnie.
+[2025-07-01 15:22:52.136] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-07-01 15:22:52.157] Obliczono statystyki dla 34 pomiarów od ostatniego resetu
+[2025-07-01 15:22:52.455] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-07-01 15:22:52.455] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-07-01 15:22:52.455] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-07-01 15:22:52.455] Status: CONNECTED
+[2025-07-01 15:22:52.455] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-07-01 15:22:52.455] ConnectedBaudRate: 115200
+[2025-07-01 15:22:52.455] GlobalCommunicationType: USR_N520
+[2025-07-01 15:22:52.455] WasUSRConnection: True
+[2025-07-01 15:22:52.455] USRConnection: istnieje
+[2025-07-01 15:22:52.455] USRConnectedPort: 192.168.0.7:23
+[2025-07-01 15:22:52.455] USRConnection.IsConnected: true
+[2025-07-01 15:22:52.455] Settings.CommType: TCP
+[2025-07-01 15:22:52.455] Settings.USR_IP: 192.168.0.7
+[2025-07-01 15:22:52.455] Settings.USR_Port: 23
+[2025-07-01 15:22:52.455] Settings.COM_Port: COM4
+[2025-07-01 15:22:52.455] Settings.COM_Baud: 115200
+[2025-07-01 15:22:52.455] === KONIEC DIAGNOSTYKI ===
+[2025-07-01 15:22:52.455] Używam globalnego typu komunikacji: USR_N520
+[2025-07-01 15:22:52.455] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-07-01 15:22:52.455] Próba 1/3 połączenia z USR-N520
+[2025-07-01 15:22:52.455] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-07-01 15:22:52.455] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-07-01 15:22:52.455] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-07-01 15:22:52.455] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-07-01 15:22:52.455] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-07-01 15:22:52.455] 
+[2025-07-01 15:22:52.482] 
+Parametry zgrzewania (USR-N520):
+[2025-07-01 15:22:52.482] Napięcie zgrzewania: 0,70 V
+[2025-07-01 15:22:52.482] Prąd zgrzewania: 0,00 A
+[2025-07-01 15:22:52.482] 
+Wartości ADC:
+[2025-07-01 15:22:52.482] ADC napięcia zgrzewania: 001F
+[2025-07-01 15:22:52.482] ADC prądu zgrzewania: 0006
+[2025-07-01 15:22:52.482] 
+Parametry kalibracji napięcia:
+[2025-07-01 15:22:52.482] IVHC-U: 3950
+[2025-07-01 15:22:52.482] IVLC-U: 3970
+[2025-07-01 15:22:52.482] ADCIVHC-U: 1535
+[2025-07-01 15:22:52.482] ADCIVLC-U: 1535
+[2025-07-01 15:22:52.482] 
+Parametry kalibracji prądu:
+[2025-07-01 15:22:52.482] IVHC-I: 4780
+[2025-07-01 15:22:52.482] IVLC-I: 520
+[2025-07-01 15:22:52.482] ADCIVHC-I: 1084
+[2025-07-01 15:22:52.482] ADCIVLC-I: 124
+[2025-07-01 15:22:52.482] 
+Wartości multimetru:
+[2025-07-01 15:22:52.482] MMWVL: 0
+[2025-07-01 15:22:52.482] MMWVH: 0
+[2025-07-01 15:22:52.482] MMWCL: 0
+[2025-07-01 15:22:52.482] MMWCH: 0
+[2025-07-01 15:22:52.482] Pomyślnie odczytano parametry przez USR-N520
+[2025-07-01 15:22:52.486] Odebrane wartości:
+[2025-07-01 15:22:52.486] Napięcie zgrzewania: 0,70V
+[2025-07-01 15:22:52.486] Prąd zgrzewania: 0,00A
+[2025-07-01 15:22:52.486] ADC Napięcia: 0x001F
+[2025-07-01 15:22:52.486] ADC Prądu: 0x0006
+[2025-07-01 15:22:52.486] IVHC-U: 3950
+[2025-07-01 15:22:52.486] IVLC-U: 3970
+[2025-07-01 15:22:52.486] ADCIVHC-U: 1535
+[2025-07-01 15:22:52.486] ADCIVLC-U: 1535
+[2025-07-01 15:22:52.486] IVHC-I: 4780
+[2025-07-01 15:22:52.486] IVLC-I: 520
+[2025-07-01 15:22:52.486] ADCIVHC-I: 1084
+[2025-07-01 15:22:52.486] ADCIVLC-I: 124
+[2025-07-01 15:22:52.486] MMWVL: 0
+[2025-07-01 15:22:52.486] MMWVH: 0
+[2025-07-01 15:22:52.486] MMWCL: 0
+[2025-07-01 15:22:52.486] MMWCH: 0
+[2025-07-01 15:22:52.486] -------------------
+[2025-07-01 15:22:52.486] Odczytano parametry zgrzewania poprawnie.
+[2025-07-01 15:22:52.486] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-07-01 15:22:52.502] Obliczono statystyki dla 36 pomiarów od ostatniego resetu
+[2025-07-01 15:22:52.795] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-07-01 15:22:52.795] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-07-01 15:22:52.795] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-07-01 15:22:52.795] Status: CONNECTED
+[2025-07-01 15:22:52.795] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-07-01 15:22:52.795] ConnectedBaudRate: 115200
+[2025-07-01 15:22:52.795] GlobalCommunicationType: USR_N520
+[2025-07-01 15:22:52.795] WasUSRConnection: True
+[2025-07-01 15:22:52.795] USRConnection: istnieje
+[2025-07-01 15:22:52.795] USRConnectedPort: 192.168.0.7:23
+[2025-07-01 15:22:52.795] USRConnection.IsConnected: true
+[2025-07-01 15:22:52.795] Settings.CommType: TCP
+[2025-07-01 15:22:52.795] Settings.USR_IP: 192.168.0.7
+[2025-07-01 15:22:52.795] Settings.USR_Port: 23
+[2025-07-01 15:22:52.795] Settings.COM_Port: COM4
+[2025-07-01 15:22:52.795] Settings.COM_Baud: 115200
+[2025-07-01 15:22:52.795] === KONIEC DIAGNOSTYKI ===
+[2025-07-01 15:22:52.795] Używam globalnego typu komunikacji: USR_N520
+[2025-07-01 15:22:52.795] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-07-01 15:22:52.795] Próba 1/3 połączenia z USR-N520
+[2025-07-01 15:22:52.795] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-07-01 15:22:52.795] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-07-01 15:22:52.795] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-07-01 15:22:52.795] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-07-01 15:22:52.795] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-07-01 15:22:52.795] 
+[2025-07-01 15:22:52.822] 
+Parametry zgrzewania (USR-N520):
+[2025-07-01 15:22:52.822] Napięcie zgrzewania: 0,70 V
+[2025-07-01 15:22:52.822] Prąd zgrzewania: 0,00 A
+[2025-07-01 15:22:52.822] 
+Wartości ADC:
+[2025-07-01 15:22:52.822] ADC napięcia zgrzewania: 001F
+[2025-07-01 15:22:52.822] ADC prądu zgrzewania: 0000
+[2025-07-01 15:22:52.822] 
+Parametry kalibracji napięcia:
+[2025-07-01 15:22:52.822] IVHC-U: 3950
+[2025-07-01 15:22:52.822] IVLC-U: 3970
+[2025-07-01 15:22:52.822] ADCIVHC-U: 1535
+[2025-07-01 15:22:52.822] ADCIVLC-U: 1535
+[2025-07-01 15:22:52.822] 
+Parametry kalibracji prądu:
+[2025-07-01 15:22:52.822] IVHC-I: 4780
+[2025-07-01 15:22:52.822] IVLC-I: 520
+[2025-07-01 15:22:52.822] ADCIVHC-I: 1084
+[2025-07-01 15:22:52.822] ADCIVLC-I: 124
+[2025-07-01 15:22:52.822] 
+Wartości multimetru:
+[2025-07-01 15:22:52.822] MMWVL: 0
+[2025-07-01 15:22:52.822] MMWVH: 0
+[2025-07-01 15:22:52.822] MMWCL: 0
+[2025-07-01 15:22:52.822] MMWCH: 0
+[2025-07-01 15:22:52.822] Pomyślnie odczytano parametry przez USR-N520
+[2025-07-01 15:22:52.823] Odebrane wartości:
+[2025-07-01 15:22:52.823] Napięcie zgrzewania: 0,70V
+[2025-07-01 15:22:52.823] Prąd zgrzewania: 0,00A
+[2025-07-01 15:22:52.823] ADC Napięcia: 0x001F
+[2025-07-01 15:22:52.823] ADC Prądu: 0x0000
+[2025-07-01 15:22:52.823] IVHC-U: 3950
+[2025-07-01 15:22:52.823] IVLC-U: 3970
+[2025-07-01 15:22:52.823] ADCIVHC-U: 1535
+[2025-07-01 15:22:52.823] ADCIVLC-U: 1535
+[2025-07-01 15:22:52.823] IVHC-I: 4780
+[2025-07-01 15:22:52.823] IVLC-I: 520
+[2025-07-01 15:22:52.823] ADCIVHC-I: 1084
+[2025-07-01 15:22:52.823] ADCIVLC-I: 124
+[2025-07-01 15:22:52.823] MMWVL: 0
+[2025-07-01 15:22:52.823] MMWVH: 0
+[2025-07-01 15:22:52.823] MMWCL: 0
+[2025-07-01 15:22:52.823] MMWCH: 0
+[2025-07-01 15:22:52.823] -------------------
+[2025-07-01 15:22:52.823] Odczytano parametry zgrzewania poprawnie.
+[2025-07-01 15:22:52.823] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-07-01 15:22:52.843] Obliczono statystyki dla 38 pomiarów od ostatniego resetu
+[2025-07-01 15:22:53.147] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-07-01 15:22:53.147] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-07-01 15:22:53.147] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-07-01 15:22:53.147] Status: CONNECTED
+[2025-07-01 15:22:53.147] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-07-01 15:22:53.147] ConnectedBaudRate: 115200
+[2025-07-01 15:22:53.147] GlobalCommunicationType: USR_N520
+[2025-07-01 15:22:53.147] WasUSRConnection: True
+[2025-07-01 15:22:53.147] USRConnection: istnieje
+[2025-07-01 15:22:53.147] USRConnectedPort: 192.168.0.7:23
+[2025-07-01 15:22:53.147] USRConnection.IsConnected: true
+[2025-07-01 15:22:53.147] Settings.CommType: TCP
+[2025-07-01 15:22:53.147] Settings.USR_IP: 192.168.0.7
+[2025-07-01 15:22:53.147] Settings.USR_Port: 23
+[2025-07-01 15:22:53.147] Settings.COM_Port: COM4
+[2025-07-01 15:22:53.147] Settings.COM_Baud: 115200
+[2025-07-01 15:22:53.147] === KONIEC DIAGNOSTYKI ===
+[2025-07-01 15:22:53.147] Używam globalnego typu komunikacji: USR_N520
+[2025-07-01 15:22:53.147] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-07-01 15:22:53.147] Próba 1/3 połączenia z USR-N520
+[2025-07-01 15:22:53.147] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-07-01 15:22:53.147] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-07-01 15:22:53.147] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-07-01 15:22:53.147] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-07-01 15:22:53.147] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-07-01 15:22:53.147] 
+[2025-07-01 15:22:53.174] 
+Parametry zgrzewania (USR-N520):
+[2025-07-01 15:22:53.174] Napięcie zgrzewania: 0,70 V
+[2025-07-01 15:22:53.174] Prąd zgrzewania: 0,00 A
+[2025-07-01 15:22:53.174] 
+Wartości ADC:
+[2025-07-01 15:22:53.174] ADC napięcia zgrzewania: 001F
+[2025-07-01 15:22:53.174] ADC prądu zgrzewania: 0000
+[2025-07-01 15:22:53.174] 
+Parametry kalibracji napięcia:
+[2025-07-01 15:22:53.174] IVHC-U: 3950
+[2025-07-01 15:22:53.174] IVLC-U: 3970
+[2025-07-01 15:22:53.174] ADCIVHC-U: 1535
+[2025-07-01 15:22:53.174] ADCIVLC-U: 1535
+[2025-07-01 15:22:53.174] 
+Parametry kalibracji prądu:
+[2025-07-01 15:22:53.174] IVHC-I: 4780
+[2025-07-01 15:22:53.174] IVLC-I: 520
+[2025-07-01 15:22:53.174] ADCIVHC-I: 1084
+[2025-07-01 15:22:53.174] ADCIVLC-I: 124
+[2025-07-01 15:22:53.174] 
+Wartości multimetru:
+[2025-07-01 15:22:53.174] MMWVL: 0
+[2025-07-01 15:22:53.174] MMWVH: 0
+[2025-07-01 15:22:53.174] MMWCL: 0
+[2025-07-01 15:22:53.174] MMWCH: 0
+[2025-07-01 15:22:53.174] Pomyślnie odczytano parametry przez USR-N520
+[2025-07-01 15:22:53.174] Odebrane wartości:
+[2025-07-01 15:22:53.174] Napięcie zgrzewania: 0,70V
+[2025-07-01 15:22:53.174] Prąd zgrzewania: 0,00A
+[2025-07-01 15:22:53.174] ADC Napięcia: 0x001F
+[2025-07-01 15:22:53.174] ADC Prądu: 0x0000
+[2025-07-01 15:22:53.174] IVHC-U: 3950
+[2025-07-01 15:22:53.174] IVLC-U: 3970
+[2025-07-01 15:22:53.174] ADCIVHC-U: 1535
+[2025-07-01 15:22:53.174] ADCIVLC-U: 1535
+[2025-07-01 15:22:53.174] IVHC-I: 4780
+[2025-07-01 15:22:53.174] IVLC-I: 520
+[2025-07-01 15:22:53.174] ADCIVHC-I: 1084
+[2025-07-01 15:22:53.174] ADCIVLC-I: 124
+[2025-07-01 15:22:53.174] MMWVL: 0
+[2025-07-01 15:22:53.174] MMWVH: 0
+[2025-07-01 15:22:53.174] MMWCL: 0
+[2025-07-01 15:22:53.174] MMWCH: 0
+[2025-07-01 15:22:53.174] -------------------
+[2025-07-01 15:22:53.174] Odczytano parametry zgrzewania poprawnie.
+[2025-07-01 15:22:53.174] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-07-01 15:22:53.194] Obliczono statystyki dla 40 pomiarów od ostatniego resetu
+[2025-07-01 15:22:53.490] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-07-01 15:22:53.490] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-07-01 15:22:53.490] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-07-01 15:22:53.490] Status: CONNECTED
+[2025-07-01 15:22:55.566] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-07-01 15:22:55.566] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-07-01 15:22:55.566] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-07-01 15:22:55.566] Status: CONNECTED
+[2025-07-01 15:22:55.566] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-07-01 15:22:55.566] ConnectedBaudRate: 115200
+[2025-07-01 15:22:55.566] GlobalCommunicationType: USR_N520
+[2025-07-01 15:22:55.566] WasUSRConnection: True
+[2025-07-01 15:22:55.566] USRConnection: istnieje
+[2025-07-01 15:22:55.566] USRConnectedPort: 192.168.0.7:23
+[2025-07-01 15:22:55.566] USRConnection.IsConnected: true
+[2025-07-01 15:22:55.566] Settings.CommType: TCP
+[2025-07-01 15:22:55.566] Settings.USR_IP: 192.168.0.7
+[2025-07-01 15:22:55.566] Settings.USR_Port: 23
+[2025-07-01 15:22:55.566] Settings.COM_Port: COM4
+[2025-07-01 15:22:55.566] Settings.COM_Baud: 115200
+[2025-07-01 15:22:55.566] === KONIEC DIAGNOSTYKI ===
+[2025-07-01 15:22:55.566] Używam globalnego typu komunikacji: USR_N520
+[2025-07-01 15:22:55.566] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-07-01 15:22:55.566] Próba 1/3 połączenia z USR-N520
+[2025-07-01 15:22:55.566] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-07-01 15:22:55.566] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-07-01 15:22:55.566] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-07-01 15:22:55.566] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-07-01 15:22:55.566] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-07-01 15:22:55.566] 
+[2025-07-01 15:22:55.593] 
+Parametry zgrzewania (USR-N520):
+[2025-07-01 15:22:55.593] Napięcie zgrzewania: 0,70 V
+[2025-07-01 15:22:55.593] Prąd zgrzewania: 0,00 A
+[2025-07-01 15:22:55.593] 
+Wartości ADC:
+[2025-07-01 15:22:55.593] ADC napięcia zgrzewania: 001F
+[2025-07-01 15:22:55.593] ADC prądu zgrzewania: 0007
+[2025-07-01 15:22:55.593] 
+Parametry kalibracji napięcia:
+[2025-07-01 15:22:55.593] IVHC-U: 3950
+[2025-07-01 15:22:55.593] IVLC-U: 3970
+[2025-07-01 15:22:55.593] ADCIVHC-U: 1535
+[2025-07-01 15:22:55.593] ADCIVLC-U: 1535
+[2025-07-01 15:22:55.593] 
+Parametry kalibracji prądu:
+[2025-07-01 15:22:55.593] IVHC-I: 4780
+[2025-07-01 15:22:55.593] IVLC-I: 520
+[2025-07-01 15:22:55.593] ADCIVHC-I: 1084
+[2025-07-01 15:22:55.593] ADCIVLC-I: 124
+[2025-07-01 15:22:55.593] 
+Wartości multimetru:
+[2025-07-01 15:22:55.593] MMWVL: 0
+[2025-07-01 15:22:55.593] MMWVH: 0
+[2025-07-01 15:22:55.593] MMWCL: 0
+[2025-07-01 15:22:55.593] MMWCH: 0
+[2025-07-01 15:22:55.593] Pomyślnie odczytano parametry przez USR-N520
+[2025-07-01 15:22:55.593] Odebrane wartości:
+[2025-07-01 15:22:55.593] Napięcie zgrzewania: 0,70V
+[2025-07-01 15:22:55.593] Prąd zgrzewania: 0,00A
+[2025-07-01 15:22:55.593] ADC Napięcia: 0x001F
+[2025-07-01 15:22:55.593] ADC Prądu: 0x0007
+[2025-07-01 15:22:55.593] IVHC-U: 3950
+[2025-07-01 15:22:55.593] IVLC-U: 3970
+[2025-07-01 15:22:55.593] ADCIVHC-U: 1535
+[2025-07-01 15:22:55.593] ADCIVLC-U: 1535
+[2025-07-01 15:22:55.593] IVHC-I: 4780
+[2025-07-01 15:22:55.593] IVLC-I: 520
+[2025-07-01 15:22:55.593] ADCIVHC-I: 1084
+[2025-07-01 15:22:55.593] ADCIVLC-I: 124
+[2025-07-01 15:22:55.593] MMWVL: 0
+[2025-07-01 15:22:55.593] MMWVH: 0
+[2025-07-01 15:22:55.593] MMWCL: 0
+[2025-07-01 15:22:55.593] MMWCH: 0
+[2025-07-01 15:22:55.593] -------------------
+[2025-07-01 15:22:55.593] Odczytano parametry zgrzewania poprawnie.
+[2025-07-01 15:22:55.593] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-07-01 15:22:55.614] Obliczono statystyki dla 54 pomiarów od ostatniego resetu
+[2025-07-01 15:22:55.910] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-07-01 15:22:55.910] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-07-01 15:22:55.910] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-07-01 15:22:55.911] Status: CONNECTED
+[2025-07-01 15:22:55.911] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-07-01 15:22:55.911] ConnectedBaudRate: 115200
+[2025-07-01 15:22:55.911] GlobalCommunicationType: USR_N520
+[2025-07-01 15:22:55.911] WasUSRConnection: True
+[2025-07-01 15:22:55.911] USRConnection: istnieje
+[2025-07-01 15:22:55.911] USRConnectedPort: 192.168.0.7:23
+[2025-07-01 15:22:55.911] USRConnection.IsConnected: true
+[2025-07-01 15:22:55.911] Settings.CommType: TCP
+[2025-07-01 15:22:55.911] Settings.USR_IP: 192.168.0.7
+[2025-07-01 15:22:55.911] Settings.USR_Port: 23
+[2025-07-01 15:22:55.911] Settings.COM_Port: COM4
+[2025-07-01 15:22:55.911] Settings.COM_Baud: 115200
+[2025-07-01 15:22:55.911] === KONIEC DIAGNOSTYKI ===
+[2025-07-01 15:22:55.911] Używam globalnego typu komunikacji: USR_N520
+[2025-07-01 15:22:55.911] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-07-01 15:22:55.911] Próba 1/3 połączenia z USR-N520
+[2025-07-01 15:22:55.911] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-07-01 15:22:55.911] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-07-01 15:22:55.911] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-07-01 15:22:55.911] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-07-01 15:22:55.911] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-07-01 15:22:55.911] 
+[2025-07-01 15:22:55.938] 
+Parametry zgrzewania (USR-N520):
+[2025-07-01 15:22:55.938] Napięcie zgrzewania: 0,70 V
+[2025-07-01 15:22:55.938] Prąd zgrzewania: 0,00 A
+[2025-07-01 15:22:55.938] 
+Wartości ADC:
+[2025-07-01 15:22:55.938] ADC napięcia zgrzewania: 001F
+[2025-07-01 15:22:55.938] ADC prądu zgrzewania: 0006
+[2025-07-01 15:22:55.938] 
+Parametry kalibracji napięcia:
+[2025-07-01 15:22:55.938] IVHC-U: 3950
+[2025-07-01 15:22:55.938] IVLC-U: 3970
+[2025-07-01 15:22:55.938] ADCIVHC-U: 1535
+[2025-07-01 15:22:55.938] ADCIVLC-U: 1535
+[2025-07-01 15:22:55.938] 
+Parametry kalibracji prądu:
+[2025-07-01 15:22:55.938] IVHC-I: 4780
+[2025-07-01 15:22:55.938] IVLC-I: 520
+[2025-07-01 15:22:55.938] ADCIVHC-I: 1084
+[2025-07-01 15:22:55.938] ADCIVLC-I: 124
+[2025-07-01 15:22:55.938] 
+Wartości multimetru:
+[2025-07-01 15:22:55.938] MMWVL: 0
+[2025-07-01 15:22:55.938] MMWVH: 0
+[2025-07-01 15:22:55.938] MMWCL: 0
+[2025-07-01 15:22:55.938] MMWCH: 0
+[2025-07-01 15:22:55.938] Pomyślnie odczytano parametry przez USR-N520
+[2025-07-01 15:22:55.939] Odebrane wartości:
+[2025-07-01 15:22:55.939] Napięcie zgrzewania: 0,70V
+[2025-07-01 15:22:55.939] Prąd zgrzewania: 0,00A
+[2025-07-01 15:22:55.939] ADC Napięcia: 0x001F
+[2025-07-01 15:22:55.939] ADC Prądu: 0x0006
+[2025-07-01 15:22:55.939] IVHC-U: 3950
+[2025-07-01 15:22:55.939] IVLC-U: 3970
+[2025-07-01 15:22:55.939] ADCIVHC-U: 1535
+[2025-07-01 15:22:55.939] ADCIVLC-U: 1535
+[2025-07-01 15:22:55.939] IVHC-I: 4780
+[2025-07-01 15:22:55.939] IVLC-I: 520
+[2025-07-01 15:22:55.939] ADCIVHC-I: 1084
+[2025-07-01 15:22:55.939] ADCIVLC-I: 124
+[2025-07-01 15:22:55.939] MMWVL: 0
+[2025-07-01 15:22:55.939] MMWVH: 0
+[2025-07-01 15:22:55.939] MMWCL: 0
+[2025-07-01 15:22:55.939] MMWCH: 0
+[2025-07-01 15:22:55.939] -------------------
+[2025-07-01 15:22:55.939] Odczytano parametry zgrzewania poprawnie.
+[2025-07-01 15:22:55.939] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-07-01 15:22:55.956] Obliczono statystyki dla 56 pomiarów od ostatniego resetu
+[2025-07-01 15:22:56.249] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-07-01 15:22:56.249] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-07-01 15:22:56.249] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-07-01 15:22:56.249] Status: CONNECTED
+[2025-07-01 15:22:56.249] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-07-01 15:22:56.249] ConnectedBaudRate: 115200
+[2025-07-01 15:22:56.249] GlobalCommunicationType: USR_N520
+[2025-07-01 15:22:56.249] WasUSRConnection: True
+[2025-07-01 15:22:56.249] USRConnection: istnieje
+[2025-07-01 15:22:56.249] USRConnectedPort: 192.168.0.7:23
+[2025-07-01 15:22:56.249] USRConnection.IsConnected: true
+[2025-07-01 15:22:56.249] Settings.CommType: TCP
+[2025-07-01 15:22:56.249] Settings.USR_IP: 192.168.0.7
+[2025-07-01 15:22:56.249] Settings.USR_Port: 23
+[2025-07-01 15:22:56.249] Settings.COM_Port: COM4
+[2025-07-01 15:22:56.249] Settings.COM_Baud: 115200
+[2025-07-01 15:22:56.249] === KONIEC DIAGNOSTYKI ===
+[2025-07-01 15:22:56.249] Używam globalnego typu komunikacji: USR_N520
+[2025-07-01 15:22:56.249] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-07-01 15:22:56.249] Próba 1/3 połączenia z USR-N520
+[2025-07-01 15:22:56.249] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-07-01 15:22:56.249] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-07-01 15:22:56.249] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-07-01 15:22:56.249] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-07-01 15:22:56.249] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-07-01 15:22:56.249] 
+[2025-07-01 15:22:56.277] 
+Parametry zgrzewania (USR-N520):
+[2025-07-01 15:22:56.277] Napięcie zgrzewania: 0,70 V
+[2025-07-01 15:22:56.277] Prąd zgrzewania: 0,00 A
+[2025-07-01 15:22:56.277] 
+Wartości ADC:
+[2025-07-01 15:22:56.277] ADC napięcia zgrzewania: 001F
+[2025-07-01 15:22:56.277] ADC prądu zgrzewania: 0006
+[2025-07-01 15:22:56.277] 
+Parametry kalibracji napięcia:
+[2025-07-01 15:22:56.277] IVHC-U: 3950
+[2025-07-01 15:22:56.277] IVLC-U: 3970
+[2025-07-01 15:22:56.277] ADCIVHC-U: 1535
+[2025-07-01 15:22:56.277] ADCIVLC-U: 1535
+[2025-07-01 15:22:56.277] 
+Parametry kalibracji prądu:
+[2025-07-01 15:22:56.277] IVHC-I: 4780
+[2025-07-01 15:22:56.277] IVLC-I: 520
+[2025-07-01 15:22:56.277] ADCIVHC-I: 1084
+[2025-07-01 15:22:56.277] ADCIVLC-I: 124
+[2025-07-01 15:22:56.277] 
+Wartości multimetru:
+[2025-07-01 15:22:56.277] MMWVL: 0
+[2025-07-01 15:22:56.277] MMWVH: 0
+[2025-07-01 15:22:56.277] MMWCL: 0
+[2025-07-01 15:22:56.277] MMWCH: 0
+[2025-07-01 15:22:56.277] Pomyślnie odczytano parametry przez USR-N520
+[2025-07-01 15:22:56.277] Odebrane wartości:
+[2025-07-01 15:22:56.277] Napięcie zgrzewania: 0,70V
+[2025-07-01 15:22:56.277] Prąd zgrzewania: 0,00A
+[2025-07-01 15:22:56.277] ADC Napięcia: 0x001F
+[2025-07-01 15:22:56.277] ADC Prądu: 0x0006
+[2025-07-01 15:22:56.277] IVHC-U: 3950
+[2025-07-01 15:22:56.277] IVLC-U: 3970
+[2025-07-01 15:22:56.277] ADCIVHC-U: 1535
+[2025-07-01 15:22:56.277] ADCIVLC-U: 1535
+[2025-07-01 15:22:56.277] IVHC-I: 4780
+[2025-07-01 15:22:56.277] IVLC-I: 520
+[2025-07-01 15:22:56.277] ADCIVHC-I: 1084
+[2025-07-01 15:22:56.277] ADCIVLC-I: 124
+[2025-07-01 15:22:56.277] MMWVL: 0
+[2025-07-01 15:22:56.277] MMWVH: 0
+[2025-07-01 15:22:56.277] MMWCL: 0
+[2025-07-01 15:22:56.277] MMWCH: 0
+[2025-07-01 15:22:56.277] -------------------
+[2025-07-01 15:22:56.277] Odczytano parametry zgrzewania poprawnie.
+[2025-07-01 15:22:56.277] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-07-01 15:22:58.009] 
+Parametry zgrzewania (USR-N520):
+[2025-07-01 15:22:58.009] Napięcie zgrzewania: 0,70 V
+[2025-07-01 15:22:58.009] Prąd zgrzewania: 0,00 A
+[2025-07-01 15:22:58.009] 
+Wartości ADC:
+[2025-07-01 15:22:58.009] ADC napięcia zgrzewania: 001F
+[2025-07-01 15:22:58.009] ADC prądu zgrzewania: 0006
+[2025-07-01 15:22:58.009] 
+Parametry kalibracji napięcia:
+[2025-07-01 15:22:58.009] IVHC-U: 3950
+[2025-07-01 15:22:58.009] IVLC-U: 3970
+[2025-07-01 15:22:58.009] ADCIVHC-U: 1535
+[2025-07-01 15:22:58.009] ADCIVLC-U: 1535
+[2025-07-01 15:22:58.009] 
+Parametry kalibracji prądu:
+[2025-07-01 15:22:58.009] IVHC-I: 4780
+[2025-07-01 15:22:58.009] IVLC-I: 520
+[2025-07-01 15:22:58.009] ADCIVHC-I: 1084
+[2025-07-01 15:22:58.009] ADCIVLC-I: 124
+[2025-07-01 15:22:58.009] 
+Wartości multimetru:
+[2025-07-01 15:22:58.009] MMWVL: 0
+[2025-07-01 15:22:58.009] MMWVH: 0
+[2025-07-01 15:22:58.009] MMWCL: 0
+[2025-07-01 15:22:58.009] MMWCH: 0
+[2025-07-01 15:22:58.009] Pomyślnie odczytano parametry przez USR-N520
+[2025-07-01 15:22:58.014] Odebrane wartości:
+[2025-07-01 15:22:58.014] Napięcie zgrzewania: 0,70V
+[2025-07-01 15:22:58.014] Prąd zgrzewania: 0,00A
+[2025-07-01 15:22:58.014] ADC Napięcia: 0x001F
+[2025-07-01 15:22:58.014] ADC Prądu: 0x0006
+[2025-07-01 15:22:58.014] IVHC-U: 3950
+[2025-07-01 15:22:58.014] IVLC-U: 3970
+[2025-07-01 15:22:58.014] ADCIVHC-U: 1535
+[2025-07-01 15:22:58.014] ADCIVLC-U: 1535
+[2025-07-01 15:22:58.014] IVHC-I: 4780
+[2025-07-01 15:22:58.014] IVLC-I: 520
+[2025-07-01 15:22:58.014] ADCIVHC-I: 1084
+[2025-07-01 15:22:58.014] ADCIVLC-I: 124
+[2025-07-01 15:22:58.014] MMWVL: 0
+[2025-07-01 15:22:58.014] MMWVH: 0
+[2025-07-01 15:22:58.014] MMWCL: 0
+[2025-07-01 15:22:58.014] MMWCH: 0
+[2025-07-01 15:22:58.014] -------------------
+[2025-07-01 15:22:58.014] Odczytano parametry zgrzewania poprawnie.
+[2025-07-01 15:22:58.014] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-07-01 15:22:58.028] Obliczono statystyki dla 68 pomiarów od ostatniego resetu
+[2025-07-01 15:22:58.324] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-07-01 15:22:58.324] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-07-01 15:22:58.324] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-07-01 15:22:58.324] Status: CONNECTED
+[2025-07-01 15:22:58.324] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-07-01 15:22:58.324] ConnectedBaudRate: 115200
+[2025-07-01 15:22:58.324] GlobalCommunicationType: USR_N520
+[2025-07-01 15:22:58.324] WasUSRConnection: True
+[2025-07-01 15:22:58.324] USRConnection: istnieje
+[2025-07-01 15:22:58.324] USRConnectedPort: 192.168.0.7:23
+[2025-07-01 15:22:58.324] USRConnection.IsConnected: true
+[2025-07-01 15:22:58.324] Settings.CommType: TCP
+[2025-07-01 15:22:58.324] Settings.USR_IP: 192.168.0.7
+[2025-07-01 15:22:58.324] Settings.USR_Port: 23
+[2025-07-01 15:22:58.324] Settings.COM_Port: COM4
+[2025-07-01 15:22:58.324] Settings.COM_Baud: 115200
+[2025-07-01 15:22:58.324] === KONIEC DIAGNOSTYKI ===
+[2025-07-01 15:22:58.324] Używam globalnego typu komunikacji: USR_N520
+[2025-07-01 15:22:58.324] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-07-01 15:22:58.324] Próba 1/3 połączenia z USR-N520
+[2025-07-01 15:22:58.324] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-07-01 15:22:58.324] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-07-01 15:22:58.324] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-07-01 15:22:58.324] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-07-01 15:22:58.324] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-07-01 15:22:58.324] 
+[2025-07-01 15:22:58.351] 
+Parametry zgrzewania (USR-N520):
+[2025-07-01 15:22:58.351] Napięcie zgrzewania: 0,70 V
+[2025-07-01 15:22:58.351] Prąd zgrzewania: 0,00 A
+[2025-07-01 15:22:58.351] 
+Wartości ADC:
+[2025-07-01 15:22:58.351] ADC napięcia zgrzewania: 001F
+[2025-07-01 15:22:58.351] ADC prądu zgrzewania: 0006
+[2025-07-01 15:22:58.351] 
+Parametry kalibracji napięcia:
+[2025-07-01 15:22:58.351] IVHC-U: 3950
+[2025-07-01 15:22:58.351] IVLC-U: 3970
+[2025-07-01 15:22:58.351] ADCIVHC-U: 1535
+[2025-07-01 15:22:58.351] ADCIVLC-U: 1535
+[2025-07-01 15:22:58.351] 
+Parametry kalibracji prądu:
+[2025-07-01 15:22:58.351] IVHC-I: 4780
+[2025-07-01 15:22:58.351] IVLC-I: 520
+[2025-07-01 15:22:58.351] ADCIVHC-I: 1084
+[2025-07-01 15:22:58.351] ADCIVLC-I: 124
+[2025-07-01 15:22:58.351] 
+Wartości multimetru:
+[2025-07-01 15:22:58.351] MMWVL: 0
+[2025-07-01 15:22:58.351] MMWVH: 0
+[2025-07-01 15:22:58.351] MMWCL: 0
+[2025-07-01 15:22:58.351] MMWCH: 0
+[2025-07-01 15:22:58.351] Pomyślnie odczytano parametry przez USR-N520
+[2025-07-01 15:22:58.351] Odebrane wartości:
+[2025-07-01 15:22:58.351] Napięcie zgrzewania: 0,70V
+[2025-07-01 15:22:58.351] Prąd zgrzewania: 0,00A
+[2025-07-01 15:22:58.351] ADC Napięcia: 0x001F
+[2025-07-01 15:22:58.351] ADC Prądu: 0x0006
+[2025-07-01 15:22:58.351] IVHC-U: 3950
+[2025-07-01 15:22:58.351] IVLC-U: 3970
+[2025-07-01 15:22:58.351] ADCIVHC-U: 1535
+[2025-07-01 15:22:58.351] ADCIVLC-U: 1535
+[2025-07-01 15:22:58.351] IVHC-I: 4780
+[2025-07-01 15:22:58.351] IVLC-I: 520
+[2025-07-01 15:22:58.351] ADCIVHC-I: 1084
+[2025-07-01 15:22:58.351] ADCIVLC-I: 124
+[2025-07-01 15:22:58.351] MMWVL: 0
+[2025-07-01 15:22:58.351] MMWVH: 0
+[2025-07-01 15:22:58.351] MMWCL: 0
+[2025-07-01 15:22:58.351] MMWCH: 0
+[2025-07-01 15:22:58.351] -------------------
+[2025-07-01 15:22:58.351] Odczytano parametry zgrzewania poprawnie.
+[2025-07-01 15:22:58.351] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-07-01 15:22:58.369] Obliczono statystyki dla 70 pomiarów od ostatniego resetu
+[2025-07-01 15:22:58.679] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-07-01 15:22:58.679] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-07-01 15:22:58.679] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-07-01 15:22:58.679] Status: CONNECTED
+[2025-07-01 15:22:58.679] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-07-01 15:22:58.679] ConnectedBaudRate: 115200
+[2025-07-01 15:22:58.679] GlobalCommunicationType: USR_N520
+[2025-07-01 15:22:58.679] WasUSRConnection: True
+[2025-07-01 15:22:58.679] USRConnection: istnieje
+[2025-07-01 15:22:58.679] USRConnectedPort: 192.168.0.7:23
+[2025-07-01 15:22:58.679] USRConnection.IsConnected: true
+[2025-07-01 15:22:58.679] Settings.CommType: TCP
+[2025-07-01 15:22:58.679] Settings.USR_IP: 192.168.0.7
+[2025-07-01 15:22:58.679] Settings.USR_Port: 23
+[2025-07-01 15:22:58.679] Settings.COM_Port: COM4
+[2025-07-01 15:22:58.679] Settings.COM_Baud: 115200
+[2025-07-01 15:22:58.679] === KONIEC DIAGNOSTYKI ===
+[2025-07-01 15:22:58.679] Używam globalnego typu komunikacji: USR_N520
+[2025-07-01 15:22:58.679] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-07-01 15:22:58.679] Próba 1/3 połączenia z USR-N520
+[2025-07-01 15:22:58.679] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-07-01 15:22:58.679] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-07-01 15:22:58.679] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-07-01 15:22:58.679] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-07-01 15:22:58.679] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-07-01 15:22:58.679] 
+[2025-07-01 15:22:58.706] 
+Parametry zgrzewania (USR-N520):
+[2025-07-01 15:22:58.706] Napięcie zgrzewania: 0,70 V
+[2025-07-01 15:22:58.706] Prąd zgrzewania: 0,00 A
+[2025-07-01 15:22:58.706] 
+Wartości ADC:
+[2025-07-01 15:22:58.706] ADC napięcia zgrzewania: 001F
+[2025-07-01 15:22:58.706] ADC prądu zgrzewania: 0006
+[2025-07-01 15:22:58.706] 
+Parametry kalibracji napięcia:
+[2025-07-01 15:22:58.706] IVHC-U: 3950
+[2025-07-01 15:22:58.706] IVLC-U: 3970
+[2025-07-01 15:22:58.706] ADCIVHC-U: 1535
+[2025-07-01 15:22:58.706] ADCIVLC-U: 1535
+[2025-07-01 15:22:58.706] 
+Parametry kalibracji prądu:
+[2025-07-01 15:22:58.706] IVHC-I: 4780
+[2025-07-01 15:22:58.706] IVLC-I: 520
+[2025-07-01 15:22:58.706] ADCIVHC-I: 1084
+[2025-07-01 15:22:58.706] ADCIVLC-I: 124
+[2025-07-01 15:22:58.706] 
+Wartości multimetru:
+[2025-07-01 15:22:58.706] MMWVL: 0
+[2025-07-01 15:22:58.706] MMWVH: 0
+[2025-07-01 15:22:58.706] MMWCL: 0
+[2025-07-01 15:22:58.706] MMWCH: 0
+[2025-07-01 15:22:58.706] Pomyślnie odczytano parametry przez USR-N520
+[2025-07-01 15:22:58.706] Odebrane wartości:
+[2025-07-01 15:22:58.706] Napięcie zgrzewania: 0,70V
+[2025-07-01 15:22:58.706] Prąd zgrzewania: 0,00A
+[2025-07-01 15:22:58.706] ADC Napięcia: 0x001F
+[2025-07-01 15:22:58.706] ADC Prądu: 0x0006
+[2025-07-01 15:22:58.706] IVHC-U: 3950
+[2025-07-01 15:22:58.706] IVLC-U: 3970
+[2025-07-01 15:22:58.706] ADCIVHC-U: 1535
+[2025-07-01 15:22:58.706] ADCIVLC-U: 1535
+[2025-07-01 15:22:58.706] IVHC-I: 4780
+[2025-07-01 15:22:58.706] IVLC-I: 520
+[2025-07-01 15:22:58.706] ADCIVHC-I: 1084
+[2025-07-01 15:22:58.706] ADCIVLC-I: 124
+[2025-07-01 15:22:58.706] MMWVL: 0
+[2025-07-01 15:22:58.706] MMWVH: 0
+[2025-07-01 15:22:58.706] MMWCL: 0
+[2025-07-01 15:22:58.706] MMWCH: 0
+[2025-07-01 15:22:58.706] -------------------
+[2025-07-01 15:22:58.706] Odczytano parametry zgrzewania poprawnie.
+[2025-07-01 15:22:58.706] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-07-01 15:22:58.725] Obliczono statystyki dla 72 pomiarów od ostatniego resetu
+[2025-07-01 15:22:59.022] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-07-01 15:22:59.022] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-07-01 15:22:59.023] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-07-01 15:22:59.023] Status: CONNECTED
+[2025-07-01 15:22:59.023] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-07-01 15:22:59.023] ConnectedBaudRate: 115200
+[2025-07-01 15:22:59.023] GlobalCommunicationType: USR_N520
+[2025-07-01 15:22:59.023] WasUSRConnection: True
+[2025-07-01 15:22:59.023] USRConnection: istnieje
+[2025-07-01 15:22:59.023] USRConnectedPort: 192.168.0.7:23
+[2025-07-01 15:22:59.023] USRConnection.IsConnected: true
+[2025-07-01 15:22:59.023] Settings.CommType: TCP
+[2025-07-01 15:22:59.023] Settings.USR_IP: 192.168.0.7
+[2025-07-01 15:22:59.023] Settings.USR_Port: 23
+[2025-07-01 15:22:59.023] Settings.COM_Port: COM4
+[2025-07-01 15:22:59.023] Settings.COM_Baud: 115200
+[2025-07-01 15:22:59.023] === KONIEC DIAGNOSTYKI ===
+[2025-07-01 15:22:59.023] Używam globalnego typu komunikacji: USR_N520
+[2025-07-01 15:22:59.023] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-07-01 15:22:59.023] Próba 1/3 połączenia z USR-N520
+[2025-07-01 15:22:59.023] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-07-01 15:22:59.023] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-07-01 15:22:59.023] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-07-01 15:22:59.023] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-07-01 15:22:59.023] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-07-01 15:22:59.023] 
+[2025-07-01 15:22:59.050] 
+Parametry zgrzewania (USR-N520):
+[2025-07-01 15:22:59.050] Napięcie zgrzewania: 0,70 V
+[2025-07-01 15:22:59.050] Prąd zgrzewania: 0,00 A
+[2025-07-01 15:22:59.050] 
+Wartości ADC:
+[2025-07-01 15:22:59.050] ADC napięcia zgrzewania: 0000
+[2025-07-01 15:22:59.050] ADC prądu zgrzewania: 0007
+[2025-07-01 15:22:59.050] 
+Parametry kalibracji napięcia:
+[2025-07-01 15:22:59.050] IVHC-U: 3950
+[2025-07-01 15:22:59.050] IVLC-U: 3970
+[2025-07-01 15:22:59.050] ADCIVHC-U: 1535
+[2025-07-01 15:22:59.050] ADCIVLC-U: 1535
+[2025-07-01 15:22:59.050] 
+Parametry kalibracji prądu:
+[2025-07-01 15:22:59.050] IVHC-I: 4780
+[2025-07-01 15:22:59.050] IVLC-I: 520
+[2025-07-01 15:22:59.050] ADCIVHC-I: 1084
+[2025-07-01 15:22:59.050] ADCIVLC-I: 124
+[2025-07-01 15:22:59.050] 
+Wartości multimetru:
+[2025-07-01 15:22:59.050] MMWVL: 0
+[2025-07-01 15:22:59.050] MMWVH: 0
+[2025-07-01 15:22:59.050] MMWCL: 0
+[2025-07-01 15:22:59.050] MMWCH: 0
+[2025-07-01 15:22:59.050] Pomyślnie odczytano parametry przez USR-N520
+[2025-07-01 15:22:59.050] Odebrane wartości:
+[2025-07-01 15:22:59.050] Napięcie zgrzewania: 0,70V
+[2025-07-01 15:22:59.050] Prąd zgrzewania: 0,00A
+[2025-07-01 15:22:59.050] ADC Napięcia: 0x0000
+[2025-07-01 15:22:59.050] ADC Prądu: 0x0007
+[2025-07-01 15:22:59.050] IVHC-U: 3950
+[2025-07-01 15:22:59.050] IVLC-U: 3970
+[2025-07-01 15:22:59.050] ADCIVHC-U: 1535
+[2025-07-01 15:22:59.050] ADCIVLC-U: 1535
+[2025-07-01 15:22:59.050] IVHC-I: 4780
+[2025-07-01 15:22:59.050] IVLC-I: 520
+[2025-07-01 15:22:59.050] ADCIVHC-I: 1084
+[2025-07-01 15:22:59.050] ADCIVLC-I: 124
+[2025-07-01 15:22:59.050] MMWVL: 0
+[2025-07-01 15:22:59.050] MMWVH: 0
+[2025-07-01 15:22:59.050] MMWCL: 0
+[2025-07-01 15:22:59.050] MMWCH: 0
+[2025-07-01 15:22:59.050] -------------------
+[2025-07-01 15:22:59.050] Odczytano parametry zgrzewania poprawnie.
+[2025-07-01 15:22:59.050] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-07-01 15:22:59.066] Obliczono statystyki dla 74 pomiarów od ostatniego resetu
+[2025-07-01 15:22:59.361] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-07-01 15:22:59.361] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-07-01 15:22:59.361] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-07-01 15:22:59.361] Status: CONNECTED
+[2025-07-01 15:22:59.361] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-07-01 15:22:59.361] ConnectedBaudRate: 115200
+[2025-07-01 15:22:59.361] GlobalCommunicationType: USR_N520
+[2025-07-01 15:22:59.361] WasUSRConnection: True
+[2025-07-01 15:22:59.361] USRConnection: istnieje
+[2025-07-01 15:22:59.361] USRConnectedPort: 192.168.0.7:23
+[2025-07-01 15:22:59.361] USRConnection.IsConnected: true
+[2025-07-01 15:22:59.361] Settings.CommType: TCP
+[2025-07-01 15:22:59.361] Settings.USR_IP: 192.168.0.7
+[2025-07-01 15:22:59.361] Settings.USR_Port: 23
+[2025-07-01 15:22:59.361] Settings.COM_Port: COM4
+[2025-07-01 15:22:59.361] Settings.COM_Baud: 115200
+[2025-07-01 15:22:59.361] === KONIEC DIAGNOSTYKI ===
+[2025-07-01 15:22:59.361] Używam globalnego typu komunikacji: USR_N520
+[2025-07-01 15:22:59.361] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-07-01 15:22:59.361] Próba 1/3 połączenia z USR-N520
+[2025-07-01 15:22:59.361] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-07-01 15:22:59.361] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-07-01 15:22:59.361] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-07-01 15:22:59.361] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-07-01 15:22:59.361] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-07-01 15:22:59.361] 
+[2025-07-01 15:22:59.388] 
+Parametry zgrzewania (USR-N520):
+[2025-07-01 15:22:59.388] Napięcie zgrzewania: 0,70 V
+[2025-07-01 15:22:59.388] Prąd zgrzewania: 0,00 A
+[2025-07-01 15:22:59.388] 
+Wartości ADC:
+[2025-07-01 15:22:59.388] ADC napięcia zgrzewania: 001F
+[2025-07-01 15:22:59.388] ADC prądu zgrzewania: 0000
+[2025-07-01 15:22:59.388] 
+Parametry kalibracji napięcia:
+[2025-07-01 15:22:59.388] IVHC-U: 3950
+[2025-07-01 15:22:59.388] IVLC-U: 3970
+[2025-07-01 15:22:59.388] ADCIVHC-U: 1535
+[2025-07-01 15:22:59.388] ADCIVLC-U: 1535
+[2025-07-01 15:22:59.388] 
+Parametry kalibracji prądu:
+[2025-07-01 15:22:59.388] IVHC-I: 4780
+[2025-07-01 15:22:59.388] IVLC-I: 520
+[2025-07-01 15:22:59.388] ADCIVHC-I: 1084
+[2025-07-01 15:22:59.388] ADCIVLC-I: 124
+[2025-07-01 15:22:59.388] 
+Wartości multimetru:
+[2025-07-01 15:22:59.388] MMWVL: 0
+[2025-07-01 15:22:59.388] MMWVH: 0
+[2025-07-01 15:22:59.388] MMWCL: 0
+[2025-07-01 15:22:59.388] MMWCH: 0
+[2025-07-01 15:22:59.388] Pomyślnie odczytano parametry przez USR-N520
+[2025-07-01 15:22:59.389] Odebrane wartości:
+[2025-07-01 15:22:59.389] Napięcie zgrzewania: 0,70V
+[2025-07-01 15:22:59.389] Prąd zgrzewania: 0,00A
+[2025-07-01 15:22:59.389] ADC Napięcia: 0x001F
+[2025-07-01 15:22:59.389] ADC Prądu: 0x0000
+[2025-07-01 15:22:59.389] IVHC-U: 3950
+[2025-07-01 15:22:59.389] IVLC-U: 3970
+[2025-07-01 15:22:59.389] ADCIVHC-U: 1535
+[2025-07-01 15:22:59.389] ADCIVLC-U: 1535
+[2025-07-01 15:22:59.389] IVHC-I: 4780
+[2025-07-01 15:22:59.389] IVLC-I: 520
+[2025-07-01 15:22:59.389] ADCIVHC-I: 1084
+[2025-07-01 15:22:59.389] ADCIVLC-I: 124
+[2025-07-01 15:22:59.389] MMWVL: 0
+[2025-07-01 15:22:59.389] MMWVH: 0
+[2025-07-01 15:22:59.389] MMWCL: 0
+[2025-07-01 15:22:59.389] MMWCH: 0
+[2025-07-01 15:22:59.389] -------------------
+[2025-07-01 15:22:59.389] Odczytano parametry zgrzewania poprawnie.
+[2025-07-01 15:22:59.389] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-07-01 15:22:59.407] Obliczono statystyki dla 76 pomiarów od ostatniego resetu
+[2025-07-01 15:22:59.701] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-07-01 15:22:59.701] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-07-01 15:22:59.701] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-07-01 15:22:59.701] Status: CONNECTED
+[2025-07-01 15:22:59.701] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-07-01 15:22:59.701] ConnectedBaudRate: 115200
+[2025-07-01 15:22:59.701] GlobalCommunicationType: USR_N520
+[2025-07-01 15:22:59.701] WasUSRConnection: True
+[2025-07-01 15:22:59.701] USRConnection: istnieje
+[2025-07-01 15:22:59.701] USRConnectedPort: 192.168.0.7:23
+[2025-07-01 15:22:59.701] USRConnection.IsConnected: true
+[2025-07-01 15:22:59.701] Settings.CommType: TCP
+[2025-07-01 15:22:59.701] Settings.USR_IP: 192.168.0.7
+[2025-07-01 15:22:59.701] Settings.USR_Port: 23
+[2025-07-01 15:22:59.701] Settings.COM_Port: COM4
+[2025-07-01 15:22:59.701] Settings.COM_Baud: 115200
+[2025-07-01 15:22:59.701] === KONIEC DIAGNOSTYKI ===
+[2025-07-01 15:22:59.701] Używam globalnego typu komunikacji: USR_N520
+[2025-07-01 15:22:59.701] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-07-01 15:22:59.701] Próba 1/3 połączenia z USR-N520
+[2025-07-01 15:22:59.701] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-07-01 15:22:59.701] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-07-01 15:22:59.701] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-07-01 15:22:59.701] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-07-01 15:22:59.701] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-07-01 15:22:59.701] 
+[2025-07-01 15:22:59.729] 
+Parametry zgrzewania (USR-N520):
+[2025-07-01 15:22:59.729] Napięcie zgrzewania: 0,70 V
+[2025-07-01 15:22:59.729] Prąd zgrzewania: 0,00 A
+[2025-07-01 15:22:59.729] 
+Wartości ADC:
+[2025-07-01 15:22:59.729] ADC napięcia zgrzewania: 001F
+[2025-07-01 15:22:59.729] ADC prądu zgrzewania: 0007
+[2025-07-01 15:22:59.729] 
+Parametry kalibracji napięcia:
+[2025-07-01 15:22:59.729] IVHC-U: 3950
+[2025-07-01 15:22:59.729] IVLC-U: 3970
+[2025-07-01 15:22:59.729] ADCIVHC-U: 1535
+[2025-07-01 15:22:59.729] ADCIVLC-U: 1535
+[2025-07-01 15:22:59.729] 
+Parametry kalibracji prądu:
+[2025-07-01 15:22:59.729] IVHC-I: 4780
+[2025-07-01 15:22:59.729] IVLC-I: 520
+[2025-07-01 15:22:59.729] ADCIVHC-I: 1084
+[2025-07-01 15:22:59.729] ADCIVLC-I: 124
+[2025-07-01 15:22:59.729] 
+Wartości multimetru:
+[2025-07-01 15:22:59.729] MMWVL: 0
+[2025-07-01 15:22:59.729] MMWVH: 0
+[2025-07-01 15:22:59.729] MMWCL: 0
+[2025-07-01 15:22:59.729] MMWCH: 0
+[2025-07-01 15:22:59.729] Pomyślnie odczytano parametry przez USR-N520
+[2025-07-01 15:22:59.729] Odebrane wartości:
+[2025-07-01 15:22:59.729] Napięcie zgrzewania: 0,70V
+[2025-07-01 15:22:59.729] Prąd zgrzewania: 0,00A
+[2025-07-01 15:22:59.729] ADC Napięcia: 0x001F
+[2025-07-01 15:22:59.729] ADC Prądu: 0x0007
+[2025-07-01 15:22:59.729] IVHC-U: 3950
+[2025-07-01 15:22:59.729] IVLC-U: 3970
+[2025-07-01 15:22:59.729] ADCIVHC-U: 1535
+[2025-07-01 15:22:59.729] ADCIVLC-U: 1535
+[2025-07-01 15:22:59.729] IVHC-I: 4780
+[2025-07-01 15:22:59.729] IVLC-I: 520
+[2025-07-01 15:22:59.729] ADCIVHC-I: 1084
+[2025-07-01 15:22:59.729] ADCIVLC-I: 124
+[2025-07-01 15:22:59.729] MMWVL: 0
+[2025-07-01 15:22:59.729] MMWVH: 0
+[2025-07-01 15:22:59.729] MMWCL: 0
+[2025-07-01 15:22:59.729] MMWCH: 0
+[2025-07-01 15:22:59.729] -------------------
+[2025-07-01 15:22:59.729] Odczytano parametry zgrzewania poprawnie.
+[2025-07-01 15:22:59.729] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-07-01 15:22:59.747] Obliczono statystyki dla 78 pomiarów od ostatniego resetu
+[2025-07-01 15:23:00.044] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-07-01 15:23:00.044] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-07-01 15:23:00.044] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-07-01 15:23:00.044] Status: CONNECTED
+[2025-07-01 15:23:00.044] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-07-01 15:23:00.044] ConnectedBaudRate: 115200
+[2025-07-01 15:23:00.044] GlobalCommunicationType: USR_N520
+[2025-07-01 15:23:00.044] WasUSRConnection: True
+[2025-07-01 15:23:00.044] USRConnection: istnieje
+[2025-07-01 15:23:00.044] USRConnectedPort: 192.168.0.7:23
+[2025-07-01 15:23:00.044] USRConnection.IsConnected: true
+[2025-07-01 15:23:00.044] Settings.CommType: TCP
+[2025-07-01 15:23:00.044] Settings.USR_IP: 192.168.0.7
+[2025-07-01 15:23:00.044] Settings.USR_Port: 23
+[2025-07-01 15:23:00.044] Settings.COM_Port: COM4
+[2025-07-01 15:23:00.044] Settings.COM_Baud: 115200
+[2025-07-01 15:23:00.044] === KONIEC DIAGNOSTYKI ===
+[2025-07-01 15:23:00.044] Używam globalnego typu komunikacji: USR_N520
+[2025-07-01 15:23:00.044] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-07-01 15:23:00.044] Próba 1/3 połączenia z USR-N520
+[2025-07-01 15:23:00.044] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-07-01 15:23:00.044] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-07-01 15:23:00.044] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-07-01 15:23:00.044] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-07-01 15:23:00.044] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-07-01 15:23:00.044] 
+[2025-07-01 15:23:00.071] 
+Parametry zgrzewania (USR-N520):
+[2025-07-01 15:23:00.071] Napięcie zgrzewania: 0,70 V
+[2025-07-01 15:23:00.071] Prąd zgrzewania: 0,00 A
+[2025-07-01 15:23:00.071] 
+Wartości ADC:
+[2025-07-01 15:23:00.071] ADC napięcia zgrzewania: 001F
+[2025-07-01 15:23:00.071] ADC prądu zgrzewania: 0006
+[2025-07-01 15:23:00.071] 
+Parametry kalibracji napięcia:
+[2025-07-01 15:23:00.071] IVHC-U: 3950
+[2025-07-01 15:23:00.071] IVLC-U: 3970
+[2025-07-01 15:23:00.071] ADCIVHC-U: 1535
+[2025-07-01 15:23:00.071] ADCIVLC-U: 1535
+[2025-07-01 15:23:00.071] 
+Parametry kalibracji prądu:
+[2025-07-01 15:23:00.071] IVHC-I: 4780
+[2025-07-01 15:23:00.071] IVLC-I: 520
+[2025-07-01 15:23:00.071] ADCIVHC-I: 1084
+[2025-07-01 15:23:00.071] ADCIVLC-I: 124
+[2025-07-01 15:23:00.071] 
+Wartości multimetru:
+[2025-07-01 15:23:00.071] MMWVL: 0
+[2025-07-01 15:23:00.071] MMWVH: 0
+[2025-07-01 15:23:00.071] MMWCL: 0
+[2025-07-01 15:23:00.071] MMWCH: 0
+[2025-07-01 15:23:00.071] Pomyślnie odczytano parametry przez USR-N520
+[2025-07-01 15:23:00.073] Odebrane wartości:
+[2025-07-01 15:23:00.073] Napięcie zgrzewania: 0,70V
+[2025-07-01 15:23:00.073] Prąd zgrzewania: 0,00A
+[2025-07-01 15:23:00.073] ADC Napięcia: 0x001F
+[2025-07-01 15:23:00.073] ADC Prądu: 0x0006
+[2025-07-01 15:23:00.073] IVHC-U: 3950
+[2025-07-01 15:23:00.073] IVLC-U: 3970
+[2025-07-01 15:23:00.073] ADCIVHC-U: 1535
+[2025-07-01 15:23:00.073] ADCIVLC-U: 1535
+[2025-07-01 15:23:00.073] IVHC-I: 4780
+[2025-07-01 15:23:00.073] IVLC-I: 520
+[2025-07-01 15:23:00.073] ADCIVHC-I: 1084
+[2025-07-01 15:23:00.073] ADCIVLC-I: 124
+[2025-07-01 15:23:00.073] MMWVL: 0
+[2025-07-01 15:23:00.073] MMWVH: 0
+[2025-07-01 15:23:00.073] MMWCL: 0
+[2025-07-01 15:23:00.073] MMWCH: 0
+[2025-07-01 15:23:00.073] -------------------
+[2025-07-01 15:23:00.073] Odczytano parametry zgrzewania poprawnie.
+[2025-07-01 15:23:00.073] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-07-01 15:23:00.089] Obliczono statystyki dla 80 pomiarów od ostatniego resetu
+[2025-07-01 15:23:00.385] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-07-01 15:23:00.385] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-07-01 15:23:00.385] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-07-01 15:23:00.385] Status: CONNECTED
+[2025-07-01 15:23:00.385] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-07-01 15:23:00.385] ConnectedBaudRate: 115200
+[2025-07-01 15:23:00.385] GlobalCommunicationType: USR_N520
+[2025-07-01 15:23:00.385] WasUSRConnection: True
+[2025-07-01 15:23:00.385] USRConnection: istnieje
+[2025-07-01 15:23:00.385] USRConnectedPort: 192.168.0.7:23
+[2025-07-01 15:23:00.385] USRConnection.IsConnected: true
+[2025-07-01 15:23:00.385] Settings.CommType: TCP
+[2025-07-01 15:23:00.385] Settings.USR_IP: 192.168.0.7
+[2025-07-01 15:23:00.385] Settings.USR_Port: 23
+[2025-07-01 15:23:00.385] Settings.COM_Port: COM4
+[2025-07-01 15:23:00.385] Settings.COM_Baud: 115200
+[2025-07-01 15:23:00.385] === KONIEC DIAGNOSTYKI ===
+[2025-07-01 15:23:00.385] Używam globalnego typu komunikacji: USR_N520
+[2025-07-01 15:23:00.385] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-07-01 15:23:00.385] Próba 1/3 połączenia z USR-N520
+[2025-07-01 15:23:00.385] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-07-01 15:23:00.385] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-07-01 15:23:00.386] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-07-01 15:23:00.386] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-07-01 15:23:00.386] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-07-01 15:23:00.386] 
+[2025-07-01 15:23:00.412] 
+Parametry zgrzewania (USR-N520):
+[2025-07-01 15:23:00.412] Napięcie zgrzewania: 0,70 V
+[2025-07-01 15:23:00.412] Prąd zgrzewania: 0,00 A
+[2025-07-01 15:23:00.412] 
+Wartości ADC:
+[2025-07-01 15:23:00.412] ADC napięcia zgrzewania: 001F
+[2025-07-01 15:23:00.412] ADC prądu zgrzewania: 0006
+[2025-07-01 15:23:00.412] 
+Parametry kalibracji napięcia:
+[2025-07-01 15:23:00.412] IVHC-U: 3950
+[2025-07-01 15:23:00.412] IVLC-U: 3970
+[2025-07-01 15:23:00.412] ADCIVHC-U: 1535
+[2025-07-01 15:23:00.412] ADCIVLC-U: 1535
+[2025-07-01 15:23:00.412] 
+Parametry kalibracji prądu:
+[2025-07-01 15:23:00.412] IVHC-I: 4780
+[2025-07-01 15:23:00.412] IVLC-I: 520
+[2025-07-01 15:23:00.412] ADCIVHC-I: 1084
+[2025-07-01 15:23:00.412] ADCIVLC-I: 124
+[2025-07-01 15:23:00.412] 
+Wartości multimetru:
+[2025-07-01 15:23:00.412] MMWVL: 0
+[2025-07-01 15:23:00.412] MMWVH: 0
+[2025-07-01 15:23:00.412] MMWCL: 0
+[2025-07-01 15:23:00.412] MMWCH: 0
+[2025-07-01 15:23:00.412] Pomyślnie odczytano parametry przez USR-N520
+[2025-07-01 15:23:00.415] Odebrane wartości:
+[2025-07-01 15:23:00.415] Napięcie zgrzewania: 0,70V
+[2025-07-01 15:23:00.415] Prąd zgrzewania: 0,00A
+[2025-07-01 15:23:00.415] ADC Napięcia: 0x001F
+[2025-07-01 15:23:00.415] ADC Prądu: 0x0006
+[2025-07-01 15:23:00.415] IVHC-U: 3950
+[2025-07-01 15:23:00.415] IVLC-U: 3970
+[2025-07-01 15:23:00.415] ADCIVHC-U: 1535
+[2025-07-01 15:23:00.415] ADCIVLC-U: 1535
+[2025-07-01 15:23:00.415] IVHC-I: 4780
+[2025-07-01 15:23:00.415] IVLC-I: 520
+[2025-07-01 15:23:00.415] ADCIVHC-I: 1084
+[2025-07-01 15:23:00.415] ADCIVLC-I: 124
+[2025-07-01 15:23:00.415] MMWVL: 0
+[2025-07-01 15:23:00.415] MMWVH: 0
+[2025-07-01 15:23:00.415] MMWCL: 0
+[2025-07-01 15:23:00.415] MMWCH: 0
+[2025-07-01 15:23:00.415] -------------------
+[2025-07-01 15:23:00.415] Odczytano parametry zgrzewania poprawnie.
+[2025-07-01 15:23:00.415] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-07-01 15:23:00.430] Obliczono statystyki dla 82 pomiarów od ostatniego resetu
+[2025-07-01 15:23:00.745] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-07-01 15:23:00.745] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-07-01 15:23:00.745] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-07-01 15:23:00.745] Status: CONNECTED
+[2025-07-01 15:23:00.745] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-07-01 15:23:00.745] ConnectedBaudRate: 115200
+[2025-07-01 15:23:00.745] GlobalCommunicationType: USR_N520
+[2025-07-01 15:23:00.745] WasUSRConnection: True
+[2025-07-01 15:23:00.745] USRConnection: istnieje
+[2025-07-01 15:23:00.745] USRConnectedPort: 192.168.0.7:23
+[2025-07-01 15:23:00.745] USRConnection.IsConnected: true
+[2025-07-01 15:23:00.745] Settings.CommType: TCP
+[2025-07-01 15:23:00.745] Settings.USR_IP: 192.168.0.7
+[2025-07-01 15:23:00.745] Settings.USR_Port: 23
+[2025-07-01 15:23:00.745] Settings.COM_Port: COM4
+[2025-07-01 15:23:00.745] Settings.COM_Baud: 115200
+[2025-07-01 15:23:00.745] === KONIEC DIAGNOSTYKI ===
+[2025-07-01 15:23:00.745] Używam globalnego typu komunikacji: USR_N520
+[2025-07-01 15:23:00.745] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-07-01 15:23:00.745] Próba 1/3 połączenia z USR-N520
+[2025-07-01 15:23:00.745] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-07-01 15:23:00.745] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-07-01 15:23:00.745] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-07-01 15:23:00.745] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-07-01 15:23:00.745] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-07-01 15:23:00.745] 
+[2025-07-01 15:23:00.772] 
+Parametry zgrzewania (USR-N520):
+[2025-07-01 15:23:00.772] Napięcie zgrzewania: 0,70 V
+[2025-07-01 15:23:00.772] Prąd zgrzewania: 0,00 A
+[2025-07-01 15:23:00.772] 
+Wartości ADC:
+[2025-07-01 15:23:00.772] ADC napięcia zgrzewania: 001F
+[2025-07-01 15:23:00.772] ADC prądu zgrzewania: 0006
+[2025-07-01 15:23:00.772] 
+Parametry kalibracji napięcia:
+[2025-07-01 15:23:00.772] IVHC-U: 3950
+[2025-07-01 15:23:00.772] IVLC-U: 3970
+[2025-07-01 15:23:00.772] ADCIVHC-U: 1535
+[2025-07-01 15:23:00.772] ADCIVLC-U: 1535
+[2025-07-01 15:23:00.772] 
+Parametry kalibracji prądu:
+[2025-07-01 15:23:00.772] IVHC-I: 4780
+[2025-07-01 15:23:00.772] IVLC-I: 520
+[2025-07-01 15:23:00.772] ADCIVHC-I: 1084
+[2025-07-01 15:23:00.772] ADCIVLC-I: 124
+[2025-07-01 15:23:00.772] 
+Wartości multimetru:
+[2025-07-01 15:23:00.772] MMWVL: 0
+[2025-07-01 15:23:00.772] MMWVH: 0
+[2025-07-01 15:23:00.772] MMWCL: 0
+[2025-07-01 15:23:00.772] MMWCH: 0
+[2025-07-01 15:23:00.772] Pomyślnie odczytano parametry przez USR-N520
+[2025-07-01 15:23:00.772] Odebrane wartości:
+[2025-07-01 15:23:00.772] Napięcie zgrzewania: 0,70V
+[2025-07-01 15:23:00.772] Prąd zgrzewania: 0,00A
+[2025-07-01 15:23:00.772] ADC Napięcia: 0x001F
+[2025-07-01 15:23:00.772] ADC Prądu: 0x0006
+[2025-07-01 15:23:00.772] IVHC-U: 3950
+[2025-07-01 15:23:00.772] IVLC-U: 3970
+[2025-07-01 15:23:00.772] ADCIVHC-U: 1535
+[2025-07-01 15:23:00.772] ADCIVLC-U: 1535
+[2025-07-01 15:23:00.772] IVHC-I: 4780
+[2025-07-01 15:23:00.772] IVLC-I: 520
+[2025-07-01 15:23:00.772] ADCIVHC-I: 1084
+[2025-07-01 15:23:00.772] ADCIVLC-I: 124
+[2025-07-01 15:23:00.772] MMWVL: 0
+[2025-07-01 15:23:00.772] MMWVH: 0
+[2025-07-01 15:23:00.772] MMWCL: 0
+[2025-07-01 15:23:00.772] MMWCH: 0
+[2025-07-01 15:23:00.772] -------------------
+[2025-07-01 15:23:00.772] Odczytano parametry zgrzewania poprawnie.
+[2025-07-01 15:23:00.773] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-07-01 15:23:00.787] Obliczono statystyki dla 84 pomiarów od ostatniego resetu
+[2025-07-01 15:23:01.097] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-07-01 15:23:01.097] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-07-01 15:23:01.097] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-07-01 15:23:01.097] Status: CONNECTED
+[2025-07-01 15:23:01.097] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-07-01 15:23:01.097] ConnectedBaudRate: 115200
+[2025-07-01 15:23:01.097] GlobalCommunicationType: USR_N520
+[2025-07-01 15:23:01.097] WasUSRConnection: True
+[2025-07-01 15:23:01.097] USRConnection: istnieje
+[2025-07-01 15:23:01.097] USRConnectedPort: 192.168.0.7:23
+[2025-07-01 15:23:01.097] USRConnection.IsConnected: true
+[2025-07-01 15:23:01.097] Settings.CommType: TCP
+[2025-07-01 15:23:01.098] Settings.USR_IP: 192.168.0.7
+[2025-07-01 15:23:01.098] Settings.USR_Port: 23
+[2025-07-01 15:23:01.098] Settings.COM_Port: COM4
+[2025-07-01 15:23:01.098] Settings.COM_Baud: 115200
+[2025-07-01 15:23:01.098] === KONIEC DIAGNOSTYKI ===
+[2025-07-01 15:23:01.098] Używam globalnego typu komunikacji: USR_N520
+[2025-07-01 15:23:01.098] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-07-01 15:23:01.098] Próba 1/3 połączenia z USR-N520
+[2025-07-01 15:23:01.098] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-07-01 15:23:01.098] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-07-01 15:23:01.098] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-07-01 15:23:01.098] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-07-01 15:23:01.098] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-07-01 15:23:01.098] 
+[2025-07-01 15:23:01.125] 
+Parametry zgrzewania (USR-N520):
+[2025-07-01 15:23:01.125] Napięcie zgrzewania: 0,70 V
+[2025-07-01 15:23:01.125] Prąd zgrzewania: 0,00 A
+[2025-07-01 15:23:01.125] 
+Wartości ADC:
+[2025-07-01 15:23:01.125] ADC napięcia zgrzewania: 001F
+[2025-07-01 15:23:01.125] ADC prądu zgrzewania: 0007
+[2025-07-01 15:23:01.125] 
+Parametry kalibracji napięcia:
+[2025-07-01 15:23:01.125] IVHC-U: 3950
+[2025-07-01 15:23:01.125] IVLC-U: 3970
+[2025-07-01 15:23:01.125] ADCIVHC-U: 1535
+[2025-07-01 15:23:01.125] ADCIVLC-U: 1535
+[2025-07-01 15:23:01.125] 
+Parametry kalibracji prądu:
+[2025-07-01 15:23:01.125] IVHC-I: 4780
+[2025-07-01 15:23:01.125] IVLC-I: 520
+[2025-07-01 15:23:01.125] ADCIVHC-I: 1084
+[2025-07-01 15:23:01.125] ADCIVLC-I: 124
+[2025-07-01 15:23:01.125] 
+Wartości multimetru:
+[2025-07-01 15:23:01.125] MMWVL: 0
+[2025-07-01 15:23:01.125] MMWVH: 0
+[2025-07-01 15:23:01.125] MMWCL: 0
+[2025-07-01 15:23:01.125] MMWCH: 0
+[2025-07-01 15:23:01.125] Pomyślnie odczytano parametry przez USR-N520
+[2025-07-01 15:23:01.128] Odebrane wartości:
+[2025-07-01 15:23:01.128] Napięcie zgrzewania: 0,70V
+[2025-07-01 15:23:01.128] Prąd zgrzewania: 0,00A
+[2025-07-01 15:23:01.128] ADC Napięcia: 0x001F
+[2025-07-01 15:23:01.128] ADC Prądu: 0x0007
+[2025-07-01 15:23:01.128] IVHC-U: 3950
+[2025-07-01 15:23:01.128] IVLC-U: 3970
+[2025-07-01 15:23:01.128] ADCIVHC-U: 1535
+[2025-07-01 15:23:01.128] ADCIVLC-U: 1535
+[2025-07-01 15:23:01.128] IVHC-I: 4780
+[2025-07-01 15:23:01.128] IVLC-I: 520
+[2025-07-01 15:23:01.128] ADCIVHC-I: 1084
+[2025-07-01 15:23:01.128] ADCIVLC-I: 124
+[2025-07-01 15:23:01.128] MMWVL: 0
+[2025-07-01 15:23:01.128] MMWVH: 0
+[2025-07-01 15:23:01.128] MMWCL: 0
+[2025-07-01 15:23:01.128] MMWCH: 0
+[2025-07-01 15:23:01.128] -------------------
+[2025-07-01 15:23:01.128] Odczytano parametry zgrzewania poprawnie.
+[2025-07-01 15:23:01.128] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-07-01 15:23:01.143] Obliczono statystyki dla 86 pomiarów od ostatniego resetu
+[2025-07-01 15:23:01.439] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-07-01 15:23:01.439] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-07-01 15:23:01.439] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-07-01 15:23:01.439] Status: CONNECTED
+[2025-07-01 15:23:01.439] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-07-01 15:23:01.439] ConnectedBaudRate: 115200
+[2025-07-01 15:23:01.439] GlobalCommunicationType: USR_N520
+[2025-07-01 15:23:01.439] WasUSRConnection: True
+[2025-07-01 15:23:01.439] USRConnection: istnieje
+[2025-07-01 15:23:01.439] USRConnectedPort: 192.168.0.7:23
+[2025-07-01 15:23:01.439] USRConnection.IsConnected: true
+[2025-07-01 15:23:01.439] Settings.CommType: TCP
+[2025-07-01 15:23:01.439] Settings.USR_IP: 192.168.0.7
+[2025-07-01 15:23:01.439] Settings.USR_Port: 23
+[2025-07-01 15:23:01.439] Settings.COM_Port: COM4
+[2025-07-01 15:23:01.439] Settings.COM_Baud: 115200
+[2025-07-01 15:23:01.439] === KONIEC DIAGNOSTYKI ===
+[2025-07-01 15:23:01.439] Używam globalnego typu komunikacji: USR_N520
+[2025-07-01 15:23:01.439] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-07-01 15:23:01.439] Próba 1/3 połączenia z USR-N520
+[2025-07-01 15:23:01.439] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-07-01 15:23:01.439] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-07-01 15:23:01.439] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-07-01 15:23:01.439] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-07-01 15:23:01.439] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-07-01 15:23:01.439] 
+[2025-07-01 15:23:01.466] 
+Parametry zgrzewania (USR-N520):
+[2025-07-01 15:23:01.466] Napięcie zgrzewania: 0,70 V
+[2025-07-01 15:23:01.466] Prąd zgrzewania: 0,00 A
+[2025-07-01 15:23:01.466] 
+Wartości ADC:
+[2025-07-01 15:23:01.466] ADC napięcia zgrzewania: 0000
+[2025-07-01 15:23:01.466] ADC prądu zgrzewania: 0007
+[2025-07-01 15:23:01.466] 
+Parametry kalibracji napięcia:
+[2025-07-01 15:23:01.466] IVHC-U: 3950
+[2025-07-01 15:23:01.466] IVLC-U: 3970
+[2025-07-01 15:23:01.466] ADCIVHC-U: 1535
+[2025-07-01 15:23:01.466] ADCIVLC-U: 1535
+[2025-07-01 15:23:01.466] 
+Parametry kalibracji prądu:
+[2025-07-01 15:23:01.466] IVHC-I: 4780
+[2025-07-01 15:23:01.466] IVLC-I: 520
+[2025-07-01 15:23:01.466] ADCIVHC-I: 1084
+[2025-07-01 15:23:01.466] ADCIVLC-I: 124
+[2025-07-01 15:23:01.466] 
+Wartości multimetru:
+[2025-07-01 15:23:01.466] MMWVL: 0
+[2025-07-01 15:23:01.466] MMWVH: 0
+[2025-07-01 15:23:01.466] MMWCL: 0
+[2025-07-01 15:23:01.466] MMWCH: 0
+[2025-07-01 15:23:01.466] Pomyślnie odczytano parametry przez USR-N520
+[2025-07-01 15:23:01.469] Odebrane wartości:
+[2025-07-01 15:23:01.469] Napięcie zgrzewania: 0,70V
+[2025-07-01 15:23:01.469] Prąd zgrzewania: 0,00A
+[2025-07-01 15:23:01.469] ADC Napięcia: 0x0000
+[2025-07-01 15:23:01.469] ADC Prądu: 0x0007
+[2025-07-01 15:23:01.469] IVHC-U: 3950
+[2025-07-01 15:23:01.469] IVLC-U: 3970
+[2025-07-01 15:23:01.469] ADCIVHC-U: 1535
+[2025-07-01 15:23:01.469] ADCIVLC-U: 1535
+[2025-07-01 15:23:01.469] IVHC-I: 4780
+[2025-07-01 15:23:01.469] IVLC-I: 520
+[2025-07-01 15:23:01.469] ADCIVHC-I: 1084
+[2025-07-01 15:23:01.469] ADCIVLC-I: 124
+[2025-07-01 15:23:01.469] MMWVL: 0
+[2025-07-01 15:23:01.469] MMWVH: 0
+[2025-07-01 15:23:01.469] MMWCL: 0
+[2025-07-01 15:23:01.469] MMWCH: 0
+[2025-07-01 15:23:01.469] -------------------
+[2025-07-01 15:23:01.469] Odczytano parametry zgrzewania poprawnie.
+[2025-07-01 15:23:01.469] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-07-01 15:23:01.485] Obliczono statystyki dla 88 pomiarów od ostatniego resetu
+[2025-07-01 15:23:01.778] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
+[2025-07-01 15:23:01.778] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-07-01 15:23:01.778] === DIAGNOSTYKA STANU POŁĄCZENIA ===
+[2025-07-01 15:23:01.778] Status: CONNECTED
+[2025-07-01 15:23:01.778] ConnectedPort: USR-N520 192.168.0.7:23
+[2025-07-01 15:23:01.778] ConnectedBaudRate: 115200
+[2025-07-01 15:23:01.778] GlobalCommunicationType: USR_N520
+[2025-07-01 15:23:01.778] WasUSRConnection: True
+[2025-07-01 15:23:01.778] USRConnection: istnieje
+[2025-07-01 15:23:01.778] USRConnectedPort: 192.168.0.7:23
+[2025-07-01 15:23:01.778] USRConnection.IsConnected: true
+[2025-07-01 15:23:01.778] Settings.CommType: TCP
+[2025-07-01 15:23:01.778] Settings.USR_IP: 192.168.0.7
+[2025-07-01 15:23:01.778] Settings.USR_Port: 23
+[2025-07-01 15:23:01.778] Settings.COM_Port: COM4
+[2025-07-01 15:23:01.778] Settings.COM_Baud: 115200
+[2025-07-01 15:23:01.778] === KONIEC DIAGNOSTYKI ===
+[2025-07-01 15:23:01.778] Używam globalnego typu komunikacji: USR_N520
+[2025-07-01 15:23:01.778] WYBIERAM: ReadWeldParametersThroughUSR
+[2025-07-01 15:23:01.778] Próba 1/3 połączenia z USR-N520
+[2025-07-01 15:23:01.778] Połączenie USR-N520 jest aktywne, próbuję odczytać parametry
+[2025-07-01 15:23:01.778] Wysyłanie komendy odczytu parametrów zgrzewania przez USR-N520:
+[2025-07-01 15:23:01.778] Bajt:   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+[2025-07-01 15:23:01.778] HEX:    74 5A 56 37 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 EE FB 0D 0A
+[2025-07-01 15:23:01.778] ASCII:  t Z V 7 X X X X X X X X X X X X X X X X X X X X X X . . . .
+[2025-07-01 15:23:01.778] 
+[2025-07-01 15:23:01.806] 
+Parametry zgrzewania (USR-N520):
+[2025-07-01 15:23:01.806] Napięcie zgrzewania: 0,70 V
+[2025-07-01 15:23:01.806] Prąd zgrzewania: 0,00 A
+[2025-07-01 15:23:01.806] 
+Wartości ADC:
+[2025-07-01 15:23:01.806] ADC napięcia zgrzewania: 001F
+[2025-07-01 15:23:01.806] ADC prądu zgrzewania: 0006
+[2025-07-01 15:23:01.806] 
+Parametry kalibracji napięcia:
+[2025-07-01 15:23:01.806] IVHC-U: 3950
+[2025-07-01 15:23:01.806] IVLC-U: 3970
+[2025-07-01 15:23:01.806] ADCIVHC-U: 1535
+[2025-07-01 15:23:01.806] ADCIVLC-U: 1535
+[2025-07-01 15:23:01.806] 
+Parametry kalibracji prądu:
+[2025-07-01 15:23:01.806] IVHC-I: 4780
+[2025-07-01 15:23:01.806] IVLC-I: 520
+[2025-07-01 15:23:01.806] ADCIVHC-I: 1084
+[2025-07-01 15:23:01.806] ADCIVLC-I: 124
+[2025-07-01 15:23:01.806] 
+Wartości multimetru:
+[2025-07-01 15:23:01.806] MMWVL: 0
+[2025-07-01 15:23:01.806] MMWVH: 0
+[2025-07-01 15:23:01.806] MMWCL: 0
+[2025-07-01 15:23:01.806] MMWCH: 0
+[2025-07-01 15:23:01.806] Pomyślnie odczytano parametry przez USR-N520
+[2025-07-01 15:23:01.806] Odebrane wartości:
+[2025-07-01 15:23:01.806] Napięcie zgrzewania: 0,70V
+[2025-07-01 15:23:01.806] Prąd zgrzewania: 0,00A
+[2025-07-01 15:23:01.806] ADC Napięcia: 0x001F
+[2025-07-01 15:23:01.806] ADC Prądu: 0x0006
+[2025-07-01 15:23:01.806] IVHC-U: 3950
+[2025-07-01 15:23:01.806] IVLC-U: 3970
+[2025-07-01 15:23:01.806] ADCIVHC-U: 1535
+[2025-07-01 15:23:01.806] ADCIVLC-U: 1535
+[2025-07-01 15:23:01.806] IVHC-I: 4780
+[2025-07-01 15:23:01.806] IVLC-I: 520
+[2025-07-01 15:23:01.806] ADCIVHC-I: 1084
+[2025-07-01 15:23:01.806] ADCIVLC-I: 124
+[2025-07-01 15:23:01.806] MMWVL: 0
+[2025-07-01 15:23:01.806] MMWVH: 0
+[2025-07-01 15:23:01.806] MMWCL: 0
+[2025-07-01 15:23:01.806] MMWCH: 0
+[2025-07-01 15:23:01.806] -------------------
+[2025-07-01 15:23:01.806] Odczytano parametry zgrzewania poprawnie.
+[2025-07-01 15:23:01.806] ✓ Parametry zgrzewania zostały odczytane i wyświetlone.
+[2025-07-01 15:23:01.824] Obliczono statystyki dla 90 pomiarów od ostatniego resetu
+[2025-07-01 15:23:01.859] Zapisano 90 pomiarów do pliku measurement_data.csv
+[2025-07-01 15:23:01.859] ⏸ Pomiar parametrów zatrzymany
+[2025-07-01 15:24:00.181] Wczytano 90 pomiarów z pliku measurement_data.csv
+[2025-07-01 15:24:00.198] Obliczono statystyki dla 90 pomiarów od ostatniego resetu
+[2025-07-01 15:24:22.415] Wczytano 90 pomiarów z pliku measurement_data.csv
+[2025-07-01 15:24:22.432] Obliczono statystyki dla 90 pomiarów od ostatniego resetu
+[2025-07-01 15:26:08.077] Wczytano 90 pomiarów z pliku measurement_data.csv
+[2025-07-01 15:26:08.094] Obliczono statystyki dla 90 pomiarów od ostatniego resetu

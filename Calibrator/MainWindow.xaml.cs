@@ -444,8 +444,8 @@ public partial class MainWindow : Window
     {
         if (logNeedsUpdate)
         {
-            txtLog.Text = logBuffer.ToString();
-            txtLog.ScrollToEnd();
+            logPanel.ClearLog();
+            logPanel.AppendLog(logBuffer.ToString());
             logNeedsUpdate = false;
         }
     }
@@ -816,15 +816,15 @@ public partial class MainWindow : Window
         if (logPanelCollapsed)
         {
             // Rozwiń panel logów
-            LogPanel.Height = lastLogPanelHeight;
+            logPanel.Height = lastLogPanelHeight;
             txtToggleLogIcon.Text = "▼";
             logPanelCollapsed = false;
         }
         else
         {
             // Zwiń panel logów
-            lastLogPanelHeight = LogPanel.Height;
-            LogPanel.Height = 0;
+            lastLogPanelHeight = logPanel.Height;
+            logPanel.Height = 0;
             txtToggleLogIcon.Text = "▲";
             logPanelCollapsed = true;
         }
@@ -906,7 +906,7 @@ public partial class MainWindow : Window
         if (!logPanelCollapsed && e.HeightChanged)
         {
             var settings = WindowSettings.Load();
-            double newHeight = LogPanel.RowDefinitions[1].ActualHeight;
+            double newHeight = logPanel.ActualHeight;
             settings.LogPanelHeight = newHeight;
             settings.Save();
             Log($"Zapisano wysokość logów: {newHeight:F0} px do ustawień.");
@@ -915,7 +915,7 @@ public partial class MainWindow : Window
 
     private void LogPanelSplitter_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
     {
-        var newHeight = LogPanel.ActualHeight;
+        var newHeight = logPanel.ActualHeight;
         lastLogPanelHeight = newHeight;
         var settings = WindowSettings.Load();
         settings.LogPanelHeight = newHeight;
@@ -1088,7 +1088,7 @@ public partial class MainWindow : Window
     {
         try
         {
-            txtLog.Clear();
+            logPanel.ClearLog();
             logBuffer.Clear();
             currentLogLines = 0;
             // Nie logujemy informacji o wyczyszczeniu logu
@@ -1103,9 +1103,9 @@ public partial class MainWindow : Window
     {
         try
         {
-            if (!string.IsNullOrEmpty(txtLog.Text))
+            if (!string.IsNullOrEmpty(logPanel.GetLogText()))
             {
-                Clipboard.SetText(txtLog.Text);
+                Clipboard.SetText(logPanel.GetLogText() ?? "");
                 // Nie logujemy informacji o skopiowaniu
             }
             // Nie logujemy gdy log jest pusty
@@ -1120,9 +1120,9 @@ public partial class MainWindow : Window
     {
         try
         {
-            if (!string.IsNullOrEmpty(txtLog.SelectedText))
+            if (!string.IsNullOrEmpty(logPanel.GetSelectedText()))
             {
-                Clipboard.SetText(txtLog.SelectedText);
+                Clipboard.SetText(logPanel.GetSelectedText() ?? "");
                 // Nie logujemy informacji o skopiowaniu zaznaczonego tekstu
             }
             // Nie logujemy gdy nic nie jest zaznaczone
@@ -1325,7 +1325,7 @@ public partial class MainWindow : Window
                 {
                     File.Delete(logPath);
                 }
-                txtLog.Clear();
+                logPanel.ClearLog();
                 LoggerService.Instance.LoadLogHistory();
             }
         }
