@@ -217,14 +217,14 @@
                 <TabItem Header="Parametry zgrzewania"
                          Tag="weld_parameters">
                     <controls:WeldParametersTab x:Name="weldParametersTab"
-                            Margin="0,0,6,0"/>
+                                                Margin="0,0,6,0"/>
                 </TabItem>
                 <!--  Tab 2: Parametry kalibracji  -->
                 <TabItem Header="Parametry kalibracji"
                          Tag="calibration_parameters">
                     <controls:CalibrationParametersTab x:Name="calibrationParametersTab"/>
                 </TabItem>
-                <TabItem Header="Historia pomiarów"
+                <TabItem Header="Historia kalibracji"
                          Tag="measurement_history">
                     <controls:MeasurementHistoryTab x:Name="measurementHistoryTab"/>
                 </TabItem>
