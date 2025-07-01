@@ -12,370 +12,382 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"
+                    MinWidth="150"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="2*"
+                    MinWidth="300"/>
+        </Grid.ColumnDefinitions>
 
-        <!--  Górny wiersz: podzielony na 2 kolumny  -->
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="6"/>
-                <ColumnDefinition Width="2*"/>
-            </Grid.ColumnDefinitions>
+        <!--  Lewa kolumna: tabela pomiarów  -->
+        <DataGrid
+            x:Name="dataGridMeasurements"
+            Grid.Row="0"
+            Grid.Column="0"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            AutoGenerateColumns="False"
+            CanUserAddRows="False"
+            CanUserDeleteRows="False"
+            GridLinesVisibility="Horizontal"
+            HeadersVisibility="All"
+            IsReadOnly="True"
+            RenderTransformOrigin="0.5,0.5"
+            FontSize="18"
+            BorderBrush="#E0E0E0"
+            Margin="5">
+            <DataGrid.Resources>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="BorderThickness"
+                            Value="0,0,0,1"/>
+                    <Setter Property="BorderBrush"
+                            Value="#F5F5F5"/>
+                    <Setter Property="Padding"
+                            Value="6,2,6,2"/>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="-0.216"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="-0.996"/>
+                </TransformGroup>
+            </DataGrid.RenderTransform>
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="70"
+                                    Binding="{Binding Index}"
+                                    Header="Lp."/>
+                <DataGridTextColumn Width="*"
+                                    Binding="{Binding Timestamp}"
+                                    Header="Czas"/>
+                <DataGridTextColumn Width="*"
+                                    Binding="{Binding Voltage, StringFormat=F2}"
+                                    Header="Napięcie [V]">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="Foreground"
+                                    Value="#2196F3"/>
+                            <Setter Property="FontWeight"
+                                    Value="Bold"/>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Width="*"
+                                    Binding="{Binding Current, StringFormat=F2}"
+                                    Header="Prąd [A]">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="Foreground"
+                                    Value="Purple"/>
+                            <Setter Property="FontWeight"
+                                    Value="Bold"/>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Width="*"
+                                    Binding="{Binding VoltageADC, StringFormat=D5}"
+                                    Header="ADC Napięcia">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="Foreground"
+                                    Value="#2196F3"/>
+                            <Setter Property="FontWeight"
+                                    Value="Bold"/>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Width="*"
+                                    Binding="{Binding CurrentADC, StringFormat=D5}"
+                                    Header="ADC Prądu">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="Foreground"
+                                    Value="Purple"/>
+                            <Setter Property="FontWeight"
+                                    Value="Bold"/>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsSessionSeparator}"
+                                     Value="True">
+                            <Setter Property="Background"
+                                    Value="#FFFDE7"/>
+                            <Setter Property="FontWeight"
+                                    Value="Bold"/>
+                            <Setter Property="FontSize"
+                                    Value="16"/>
+                            <Setter Property="Foreground"
+                                    Value="#FF5722"/>
+                            <Setter Property="HorizontalContentAlignment"
+                                    Value="Center"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+        </DataGrid>
 
-            <!--  Tabela pomiarów  -->
-            <DataGrid
-                x:Name="dataGridMeasurements"
-                Grid.Column="0"
+        <!-- SPLITTER -->
+        <GridSplitter Grid.Row="0"
+                Grid.Column="1"
+                Width="5"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
-                AutoGenerateColumns="False"
-                CanUserAddRows="False"
-                CanUserDeleteRows="False"
-                GridLinesVisibility="All"
-                HeadersVisibility="All"
-                IsReadOnly="True"
-                RenderTransformOrigin="0.5,0.5">
-                <DataGrid.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform AngleY="-0.216"/>
-                        <RotateTransform/>
-                        <TranslateTransform Y="-0.996"/>
-                    </TransformGroup>
-                </DataGrid.RenderTransform>
-                <DataGrid.Columns>
-                    <DataGridTextColumn
-                        Width="SizeToCells"
-                        Binding="{Binding Index}"
-                        Header="Lp."/>
-                    <DataGridTextColumn
-                        Width="SizeToCells"
-                        Binding="{Binding Timestamp}"
-                        Header="Czas"/>
-                    <DataGridTextColumn
-                        Width="SizeToCells"
-                        Binding="{Binding Voltage, StringFormat=F2}"
-                        Header="Napięcie [V]">
-                        <DataGridTextColumn.CellStyle>
-                            <Style TargetType="DataGridCell">
-                                <Setter Property="Foreground"
-                                        Value="#2196F3"/>
-                                <Setter Property="FontWeight"
-                                        Value="Bold"/>
-                            </Style>
-                        </DataGridTextColumn.CellStyle>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn
-                        Width="SizeToCells"
-                        Binding="{Binding Current, StringFormat=F2}"
-                        Header="Prąd [A]">
-                        <DataGridTextColumn.CellStyle>
-                            <Style TargetType="DataGridCell">
-                                <Setter Property="Foreground"
-                                        Value="Purple"/>
-                                <Setter Property="FontWeight"
-                                        Value="Bold"/>
-                            </Style>
-                        </DataGridTextColumn.CellStyle>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn
-                        Width="SizeToCells"
-                        Binding="{Binding VoltageADC, StringFormat=D5}"
-                        Header="ADC Napięcia">
-                        <DataGridTextColumn.CellStyle>
-                            <Style TargetType="DataGridCell">
-                                <Setter Property="Foreground"
-                                        Value="#2196F3"/>
-                                <Setter Property="FontWeight"
-                                        Value="Bold"/>
-                            </Style>
-                        </DataGridTextColumn.CellStyle>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn
-                        Width="SizeToCells"
-                        Binding="{Binding CurrentADC, StringFormat=D5}"
-                        Header="ADC Prądu">
-                        <DataGridTextColumn.CellStyle>
-                            <Style TargetType="DataGridCell">
-                                <Setter Property="Foreground"
-                                        Value="Purple"/>
-                                <Setter Property="FontWeight"
-                                        Value="Bold"/>
-                            </Style>
-                        </DataGridTextColumn.CellStyle>
-                    </DataGridTextColumn>
-                </DataGrid.Columns>
-                <DataGrid.RowStyle>
-                    <Style TargetType="DataGridRow">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsSessionSeparator}"
-                                         Value="True">
-                                <Setter Property="Background"
-                                        Value="#FFFDE7"/>
-                                <Setter Property="FontWeight"
-                                        Value="Bold"/>
-                                <Setter Property="FontSize"
-                                        Value="16"/>
-                                <Setter Property="Foreground"
-                                        Value="#FF5722"/>
-                                <Setter Property="HorizontalContentAlignment"
-                                        Value="Center"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </DataGrid.RowStyle>
-            </DataGrid>
-
-            <!--  Splitter pionowy  -->
-            <GridSplitter
-                Grid.Column="1"
-                Width="6"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Stretch"
-                Background="#B0BEC5"
+                Background="#EEE"
                 ShowsPreview="True"/>
 
-            <!--  Prawa kolumna: komponent pomiarów zgrzewania  -->
-            <controls:WeldMeasurementsComponent x:Name="weldMeasurementsComponent"
-                                                Grid.Column="2"/>
-        </Grid>
-
-        <!--  Dolny wiersz: statystyki na całą szerokość  -->
+        <!--  Prawa kolumna: komponent Gauge i statystyki  -->
         <StackPanel
-            Grid.Row="1"
-            Grid.ColumnSpan="3"
-            Margin="10,5,10,5"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Orientation="Horizontal">
-            <!--  Napięcie  -->
-            <Border
-                Margin="8"
-                Padding="10"
-                BorderBrush="#00BCD4"
-                BorderThickness="2"
-                CornerRadius="6">
-                <StackPanel>
-                    <TextBlock
-                        Margin="0,0,0,8"
-                        HorizontalAlignment="Center"
-                        FontSize="20"
-                        FontWeight="Bold"
-                        Text="Napięcie [V]"/>
-                    <TextBlock
-                        x:Name="txtVoltageMax"
-                        Margin="0,2"
-                        FontWeight="Bold"
-                        Foreground="Red"
-                        Text="Max: 0,00"
-                        TextAlignment="Right"/>
-                    <TextBlock
-                        x:Name="txtVoltageAvg"
-                        Margin="0,2"
-                        HorizontalAlignment="Right"
-                        FontFamily="Consolas, Courier New, monospace"
-                        FontSize="18"
-                        FontWeight="Bold"
-                        Foreground="#2196F3"
-                        Text="Śr: 0,00"
-                        TextAlignment="Right"/>
-                    <TextBlock
-                        x:Name="txtVoltageMin"
-                        Margin="0,2"
-                        HorizontalAlignment="Right"
-                        FontFamily="Consolas, Courier New, monospace"
-                        FontSize="18"
-                        FontWeight="Bold"
-                        Foreground="#4CAF50"
-                        Text="Min: 0,00"
-                        TextAlignment="Right"/>
-                    <TextBlock
-                        x:Name="txtVoltageDelta"
-                        Margin="0,2"
-                        HorizontalAlignment="Right"
-                        FontFamily="Consolas, Courier New, monospace"
-                        FontSize="18"
-                        FontWeight="Bold"
-                        Foreground="#FF9800"
-                        Text="Δ: 0,00"
-                        TextAlignment="Right"/>
-                </StackPanel>
-            </Border>
-            <!--  Prąd  -->
-            <Border
-                Margin="8"
-                Padding="10"
-                BorderBrush="#00BCD4"
-                BorderThickness="2"
-                CornerRadius="6">
-                <StackPanel>
-                    <TextBlock
-                        Margin="0,0,0,8"
-                        HorizontalAlignment="Center"
-                        FontSize="20"
-                        FontWeight="Bold"
-                        Text="Prąd [A]"/>
-                    <TextBlock
-                        x:Name="txtCurrentMax"
-                        Margin="0,2"
-                        HorizontalAlignment="Right"
-                        FontFamily="Consolas, Courier New, monospace"
-                        FontSize="18"
-                        FontWeight="Bold"
-                        Foreground="Red"
-                        Text="Max: 0,00"
-                        TextAlignment="Right"/>
-                    <TextBlock
-                        x:Name="txtCurrentAvg"
-                        Margin="0,2"
-                        HorizontalAlignment="Right"
-                        FontFamily="Consolas, Courier New, monospace"
-                        FontSize="18"
-                        FontWeight="Bold"
-                        Foreground="Purple"
-                        Text="Śr: 0,00"
-                        TextAlignment="Right"/>
-                    <TextBlock
-                        x:Name="txtCurrentMin"
-                        Margin="0,2"
-                        HorizontalAlignment="Right"
-                        FontFamily="Consolas, Courier New, monospace"
-                        FontSize="18"
-                        FontWeight="Bold"
-                        Foreground="#4CAF50"
-                        Text="Min: 0,00"
-                        TextAlignment="Right"/>
-                    <TextBlock
-                        x:Name="txtCurrentDelta"
-                        Margin="0,2"
-                        HorizontalAlignment="Right"
-                        FontFamily="Consolas, Courier New, monospace"
-                        FontSize="18"
-                        FontWeight="Bold"
-                        Foreground="#FF9800"
-                        Text="Δ: 0,00"
-                        TextAlignment="Right"/>
-                </StackPanel>
-            </Border>
-            <!--  ADC Napięcia  -->
-            <Border
-                Margin="8"
-                Padding="10"
-                BorderBrush="#00BCD4"
-                BorderThickness="2"
-                CornerRadius="6">
-                <StackPanel>
-                    <TextBlock
-                        Margin="0,0,0,8"
-                        HorizontalAlignment="Center"
-                        FontSize="20"
-                        FontWeight="Bold"
-                        Text="ADC Napięcia"/>
-                    <TextBlock
-                        x:Name="txtVoltageADCMax"
-                        Margin="0,2"
-                        HorizontalAlignment="Right"
-                        FontFamily="Consolas, Courier New, monospace"
-                        FontSize="18"
-                        FontWeight="Bold"
-                        Foreground="Red"
-                        Text="Max: 00000"
-                        TextAlignment="Right"/>
-                    <TextBlock
-                        x:Name="txtVoltageADCAvg"
-                        Margin="0,2"
-                        HorizontalAlignment="Right"
-                        FontFamily="Consolas, Courier New, monospace"
-                        FontSize="18"
-                        FontWeight="Bold"
-                        Foreground="#2196F3"
-                        Text="Śr: 00000"
-                        TextAlignment="Right"/>
-                    <TextBlock
-                        x:Name="txtVoltageADCMin"
-                        Margin="0,2"
-                        HorizontalAlignment="Right"
-                        FontFamily="Consolas, Courier New, monospace"
-                        FontSize="18"
-                        FontWeight="Bold"
-                        Foreground="#4CAF50"
-                        Text="Min: 00000"
-                        TextAlignment="Right"/>
-                    <TextBlock
-                        x:Name="txtVoltageADCDelta"
-                        Margin="0,2"
-                        HorizontalAlignment="Right"
-                        FontFamily="Consolas, Courier New, monospace"
-                        FontSize="18"
-                        FontWeight="Bold"
-                        Foreground="#FF9800"
-                        Text="Δ: 00000"
-                        TextAlignment="Right"/>
-                </StackPanel>
-            </Border>
-            <!--  ADC Prądu  -->
-            <Border
-                Margin="8"
-                Padding="10"
-                BorderBrush="#00BCD4"
-                BorderThickness="2"
-                CornerRadius="6">
-                <StackPanel>
-                    <TextBlock
-                        Margin="0,0,0,8"
-                        HorizontalAlignment="Center"
-                        FontSize="20"
-                        FontWeight="Bold"
-                        Text="ADC Prądu"/>
-                    <TextBlock
-                        x:Name="txtCurrentADCMax"
-                        Margin="0,2"
-                        HorizontalAlignment="Right"
-                        FontFamily="Consolas, Courier New, monospace"
-                        FontSize="18"
-                        FontWeight="Bold"
-                        Foreground="Red"
-                        Text="Max: 00000"
-                        TextAlignment="Right"/>
-                    <TextBlock
-                        x:Name="txtCurrentADCAvg"
-                        Margin="0,2"
-                        HorizontalAlignment="Right"
-                        FontFamily="Consolas, Courier New, monospace"
-                        FontSize="18"
-                        FontWeight="Bold"
-                        Foreground="#2196F3"
-                        Text="Śr: 00000"
-                        TextAlignment="Right"/>
-                    <TextBlock
-                        x:Name="txtCurrentADCMin"
-                        Margin="0,2"
-                        HorizontalAlignment="Right"
-                        FontFamily="Consolas, Courier New, monospace"
-                        FontSize="18"
-                        FontWeight="Bold"
-                        Foreground="#4CAF50"
-                        Text="Min: 00000"
-                        TextAlignment="Right"/>
-                    <TextBlock
-                        x:Name="txtCurrentADCDelta"
-                        Margin="0,2"
-                        HorizontalAlignment="Right"
-                        FontFamily="Consolas, Courier New, monospace"
-                        FontSize="18"
-                        FontWeight="Bold"
-                        Foreground="#FF9800"
-                        Text="Δ: 00000"
-                        TextAlignment="Right"/>
-                </StackPanel>
-            </Border>
+            Grid.Row="0"
+            Grid.Column="2"
+            Margin="5">
+
+            <!--  Komponent Gauge  -->
+            <controls:WeldMeasurementsComponent
+                x:Name="weldMeasurementsComponent"
+                Margin="0,1,0,1"
+                ShowStatistics="False"/>
+
+            <!--  Statystyki  -->
+            <StackPanel
+                Margin="0,1,0,1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+                <!--  Napięcie  -->
+                <Border
+                    Margin="8"
+                    Padding="10"
+                    BorderBrush="#00BCD4"
+                    BorderThickness="2"
+                    CornerRadius="6">
+                    <StackPanel>
+                        <TextBlock
+                            Margin="0,0,0,8"
+                            HorizontalAlignment="Center"
+                            FontSize="20"
+                            FontWeight="Bold"
+                            Text="Napięcie [V]"/>
+                        <TextBlock
+                            x:Name="txtVoltageMax"
+                            Margin="0,2"
+                            FontWeight="Bold"
+                            Foreground="Red"
+                            Text="Max: 0,00"
+                            TextAlignment="Right"/>
+                        <TextBlock
+                            x:Name="txtVoltageAvg"
+                            Margin="0,2"
+                            HorizontalAlignment="Right"
+                            FontFamily="Consolas, Courier New, monospace"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Foreground="#2196F3"
+                            Text="Śr: 0,00"
+                            TextAlignment="Right"/>
+                        <TextBlock
+                            x:Name="txtVoltageMin"
+                            Margin="0,2"
+                            HorizontalAlignment="Right"
+                            FontFamily="Consolas, Courier New, monospace"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Foreground="#4CAF50"
+                            Text="Min: 0,00"
+                            TextAlignment="Right"/>
+                        <TextBlock
+                            x:Name="txtVoltageDelta"
+                            Margin="0,2"
+                            HorizontalAlignment="Right"
+                            FontFamily="Consolas, Courier New, monospace"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Foreground="#FF9800"
+                            Text="Δ: 0,00"
+                            TextAlignment="Right"/>
+                    </StackPanel>
+                </Border>
+                <!--  Prąd  -->
+                <Border
+                    Margin="8"
+                    Padding="10"
+                    BorderBrush="#00BCD4"
+                    BorderThickness="2"
+                    CornerRadius="6">
+                    <StackPanel>
+                        <TextBlock
+                            Margin="0,0,0,8"
+                            HorizontalAlignment="Center"
+                            FontSize="20"
+                            FontWeight="Bold"
+                            Text="Prąd [A]"/>
+                        <TextBlock
+                            x:Name="txtCurrentMax"
+                            Margin="0,2"
+                            HorizontalAlignment="Right"
+                            FontFamily="Consolas, Courier New, monospace"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Foreground="Red"
+                            Text="Max: 0,00"
+                            TextAlignment="Right"/>
+                        <TextBlock
+                            x:Name="txtCurrentAvg"
+                            Margin="0,2"
+                            HorizontalAlignment="Right"
+                            FontFamily="Consolas, Courier New, monospace"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Foreground="Purple"
+                            Text="Śr: 0,00"
+                            TextAlignment="Right"/>
+                        <TextBlock
+                            x:Name="txtCurrentMin"
+                            Margin="0,2"
+                            HorizontalAlignment="Right"
+                            FontFamily="Consolas, Courier New, monospace"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Foreground="#4CAF50"
+                            Text="Min: 0,00"
+                            TextAlignment="Right"/>
+                        <TextBlock
+                            x:Name="txtCurrentDelta"
+                            Margin="0,2"
+                            HorizontalAlignment="Right"
+                            FontFamily="Consolas, Courier New, monospace"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Foreground="#FF9800"
+                            Text="Δ: 0,00"
+                            TextAlignment="Right"/>
+                    </StackPanel>
+                </Border>
+                <!--  ADC Napięcia  -->
+                <Border
+                    Margin="8"
+                    Padding="10"
+                    BorderBrush="#00BCD4"
+                    BorderThickness="2"
+                    CornerRadius="6">
+                    <StackPanel>
+                        <TextBlock
+                            Margin="0,0,0,8"
+                            HorizontalAlignment="Center"
+                            FontSize="20"
+                            FontWeight="Bold"
+                            Text="ADC Napięcia"/>
+                        <TextBlock
+                            x:Name="txtVoltageADCMax"
+                            Margin="0,2"
+                            HorizontalAlignment="Right"
+                            FontFamily="Consolas, Courier New, monospace"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Foreground="Red"
+                            Text="Max: 00000"
+                            TextAlignment="Right"/>
+                        <TextBlock
+                            x:Name="txtVoltageADCAvg"
+                            Margin="0,2"
+                            HorizontalAlignment="Right"
+                            FontFamily="Consolas, Courier New, monospace"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Foreground="#2196F3"
+                            Text="Śr: 00000"
+                            TextAlignment="Right"/>
+                        <TextBlock
+                            x:Name="txtVoltageADCMin"
+                            Margin="0,2"
+                            HorizontalAlignment="Right"
+                            FontFamily="Consolas, Courier New, monospace"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Foreground="#4CAF50"
+                            Text="Min: 00000"
+                            TextAlignment="Right"/>
+                        <TextBlock
+                            x:Name="txtVoltageADCDelta"
+                            Margin="0,2"
+                            HorizontalAlignment="Right"
+                            FontFamily="Consolas, Courier New, monospace"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Foreground="#FF9800"
+                            Text="Δ: 00000"
+                            TextAlignment="Right"/>
+                    </StackPanel>
+                </Border>
+                <!--  ADC Prądu  -->
+                <Border
+                    Margin="8"
+                    Padding="10"
+                    BorderBrush="#00BCD4"
+                    BorderThickness="2"
+                    CornerRadius="6">
+                    <StackPanel>
+                        <TextBlock
+                            Margin="0,0,0,8"
+                            HorizontalAlignment="Center"
+                            FontSize="20"
+                            FontWeight="Bold"
+                            Text="ADC Prądu"/>
+                        <TextBlock
+                            x:Name="txtCurrentADCMax"
+                            Margin="0,2"
+                            HorizontalAlignment="Right"
+                            FontFamily="Consolas, Courier New, monospace"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Foreground="Red"
+                            Text="Max: 00000"
+                            TextAlignment="Right"/>
+                        <TextBlock
+                            x:Name="txtCurrentADCAvg"
+                            Margin="0,2"
+                            HorizontalAlignment="Right"
+                            FontFamily="Consolas, Courier New, monospace"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Foreground="#2196F3"
+                            Text="Śr: 00000"
+                            TextAlignment="Right"/>
+                        <TextBlock
+                            x:Name="txtCurrentADCMin"
+                            Margin="0,2"
+                            HorizontalAlignment="Right"
+                            FontFamily="Consolas, Courier New, monospace"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Foreground="#4CAF50"
+                            Text="Min: 00000"
+                            TextAlignment="Right"/>
+                        <TextBlock
+                            x:Name="txtCurrentADCDelta"
+                            Margin="0,2"
+                            HorizontalAlignment="Right"
+                            FontFamily="Consolas, Courier New, monospace"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Foreground="#FF9800"
+                            Text="Δ: 00000"
+                            TextAlignment="Right"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
         </StackPanel>
 
-        <!--  Przyciski pod statystykami  -->
+        <!--  Przyciski na dole  -->
         <StackPanel
-            Grid.Row="2"
+            Grid.Row="1"
+            Grid.Column="0"
             Grid.ColumnSpan="3"
             Margin="10"
             HorizontalAlignment="Center"
