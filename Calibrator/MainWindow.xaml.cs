@@ -1169,6 +1169,8 @@ public partial class MainWindow : Window
                 {
                     // Aktualizacja UI z parametrami zgrzewania
                     UpdateWeldParametersUI(parameters);
+                    // Aktualizacja statystyk (min/max/średnia)
+                    UpdateStatisticsUI();
                 }
                 catch (Exception ex)
                 {
