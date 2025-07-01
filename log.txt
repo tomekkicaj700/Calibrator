@@ -11063,3 +11063,4 @@ Wartości multimetru:
 [2025-07-01 13:28:04.902] Wysyłanie polecenia: Odczytaj parametry zgrzewania
 [2025-07-01 13:28:04.902] === ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===
 [2025-07-01 13:28:04.902] Wysyłanie polecenia: Odczytaj parametry zgrzewania
+[2025-07-01 15:00:52.949] Plik z danymi pomiarowymi nie istnieje

@@ -228,6 +228,10 @@
                          Tag="measurement_history">
                     <controls:MeasurementHistoryTab x:Name="measurementHistoryTab"/>
                 </TabItem>
+                <TabItem Header="Historia pomiarów"
+                         Tag="measurement_history_new">
+                    <controls:MeasurementHistoryNewTab x:Name="measurementHistoryNewTab"/>
+                </TabItem>
                 <TabItem Header="INFO"
                          Tag="info">
                     <controls:InfoTab x:Name="infoTab"/>

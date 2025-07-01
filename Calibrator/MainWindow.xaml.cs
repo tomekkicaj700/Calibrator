@@ -160,6 +160,8 @@ public partial class MainWindow : Window
     private WeldParametersTab WeldParametersTab => weldParametersTab;
     private CalibrationParametersTab CalibrationParametersTab => calibrationParametersTab;
     private MeasurementHistoryTab MeasurementHistoryTab => measurementHistoryTab;
+
+
     private InfoTab InfoTab => infoTab;
     private CommunicationTab CommunicationTab => communicationTab;
 
@@ -386,6 +388,8 @@ public partial class MainWindow : Window
                 // Upewnij się, że timer ma poprawny interwał
                 InitConfigTimer();
 
+                measurementHistoryNewTab.ClearData();
+
                 isRunning = true;
                 iconRun.Text = "⏸";
                 txtRun.Text = "STOP";
@@ -410,6 +414,9 @@ public partial class MainWindow : Window
                 commandCounterTimer.Stop(); // Zatrzymaj timer licznika komend
                 commandsSentThisSecond = 0; // Resetuj licznik
                 txtStatusSection1.Text = "Komendy/s: 0"; // Resetuj wyświetlanie
+
+                measurementHistoryNewTab.SaveDataToFile();
+
                 Log("⏸ Pomiar parametrów zatrzymany");
             }
         }
@@ -626,6 +633,7 @@ public partial class MainWindow : Window
             if (parameters != null && (isRunning || force))
             {
                 UpdateWeldParametersUI(parameters);
+                if (isRunning) measurementHistoryNewTab.AddMeasurement(parameters);
                 Log("✓ Parametry zgrzewania zostały odczytane i wyświetlone.");
             }
             else if (!isRunning && !force)
@@ -1171,6 +1179,9 @@ public partial class MainWindow : Window
                     UpdateWeldParametersUI(parameters);
                     // Aktualizacja statystyk (min/max/średnia)
                     UpdateStatisticsUI();
+
+                    if (isRunning) measurementHistoryNewTab.AddMeasurement(parameters);
+
                 }
                 catch (Exception ex)
                 {
