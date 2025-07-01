@@ -263,8 +263,15 @@ namespace Calibrator.Services
 
         public async Task<WeldParameters?> ReadWeldParametersAsync()
         {
+            if (isReadingConfig)
+            {
+                Log("⏸ Pomijam odczyt parametrów - trwa inna operacja komunikacji");
+                return null;
+            }
+
             try
             {
+                isReadingConfig = true;
                 Log("Wysyłanie polecenia: Odczytaj parametry zgrzewania");
                 string? errorDetails = null;
                 var wp = await Task.Run(() => welder.ReadWeldParameters(out errorDetails));
@@ -285,12 +292,23 @@ namespace Calibrator.Services
                 Log($"Błąd: {ex.Message}");
                 return null;
             }
+            finally
+            {
+                isReadingConfig = false;
+            }
         }
 
         public async Task<SKonfiguracjaSystemu?> ReadConfigurationAsync()
         {
+            if (isReadingConfig)
+            {
+                Log("⏸ Pomijam odczyt konfiguracji - trwa inna operacja komunikacji");
+                return null;
+            }
+
             try
             {
+                isReadingConfig = true;
                 Log("Wysyłanie polecenia: Odczytaj kalibrację");
                 byte[] configData = new byte[256];
                 if (await Task.Run(() => welder.ReadConfigurationRegister(out configData)))
@@ -310,6 +328,10 @@ namespace Calibrator.Services
             {
                 Log($"✗ Błąd: {ex.Message}");
                 return null;
+            }
+            finally
+            {
+                isReadingConfig = false;
             }
         }
 

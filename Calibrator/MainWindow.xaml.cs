@@ -136,8 +136,20 @@ public partial class MainWindow : Window
     private readonly System.Windows.Threading.DispatcherTimer configTimer;
     private bool isRunning = false;
 
+    // Licznik komend na sekundę
+    private int commandsSentThisSecond = 0;
+    private DateTime lastCommandTime = DateTime.Now;
+    private readonly System.Windows.Threading.DispatcherTimer commandCounterTimer;
+
     private bool logPanelCollapsed = false;
     private double lastLogPanelHeight = 150;
+
+    // Wydajne zarządzanie logiem UI
+    private readonly System.Text.StringBuilder logBuffer = new System.Text.StringBuilder();
+    private int currentLogLines = 0;
+    private const int MAX_LOG_LINES = 500; // Zmniejszone z 1000 na 500
+    private bool logNeedsUpdate = false;
+    private readonly System.Windows.Threading.DispatcherTimer logUpdateTimer;
 
     // TCP Server service
     private LocalTcpServerService tcpServerService = new LocalTcpServerService();
@@ -250,6 +262,19 @@ public partial class MainWindow : Window
 
         configTimer = new System.Windows.Threading.DispatcherTimer();
         configTimer.Tick += ConfigTimer_Tick;
+        InitConfigTimer(); // Inicjalizuj timer z poprawnym interwałem
+
+        // Inicjalizacja timera licznika komend
+        commandCounterTimer = new System.Windows.Threading.DispatcherTimer();
+        commandCounterTimer.Interval = TimeSpan.FromSeconds(1);
+        commandCounterTimer.Tick += CommandCounterTimer_Tick;
+        commandCounterTimer.Start();
+
+        // Inicjalizacja timera aktualizacji logu
+        logUpdateTimer = new System.Windows.Threading.DispatcherTimer();
+        logUpdateTimer.Interval = TimeSpan.FromMilliseconds(100); // Aktualizuj co 100ms
+        logUpdateTimer.Tick += LogUpdateTimer_Tick;
+        logUpdateTimer.Start();
 
         // Inicjalizacja filtrowania
         ApplyFilter();
@@ -358,12 +383,18 @@ public partial class MainWindow : Window
                 if (!await EnsureWelderConnectionAsync("uruchomienia pomiarów"))
                     return;
 
+                // Upewnij się, że timer ma poprawny interwał
+                InitConfigTimer();
+
                 isRunning = true;
                 iconRun.Text = "⏸";
                 txtRun.Text = "STOP";
                 btnRun.IsEnabled = true;
+                btnRun.Background = Brushes.Red; // Czerwony kolor dla STOP
+                btnRun.Foreground = Brushes.White; // Biały tekst
 
                 configTimer.Start();
+                commandCounterTimer.Start(); // Uruchom timer licznika komend
                 Log("▶ Pomiar parametrów uruchomiony");
             }
             else
@@ -372,8 +403,13 @@ public partial class MainWindow : Window
                 iconRun.Text = "▶";
                 txtRun.Text = "RUN";
                 btnRun.IsEnabled = true;
+                btnRun.Background = Brushes.Green; // Zielony kolor dla RUN
+                btnRun.Foreground = Brushes.White; // Biały tekst
 
                 configTimer.Stop();
+                commandCounterTimer.Stop(); // Zatrzymaj timer licznika komend
+                commandsSentThisSecond = 0; // Resetuj licznik
+                txtStatusSection1.Text = "Komendy/s: 0"; // Resetuj wyświetlanie
                 Log("⏸ Pomiar parametrów zatrzymany");
             }
         }
@@ -385,7 +421,26 @@ public partial class MainWindow : Window
 
     private void ConfigTimer_Tick(object? sender, EventArgs e)
     {
-        _ = ReadWeldParametersAndUpdateUIAsync();
+        if (isRunning)
+        {
+            _ = ReadWeldParametersAndUpdateUIAsync();
+        }
+    }
+
+    private void CommandCounterTimer_Tick(object? sender, EventArgs e)
+    {
+        UpdateStatusBar();
+        commandsSentThisSecond = 0; // Resetuj licznik
+    }
+
+    private void LogUpdateTimer_Tick(object? sender, EventArgs e)
+    {
+        if (logNeedsUpdate)
+        {
+            txtLog.Text = logBuffer.ToString();
+            txtLog.ScrollToEnd();
+            logNeedsUpdate = false;
+        }
     }
 
     private int GetSelectedInterval()
@@ -436,18 +491,26 @@ public partial class MainWindow : Window
         var statusDescription = GetStatusDescription(status);
         txtStatus.Text = statusDescription;
 
+        // Aktualizacja paska statusu
+        txtStatusSection0.Text = $"Status: {statusDescription}";
+        txtStatusSection2.Text = $"Połączenie: {welderService.ConnectedPort ?? "Brak"}";
+        txtStatusSection3.Text = $"Czas: {DateTime.Now:HH:mm:ss}";
+
         // Aktualizacja koloru statusu
         switch (status)
         {
             case WelderStatus.CONNECTED:
             case WelderStatus.NEW_WELDER:
                 txtStatus.Foreground = Brushes.Green;
+                txtStatusSection0.Foreground = Brushes.Green;
                 break;
             case WelderStatus.NO_CONNECTION:
                 txtStatus.Foreground = Brushes.Red;
+                txtStatusSection0.Foreground = Brushes.Red;
                 break;
             default:
                 txtStatus.Foreground = Brushes.Orange;
+                txtStatusSection0.Foreground = Brushes.Orange;
                 break;
         }
     }
@@ -468,8 +531,29 @@ public partial class MainWindow : Window
             Dispatcher.Invoke(() => AppendLogToUI(message));
             return;
         }
-        txtLog.AppendText(message + "\n");
-        txtLog.ScrollToEnd();
+
+        // Dodaj nową linię do bufora
+        logBuffer.AppendLine(message);
+        currentLogLines++;
+
+        // Jeśli przekroczono limit linii, usuń najstarsze
+        if (currentLogLines > MAX_LOG_LINES)
+        {
+            // Znajdź pierwszy znak nowej linii i usuń wszystko przed nim
+            var text = logBuffer.ToString();
+            var lines = text.Split('\n');
+            if (lines.Length > MAX_LOG_LINES)
+            {
+                // Zachowaj tylko ostatnie MAX_LOG_LINES linii
+                var newLines = lines.Skip(lines.Length - MAX_LOG_LINES - 1).ToArray();
+                logBuffer.Clear();
+                logBuffer.AppendLine(string.Join("\n", newLines));
+                currentLogLines = MAX_LOG_LINES;
+            }
+        }
+
+        // Oznacz że log wymaga aktualizacji
+        logNeedsUpdate = true;
     }
 
     private void LoadLogHistoryToUI(IReadOnlyList<string> history)
@@ -479,27 +563,74 @@ public partial class MainWindow : Window
             Dispatcher.Invoke(() => LoadLogHistoryToUI(history));
             return;
         }
-        txtLog.Clear();
-        foreach (var line in history)
+
+        // Wyczyść bufor i załaduj historię
+        logBuffer.Clear();
+        currentLogLines = 0;
+
+        // Załaduj tylko ostatnie MAX_LOG_LINES linii z historii
+        var linesToLoad = history.Skip(Math.Max(0, history.Count - MAX_LOG_LINES)).ToList();
+
+        foreach (var line in linesToLoad)
         {
-            txtLog.AppendText(line + "\n");
+            logBuffer.AppendLine(line);
+            currentLogLines++;
         }
-        txtLog.ScrollToEnd();
+
+        // Oznacz że log wymaga aktualizacji
+        logNeedsUpdate = true;
     }
 
-    private async Task ReadWeldParametersAndUpdateUIAsync()
+    private void IncrementCommandCounter()
     {
-        if (welderService?.IsReadingConfig == true) return;
+        commandsSentThisSecond++;
+        lastCommandTime = DateTime.Now;
+    }
 
+    private void UpdateStatusBar()
+    {
+        if (welderService != null)
+        {
+            var status = welderService.WelderStatus;
+            var statusDescription = GetStatusDescription(status);
+            txtStatusSection0.Text = $"Status: {statusDescription}";
+            txtStatusSection2.Text = $"Połączenie: {welderService.ConnectedPort ?? "Brak"}";
+        }
+        else
+        {
+            txtStatusSection0.Text = "Status: Nie zainicjalizowany";
+            txtStatusSection2.Text = "Połączenie: Brak";
+        }
+
+        txtStatusSection1.Text = $"Komendy/s: {commandsSentThisSecond}";
+        txtStatusSection3.Text = $"Czas: {DateTime.Now:HH:mm:ss} | Log: {currentLogLines} linii";
+    }
+
+    private async Task ReadWeldParametersAndUpdateUIAsync(bool force = false)
+    {
+        if (!force && !isRunning)
+        {
+            Log("⏸ Pomijam odczyt - pomiar zatrzymany");
+            return;
+        }
+        if (welderService?.IsReadingConfig == true)
+        {
+            Log("⏸ Pomijam odczyt - trwa inna operacja komunikacji");
+            return;
+        }
         try
         {
             Log("=== ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===");
-
+            IncrementCommandCounter();
             var parameters = await welderService?.ReadWeldParametersAsync();
-            if (parameters != null)
+            if (parameters != null && (isRunning || force))
             {
                 UpdateWeldParametersUI(parameters);
                 Log("✓ Parametry zgrzewania zostały odczytane i wyświetlone.");
+            }
+            else if (!isRunning && !force)
+            {
+                Log("⏸ Pomiar został zatrzymany podczas odczytu parametrów.");
             }
             else
             {
@@ -508,7 +639,10 @@ public partial class MainWindow : Window
         }
         catch (Exception ex)
         {
-            Log($"Błąd podczas odczytu parametrów zgrzewania: {ex.Message}");
+            if (isRunning || force)
+            {
+                Log($"Błąd podczas odczytu parametrów zgrzewania: {ex.Message}");
+            }
         }
     }
 
@@ -585,15 +719,12 @@ public partial class MainWindow : Window
         {
             // Przełącz na zakładkę 'Parametry zgrzewania' od razu
             SwitchToTab(TAB_PARAMETRY_ZGRZEWANIA);
-
             if (welderService == null) return;
             if (!await welderService.EnsureWelderConnectionAsync("odczytu parametrów zgrzewania"))
             {
                 return; // Połączenie się nie udało, przerwij
             }
-
-            // Wywołaj bezpośrednio aktualizację UI jak w poprzednim commicie
-            await ReadWeldParametersAndUpdateUIAsync();
+            await ReadWeldParametersAndUpdateUIAsync(force: true);
         }
         catch (Exception ex)
         {
@@ -706,6 +837,12 @@ public partial class MainWindow : Window
         {
             Log("Brak zapisanej wysokości logów w ustawieniach, używam domyślnej.");
         }
+
+        // Inicjalizuj timer z poprawnym interwałem
+        InitConfigTimer();
+
+        // Inicjalizuj pasek statusu
+        UpdateStatusBar();
     }
 
     private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -944,6 +1081,8 @@ public partial class MainWindow : Window
         try
         {
             txtLog.Clear();
+            logBuffer.Clear();
+            currentLogLines = 0;
             // Nie logujemy informacji o wyczyszczeniu logu
         }
         catch (Exception ex)
@@ -1255,53 +1394,7 @@ public partial class MainWindow : Window
         }
     }
 
-    /// <summary>
-    /// Przełącza na zakładkę historii pomiarów
-    /// </summary>
-    private void SwitchToHistoryTab()
-    {
-        SwitchToTabById(TAB_ID_MEASUREMENT_HISTORY);
-    }
 
-    /// <summary>
-    /// Przełącza na zakładkę komunikacji
-    /// </summary>
-    private void SwitchToCommunicationTab()
-    {
-        SwitchToTabById(TAB_ID_COMMUNICATION);
-    }
-
-    /// <summary>
-    /// Przełącza na zakładkę parametrów zgrzewania
-    /// </summary>
-    private void SwitchToWeldParametersTab()
-    {
-        SwitchToTabById(TAB_ID_WELD_PARAMETERS);
-    }
-
-    /// <summary>
-    /// Przełącza na zakładkę parametrów kalibracji
-    /// </summary>
-    private void SwitchToCalibrationParametersTab()
-    {
-        SwitchToTabById(TAB_ID_CALIBRATION_PARAMETERS);
-    }
-
-    /// <summary>
-    /// Przełącza na zakładkę konfiguracji
-    /// </summary>
-    private void SwitchToConfigurationTab()
-    {
-        SwitchToTabById(TAB_ID_CONFIGURATION);
-    }
-
-    /// <summary>
-    /// Przełącza na zakładkę pozostałych parametrów
-    /// </summary>
-    private void SwitchToOtherParametersTab()
-    {
-        SwitchToTabById(TAB_ID_OTHER_PARAMETERS);
-    }
 
     /// <summary>
     /// Przełącza na zakładkę INFO
