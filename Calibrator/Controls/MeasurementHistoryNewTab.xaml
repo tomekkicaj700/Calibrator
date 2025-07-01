@@ -15,10 +15,10 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"
-                    MinWidth="150"/>
+                              MinWidth="150"/>
             <ColumnDefinition Width="5"/>
             <ColumnDefinition Width="2*"
-                    MinWidth="300"/>
+                              MinWidth="300"/>
         </Grid.ColumnDefinitions>
 
         <!--  Lewa kolumna: tabela pomiarów  -->
@@ -135,12 +135,12 @@
 
         <!-- SPLITTER -->
         <GridSplitter Grid.Row="0"
-                Grid.Column="1"
-                Width="5"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                Background="#EEE"
-                ShowsPreview="True"/>
+                      Grid.Column="1"
+                      Width="5"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+                      Background="#EEE"
+                      ShowsPreview="True"/>
 
         <!--  Prawa kolumna: komponent Gauge i statystyki  -->
         <StackPanel
