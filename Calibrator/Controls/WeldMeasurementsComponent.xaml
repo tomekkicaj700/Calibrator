@@ -10,8 +10,7 @@
     d:DesignHeight="400"
     HorizontalAlignment="Stretch"
     VerticalAlignment="Stretch">
-    <Grid Margin="10"
-            HorizontalAlignment="Stretch"
+    <Grid HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -26,13 +25,13 @@
         </Grid.ColumnDefinitions>
         <!-- Napięcie (lewa kolumna) -->
         <TextBlock Grid.Row="0"
-                Grid.Column="0"
-                Text="Napięcie [V]"
-                FontSize="18"
-                FontWeight="Bold"
-                HorizontalAlignment="Stretch"
-                TextAlignment="Center"
-                VerticalAlignment="Stretch"/>
+                   Grid.Column="0"
+                   Text="Napięcie [V]"
+                   FontSize="18"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Stretch"
+                   TextAlignment="Center"
+                   VerticalAlignment="Stretch"/>
         <Border Grid.Row="1"
                 Grid.Column="0"
                 x:Name="borderNapiecieStats"
@@ -103,14 +102,14 @@
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch">
             <TextBlock x:Name="txtNapiecieZgrzewania"
-                    Padding="15,8"
-                    HorizontalAlignment="Stretch"
-                    FontSize="28"
-                    FontWeight="Bold"
-                    Foreground="#673AB7"
-                    Text="0.00"
-                    TextAlignment="Center"
-                    VerticalAlignment="Stretch"/>
+                       Padding="15,8"
+                       HorizontalAlignment="Stretch"
+                       FontSize="28"
+                       FontWeight="Bold"
+                       Foreground="#673AB7"
+                       Text="0.00"
+                       TextAlignment="Center"
+                       VerticalAlignment="Stretch"/>
         </Border>
         <Border Grid.Row="3"
                 Grid.Column="0"
@@ -120,31 +119,31 @@
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch">
             <TextBlock x:Name="txtADCNapZgrzew"
-                    Padding="15,8"
-                    HorizontalAlignment="Stretch"
-                    FontSize="20"
-                    Foreground="#2196F3"
-                    Text="0"
-                    TextAlignment="Center"
-                    VerticalAlignment="Stretch"/>
+                       Padding="15,8"
+                       HorizontalAlignment="Stretch"
+                       FontSize="20"
+                       Foreground="#2196F3"
+                       Text="0"
+                       TextAlignment="Center"
+                       VerticalAlignment="Stretch"/>
         </Border>
         <lvc:Gauge Grid.Row="4"
-                Grid.Column="0"
-                x:Name="gaugeNapiecie"
-                Value="0.00"
-                From="0"
-                To="50"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"/>
+                   Grid.Column="0"
+                   x:Name="gaugeNapiecie"
+                   Value="0.00"
+                   From="0"
+                   To="50"
+                   HorizontalAlignment="Stretch"
+                   VerticalAlignment="Stretch"/>
         <!-- Prąd (prawa kolumna) -->
         <TextBlock Grid.Row="0"
-                Grid.Column="1"
-                Text="Prąd [A]"
-                FontSize="18"
-                FontWeight="Bold"
-                HorizontalAlignment="Stretch"
-                TextAlignment="Center"
-                VerticalAlignment="Stretch"/>
+                   Grid.Column="1"
+                   Text="Prąd [A]"
+                   FontSize="18"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Stretch"
+                   TextAlignment="Center"
+                   VerticalAlignment="Stretch"/>
         <Border Grid.Row="1"
                 Grid.Column="1"
                 x:Name="borderPradStats"
@@ -215,14 +214,14 @@
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch">
             <TextBlock x:Name="txtPradZgrzewania"
-                    Padding="15,8"
-                    HorizontalAlignment="Stretch"
-                    FontSize="28"
-                    FontWeight="Bold"
-                    Foreground="#673AB7"
-                    Text="0.00"
-                    TextAlignment="Center"
-                    VerticalAlignment="Stretch"/>
+                       Padding="15,8"
+                       HorizontalAlignment="Stretch"
+                       FontSize="28"
+                       FontWeight="Bold"
+                       Foreground="#673AB7"
+                       Text="0.00"
+                       TextAlignment="Center"
+                       VerticalAlignment="Stretch"/>
         </Border>
         <Border Grid.Row="3"
                 Grid.Column="1"
@@ -232,21 +231,21 @@
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch">
             <TextBlock x:Name="txtADCPradZgrzew"
-                    Padding="15,8"
-                    HorizontalAlignment="Stretch"
-                    FontSize="20"
-                    Foreground="#2196F3"
-                    Text="0"
-                    TextAlignment="Center"
-                    VerticalAlignment="Stretch"/>
+                       Padding="15,8"
+                       HorizontalAlignment="Stretch"
+                       FontSize="20"
+                       Foreground="#2196F3"
+                       Text="0"
+                       TextAlignment="Center"
+                       VerticalAlignment="Stretch"/>
         </Border>
         <lvc:Gauge Grid.Row="4"
-                Grid.Column="1"
-                x:Name="gaugePrad"
-                Value="0"
-                From="0"
-                To="140"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"/>
+                   Grid.Column="1"
+                   x:Name="gaugePrad"
+                   Value="0"
+                   From="0"
+                   To="140"
+                   HorizontalAlignment="Stretch"
+                   VerticalAlignment="Stretch"/>
     </Grid>
 </UserControl>
