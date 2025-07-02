@@ -96,6 +96,7 @@ public partial class MainWindow : Window
     private const string TAB_ID_CONFIGURATION = "configuration";
     private const string TAB_ID_OTHER_PARAMETERS = "other_parameters";
     private const string TAB_ID_MEASUREMENT_HISTORY = "measurement_history";
+    private const string TAB_ID_MEASUREMENT_HISTORY_NEW = "measurement_history_new";
     private const string TAB_ID_INFO = "info";
     private const string TAB_ID_COMMUNICATION = "communication";
 
@@ -398,6 +399,10 @@ windowSettings.WindowWidth.Value > 0 && windowSettings.WindowHeight.Value > 0)
                 btnRun.Background = Brushes.Red; // Czerwony kolor dla STOP
                 btnRun.Foreground = Brushes.White; // Biały tekst
 
+                // Update menu icon as well
+                if (menuIconRun != null)
+                    menuIconRun.Text = "⏸";
+
                 configTimer.Start();
                 commandCounterTimer.Start(); // Uruchom timer licznika komend
                 Log("▶ Pomiar parametrów uruchomiony");
@@ -410,6 +415,10 @@ windowSettings.WindowWidth.Value > 0 && windowSettings.WindowHeight.Value > 0)
                 btnRun.IsEnabled = true;
                 btnRun.Background = Brushes.Green; // Zielony kolor dla RUN
                 btnRun.Foreground = Brushes.White; // Biały tekst
+
+                // Update menu icon as well
+                if (menuIconRun != null)
+                    menuIconRun.Text = "▶";
 
                 configTimer.Stop();
                 commandCounterTimer.Stop(); // Zatrzymaj timer licznika komend
@@ -727,7 +736,7 @@ windowSettings.WindowWidth.Value > 0 && windowSettings.WindowHeight.Value > 0)
         try
         {
             // Przełącz na zakładkę 'Parametry zgrzewania' od razu
-            SwitchToTab(TAB_PARAMETRY_ZGRZEWANIA);
+            SwitchToTabById(TAB_ID_WELD_PARAMETERS);
             if (welderService == null) return;
             if (!await welderService.EnsureWelderConnectionAsync("odczytu parametrów zgrzewania"))
             {
@@ -786,7 +795,7 @@ windowSettings.WindowWidth.Value > 0 && windowSettings.WindowHeight.Value > 0)
         try
         {
             // Przełącz na zakładkę 'Parametry kalibracji' od razu
-            SwitchToTab(TAB_PARAMETRY_KALIBRACJI);
+            SwitchToTabById(TAB_ID_CALIBRATION_PARAMETERS);
 
             if (welderService == null) return;
             if (!await welderService.EnsureWelderConnectionAsync("odczytu konfiguracji"))
@@ -852,6 +861,10 @@ windowSettings.WindowWidth.Value > 0 && windowSettings.WindowHeight.Value > 0)
 
         // Inicjalizuj pasek statusu
         UpdateStatusBar();
+
+        // Wyświetl informację o skrótach klawiaturowych
+        Log("🚀 Calibrator uruchomiony! Używaj klawiszy F1-F6 aby szybko przełączać zakładki.");
+        Log("💡 Pomoc → Skróty klawiaturowe, aby zobaczyć wszystkie dostępne skróty.");
     }
 
     private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -948,7 +961,7 @@ windowSettings.WindowWidth.Value > 0 && windowSettings.WindowHeight.Value > 0)
             welderService.SaveCalibrationToHistory(lastConfig, deviceType, serialNumber);
 
             // Przełącz na zakładkę "Historia kalibracji" używając ID (niezależne od języka)
-            SwitchToTabById("measurement_history");
+            SwitchToTabById(TAB_ID_MEASUREMENT_HISTORY);
 
             Log("✓ Kalibracja została zapisana do historii i widok został odświeżony.");
         }
@@ -1385,28 +1398,7 @@ windowSettings.WindowWidth.Value > 0 && windowSettings.WindowHeight.Value > 0)
                                                                                                                           });
     }
 
-    private void SwitchToTab(string tabName)
-    {
-        try
-        {
-            for (int i = 0; i < mainTabControl.Items.Count; i++)
-            {
-                if (mainTabControl.Items[i] is TabItem tabItem && tabItem.Header.ToString() == tabName)
-                {
-                    mainTabControl.SelectedIndex = i;
-                    Log($"Przełączono na zakładkę: {tabName}");
-                    return;
-                }
-            }
 
-            // Jeśli nie znaleziono zakładki, zaloguj błąd
-            Log($"Nie znaleziono zakładki o nazwie: {tabName}");
-        }
-        catch (Exception ex)
-        {
-            Log($"Błąd podczas przełączania na zakładkę {tabName}: {ex.Message}");
-        }
-    }
 
 
 
@@ -1425,19 +1417,23 @@ windowSettings.WindowWidth.Value > 0 && windowSettings.WindowHeight.Value > 0)
     {
         try
         {
-            string tabName = GetTabName(tabId);
-            for (int i = 0; i < mainTabControl.Items.Count; i++)
+            // Find the tab with the specified tag (more reliable than header text)
+            foreach (TabItem tab in mainTabControl.Items)
             {
-                if (mainTabControl.Items[i] is TabItem tabItem && tabItem.Header.ToString() == tabName)
+                if (tab.Tag?.ToString() == tabId)
                 {
-                    mainTabControl.SelectedIndex = i;
-                    Log($"Przełączono na zakładkę: {tabName} (ID: {tabId})");
+                    mainTabControl.SelectedItem = tab;
+                    
+                    // Get the F-key number for display
+                    string fKeyNumber = GetFKeyForTag(tabId);
+                    string displayName = GetDisplayNameForTag(tabId);
+                    Log($"🔄 Przełączono na zakładkę: {displayName} ({fKeyNumber})");
                     return;
                 }
             }
 
             // Jeśli nie znaleziono zakładki, zaloguj błąd
-            Log($"Nie znaleziono zakładki o ID: {tabId} (nazwa: {tabName})");
+            Log($"⚠ Nie znaleziono zakładki o ID: {tabId}");
         }
         catch (Exception ex)
         {
@@ -1447,6 +1443,181 @@ windowSettings.WindowWidth.Value > 0 && windowSettings.WindowHeight.Value > 0)
 
     private void measurementHistoryNewTab_Loaded(object sender, RoutedEventArgs e)
     {
+        // Loaded event for measurement history tab
+    }
 
+    /// <summary>
+    /// Event handler for setting measurement interval from menu
+    /// </summary>
+    private void SetInterval_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            if (sender is MenuItem menuItem && menuItem.Tag != null)
+            {
+                string tagValue = menuItem.Tag.ToString();
+                
+                // Find the corresponding combo box item and select it
+                foreach (ComboBoxItem item in comboInterval.Items)
+                {
+                    if (item.Tag?.ToString() == tagValue)
+                    {
+                        comboInterval.SelectedItem = item;
+                        Log($"Interwał próbkowania zmieniony na: {item.Content}");
+                        break;
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Log($"Błąd podczas zmiany interwału: {ex.Message}");
+        }
+    }
+
+    /// <summary>
+    /// Event handler for About dialog
+    /// </summary>
+    private void ShowAbout_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            string version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? "Unknown";
+            string message = $"Calibrator\n\n" +
+                           $"Wersja: {version}\n" +
+                           $"Framework: .NET 9.0\n\n" +
+                           $"Aplikacja do kalibracji zgrzewarek\n" +
+                           $"© 2024";
+
+            MessageBox.Show(message, "O programie", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        catch (Exception ex)
+        {
+            Log($"Błąd podczas wyświetlania okna 'O programie': {ex.Message}");
+        }
+    }
+
+    /// <summary>
+    /// Event handler for Exit menu item
+    /// </summary>
+    private void Exit_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            this.Close();
+        }
+        catch (Exception ex)
+        {
+            Log($"Błąd podczas zamykania aplikacji: {ex.Message}");
+        }
+    }
+
+    /// <summary>
+    /// Event handler for F-key shortcuts to switch between tabs
+    /// </summary>
+    private void Window_KeyDown(object sender, KeyEventArgs e)
+    {
+        try
+        {
+            // Handle F1-F6 keys for tab switching using tag IDs
+            switch (e.Key)
+            {
+                case Key.F1:
+                    SwitchToTabById(TAB_ID_WELD_PARAMETERS);
+                    e.Handled = true;
+                    break;
+                case Key.F2:
+                    SwitchToTabById(TAB_ID_CALIBRATION_PARAMETERS);
+                    e.Handled = true;
+                    break;
+                case Key.F3:
+                    SwitchToTabById(TAB_ID_MEASUREMENT_HISTORY);
+                    e.Handled = true;
+                    break;
+                case Key.F4:
+                    SwitchToTabById(TAB_ID_MEASUREMENT_HISTORY_NEW);
+                    e.Handled = true;
+                    break;
+                case Key.F5:
+                    SwitchToTabById(TAB_ID_INFO);
+                    e.Handled = true;
+                    break;
+                case Key.F6:
+                    SwitchToTabById(TAB_ID_COMMUNICATION);
+                    e.Handled = true;
+                    break;
+            }
+        }
+        catch (Exception ex)
+        {
+            Log($"Błąd podczas przełączania zakładki klawiszem skrótu: {ex.Message}");
+        }
+    }
+
+    /// <summary>
+    /// Get F-key name for a given tag
+    /// </summary>
+    private string GetFKeyForTag(string tagName)
+    {
+        return tagName switch
+        {
+            TAB_ID_WELD_PARAMETERS => "F1",
+            TAB_ID_CALIBRATION_PARAMETERS => "F2", 
+            TAB_ID_MEASUREMENT_HISTORY => "F3",
+            TAB_ID_MEASUREMENT_HISTORY_NEW => "F4",
+            TAB_ID_INFO => "F5",
+            TAB_ID_COMMUNICATION => "F6",
+            _ => "F?"
+        };
+    }
+
+    /// <summary>
+    /// Get display name for a given tag
+    /// </summary>
+    private string GetDisplayNameForTag(string tagName)
+    {
+        return tagName switch
+        {
+            TAB_ID_WELD_PARAMETERS => "Parametry zgrzewania",
+            TAB_ID_CALIBRATION_PARAMETERS => "Parametry kalibracji",
+            TAB_ID_MEASUREMENT_HISTORY => "Historia kalibracji",
+            TAB_ID_MEASUREMENT_HISTORY_NEW => "Historia pomiarów",
+            TAB_ID_INFO => "INFO",
+            TAB_ID_COMMUNICATION => "Komunikacja",
+            _ => tagName
+        };
+    }
+
+    /// <summary>
+    /// Event handler for Keyboard Shortcuts dialog
+    /// </summary>
+    private void ShowKeyboardShortcuts_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            string shortcuts = "Skróty klawiaturowe Calibrator\n\n" +
+                             "ZAKŁADKI:\n" +
+                             "F1 - Parametry zgrzewania\n" +
+                             "F2 - Parametry kalibracji\n" +
+                             "F3 - Historia kalibracji\n" +
+                             "F4 - Historia pomiarów\n" +
+                             "F5 - INFO\n" +
+                             "F6 - Komunikacja\n\n" +
+                             "MENU:\n" +
+                             "Alt + P - Menu Plik\n" +
+                             "Alt + O - Menu Połączenie\n" +
+                             "Alt + K - Menu Kalibracja\n" +
+                             "Alt + T - Menu Kontrola\n" +
+                             "Alt + W - Menu Widok\n" +
+                             "Alt + M - Menu Pomoc\n\n" +
+                             "Naciśnij odpowiedni klawisz F, aby szybko przełączyć się między zakładkami!";
+
+            MessageBox.Show(shortcuts, "Skróty klawiaturowe", MessageBoxButton.OK, MessageBoxImage.Information);
+            Log("ℹ Wyświetlono okno ze skrótami klawiaturowymi");
+        }
+        catch (Exception ex)
+        {
+            Log($"Błąd podczas wyświetlania skrótów klawiaturowych: {ex.Message}");
+        }
     }
 }
