@@ -29,85 +29,85 @@
 
         <!--  Menu Bar  -->
         <Menu Grid.Row="0"
-                Background="#F0F0F0">
+              Background="#F0F0F0">
             <MenuItem Header="_Plik">
                 <Separator/>
                 <MenuItem Click="Exit_Click"
-                        Header="_Wyjście">
+                          Header="_Wyjście">
                     <MenuItem.Icon>
                         <TextBlock FontSize="16"
-                                Text="✖"/>
+                                   Text="✖"/>
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
 
             <MenuItem Header="_Połączenie">
                 <MenuItem Click="btnScanPorts_Click"
-                        Header="_Skanuj porty">
+                          Header="_Skanuj porty">
                     <MenuItem.Icon>
                         <TextBlock FontSize="16"
-                                Text="🔌"/>
+                                   Text="🔌"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Click="btnScanUSRDevices_Click"
-                        Header="Skanuj _USR-N520">
+                          Header="Skanuj _USR-N520">
                     <MenuItem.Icon>
                         <TextBlock FontSize="16"
-                                Text="🌐"/>
+                                   Text="🌐"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Click="btnScanAllDevices_Click"
-                        Header="Skanuj _wszystkie">
+                          Header="Skanuj _wszystkie">
                     <MenuItem.Icon>
                         <TextBlock FontSize="16"
-                                Text="🔍"/>
+                                   Text="🔍"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator/>
                 <MenuItem Click="btnTcpServer_Click"
-                        Header="_Serwer TCP">
+                          Header="_Serwer TCP">
                     <MenuItem.Icon>
                         <TextBlock FontSize="16"
-                                Text="🌐"/>
+                                   Text="🌐"/>
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
 
             <MenuItem Header="_Kalibracja">
                 <MenuItem Click="btnReadConfig_Click"
-                        Header="_Odczytaj konfigurację">
+                          Header="_Odczytaj konfigurację">
                     <MenuItem.Icon>
                         <TextBlock FontSize="16"
-                                Text="📖"/>
+                                   Text="📖"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Click="btnReadWeldParams_Click"
-                        Header="_Parametry zgrzewania">
+                          Header="_Parametry zgrzewania">
                     <MenuItem.Icon>
                         <TextBlock FontSize="16"
-                                Text="⚡"/>
+                                   Text="⚡"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator/>
                 <MenuItem Click="btnResetStats_Click"
-                        Header="_Resetuj statystyki">
+                          Header="_Resetuj statystyki">
                     <MenuItem.Icon>
                         <TextBlock FontSize="16"
-                                Text="↺"/>
+                                   Text="↺"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator/>
                 <MenuItem Header="_Zapisz kalibrację">
                     <MenuItem.Icon>
                         <TextBlock FontSize="16"
-                                Text="💾"/>
+                                   Text="💾"/>
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
 
             <MenuItem Header="_Kontrola">
                 <MenuItem Click="btnRun_Click"
-                        Header="_RUN/STOP">
+                          Header="_RUN/STOP">
                     <MenuItem.Icon>
                         <TextBlock
                             x:Name="menuIconRun"
@@ -119,7 +119,7 @@
                 <MenuItem Header="Interwał próbkowania">
                     <MenuItem.Icon>
                         <TextBlock FontSize="16"
-                                Text="⏱"/>
+                                   Text="⏱"/>
                     </MenuItem.Icon>
                     <MenuItem
                         Click="SetInterval_Click"
@@ -148,17 +148,17 @@
                 <MenuItem Header="_Panel logów">
                     <MenuItem.Icon>
                         <TextBlock FontSize="16"
-                                Text="📋"/>
+                                   Text="📋"/>
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
 
             <MenuItem Header="_Pomoc">
                 <MenuItem Click="ShowKeyboardShortcuts_Click"
-                        Header="_Skróty klawiaturowe">
+                          Header="_Skróty klawiaturowe">
                     <MenuItem.Icon>
                         <TextBlock FontSize="16"
-                                Text="⌨"/>
+                                   Text="⌨"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem
@@ -167,15 +167,15 @@
                     ToolTip="Zapisz plik konfiguracji">
                     <MenuItem.Icon>
                         <TextBlock FontSize="16"
-                                Text="💾"/>
+                                   Text="💾"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator/>
                 <MenuItem Click="ShowAbout_Click"
-                        Header="_O programie">
+                          Header="_O programie">
                     <MenuItem.Icon>
                         <TextBlock FontSize="16"
-                                Text="ℹ"/>
+                                   Text="ℹ"/>
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
@@ -324,13 +324,13 @@
                         IsSelected="True"
                         Tag="333"/>
                     <ComboBoxItem Content="0.5 s"
-                            Tag="500"/>
+                                  Tag="500"/>
                     <ComboBoxItem Content="1 s"
-                            Tag="1000"/>
+                                  Tag="1000"/>
                     <ComboBoxItem Content="2 s"
-                            Tag="2000"/>
+                                  Tag="2000"/>
                     <ComboBoxItem Content="3 s"
-                            Tag="3000"/>
+                                  Tag="3000"/>
                 </ComboBox>
                 <TextBlock
                     x:Name="txtStatus"
@@ -530,7 +530,7 @@
 
         <!--  Status Bar na samym dole  -->
         <StatusBar Grid.Row="3"
-                Background="#F0F0F0">
+                   Background="#F0F0F0">
             <StatusBarItem>
                 <TextBlock
                     x:Name="txtStatusSection0"

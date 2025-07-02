@@ -12,17 +12,17 @@
     MinWidth="300"
     MinHeight="200">
     <Grid HorizontalAlignment="Stretch"
-          VerticalAlignment="Stretch">
+            VerticalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"
-                              MinWidth="150"/>
+                    MinWidth="150"/>
             <ColumnDefinition Width="5"/>
             <ColumnDefinition Width="*"
-                              MinWidth="250"/>
+                    MinWidth="250"/>
         </Grid.ColumnDefinitions>
 
         <!-- Lewa kolumna: tabela pomiarów -->
@@ -60,14 +60,14 @@
             </DataGrid.RenderTransform>
             <DataGrid.Columns>
                 <DataGridTextColumn Width="70"
-                                    Binding="{Binding Index}"
-                                    Header="Lp."/>
+                        Binding="{Binding Index}"
+                        Header="Lp."/>
                 <DataGridTextColumn Width="*"
-                                    Binding="{Binding Timestamp}"
-                                    Header="Czas"/>
+                        Binding="{Binding Timestamp}"
+                        Header="Czas"/>
                 <DataGridTextColumn Width="*"
-                                    Binding="{Binding Voltage, StringFormat=F2}"
-                                    Header="Napięcie [V]">
+                        Binding="{Binding Voltage, StringFormat=F2}"
+                        Header="Napięcie [V]">
                     <DataGridTextColumn.CellStyle>
                         <Style TargetType="DataGridCell">
                             <Setter Property="Foreground"
@@ -78,8 +78,8 @@
                     </DataGridTextColumn.CellStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Width="*"
-                                    Binding="{Binding Current, StringFormat=F2}"
-                                    Header="Prąd [A]">
+                        Binding="{Binding Current, StringFormat=F2}"
+                        Header="Prąd [A]">
                     <DataGridTextColumn.CellStyle>
                         <Style TargetType="DataGridCell">
                             <Setter Property="Foreground"
@@ -90,8 +90,8 @@
                     </DataGridTextColumn.CellStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Width="*"
-                                    Binding="{Binding VoltageADC, StringFormat=D5}"
-                                    Header="ADC Napięcia">
+                        Binding="{Binding VoltageADC, StringFormat=D5}"
+                        Header="ADC Napięcia">
                     <DataGridTextColumn.CellStyle>
                         <Style TargetType="DataGridCell">
                             <Setter Property="Foreground"
@@ -102,8 +102,8 @@
                     </DataGridTextColumn.CellStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Width="*"
-                                    Binding="{Binding CurrentADC, StringFormat=D5}"
-                                    Header="ADC Prądu">
+                        Binding="{Binding CurrentADC, StringFormat=D5}"
+                        Header="ADC Prądu">
                     <DataGridTextColumn.CellStyle>
                         <Style TargetType="DataGridCell">
                             <Setter Property="Foreground"
@@ -118,7 +118,7 @@
                 <Style TargetType="DataGridRow">
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding IsSessionSeparator}"
-                                     Value="True">
+                                Value="True">
                             <Setter Property="Background"
                                     Value="#FFFDE7"/>
                             <Setter Property="FontWeight"
@@ -137,13 +137,13 @@
 
         <!-- Splitter -->
         <GridSplitter Grid.Row="0"
-                      Grid.Column="1"
-                      Width="5"
-                      HorizontalAlignment="Stretch"
-                      VerticalAlignment="Stretch"
-                      Background="#EEE"
-                      ShowsPreview="True"
-                      DragCompleted="GridSplitter_DragCompleted"/>
+                Grid.Column="1"
+                Width="5"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Background="#EEE"
+                ShowsPreview="True"
+                DragCompleted="GridSplitter_DragCompleted"/>
 
         <!-- Prawa kolumna: komponenty -->
         <Grid Grid.Row="0"
@@ -151,70 +151,72 @@
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <controls:WeldMeasurementsComponent
-                x:Name="weldMeasurementsComponent"
-                Grid.Row="0"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                Margin="0"
-                ShowStatistics="False"/>
-            <controls:MeasurementStatisticsComponent
-                x:Name="measurementStatisticsComponent"
-                Grid.Row="1"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"/>
+            <controls:WeldMeasurementsComponent x:Name="weldMeasurementsComponent"
+                    Grid.Row="0"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Margin="0"
+                    ShowStatistics="False"/>
+            <controls:MeasurementStatisticsComponent x:Name="measurementStatisticsComponent"
+                    Grid.Row="1"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"/>
         </Grid>
 
-        <!-- Przyciski na dole -->
-        <StackPanel
-            Grid.Row="1"
-            Grid.Column="0"
-            Grid.ColumnSpan="3"
-            Margin="10"
-            HorizontalAlignment="Left"
-            Orientation="Horizontal">
-            <Button
-                x:Name="btnCalculateStats"
-                Width="150"
-                Height="35"
-                Margin="5"
-                Click="btnCalculateStats_Click"
-                Content="Oblicz statystyki"/>
-            <Button
-                x:Name="btnOpenDataFile"
-                Width="150"
-                Height="35"
-                Margin="5"
-                Click="btnOpenDataFile_Click"
-                Content="Otwórz plik danych"/>
-            <Button
-                x:Name="btnClearData"
-                Width="150"
-                Height="35"
-                Margin="5"
-                Click="btnClearData_Click"
-                Content="Wyczyść dane"/>
-            <Button
-                x:Name="btnResetStats"
-                Width="180"
-                Height="35"
-                Margin="5"
-                Background="Red"
-                Click="btnResetStats_Click"
-                Foreground="White">
+        <!-- Przyciski na dole w Gridzie -->
+        <Grid Grid.Row="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Margin="10"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnCalculateStats"
+                    Grid.Column="0"
+                    Width="150"
+                    Height="35"
+                    Margin="5"
+                    Click="btnCalculateStats_Click"
+                    Content="Oblicz statystyki"/>
+            <Button x:Name="btnOpenDataFile"
+                    Grid.Column="1"
+                    Width="150"
+                    Height="35"
+                    Margin="5"
+                    Click="btnOpenDataFile_Click"
+                    Content="Otwórz plik danych"/>
+            <Button x:Name="btnClearData"
+                    Grid.Column="2"
+                    Width="150"
+                    Height="35"
+                    Margin="5"
+                    Click="btnClearData_Click"
+                    Content="Wyczyść dane"/>
+            <Button x:Name="btnResetStats"
+                    Grid.Column="3"
+                    Width="180"
+                    Height="35"
+                    Margin="5"
+                    Background="Red"
+                    Click="btnResetStats_Click"
+                    Foreground="White">
                 <StackPanel HorizontalAlignment="Center"
-                            Orientation="Horizontal">
-                    <TextBlock
-                        Margin="0,0,5,0"
-                        FontSize="18"
-                        Text="↺"/>
+                        Orientation="Horizontal">
+                    <TextBlock Margin="0,0,5,0"
+                            FontSize="18"
+                            Text="↺"/>
                     <TextBlock FontSize="16"
-                               Text="Resetuj statystyki"/>
+                            Text="Resetuj statystyki"/>
                 </StackPanel>
             </Button>
-        </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>
