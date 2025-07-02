@@ -9,288 +9,299 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
     Title="Calibrator"
-    Width="1200"
-    Height="800"
+    Width="1360"
+    Height="760"
     Closing="Window_Closing"
+    Focusable="True"
+    KeyDown="Window_KeyDown"
     Loaded="Window_Loaded"
     SizeChanged="Window_SizeChanged"
     StateChanged="Window_StateChanged"
     WindowStartupLocation="Manual"
-    KeyDown="Window_KeyDown"
-    Focusable="True"
     mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="3*"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="1*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- Menu Bar -->
+        <!--  Menu Bar  -->
         <Menu Grid.Row="0"
-                Background="#F0F0F0">
+              Background="#F0F0F0">
             <MenuItem Header="_Plik">
-                <MenuItem Header="_Zapisz kalibrację"
-                        Click="btnSaveCalibration_Click">
-                    <MenuItem.Icon>
-                        <TextBlock Text="💾"
-                                FontSize="16"/>
-                    </MenuItem.Icon>
-                </MenuItem>
                 <Separator/>
-                <MenuItem Header="_Otwórz konfigurację"
-                        Click="btnOpenConfig_Click"
-                        ToolTip="Otwórz plik konfiguracji">
+                <MenuItem Click="Exit_Click"
+                          Header="_Wyjście">
                     <MenuItem.Icon>
-                        <TextBlock Text="⚙"
-                                FontSize="16"/>
-                    </MenuItem.Icon>
-                </MenuItem>
-                <Separator/>
-                <MenuItem Header="_Wyjście"
-                        Click="Exit_Click">
-                    <MenuItem.Icon>
-                        <TextBlock Text="✖"
-                                FontSize="16"/>
+                        <TextBlock FontSize="16"
+                                   Text="✖"/>
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
 
             <MenuItem Header="_Połączenie">
-                <MenuItem Header="_Skanuj porty"
-                        Click="btnScanPorts_Click">
+                <MenuItem Click="btnScanPorts_Click"
+                          Header="_Skanuj porty">
                     <MenuItem.Icon>
-                        <TextBlock Text="🔌"
-                                FontSize="16"/>
+                        <TextBlock FontSize="16"
+                                   Text="🔌"/>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Skanuj _USR-N520"
-                        Click="btnScanUSRDevices_Click">
+                <MenuItem Click="btnScanUSRDevices_Click"
+                          Header="Skanuj _USR-N520">
                     <MenuItem.Icon>
-                        <TextBlock Text="🌐"
-                                FontSize="16"/>
+                        <TextBlock FontSize="16"
+                                   Text="🌐"/>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Skanuj _wszystkie"
-                        Click="btnScanAllDevices_Click">
+                <MenuItem Click="btnScanAllDevices_Click"
+                          Header="Skanuj _wszystkie">
                     <MenuItem.Icon>
-                        <TextBlock Text="🔍"
-                                FontSize="16"/>
+                        <TextBlock FontSize="16"
+                                   Text="🔍"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator/>
-                <MenuItem Header="_Serwer TCP"
-                        Click="btnTcpServer_Click">
+                <MenuItem Click="btnTcpServer_Click"
+                          Header="_Serwer TCP">
                     <MenuItem.Icon>
-                        <TextBlock Text="🌐"
-                                FontSize="16"/>
+                        <TextBlock FontSize="16"
+                                   Text="🌐"/>
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
 
             <MenuItem Header="_Kalibracja">
-                <MenuItem Header="_Odczytaj konfigurację"
-                        Click="btnReadConfig_Click">
+                <MenuItem Click="btnReadConfig_Click"
+                          Header="_Odczytaj konfigurację">
                     <MenuItem.Icon>
-                        <TextBlock Text="📖"
-                                FontSize="16"/>
+                        <TextBlock FontSize="16"
+                                   Text="📖"/>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="_Parametry zgrzewania"
-                        Click="btnReadWeldParams_Click">
+                <MenuItem Click="btnReadWeldParams_Click"
+                          Header="_Parametry zgrzewania">
                     <MenuItem.Icon>
-                        <TextBlock Text="⚡"
-                                FontSize="16"/>
+                        <TextBlock FontSize="16"
+                                   Text="⚡"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator/>
-                <MenuItem Header="_Resetuj statystyki"
-                        Click="btnResetStats_Click">
+                <MenuItem Click="btnResetStats_Click"
+                          Header="_Resetuj statystyki">
                     <MenuItem.Icon>
-                        <TextBlock Text="↺"
-                                FontSize="16"/>
+                        <TextBlock FontSize="16"
+                                   Text="↺"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="_Zapisz kalibrację">
+                    <MenuItem.Icon>
+                        <TextBlock FontSize="16"
+                                   Text="💾"/>
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
 
             <MenuItem Header="_Kontrola">
-                <MenuItem Header="_RUN/STOP"
-                        Click="btnRun_Click">
+                <MenuItem Click="btnRun_Click"
+                          Header="_RUN/STOP">
                     <MenuItem.Icon>
-                        <TextBlock x:Name="menuIconRun"
-                                Text="▶"
-                                FontSize="16"/>
+                        <TextBlock
+                            x:Name="menuIconRun"
+                            FontSize="16"
+                            Text="▶"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator/>
                 <MenuItem Header="Interwał próbkowania">
                     <MenuItem.Icon>
-                        <TextBlock Text="⏱"
-                                FontSize="16"/>
+                        <TextBlock FontSize="16"
+                                   Text="⏱"/>
                     </MenuItem.Icon>
-                    <MenuItem Header="3 x/s"
-                            Click="SetInterval_Click"
-                            Tag="333"/>
-                    <MenuItem Header="0.5 s"
-                            Click="SetInterval_Click"
-                            Tag="500"/>
-                    <MenuItem Header="1 s"
-                            Click="SetInterval_Click"
-                            Tag="1000"/>
-                    <MenuItem Header="2 s"
-                            Click="SetInterval_Click"
-                            Tag="2000"/>
-                    <MenuItem Header="3 s"
-                            Click="SetInterval_Click"
-                            Tag="3000"/>
+                    <MenuItem
+                        Click="SetInterval_Click"
+                        Header="3 x/s"
+                        Tag="333"/>
+                    <MenuItem
+                        Click="SetInterval_Click"
+                        Header="0.5 s"
+                        Tag="500"/>
+                    <MenuItem
+                        Click="SetInterval_Click"
+                        Header="1 s"
+                        Tag="1000"/>
+                    <MenuItem
+                        Click="SetInterval_Click"
+                        Header="2 s"
+                        Tag="2000"/>
+                    <MenuItem
+                        Click="SetInterval_Click"
+                        Header="3 s"
+                        Tag="3000"/>
                 </MenuItem>
             </MenuItem>
 
             <MenuItem Header="_Widok">
-                <MenuItem Header="_Panel logów"
-                        Click="btnToggleLogPanel_Click">
+                <MenuItem Header="_Panel logów">
                     <MenuItem.Icon>
-                        <TextBlock Text="📋"
-                                FontSize="16"/>
+                        <TextBlock FontSize="16"
+                                   Text="📋"/>
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
 
             <MenuItem Header="_Pomoc">
-                <MenuItem Header="_Skróty klawiaturowe"
-                        Click="ShowKeyboardShortcuts_Click">
+                <MenuItem Click="ShowKeyboardShortcuts_Click"
+                          Header="_Skróty klawiaturowe">
                     <MenuItem.Icon>
-                        <TextBlock Text="⌨"
-                                FontSize="16"/>
+                        <TextBlock FontSize="16"
+                                   Text="⌨"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem
+                    Click="btnOpenConfig_Click"
+                    Header="_Zapisz konfigurację"
+                    ToolTip="Zapisz plik konfiguracji">
+                    <MenuItem.Icon>
+                        <TextBlock FontSize="16"
+                                   Text="💾"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator/>
-                <MenuItem Header="_O programie"
-                        Click="ShowAbout_Click">
+                <MenuItem Click="ShowAbout_Click"
+                          Header="_O programie">
                     <MenuItem.Icon>
-                        <TextBlock Text="ℹ"
-                                FontSize="16"/>
+                        <TextBlock FontSize="16"
+                                   Text="ℹ"/>
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
         </Menu>
 
-        <!--  DockPanel: przyciski na górze, TabControl pod spodem  -->
-        <DockPanel Grid.Row="1">
-            <!--  Top Control Panel  -->
+        <!-- Główny obszar: StackPanel z przyciskami, TabControl -->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
             <StackPanel
                 Margin="0,0,0,10"
-                VerticalAlignment="Center"
-                DockPanel.Dock="Top"
                 Orientation="Horizontal">
                 <Button
                     x:Name="btnScanPorts"
-                    Width="98"
-                    Height="40"
                     Margin="0,0,10,0"
+                    MinWidth="40"
+                    MinHeight="40"
                     Click="btnScanPorts_Click"
-                    Content="Skanuj porty"
-                    FontSize="16"/>
+                    FontSize="16"
+                    ToolTip="Skanuj porty">
+                    <TextBlock FontSize="22"
+                               Text="🔌"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"/>
+                </Button>
                 <Button
                     x:Name="btnScanUSRDevices"
-                    Width="156"
-                    Height="40"
                     Margin="0,0,10,0"
+                    MinWidth="40"
+                    MinHeight="40"
                     Background="Blue"
                     Click="btnScanUSRDevices_Click"
                     FontSize="16"
-                    Foreground="White">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock
-                            Margin="0,0,5,0"
-                            FontSize="16"
-                            Text="🌐"/>
-                        <TextBlock Text="Skanuj USR-N520"/>
-                    </StackPanel>
+                    Foreground="White"
+                    ToolTip="Skanuj USR-N520">
+                    <TextBlock FontSize="22"
+                               Text="🌐"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"/>
                 </Button>
                 <Button
                     x:Name="btnScanAllDevices"
-                    Width="158"
-                    Height="40"
                     Margin="0,0,10,0"
+                    MinWidth="40"
+                    MinHeight="40"
                     Background="Purple"
                     Click="btnScanAllDevices_Click"
                     FontSize="16"
-                    Foreground="White">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock
-                            Margin="0,0,5,0"
-                            FontSize="16"
-                            Text="🔍"/>
-                        <TextBlock Text="Skanuj wszystkie"/>
-                    </StackPanel>
+                    Foreground="White"
+                    ToolTip="Skanuj wszystkie">
+                    <TextBlock FontSize="22"
+                               Text="🔍"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"/>
                 </Button>
                 <Button
                     x:Name="btnReadConfig"
-                    Width="179"
-                    Height="40"
                     Margin="0,0,10,0"
+                    MinWidth="40"
+                    MinHeight="40"
                     Click="btnReadConfig_Click"
-                    Content="Odczytaj konfigurację"
-                    FontSize="16"/>
+                    FontSize="16"
+                    ToolTip="Odczytaj konfigurację">
+                    <TextBlock FontSize="22"
+                               Text="📖"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"/>
+                </Button>
                 <Button
                     x:Name="btnSaveCalibration"
-                    Width="70"
-                    Height="40"
                     Margin="0,0,10,0"
+                    MinWidth="40"
+                    MinHeight="40"
                     Background="Blue"
-                    Click="btnSaveCalibration_Click"
-                    Content="Zapisz"
                     FontSize="16"
-                    Foreground="White"/>
+                    Foreground="White"
+                    ToolTip="Zapisz kalibrację">
+                    <TextBlock FontSize="22"
+                               Text="💾"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"/>
+                </Button>
                 <Button
                     x:Name="btnRun"
-                    Width="100"
-                    Height="40"
                     Margin="0,0,10,0"
+                    MinWidth="40"
+                    MinHeight="40"
                     Background="Green"
                     Click="btnRun_Click"
                     FontSize="16"
-                    Foreground="White">
-                    <StackPanel
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Orientation="Horizontal">
-                        <TextBlock
-                            x:Name="iconRun"
-                            Margin="0,0,5,0"
-                            FontSize="18"
-                            Text="▶"/>
-                        <TextBlock x:Name="txtRun"
-                                   Text="RUN"/>
-                    </StackPanel>
+                    Foreground="White"
+                    ToolTip="RUN/STOP">
+                    <TextBlock FontSize="22"
+                               Text="▶"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"/>
                 </Button>
                 <Button
                     x:Name="btnReadWeldParams"
-                    Width="240"
-                    Height="40"
                     Margin="0,0,10,0"
+                    MinWidth="40"
+                    MinHeight="40"
                     Click="btnReadWeldParams_Click"
-                    Content="Odczytaj parametry zgrzewania"
-                    FontSize="16"/>
+                    FontSize="16"
+                    ToolTip="Odczytaj parametry zgrzewania">
+                    <TextBlock FontSize="22"
+                               Text="⚡"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"/>
+                </Button>
                 <Button
                     x:Name="btnResetStats"
-                    Width="200"
-                    Height="40"
                     Margin="0,0,10,0"
+                    MinWidth="40"
+                    MinHeight="40"
                     Background="Orange"
                     Click="btnResetStats_Click"
                     FontSize="16"
-                    Foreground="White">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock
-                            Margin="0,0,5,0"
-                            FontSize="20"
-                            Text="↺"/>
-                        <TextBlock Text="Resetuj statystyki"/>
-                    </StackPanel>
+                    Foreground="White"
+                    ToolTip="Resetuj statystyki">
+                    <TextBlock FontSize="22"
+                               Text="↺"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"/>
                 </Button>
                 <ComboBox
                     x:Name="comboInterval"
@@ -319,64 +330,60 @@
                     FontSize="16"/>
                 <Button
                     x:Name="btnToggleLogPanel"
-                    Width="80"
-                    Height="40"
                     Margin="10,0,0,0"
-                    Click="btnToggleLogPanel_Click"
-                    FontSize="16">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock
-                            Margin="0,0,5,0"
-                            FontSize="16"
-                            Text="📋"/>
-                        <TextBlock
-                            x:Name="txtToggleLogIcon"
-                            FontSize="16"
-                            Text="▼"/>
-                    </StackPanel>
+                    MinWidth="40"
+                    MinHeight="40"
+                    FontSize="16"
+                    ToolTip="Panel logów">
+                    <TextBlock FontSize="22"
+                               Text="📋"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"/>
                 </Button>
                 <Button
                     x:Name="btnOpenConfig"
-                    Width="50"
-                    Height="40"
                     Margin="5,0,0,0"
+                    MinWidth="40"
+                    MinHeight="40"
                     Click="btnOpenConfig_Click"
                     FontSize="16"
                     ToolTip="Otwórz plik konfiguracji">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock
-                            Margin="0,0,2,0"
-                            FontSize="16"
-                            Text="⚙"/>
-                        <TextBlock FontSize="12"
-                                   Text="👁"/>
-                    </StackPanel>
+                    <TextBlock FontSize="22"
+                               Text="⚙"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"/>
                 </Button>
                 <Button
                     x:Name="btnTcpServer"
-                    Width="160"
-                    Height="40"
                     Margin="5,0,0,0"
+                    MinWidth="40"
+                    MinHeight="40"
                     Click="btnTcpServer_Click"
-                    Content="Uruchom serwer TCP"
-                    FontSize="16"/>
+                    FontSize="16"
+                    ToolTip="Uruchom serwer TCP">
+                    <TextBlock FontSize="22"
+                               Text="🌐"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"/>
+                </Button>
             </StackPanel>
-
-            <!--  TabControl for main content  -->
             <TabControl x:Name="mainTabControl"
-                        FontSize="16">
+                        FontSize="16"
+                        Grid.Row="1">
                 <!--  Tab 1: Parametry zgrzewania  -->
                 <TabItem Tag="weld_parameters">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <Border Background="#B71C1C"
-                                    CornerRadius="5"
-                                    Padding="8,3"
-                                    Margin="0,0,10,0">
-                                <TextBlock Text="F1"
-                                        FontSize="15"
-                                        FontWeight="Bold"
-                                        Foreground="White"/>
+                            <Border
+                                Margin="0,0,10,0"
+                                Padding="8,3"
+                                Background="#B71C1C"
+                                CornerRadius="5">
+                                <TextBlock
+                                    FontSize="15"
+                                    FontWeight="Bold"
+                                    Foreground="White"
+                                    Text="F1"/>
                             </Border>
                             <TextBlock Text="Parametry zgrzewania"/>
                         </StackPanel>
@@ -388,14 +395,16 @@
                 <TabItem Tag="calibration_parameters">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <Border Background="#B71C1C"
-                                    CornerRadius="5"
-                                    Padding="8,3"
-                                    Margin="0,0,10,0">
-                                <TextBlock Text="F2"
-                                        FontSize="15"
-                                        FontWeight="Bold"
-                                        Foreground="White"/>
+                            <Border
+                                Margin="0,0,10,0"
+                                Padding="8,3"
+                                Background="#B71C1C"
+                                CornerRadius="5">
+                                <TextBlock
+                                    FontSize="15"
+                                    FontWeight="Bold"
+                                    Foreground="White"
+                                    Text="F2"/>
                             </Border>
                             <TextBlock Text="Parametry kalibracji"/>
                         </StackPanel>
@@ -405,14 +414,16 @@
                 <TabItem Tag="measurement_history">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <Border Background="#B71C1C"
-                                    CornerRadius="5"
-                                    Padding="8,3"
-                                    Margin="0,0,10,0">
-                                <TextBlock Text="F3"
-                                        FontSize="15"
-                                        FontWeight="Bold"
-                                        Foreground="White"/>
+                            <Border
+                                Margin="0,0,10,0"
+                                Padding="8,3"
+                                Background="#B71C1C"
+                                CornerRadius="5">
+                                <TextBlock
+                                    FontSize="15"
+                                    FontWeight="Bold"
+                                    Foreground="White"
+                                    Text="F3"/>
                             </Border>
                             <TextBlock Text="Historia kalibracji"/>
                         </StackPanel>
@@ -422,32 +433,36 @@
                 <TabItem Tag="measurement_history_new">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <Border Background="#B71C1C"
-                                    CornerRadius="5"
-                                    Padding="8,3"
-                                    Margin="0,0,10,0">
-                                <TextBlock Text="F4"
-                                        FontSize="15"
-                                        FontWeight="Bold"
-                                        Foreground="White"/>
+                            <Border
+                                Margin="0,0,10,0"
+                                Padding="8,3"
+                                Background="#B71C1C"
+                                CornerRadius="5">
+                                <TextBlock
+                                    FontSize="15"
+                                    FontWeight="Bold"
+                                    Foreground="White"
+                                    Text="F4"/>
                             </Border>
                             <TextBlock Text="Historia pomiarów"/>
                         </StackPanel>
                     </TabItem.Header>
                     <controls:MeasurementHistoryNewTab x:Name="measurementHistoryNewTab"
-                            Loaded="measurementHistoryNewTab_Loaded"/>
+                                                       Loaded="measurementHistoryNewTab_Loaded"/>
                 </TabItem>
                 <TabItem Tag="info">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <Border Background="#B71C1C"
-                                    CornerRadius="5"
-                                    Padding="8,3"
-                                    Margin="0,0,10,0">
-                                <TextBlock Text="F5"
-                                        FontSize="15"
-                                        FontWeight="Bold"
-                                        Foreground="White"/>
+                            <Border
+                                Margin="0,0,10,0"
+                                Padding="8,3"
+                                Background="#B71C1C"
+                                CornerRadius="5">
+                                <TextBlock
+                                    FontSize="15"
+                                    FontWeight="Bold"
+                                    Foreground="White"
+                                    Text="F5"/>
                             </Border>
                             <TextBlock Text="INFO"/>
                         </StackPanel>
@@ -457,14 +472,16 @@
                 <TabItem Tag="communication">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <Border Background="#B71C1C"
-                                    CornerRadius="5"
-                                    Padding="8,3"
-                                    Margin="0,0,10,0">
-                                <TextBlock Text="F6"
-                                        FontSize="15"
-                                        FontWeight="Bold"
-                                        Foreground="White"/>
+                            <Border
+                                Margin="0,0,10,0"
+                                Padding="8,3"
+                                Background="#B71C1C"
+                                CornerRadius="5">
+                                <TextBlock
+                                    FontSize="15"
+                                    FontWeight="Bold"
+                                    Foreground="White"
+                                    Text="F6"/>
                             </Border>
                             <TextBlock Text="Komunikacja"/>
                         </StackPanel>
@@ -472,48 +489,52 @@
                     <controls:CommunicationTab x:Name="communicationTab"/>
                 </TabItem>
             </TabControl>
-        </DockPanel>
+        </Grid>
 
-        <!--  Splitter  -->
-        <GridSplitter
-            Grid.Row="2"
-            Height="5"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Center"
-            Background="Transparent"
-            DragCompleted="LogPanelSplitter_DragCompleted"
-            ShowsPreview="True"/>
+        <!-- GridSplitter do regulacji wysokości logPanel -->
+        <GridSplitter Grid.Row="2"
+                      Height="6"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Top"
+                      Background="#DDD"
+                      ShowsPreview="True"/>
 
-        <!--  Logger na dole  -->
+        <!-- LogPanel w osobnym wierszu, bez Height -->
         <controls:LogPanel x:Name="logPanel"
-                           Grid.Row="3"/>
+                           Grid.Row="2"
+                           MinHeight="60"
+                           MaxHeight="400"/>
 
-        <!--  Status Bar  -->
-        <StatusBar Grid.Row="4"
+        <!-- Status Bar na samym dole -->
+        <StatusBar Grid.Row="3"
                    Background="#F0F0F0">
             <StatusBarItem>
-                <TextBlock x:Name="txtStatusSection0"
-                           Text="Status: Gotowy"
-                           FontSize="12"/>
+                <TextBlock
+                    x:Name="txtStatusSection0"
+                    FontSize="12"
+                    Text="Status: Gotowy"/>
             </StatusBarItem>
             <Separator/>
             <StatusBarItem>
-                <TextBlock x:Name="txtStatusSection1"
-                           Text="Komendy/s: 0"
-                           FontSize="12"
-                           Foreground="Blue"/>
+                <TextBlock
+                    x:Name="txtStatusSection1"
+                    FontSize="12"
+                    Foreground="Blue"
+                    Text="Komendy/s: 0"/>
             </StatusBarItem>
             <Separator/>
             <StatusBarItem>
-                <TextBlock x:Name="txtStatusSection2"
-                           Text="Połączenie: Brak"
-                           FontSize="12"/>
+                <TextBlock
+                    x:Name="txtStatusSection2"
+                    FontSize="12"
+                    Text="Połączenie: Brak"/>
             </StatusBarItem>
             <Separator/>
             <StatusBarItem>
-                <TextBlock x:Name="txtStatusSection3"
-                           Text="Czas: 00:00:00"
-                           FontSize="12"/>
+                <TextBlock
+                    x:Name="txtStatusSection3"
+                    FontSize="12"
+                    Text="Czas: 00:00:00"/>
             </StatusBarItem>
         </StatusBar>
     </Grid>

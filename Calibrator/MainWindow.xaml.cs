@@ -143,9 +143,6 @@ public partial class MainWindow : Window
     private DateTime lastCommandTime = DateTime.Now;
     private readonly System.Windows.Threading.DispatcherTimer commandCounterTimer;
 
-    private bool logPanelCollapsed = false;
-    private double lastLogPanelHeight = 150;
-
     // Wydajne zarządzanie logiem UI
     private readonly System.Text.StringBuilder logBuffer = new System.Text.StringBuilder();
     private int currentLogLines = 0;
@@ -393,15 +390,9 @@ windowSettings.WindowWidth.Value > 0 && windowSettings.WindowHeight.Value > 0)
                 measurementHistoryNewTab.ClearData();
 
                 isRunning = true;
-                iconRun.Text = "⏸";
-                txtRun.Text = "STOP";
                 btnRun.IsEnabled = true;
                 btnRun.Background = Brushes.Red; // Czerwony kolor dla STOP
                 btnRun.Foreground = Brushes.White; // Biały tekst
-
-                // Update menu icon as well
-                if (menuIconRun != null)
-                    menuIconRun.Text = "⏸";
 
                 configTimer.Start();
                 commandCounterTimer.Start(); // Uruchom timer licznika komend
@@ -410,20 +401,13 @@ windowSettings.WindowWidth.Value > 0 && windowSettings.WindowHeight.Value > 0)
             else
             {
                 isRunning = false;
-                iconRun.Text = "▶";
-                txtRun.Text = "RUN";
                 btnRun.IsEnabled = true;
                 btnRun.Background = Brushes.Green; // Zielony kolor dla RUN
                 btnRun.Foreground = Brushes.White; // Biały tekst
 
-                // Update menu icon as well
-                if (menuIconRun != null)
-                    menuIconRun.Text = "▶";
-
                 configTimer.Stop();
                 commandCounterTimer.Stop(); // Zatrzymaj timer licznika komend
                 commandsSentThisSecond = 0; // Resetuj licznik
-                txtStatusSection1.Text = "Komendy/s: 0"; // Resetuj wyświetlanie
 
                 measurementHistoryNewTab.SaveDataToFile();
 
@@ -821,25 +805,6 @@ windowSettings.WindowWidth.Value > 0 && windowSettings.WindowHeight.Value > 0)
         Log("Statystyki zostały zresetowane.");
     }
 
-    private void btnToggleLogPanel_Click(object sender, RoutedEventArgs e)
-    {
-        if (logPanelCollapsed)
-        {
-            // Rozwiń panel logów
-            logPanel.Height = lastLogPanelHeight;
-            txtToggleLogIcon.Text = "▼";
-            logPanelCollapsed = false;
-        }
-        else
-        {
-            // Zwiń panel logów
-            lastLogPanelHeight = logPanel.Height;
-            logPanel.Height = 0;
-            txtToggleLogIcon.Text = "▲";
-            logPanelCollapsed = true;
-        }
-    }
-
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
         // Odczytaj wysokość logów z ustawień
@@ -848,7 +813,6 @@ windowSettings.WindowWidth.Value > 0 && windowSettings.WindowHeight.Value > 0)
         if (settings.LogPanelHeight.HasValue && settings.LogPanelHeight.Value > 0)
         {
             mainGrid.RowDefinitions[2].Height = new GridLength(settings.LogPanelHeight.Value);
-            lastLogPanelHeight = settings.LogPanelHeight.Value;
             Log($"Odczytano wysokość logów z ustawień: {settings.LogPanelHeight.Value:F0} px");
         }
         else
@@ -913,98 +877,6 @@ windowSettings.WindowWidth.Value > 0 && windowSettings.WindowHeight.Value > 0)
 
         settings.WindowMaximized = (this.WindowState == WindowState.Maximized);
         settings.Save();
-    }
-
-    private void LogPanel_SizeChanged(object sender, SizeChangedEventArgs e)
-    {
-        if (!logPanelCollapsed && e.HeightChanged)
-        {
-            var settings = WindowSettings.Load();
-            double newHeight = logPanel.ActualHeight;
-            settings.LogPanelHeight = newHeight;
-            settings.Save();
-            Log($"Zapisano wysokość logów: {newHeight:F0} px do ustawień.");
-        }
-    }
-
-    private void LogPanelSplitter_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
-    {
-        var newHeight = logPanel.ActualHeight;
-        lastLogPanelHeight = newHeight;
-        var settings = WindowSettings.Load();
-        settings.LogPanelHeight = newHeight;
-        settings.Save();
-        Log($"[Splitter] Zapisano wysokość logów: {newHeight:F0} px do ustawień.");
-    }
-
-    private async void btnSaveCalibration_Click(object sender, RoutedEventArgs e)
-    {
-        try
-        {
-            if (lastConfig == null)
-            {
-                MessageBox.Show("Brak danych konfiguracyjnych do zapisania. Najpierw odczytaj konfigurację.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            // Pobierz dane z UI
-            string deviceType = CalibrationParametersTab.TxtNazwaZgrzewarki.Text;
-            string serialNumber = CalibrationParametersTab.TxtNumerSeryjny.Text;
-
-            if (string.IsNullOrEmpty(deviceType) || string.IsNullOrEmpty(serialNumber))
-            {
-                MessageBox.Show("Brak danych o typie urządzenia lub numerze seryjnym. Sprawdź czy konfiguracja została poprawnie odczytana.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            // Zapisz kalibrację
-            welderService.SaveCalibrationToHistory(lastConfig, deviceType, serialNumber);
-
-            // Przełącz na zakładkę "Historia kalibracji" używając ID (niezależne od języka)
-            SwitchToTabById(TAB_ID_MEASUREMENT_HISTORY);
-
-            Log("✓ Kalibracja została zapisana do historii i widok został odświeżony.");
-        }
-        catch (Exception ex)
-        {
-            Log($"Błąd podczas zapisywania kalibracji: {ex.Message}");
-            MessageBox.Show($"Błąd podczas zapisywania kalibracji: {ex.Message}", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
-        }
-    }
-
-    private void btnRefreshHistory_Click(object sender, RoutedEventArgs e)
-    {
-        // Przeniesione do MeasurementHistoryTab
-    }
-
-    private void btnClearHistory_Click(object sender, RoutedEventArgs e)
-    {
-        // Przeniesione do MeasurementHistoryTab
-    }
-
-    private SKonfiguracjaSystemu? GetCurrentConfigurationFromUI()
-    {
-        return lastConfig;
-    }
-
-    private void btnOpenFileHistory_Click(object sender, RoutedEventArgs e)
-    {
-        // Przeniesione do MeasurementHistoryTab
-    }
-
-    private void btnToggleDetails_Click(object sender, RoutedEventArgs e)
-    {
-        // Przeniesione do MeasurementHistoryTab
-    }
-
-    private void txtFilter_TextChanged(object sender, TextChangedEventArgs e)
-    {
-        // Przeniesione do MeasurementHistoryTab
-    }
-
-    private void btnClearFilter_Click(object sender, RoutedEventArgs e)
-    {
-        // Przeniesione do MeasurementHistoryTab
     }
 
     private void ApplyFilter()
@@ -1284,14 +1156,10 @@ windowSettings.WindowWidth.Value > 0 && windowSettings.WindowHeight.Value > 0)
         // Aktualizacja przycisku RUN
         if (status == WelderStatus.CONNECTED)
         {
-            iconRun.Text = "▶";
-            txtRun.Text = "RUN";
             btnRun.IsEnabled = true;
         }
         else
         {
-            iconRun.Text = "⏸";
-            txtRun.Text = "STOP";
             btnRun.IsEnabled = false;
         }
     }
@@ -1423,7 +1291,7 @@ windowSettings.WindowWidth.Value > 0 && windowSettings.WindowHeight.Value > 0)
                 if (tab.Tag?.ToString() == tabId)
                 {
                     mainTabControl.SelectedItem = tab;
-                    
+
                     // Get the F-key number for display
                     string fKeyNumber = GetFKeyForTag(tabId);
                     string displayName = GetDisplayNameForTag(tabId);
@@ -1456,7 +1324,7 @@ windowSettings.WindowWidth.Value > 0 && windowSettings.WindowHeight.Value > 0)
             if (sender is MenuItem menuItem && menuItem.Tag != null)
             {
                 string tagValue = menuItem.Tag.ToString();
-                
+
                 // Find the corresponding combo box item and select it
                 foreach (ComboBoxItem item in comboInterval.Items)
                 {
@@ -1562,7 +1430,7 @@ windowSettings.WindowWidth.Value > 0 && windowSettings.WindowHeight.Value > 0)
         return tagName switch
         {
             TAB_ID_WELD_PARAMETERS => "F1",
-            TAB_ID_CALIBRATION_PARAMETERS => "F2", 
+            TAB_ID_CALIBRATION_PARAMETERS => "F2",
             TAB_ID_MEASUREMENT_HISTORY => "F3",
             TAB_ID_MEASUREMENT_HISTORY_NEW => "F4",
             TAB_ID_INFO => "F5",

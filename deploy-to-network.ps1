@@ -1,36 +1,40 @@
-# Skrypt do kopiowania plików Kalibrator do lokalizacji sieciowej
+# Skrypt do kopiowania plikow Kalibrator do lokalizacji sieciowej
 # Uruchom: .\deploy-to-network.ps1
 
 param(
     [string]$Configuration = "Debug",
-    [string]$NetworkLocation = "\\DiskStation\Public\Kalibrator"
+    [string]$NetworkLocation = "\\DiskStation\Public\Kalibrator",
+    [string]$NetworkLocation2 = "\\KALIBRATOR\CalibratorPublic\Kalibrator"
 )
 
-# Debugowanie parametrów
-Write-Host "=== DEBUG PARAMETRY ===" -ForegroundColor Magenta
-Write-Host "Configuration: '$Configuration'" -ForegroundColor Magenta
-Write-Host "NetworkLocation: '$NetworkLocation'" -ForegroundColor Magenta
-Write-Host "=========================" -ForegroundColor Magenta
+# Debugowanie parametrow
+Write-Output "=== DEBUG PARAMETRY ==="
+Write-Output "Configuration: '$Configuration'"
+Write-Output "NetworkLocation: '$NetworkLocation'"
+Write-Output "NetworkLocation2: '$NetworkLocation2'"
+Write-Output "========================="
 
-Write-Host "=== Kopiowanie Kalibrator do lokalizacji sieciowej ===" -ForegroundColor Green
-Write-Host "Konfiguracja: $Configuration" -ForegroundColor Yellow
-Write-Host "Lokalizacja docelowa: $NetworkLocation" -ForegroundColor Yellow
+Write-Output "=== Kopiowanie Kalibrator do lokalizacji sieciowych ==="
+Write-Output "Konfiguracja: $Configuration"
+Write-Output "Lokalizacja docelowa 1: $NetworkLocation"
+Write-Output "Lokalizacja docelowa 2: $NetworkLocation2"
 
 # Krok 1: Wykonanie dotnet publish
-Write-Host "`n=== KROK 1: Publikowanie aplikacji ===" -ForegroundColor Cyan
-Write-Host "Wykonywanie: dotnet publish Calibrator --configuration $Configuration" -ForegroundColor Yellow
+Write-Output ""
+Write-Output "=== KROK 1: Publikowanie aplikacji ==="
+Write-Output "Wykonywanie: dotnet publish Calibrator --configuration $Configuration"
 
 try {
     $publishResult = dotnet publish Calibrator --configuration $Configuration
     if ($LASTEXITCODE -ne 0) {
-        Write-Host "Błąd podczas publikowania aplikacji!" -ForegroundColor Red
-        Write-Host "Kod błędu: $LASTEXITCODE" -ForegroundColor Red
+        Write-Output "Blad podczas publikowania aplikacji!"
+        Write-Output "Kod bledu: $LASTEXITCODE"
         exit 1
     }
-    Write-Host "Publikowanie zakończone sukcesem!" -ForegroundColor Green
+    Write-Output "Publikowanie zakonczone sukcesem!"
 }
 catch {
-    Write-Host "Błąd podczas wykonywania dotnet publish: $($_.Exception.Message)" -ForegroundColor Red
+    Write-Output "Blad podczas wykonywania dotnet publish: $($_.Exception.Message)"
     exit 1
 }
 
@@ -39,71 +43,93 @@ $PublishPath = "Calibrator\bin\$Configuration\net9.0-windows\publish\"
 
 if (Test-Path $PublishPath) {
     $SourcePath = $PublishPath
-    Write-Host "`n=== KROK 2: Kopiowanie plików ===" -ForegroundColor Cyan
-    Write-Host "Znaleziono katalog publish: $PublishPath" -ForegroundColor Green
+    Write-Output ""
+    Write-Output "=== KROK 2: Kopiowanie plikow ==="
+    Write-Output "Znaleziono katalog publish: $PublishPath"
 }
 else {
-    Write-Host "Błąd: Nie znaleziono katalogu publish po wykonaniu dotnet publish!" -ForegroundColor Red
-    Write-Host "Sprawdzona ścieżka: $PublishPath" -ForegroundColor Red
+    Write-Output "Blad: Nie znaleziono katalogu publish po wykonaniu dotnet publish!"
+    Write-Output "Sprawdzona sciezka: $PublishPath"
     exit 1
 }
 
 $ProjectPath = "Calibrator\"
 
-# Tworzenie katalogu docelowego jeśli nie istnieje
-if (-not (Test-Path $NetworkLocation)) {
-    Write-Host "Tworzenie katalogu docelowego: $NetworkLocation" -ForegroundColor Yellow
-    try {
-        New-Item -ItemType Directory -Path $NetworkLocation -Force | Out-Null
-        Write-Host "Katalog utworzony pomyślnie." -ForegroundColor Green
-    }
-    catch {
-        Write-Host "Błąd podczas tworzenia katalogu: $($_.Exception.Message)" -ForegroundColor Red
-        exit 1
-    }
-}
+# Lista lokalizacji docelowych
+$NetworkLocations = @($NetworkLocation, $NetworkLocation2)
 
-# Kopiowanie plików wykonywalnych i zależności
-Write-Host "Kopiowanie plików aplikacji..." -ForegroundColor Yellow
-try {
-    Copy-Item -Path "$SourcePath\*" -Destination $NetworkLocation -Recurse -Force
-    Write-Host "Pliki aplikacji skopiowane pomyślnie." -ForegroundColor Green
-}
-catch {
-    Write-Host "Błąd podczas kopiowania plików aplikacji: $($_.Exception.Message)" -ForegroundColor Red
-    exit 1
-}
-
-# Kopiowanie plików konfiguracyjnych
-Write-Host "Kopiowanie plików konfiguracyjnych..." -ForegroundColor Yellow
-
-$ConfigFiles = @(
-    "calibration_history.xml",
-    "welder_settings.json"
-)
-
-foreach ($file in $ConfigFiles) {
-    $sourceFile = Join-Path $ProjectPath $file
-    if (Test-Path $sourceFile) {
+# Kopiowanie do wszystkich lokalizacji
+foreach ($location in $NetworkLocations) {
+    Write-Host "`n=== Kopiowanie do: $location ===" -ForegroundColor Cyan
+    
+    # Tworzenie katalogu docelowego jesli nie istnieje
+    if (-not (Test-Path $location)) {
+        Write-Host "Tworzenie katalogu docelowego: $location" -ForegroundColor Yellow
         try {
-            Copy-Item -Path $sourceFile -Destination $NetworkLocation -Force
-            Write-Host "Skopiowano: $file" -ForegroundColor Green
+            New-Item -ItemType Directory -Path $location -Force | Out-Null
+            Write-Host "Katalog utworzony pomyslnie." -ForegroundColor Green
         }
         catch {
-            Write-Host "Błąd podczas kopiowania $file : $($_.Exception.Message)" -ForegroundColor Red
+            Write-Host "Blad podczas tworzenia katalogu: $($_.Exception.Message)" -ForegroundColor Red
+            continue
         }
     }
-    else {
-        Write-Host "Plik nie istnieje: $file" -ForegroundColor Yellow
+
+    # Kopiowanie plikow wykonywalnych i zaleznosci
+    Write-Host "Kopiowanie plikow aplikacji..." -ForegroundColor Yellow
+    try {
+        Copy-Item -Path "$SourcePath\*" -Destination $location -Recurse -Force
+        Write-Host "Pliki aplikacji skopiowane pomyslnie." -ForegroundColor Green
+    }
+    catch {
+        Write-Host "Blad podczas kopiowania plikow aplikacji: $($_.Exception.Message)" -ForegroundColor Red
+        continue
+    }
+
+    # Kopiowanie plikow konfiguracyjnych
+    Write-Host "Kopiowanie plikow konfiguracyjnych..." -ForegroundColor Yellow
+
+    $ConfigFiles = @(
+        "calibration_history.xml",
+        "welder_settings.json"
+    )
+
+    foreach ($file in $ConfigFiles) {
+        $sourceFile = Join-Path $ProjectPath $file
+        if (Test-Path $sourceFile) {
+            try {
+                Copy-Item -Path $sourceFile -Destination $location -Force
+                Write-Host "Skopiowano: $file" -ForegroundColor Green
+            }
+            catch {
+                Write-Host "Blad podczas kopiowania $file : $($_.Exception.Message)" -ForegroundColor Red
+            }
+        }
+        else {
+            Write-Host "Plik nie istnieje: $file" -ForegroundColor Yellow
+        }
     }
 }
 
-# Sprawdzenie wyników
+# Sprawdzenie wynikow
 Write-Host "`n=== Podsumowanie ===" -ForegroundColor Green
-$copiedFiles = Get-ChildItem -Path $NetworkLocation -File | Measure-Object
-Write-Host "Liczba skopiowanych plików: $($copiedFiles.Count)" -ForegroundColor Cyan
-Write-Host "Lokalizacja docelowa: $NetworkLocation" -ForegroundColor Cyan
+$allSuccessful = $true
+foreach ($location in $NetworkLocations) {
+    if (Test-Path $location) {
+        $copiedFiles = Get-ChildItem -Path $location -File | Measure-Object
+        Write-Host "Lokalizacja: $location" -ForegroundColor Cyan
+        Write-Host "Liczba skopiowanych plikow: $($copiedFiles.Count)" -ForegroundColor Cyan
+    }
+    else {
+        Write-Host "Lokalizacja niedostepna: $location" -ForegroundColor Red
+        $allSuccessful = $false
+    }
+}
 
-Write-Host "`nDeployment zakończony sukcesem!" -ForegroundColor Green
-
-exit 0 
+if ($allSuccessful) {
+    Write-Host "`nDeployment zakonczony sukcesem!" -ForegroundColor Green
+    exit 0
+} else {
+    Write-Host "`nDeployment zakonczony z bledami!" -ForegroundColor Red
+    exit 1
+}
