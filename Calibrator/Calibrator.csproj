@@ -40,14 +40,5 @@
     <Message Text="TEST TARGET DZIAŁA" Importance="high" />
   </Target>
 
-  <Target Name="CopyToNetworkAfterPublish" AfterTargets="Publish">
-    <Message Text="Uruchamianie skryptu kopiowania do lokalizacji sieciowych..." Importance="high" />
-    <Exec Command="powershell.exe -ExecutionPolicy Bypass -Command &quot;&amp; '$(MSBuildProjectDirectory)\..\deploy-to-network.ps1' -Configuration $(Configuration) *>&amp;1&quot;" 
-          ContinueOnError="true" 
-          WorkingDirectory="$(MSBuildProjectDirectory)\.."
-          ConsoleToMSBuild="true"
-          StandardOutputImportance="high"
-          StandardErrorImportance="high" />
-  </Target>
 
 </Project> 
