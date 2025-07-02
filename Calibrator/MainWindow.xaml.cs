@@ -860,6 +860,10 @@ windowSettings.WindowWidth.Value > 0 && windowSettings.WindowHeight.Value > 0)
 
         // Inicjalizuj pasek statusu
         UpdateStatusBar();
+
+        // Wyświetl informację o skrótach klawiaturowych
+        Log("🚀 Calibrator uruchomiony! Używaj klawiszy F1-F6 aby szybko przełączać zakładki.");
+        Log("💡 Pomoc → Skróty klawiaturowe, aby zobaczyć wszystkie dostępne skróty.");
     }
 
     private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -1521,6 +1525,100 @@ windowSettings.WindowWidth.Value > 0 && windowSettings.WindowHeight.Value > 0)
         catch (Exception ex)
         {
             Log($"Błąd podczas zamykania aplikacji: {ex.Message}");
+        }
+    }
+
+    /// <summary>
+    /// Event handler for F-key shortcuts to switch between tabs
+    /// </summary>
+    private void Window_KeyDown(object sender, KeyEventArgs e)
+    {
+        try
+        {
+            // Handle F1-F6 keys for tab switching
+            switch (e.Key)
+            {
+                case Key.F1:
+                    SwitchToTabByIndex(0, "Parametry zgrzewania");
+                    e.Handled = true;
+                    break;
+                case Key.F2:
+                    SwitchToTabByIndex(1, "Parametry kalibracji");
+                    e.Handled = true;
+                    break;
+                case Key.F3:
+                    SwitchToTabByIndex(2, "Historia kalibracji");
+                    e.Handled = true;
+                    break;
+                case Key.F4:
+                    SwitchToTabByIndex(3, "Historia pomiarów");
+                    e.Handled = true;
+                    break;
+                case Key.F5:
+                    SwitchToTabByIndex(4, "INFO");
+                    e.Handled = true;
+                    break;
+                case Key.F6:
+                    SwitchToTabByIndex(5, "Komunikacja");
+                    e.Handled = true;
+                    break;
+            }
+        }
+        catch (Exception ex)
+        {
+            Log($"Błąd podczas przełączania zakładki klawiszem skrótu: {ex.Message}");
+        }
+    }
+
+    /// <summary>
+    /// Switch to tab by index with logging
+    /// </summary>
+    private void SwitchToTabByIndex(int tabIndex, string tabName)
+    {
+        try
+        {
+            if (mainTabControl.Items.Count > tabIndex)
+            {
+                mainTabControl.SelectedIndex = tabIndex;
+                Log($"🔄 Przełączono na zakładkę: {tabName} (F{tabIndex + 1})");
+            }
+        }
+        catch (Exception ex)
+        {
+            Log($"Błąd podczas przełączania na zakładkę {tabName}: {ex.Message}");
+        }
+    }
+
+    /// <summary>
+    /// Event handler for Keyboard Shortcuts dialog
+    /// </summary>
+    private void ShowKeyboardShortcuts_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            string shortcuts = "Skróty klawiaturowe Calibrator\n\n" +
+                             "ZAKŁADKI:\n" +
+                             "F1 - Parametry zgrzewania\n" +
+                             "F2 - Parametry kalibracji\n" +
+                             "F3 - Historia kalibracji\n" +
+                             "F4 - Historia pomiarów\n" +
+                             "F5 - INFO\n" +
+                             "F6 - Komunikacja\n\n" +
+                             "MENU:\n" +
+                             "Alt + P - Menu Plik\n" +
+                             "Alt + O - Menu Połączenie\n" +
+                             "Alt + K - Menu Kalibracja\n" +
+                             "Alt + T - Menu Kontrola\n" +
+                             "Alt + W - Menu Widok\n" +
+                             "Alt + M - Menu Pomoc\n\n" +
+                             "Naciśnij odpowiedni klawisz F, aby szybko przełączyć się między zakładkami!";
+
+            MessageBox.Show(shortcuts, "Skróty klawiaturowe", MessageBoxButton.OK, MessageBoxImage.Information);
+            Log("ℹ Wyświetlono okno ze skrótami klawiaturowymi");
+        }
+        catch (Exception ex)
+        {
+            Log($"Błąd podczas wyświetlania skrótów klawiaturowych: {ex.Message}");
         }
     }
 }
