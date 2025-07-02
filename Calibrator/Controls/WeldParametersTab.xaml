@@ -33,7 +33,7 @@
                                   VerticalAlignment="Stretch"
                                   Header="Pomiary zgrzewania">
                                 <controls:WeldMeasurementsComponent x:Name="weldMeasurementsComponent"
-                                                                    ShowStatistics="True"/>
+                                                                    ShowStatistics="True" Margin="15,0,15,0" UseLayoutRounding="False"/>
                         </GroupBox>
                 </Grid>
         </Grid>

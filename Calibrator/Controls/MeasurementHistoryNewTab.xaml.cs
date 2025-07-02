@@ -226,7 +226,7 @@ namespace Calibrator.Controls
             var statsMeasurements = measurements.Skip(statsStartIndex).ToList();
             if (statsMeasurements.Count == 0)
             {
-                ClearStatistics();
+                measurementStatisticsComponent.ClearAll();
                 return;
             }
 
@@ -234,37 +234,41 @@ namespace Calibrator.Controls
             var voltageValues = statsMeasurements.Select(m => m.Voltage).ToList();
             double vMin = voltageValues.Min();
             double vMax = voltageValues.Max();
-            txtVoltageMin.Text = $"Min: {vMin:F2}";
-            txtVoltageMax.Text = $"Max: {vMax:F2}";
-            txtVoltageAvg.Text = $"Śr: {voltageValues.Average():F2}";
-            txtVoltageDelta.Text = $"Δ: {(vMax - vMin):F2}";
+            measurementStatisticsComponent.SetVoltageStats(
+                $"Min: {vMin:F2}",
+                $"Max: {vMax:F2}",
+                $"Śr: {voltageValues.Average():F2}",
+                $"Δ: {(vMax - vMin):F2}");
 
             // Prąd
             var currentValues = statsMeasurements.Select(m => m.Current).ToList();
             double cMin = currentValues.Min();
             double cMax = currentValues.Max();
-            txtCurrentMin.Text = $"Min: {cMin:F2}";
-            txtCurrentMax.Text = $"Max: {cMax:F2}";
-            txtCurrentAvg.Text = $"Śr: {currentValues.Average():F2}";
-            txtCurrentDelta.Text = $"Δ: {(cMax - cMin):F2}";
+            measurementStatisticsComponent.SetCurrentStats(
+                $"Min: {cMin:F2}",
+                $"Max: {cMax:F2}",
+                $"Śr: {currentValues.Average():F2}",
+                $"Δ: {(cMax - cMin):F2}");
 
             // ADC Napięcia
             var voltageADCValues = statsMeasurements.Select(m => m.VoltageADC).ToList();
             int vADCMin = voltageADCValues.Min();
             int vADCMax = voltageADCValues.Max();
-            txtVoltageADCMin.Text = $"Min: {vADCMin:D5}";
-            txtVoltageADCMax.Text = $"Max: {vADCMax:D5}";
-            txtVoltageADCAvg.Text = $"Śr: {voltageADCValues.Average():F0}";
-            txtVoltageADCDelta.Text = $"Δ: {(vADCMax - vADCMin):D5}";
+            measurementStatisticsComponent.SetVoltageADCStats(
+                $"Min: {vADCMin:D5}",
+                $"Max: {vADCMax:D5}",
+                $"Śr: {voltageADCValues.Average():F0}",
+                $"Δ: {(vADCMax - vADCMin):D5}");
 
             // ADC Prądu
             var currentADCValues = statsMeasurements.Select(m => m.CurrentADC).ToList();
             int cADCMin = currentADCValues.Min();
             int cADCMax = currentADCValues.Max();
-            txtCurrentADCMin.Text = $"Min: {cADCMin:D5}";
-            txtCurrentADCMax.Text = $"Max: {cADCMax:D5}";
-            txtCurrentADCAvg.Text = $"Śr: {currentADCValues.Average():F0}";
-            txtCurrentADCDelta.Text = $"Δ: {(cADCMax - cADCMin):D5}";
+            measurementStatisticsComponent.SetCurrentADCStats(
+                $"Min: {cADCMin:D5}",
+                $"Max: {cADCMax:D5}",
+                $"Śr: {currentADCValues.Average():F0}",
+                $"Δ: {(cADCMax - cADCMin):D5}");
 
             Log($"Obliczono statystyki dla {statsMeasurements.Count} pomiarów od ostatniego resetu");
 
@@ -285,22 +289,7 @@ namespace Calibrator.Controls
 
         private void ClearStatistics()
         {
-            txtVoltageMin.Text = "Min: —";
-            txtVoltageMax.Text = "Max: —";
-            txtVoltageAvg.Text = "Śr: —";
-            txtVoltageDelta.Text = "Δ: —";
-            txtCurrentMin.Text = "Min: —";
-            txtCurrentMax.Text = "Max: —";
-            txtCurrentAvg.Text = "Śr: —";
-            txtCurrentDelta.Text = "Δ: —";
-            txtVoltageADCMin.Text = "Min: —";
-            txtVoltageADCMax.Text = "Max: —";
-            txtVoltageADCAvg.Text = "Śr: —";
-            txtVoltageADCDelta.Text = "Δ: —";
-            txtCurrentADCMin.Text = "Min: —";
-            txtCurrentADCMax.Text = "Max: —";
-            txtCurrentADCAvg.Text = "Śr: —";
-            txtCurrentADCDelta.Text = "Δ: —";
+            measurementStatisticsComponent.ClearAll();
         }
 
         private void btnCalculateStats_Click(object sender, RoutedEventArgs e)

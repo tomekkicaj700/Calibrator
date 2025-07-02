@@ -390,7 +390,7 @@
                         </StackPanel>
                     </TabItem.Header>
                     <controls:WeldParametersTab x:Name="weldParametersTab"
-                                                Margin="0,0,6,0"/>
+                                                Margin="0,0,6,0" Loaded="weldParametersTab_Loaded"/>
                 </TabItem>
                 <!--  Tab 2: Parametry kalibracji  -->
                 <TabItem Tag="calibration_parameters">
@@ -449,7 +449,7 @@
                         </StackPanel>
                     </TabItem.Header>
                     <controls:MeasurementHistoryNewTab x:Name="measurementHistoryNewTab"
-                                                       Loaded="measurementHistoryNewTab_Loaded"/>
+                                                       Loaded="measurementHistoryNewTab_Loaded" Margin="53,0,97,0"/>
                 </TabItem>
                 <TabItem Tag="info">
                     <TabItem.Header>
@@ -494,7 +494,7 @@
 
         <!-- GridSplitter do regulacji wysokości logPanel -->
         <GridSplitter x:Name="logSplitter"
-                Grid.Row="2"
+                      Grid.Row="2"
                       Height="6"
                       HorizontalAlignment="Stretch"
                       VerticalAlignment="Top"
