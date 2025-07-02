@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Threading;
 using WelderRS232;
 using static Logger.LoggerService;
@@ -27,11 +28,22 @@ namespace Calibrator.Controls
         // Indeks od którego liczyć statystyki po resecie
         private int statsStartIndex = 0;
 
+        private bool _suppressLayoutUpdate = false;
+        private double? _lastProportion = null;
+        private MainWindow? _mainWindow;
+        private bool _splitterRestored = false;
+
         public MeasurementHistoryNewTab()
         {
             InitializeComponent();
             measurements = new ObservableCollection<MeasurementDataRecord>();
             dataGridMeasurements.ItemsSource = measurements;
+
+            this.Loaded += MeasurementHistoryNewTab_Loaded;
+
+            // Dodaj obsługę SizeChanged dla grida
+            var grid = (Grid)this.Content;
+            grid.SizeChanged += Grid_SizeChanged;
 
             // BackgroundWorker do przetwarzania bufora w tle
             bufferWorker = new BackgroundWorker();
@@ -41,6 +53,24 @@ namespace Calibrator.Controls
 
             // Automatyczne wczytanie danych z pliku przy starcie
             LoadDataFromFile();
+        }
+
+        private MainWindow? GetMainWindow()
+        {
+            if (_mainWindow != null) return _mainWindow;
+
+            // Znajdź MainWindow w drzewie wizualnym
+            var parent = this.Parent;
+            while (parent != null)
+            {
+                if (parent is MainWindow mainWindow)
+                {
+                    _mainWindow = mainWindow;
+                    return _mainWindow;
+                }
+                parent = parent is FrameworkElement element ? element.Parent : null;
+            }
+            return null;
         }
 
         private void BufferWorker_DoWork(object? sender, DoWorkEventArgs e)
@@ -350,6 +380,90 @@ namespace Calibrator.Controls
             statsStartIndex = measurements.Count;
             ClearStatistics();
             Log("Zresetowano statystyki pomiarowe");
+        }
+
+        private void MeasurementHistoryNewTab_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Przywracanie splittera zostanie wykonane w Grid_SizeChanged
+            Log("[SPLITTER RESTORE] Loaded - czekam na SizeChanged grida");
+        }
+
+        private void Grid_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            // Przywróć splitter tylko raz, gdy grid ma sensowny rozmiar
+            if (e.NewSize.Width > 100 && !_splitterRestored)
+            {
+                RestoreSplitter();
+                _splitterRestored = true;
+            }
+        }
+
+        private void RestoreSplitter()
+        {
+            var settings = Calibrator.WindowSettings.Load();
+            if (settings.TablePanelProportion.HasValue && settings.TablePanelProportion.Value > 0 && settings.TablePanelProportion.Value < 1.01)
+            {
+                var mainWindow = GetMainWindow();
+                if (mainWindow != null)
+                {
+                    var grid = (Grid)this.Content;
+                    double windowWidth = mainWindow.ActualWidth;
+                    double gridWidth = grid.ActualWidth;
+                    double proportion = settings.TablePanelProportion.Value;
+                    double minRight = grid.ColumnDefinitions[2].MinWidth;
+                    double left, right;
+                    if (proportion >= 1.0)
+                    {
+                        left = gridWidth;
+                        right = minRight;
+                    }
+                    else
+                    {
+                        left = gridWidth * proportion;
+                        right = gridWidth - left - grid.ColumnDefinitions[1].ActualWidth;
+                        if (right < minRight) right = minRight;
+                        if (left < grid.ColumnDefinitions[0].MinWidth) left = grid.ColumnDefinitions[0].MinWidth;
+                    }
+                    _suppressLayoutUpdate = true;
+                    grid.ColumnDefinitions[0].Width = new GridLength(left, GridUnitType.Pixel);
+                    grid.ColumnDefinitions[2].Width = new GridLength(right, GridUnitType.Pixel);
+                    _suppressLayoutUpdate = false;
+                    Log($"[SPLITTER RESTORE] Okno: {windowWidth:F0}px, Grid: {gridWidth:F0}px, Proporcja do przywrócenia: {proportion:F4}");
+                    Log($"[SPLITTER RESTORE] Ustawiam szerokość kolumny: {left:F0}px, prawa kolumna: {right:F0}px");
+                }
+            }
+        }
+
+        private void GridSplitter_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
+        {
+            SaveSplitterProportion();
+        }
+
+        private void SaveSplitterProportion()
+        {
+            var mainWindow = GetMainWindow();
+            if (mainWindow == null) return;
+
+            var grid = (Grid)this.Content;
+            double gridWidth = grid.ActualWidth;
+            double tableWidth = grid.ColumnDefinitions[0].ActualWidth;
+            double rightWidth = grid.ColumnDefinitions[2].ActualWidth;
+            double windowWidth = mainWindow.ActualWidth;
+
+            if (gridWidth < 100) return;
+
+            double proportion;
+            if (rightWidth < 5)
+                proportion = 1.0;
+            else
+                proportion = tableWidth / gridWidth;
+
+            if (_lastProportion.HasValue && Math.Abs(_lastProportion.Value - proportion) < 0.001) return;
+            _lastProportion = proportion;
+            var settings = Calibrator.WindowSettings.Load();
+            settings.TablePanelProportion = proportion;
+            settings.Save();
+            Log($"[SPLITTER SAVE] Okno: {windowWidth:F0}px, Grid: {gridWidth:F0}px, Zapisuję proporcję: {proportion:F4} (tabela: {tableWidth:F0}px, prawa: {rightWidth:F0}px)");
         }
     }
 

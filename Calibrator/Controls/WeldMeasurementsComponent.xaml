@@ -7,256 +7,246 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     d:DesignWidth="600"
-    d:DesignHeight="400">
-    <Grid Margin="10">
+    d:DesignHeight="400"
+    HorizontalAlignment="Stretch"
+    VerticalAlignment="Stretch">
+    <Grid Margin="10"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch">
         <Grid.RowDefinitions>
-            <RowDefinition Height="23*"/>
-            <RowDefinition Height="15*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="8*"/>
-            <ColumnDefinition Width="137*"/>
-            <ColumnDefinition Width="145*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <!--  Napięcie zgrzewania  -->
-        <Grid Grid.Column="0"
-              Margin="0,0,20,0" Grid.RowSpan="2" Grid.ColumnSpan="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <!-- Tytuł -->
-                <RowDefinition Height="Auto"/>
-                <!-- Statystyki -->
-                <RowDefinition Height="Auto"/>
-                <!-- Wartość -->
-                <RowDefinition Height="Auto"/>
-                <!-- ADC -->
-                <RowDefinition Height="Auto"/>
-                <!-- Podpis -->
-                <RowDefinition Height="*"/>
-                <!-- Gage -->
-            </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0"
-                       Margin="0,0,0,10"
-                       HorizontalAlignment="Center"
-                       FontSize="18"
-                       FontWeight="Bold"
-                       Text="Napięcie [V]"/>
-            <Border Grid.Row="1"
-                    x:Name="borderNapiecieStats"
-                    Margin="0,0,0,10"
-                    BorderBrush="#00BCD4"
-                    BorderThickness="1"
-                    CornerRadius="4"
-                    Visibility="Collapsed">
-                <Grid Margin="5">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock
-                        Grid.Row="0"
-                        Grid.Column="0"
-                        Foreground="Red"
-                        Text="Max: "/>
-                    <TextBlock
-                        x:Name="txtNapiecieMax"
-                        Grid.Row="0"
-                        Grid.Column="1"
-                        FontSize="16"
-                        FontWeight="Bold"
-                        Foreground="Red"
-                        Text="0.00"/>
-                    <TextBlock
-                        Grid.Row="1"
-                        Grid.Column="0"
-                        Foreground="Blue"
-                        Text="Avr: "/>
-                    <TextBlock
-                        x:Name="txtNapiecieAvr"
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        FontSize="16"
-                        FontWeight="Bold"
-                        Foreground="Blue"
-                        Text="0.00"/>
-                    <TextBlock
-                        Grid.Row="2"
-                        Grid.Column="0"
-                        Foreground="#4CAF50"
-                        Text="Min: "/>
-                    <TextBlock
-                        x:Name="txtNapiecieMin"
-                        Grid.Row="2"
-                        Grid.Column="1"
-                        FontSize="16"
-                        FontWeight="Bold"
-                        Foreground="#4CAF50"
-                        Text="0.00"/>
-                </Grid>
-            </Border>
-            <Border Grid.Row="2"
-                    Margin="0,0,0,10"
-                    BorderBrush="#673AB7"
-                    BorderThickness="2"
-                    CornerRadius="4">
-                <TextBlock x:Name="txtNapiecieZgrzewania"
-                           Padding="15,8"
-                           HorizontalAlignment="Center"
-                           FontSize="28"
-                           FontWeight="Bold"
-                           Foreground="#673AB7"
-                           Text="0.00"/>
-            </Border>
-            <Border Grid.Row="3"
-                    BorderBrush="#2196F3"
-                    BorderThickness="2"
-                    CornerRadius="4">
-                <TextBlock x:Name="txtADCNapZgrzew"
-                           Padding="15,8"
-                           HorizontalAlignment="Center"
-                           FontSize="20"
-                           Foreground="#2196F3"
-                           Text="0"/>
-            </Border>
-            <TextBlock Grid.Row="4"
-                       Margin="0,10,0,5"
-                       HorizontalAlignment="Center"
-                       FontSize="14"
-                       FontWeight="Bold"
-                       Text="Woltomierz [V]"/>
-            <lvc:Gauge Grid.Row="5"
-                       x:Name="gaugeNapiecie"
-                       VerticalAlignment="Stretch"
-                       HorizontalAlignment="Stretch"
-                       Foreground="#673AB7"
-                       Value="0.00"
-                       From="0"
-                       To="50"/>
-        </Grid>
-        <!--  Prąd zgrzewania  -->
-        <Grid Grid.Column="2"
-              Margin="20,0,0,0" Grid.RowSpan="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <!-- Tytuł -->
-                <RowDefinition Height="Auto"/>
-                <!-- Statystyki -->
-                <RowDefinition Height="Auto"/>
-                <!-- Wartość -->
-                <RowDefinition Height="Auto"/>
-                <!-- ADC -->
-                <RowDefinition Height="Auto"/>
-                <!-- Podpis -->
-                <RowDefinition Height="*"/>
-                <!-- Gage -->
-            </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0"
-                       Margin="0,0,0,10"
-                       HorizontalAlignment="Center"
-                       FontSize="18"
-                       FontWeight="Bold"
-                       Text="Prąd [A]"/>
-            <Border Grid.Row="1"
-                    x:Name="borderPradStats"
-                    Margin="0,0,0,10"
-                    BorderBrush="#00BCD4"
-                    BorderThickness="1"
-                    CornerRadius="4"
-                    Visibility="Collapsed">
-                <Grid Margin="5">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock
-                        Grid.Row="0"
-                        Grid.Column="0"
-                        Foreground="Red"
-                        Text="Max: "/>
-                    <TextBlock
-                        x:Name="txtPradMax"
-                        Grid.Row="0"
-                        Grid.Column="1"
-                        FontSize="16"
-                        FontWeight="Bold"
-                        Foreground="Red"
-                        Text="0.00"/>
-                    <TextBlock
-                        Grid.Row="1"
-                        Grid.Column="0"
-                        Foreground="Blue"
-                        Text="Avr: "/>
-                    <TextBlock
-                        x:Name="txtPradAvr"
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        FontSize="16"
-                        FontWeight="Bold"
-                        Foreground="Blue"
-                        Text="0.00"/>
-                    <TextBlock
-                        Grid.Row="2"
-                        Grid.Column="0"
-                        Foreground="#4CAF50"
-                        Text="Min: "/>
-                    <TextBlock
-                        x:Name="txtPradMin"
-                        Grid.Row="2"
-                        Grid.Column="1"
-                        FontSize="16"
-                        FontWeight="Bold"
-                        Foreground="#4CAF50"
-                        Text="0.00"/>
-                </Grid>
-            </Border>
-            <Border Grid.Row="2"
-                    Margin="0,0,0,10"
-                    BorderBrush="#673AB7"
-                    BorderThickness="2"
-                    CornerRadius="4">
-                <TextBlock x:Name="txtPradZgrzewania"
-                           Padding="15,8"
-                           HorizontalAlignment="Center"
-                           FontSize="28"
-                           FontWeight="Bold"
-                           Foreground="#673AB7"
-                           Text="0.00"/>
-            </Border>
-            <Border Grid.Row="3"
-                    BorderBrush="#2196F3"
-                    BorderThickness="2"
-                    CornerRadius="4">
-                <TextBlock x:Name="txtADCPradZgrzew"
-                           Padding="15,8"
-                           HorizontalAlignment="Center"
-                           FontSize="20"
-                           Foreground="#2196F3"
-                           Text="0"/>
-            </Border>
-            <TextBlock Grid.Row="4"
-                       Margin="0,10,0,5"
-                       HorizontalAlignment="Center"
-                       FontSize="14"
-                       FontWeight="Bold"
-                       Text="Amperomierz [A]"/>
-            <lvc:Gauge Grid.Row="5"
-                       x:Name="gaugePrad"
-                       VerticalAlignment="Stretch"
-                       HorizontalAlignment="Stretch"
-                       Foreground="#E91E63"
-                       Value="0"
-                       From="0"
-                       To="140"/>
-        </Grid>
+        <!-- Napięcie (lewa kolumna) -->
+        <TextBlock Grid.Row="0"
+                Grid.Column="0"
+                Text="Napięcie [V]"
+                FontSize="18"
+                FontWeight="Bold"
+                HorizontalAlignment="Stretch"
+                TextAlignment="Center"
+                VerticalAlignment="Stretch"/>
+        <Border Grid.Row="1"
+                Grid.Column="0"
+                x:Name="borderNapiecieStats"
+                Margin="0,0,0,10"
+                BorderBrush="#00BCD4"
+                BorderThickness="1"
+                CornerRadius="4"
+                Visibility="Collapsed"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch">
+            <Grid Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Foreground="Red"
+                    Text="Max: "/>
+                <TextBlock
+                    x:Name="txtNapiecieMax"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Foreground="Red"
+                    Text="0.00"/>
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Foreground="Blue"
+                    Text="Avr: "/>
+                <TextBlock
+                    x:Name="txtNapiecieAvr"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Foreground="Blue"
+                    Text="0.00"/>
+                <TextBlock
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Foreground="#4CAF50"
+                    Text="Min: "/>
+                <TextBlock
+                    x:Name="txtNapiecieMin"
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Foreground="#4CAF50"
+                    Text="0.00"/>
+            </Grid>
+        </Border>
+        <Border Grid.Row="2"
+                Grid.Column="0"
+                Margin="0,0,0,10"
+                BorderBrush="#673AB7"
+                BorderThickness="2"
+                CornerRadius="4"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch">
+            <TextBlock x:Name="txtNapiecieZgrzewania"
+                    Padding="15,8"
+                    HorizontalAlignment="Stretch"
+                    FontSize="28"
+                    FontWeight="Bold"
+                    Foreground="#673AB7"
+                    Text="0.00"
+                    TextAlignment="Center"
+                    VerticalAlignment="Stretch"/>
+        </Border>
+        <Border Grid.Row="3"
+                Grid.Column="0"
+                BorderBrush="#2196F3"
+                BorderThickness="2"
+                CornerRadius="4"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch">
+            <TextBlock x:Name="txtADCNapZgrzew"
+                    Padding="15,8"
+                    HorizontalAlignment="Stretch"
+                    FontSize="20"
+                    Foreground="#2196F3"
+                    Text="0"
+                    TextAlignment="Center"
+                    VerticalAlignment="Stretch"/>
+        </Border>
+        <lvc:Gauge Grid.Row="4"
+                Grid.Column="0"
+                x:Name="gaugeNapiecie"
+                Value="0.00"
+                From="0"
+                To="50"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"/>
+        <!-- Prąd (prawa kolumna) -->
+        <TextBlock Grid.Row="0"
+                Grid.Column="1"
+                Text="Prąd [A]"
+                FontSize="18"
+                FontWeight="Bold"
+                HorizontalAlignment="Stretch"
+                TextAlignment="Center"
+                VerticalAlignment="Stretch"/>
+        <Border Grid.Row="1"
+                Grid.Column="1"
+                x:Name="borderPradStats"
+                Margin="0,0,0,10"
+                BorderBrush="#00BCD4"
+                BorderThickness="1"
+                CornerRadius="4"
+                Visibility="Collapsed"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch">
+            <Grid Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Foreground="Red"
+                    Text="Max: "/>
+                <TextBlock
+                    x:Name="txtPradMax"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Foreground="Red"
+                    Text="0.00"/>
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Foreground="Blue"
+                    Text="Avr: "/>
+                <TextBlock
+                    x:Name="txtPradAvr"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Foreground="Blue"
+                    Text="0.00"/>
+                <TextBlock
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Foreground="#4CAF50"
+                    Text="Min: "/>
+                <TextBlock
+                    x:Name="txtPradMin"
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Foreground="#4CAF50"
+                    Text="0.00"/>
+            </Grid>
+        </Border>
+        <Border Grid.Row="2"
+                Grid.Column="1"
+                Margin="0,0,0,10"
+                BorderBrush="#673AB7"
+                BorderThickness="2"
+                CornerRadius="4"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch">
+            <TextBlock x:Name="txtPradZgrzewania"
+                    Padding="15,8"
+                    HorizontalAlignment="Stretch"
+                    FontSize="28"
+                    FontWeight="Bold"
+                    Foreground="#673AB7"
+                    Text="0.00"
+                    TextAlignment="Center"
+                    VerticalAlignment="Stretch"/>
+        </Border>
+        <Border Grid.Row="3"
+                Grid.Column="1"
+                BorderBrush="#2196F3"
+                BorderThickness="2"
+                CornerRadius="4"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch">
+            <TextBlock x:Name="txtADCPradZgrzew"
+                    Padding="15,8"
+                    HorizontalAlignment="Stretch"
+                    FontSize="20"
+                    Foreground="#2196F3"
+                    Text="0"
+                    TextAlignment="Center"
+                    VerticalAlignment="Stretch"/>
+        </Border>
+        <lvc:Gauge Grid.Row="4"
+                Grid.Column="1"
+                x:Name="gaugePrad"
+                Value="0"
+                From="0"
+                To="140"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"/>
     </Grid>
 </UserControl>

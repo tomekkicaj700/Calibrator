@@ -6,21 +6,26 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="clr-namespace:Calibrator.Controls"
     d:DesignHeight="600"
-    mc:Ignorable="d">
-    <Grid>
+    mc:Ignorable="d"
+    HorizontalAlignment="Stretch"
+    VerticalAlignment="Stretch"
+    MinWidth="300"
+    MinHeight="200">
+    <Grid HorizontalAlignment="Stretch"
+          VerticalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"
-                    MinWidth="150"/>
+                              MinWidth="150"/>
             <ColumnDefinition Width="5"/>
-            <ColumnDefinition Width="400"
-                    MinWidth="300"/>
+            <ColumnDefinition Width="*"
+                              MinWidth="250"/>
         </Grid.ColumnDefinitions>
 
-        <!--  Lewa kolumna: tabela pomiarów  -->
+        <!-- Lewa kolumna: tabela pomiarów -->
         <DataGrid
             x:Name="dataGridMeasurements"
             Grid.Row="0"
@@ -130,33 +135,40 @@
             </DataGrid.RowStyle>
         </DataGrid>
 
-        <!-- SPLITTER -->
+        <!-- Splitter -->
         <GridSplitter Grid.Row="0"
                       Grid.Column="1"
                       Width="5"
                       HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"
                       Background="#EEE"
-                      ShowsPreview="True"/>
+                      ShowsPreview="True"
+                      DragCompleted="GridSplitter_DragCompleted"/>
 
-        <!--  Prawa kolumna: komponent Gauge i statystyki  -->
+        <!-- Prawa kolumna: komponenty -->
         <Grid Grid.Row="0"
-              Grid.Column="2"
-              Margin="5,5,5,5">
+                Grid.Column="2"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <controls:WeldMeasurementsComponent
                 x:Name="weldMeasurementsComponent"
-                Margin="0,1,0,1"
-                ShowStatistics="False"
-                Grid.Row="0"/>
+                Grid.Row="0"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Margin="0"
+                ShowStatistics="False"/>
             <controls:MeasurementStatisticsComponent
                 x:Name="measurementStatisticsComponent"
-                Grid.Row="1"/>
+                Grid.Row="1"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"/>
         </Grid>
 
-        <!--  Przyciski na dole  -->
+        <!-- Przyciski na dole -->
         <StackPanel
             Grid.Row="1"
             Grid.Column="0"

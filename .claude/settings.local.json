@@ -3,7 +3,9 @@
     "allow": [
       "Bash(find:*)",
       "Bash(ls:*)",
-      "Bash(powershell.exe:*)"
+      "Bash(powershell.exe:*)",
+      "WebFetch(domain:www.labtronik.com.pl)",
+      "Bash(curl:*)"
     ],
     "deny": []
   }
