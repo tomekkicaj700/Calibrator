@@ -164,6 +164,8 @@ public partial class MainWindow : Window
     private InfoTab InfoTab => infoTab;
     private CommunicationTab CommunicationTab => communicationTab;
 
+    private double? lastLogPanelHeight = null;
+
     public MainWindow()
     {
         InitializeComponent();
@@ -1486,6 +1488,25 @@ windowSettings.WindowWidth.Value > 0 && windowSettings.WindowHeight.Value > 0)
         catch (Exception ex)
         {
             Log($"Błąd podczas wyświetlania skrótów klawiaturowych: {ex.Message}");
+        }
+    }
+
+    private void btnToggleLogPanel_Click(object sender, RoutedEventArgs e)
+    {
+        var mainGrid = (Grid)this.Content;
+        if (logPanel.Visibility == Visibility.Visible)
+        {
+            lastLogPanelHeight = mainGrid.RowDefinitions[2].Height.Value;
+            logPanel.Visibility = Visibility.Collapsed;
+            logSplitter.Visibility = Visibility.Collapsed;
+            mainGrid.RowDefinitions[2].Height = new GridLength(0);
+        }
+        else
+        {
+            logPanel.Visibility = Visibility.Visible;
+            logSplitter.Visibility = Visibility.Visible;
+            double height = lastLogPanelHeight.HasValue && lastLogPanelHeight.Value > 0 ? lastLogPanelHeight.Value : 180;
+            mainGrid.RowDefinitions[2].Height = new GridLength(height);
         }
     }
 }

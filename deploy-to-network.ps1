@@ -60,34 +60,35 @@ $NetworkLocations = @($NetworkLocation, $NetworkLocation2)
 
 # Kopiowanie do wszystkich lokalizacji
 foreach ($location in $NetworkLocations) {
-    Write-Host "`n=== Kopiowanie do: $location ===" -ForegroundColor Cyan
+    Write-Output ""
+    Write-Output "=== Kopiowanie do: $location ==="
     
     # Tworzenie katalogu docelowego jesli nie istnieje
     if (-not (Test-Path $location)) {
-        Write-Host "Tworzenie katalogu docelowego: $location" -ForegroundColor Yellow
+        Write-Output "Tworzenie katalogu docelowego: $location"
         try {
             New-Item -ItemType Directory -Path $location -Force | Out-Null
-            Write-Host "Katalog utworzony pomyslnie." -ForegroundColor Green
+            Write-Output "Katalog utworzony pomyslnie."
         }
         catch {
-            Write-Host "Blad podczas tworzenia katalogu: $($_.Exception.Message)" -ForegroundColor Red
+            Write-Output "Blad podczas tworzenia katalogu: $($_.Exception.Message)"
             continue
         }
     }
 
     # Kopiowanie plikow wykonywalnych i zaleznosci
-    Write-Host "Kopiowanie plikow aplikacji..." -ForegroundColor Yellow
+    Write-Output "Kopiowanie plikow aplikacji..."
     try {
         Copy-Item -Path "$SourcePath\*" -Destination $location -Recurse -Force
-        Write-Host "Pliki aplikacji skopiowane pomyslnie." -ForegroundColor Green
+        Write-Output "Pliki aplikacji skopiowane pomyslnie."
     }
     catch {
-        Write-Host "Blad podczas kopiowania plikow aplikacji: $($_.Exception.Message)" -ForegroundColor Red
+        Write-Output "Blad podczas kopiowania plikow aplikacji: $($_.Exception.Message)"
         continue
     }
 
     # Kopiowanie plikow konfiguracyjnych
-    Write-Host "Kopiowanie plikow konfiguracyjnych..." -ForegroundColor Yellow
+    Write-Output "Kopiowanie plikow konfiguracyjnych..."
 
     $ConfigFiles = @(
         "calibration_history.xml",
@@ -99,37 +100,40 @@ foreach ($location in $NetworkLocations) {
         if (Test-Path $sourceFile) {
             try {
                 Copy-Item -Path $sourceFile -Destination $location -Force
-                Write-Host "Skopiowano: $file" -ForegroundColor Green
+                Write-Output "Skopiowano: $file"
             }
             catch {
-                Write-Host "Blad podczas kopiowania $file : $($_.Exception.Message)" -ForegroundColor Red
+                Write-Output "Blad podczas kopiowania $file : $($_.Exception.Message)"
             }
         }
         else {
-            Write-Host "Plik nie istnieje: $file" -ForegroundColor Yellow
+            Write-Output "Plik nie istnieje: $file"
         }
     }
 }
 
 # Sprawdzenie wynikow
-Write-Host "`n=== Podsumowanie ===" -ForegroundColor Green
+Write-Output ""
+Write-Output "=== Podsumowanie ==="
 $allSuccessful = $true
 foreach ($location in $NetworkLocations) {
     if (Test-Path $location) {
         $copiedFiles = Get-ChildItem -Path $location -File | Measure-Object
-        Write-Host "Lokalizacja: $location" -ForegroundColor Cyan
-        Write-Host "Liczba skopiowanych plikow: $($copiedFiles.Count)" -ForegroundColor Cyan
+        Write-Output "Lokalizacja: $location"
+        Write-Output "Liczba skopiowanych plikow: $($copiedFiles.Count)"
     }
     else {
-        Write-Host "Lokalizacja niedostepna: $location" -ForegroundColor Red
+        Write-Output "Lokalizacja niedostepna: $location"
         $allSuccessful = $false
     }
 }
 
 if ($allSuccessful) {
-    Write-Host "`nDeployment zakonczony sukcesem!" -ForegroundColor Green
+    Write-Output ""
+    Write-Output "Deployment zakonczony sukcesem!"
     exit 0
 } else {
-    Write-Host "`nDeployment zakonczony z bledami!" -ForegroundColor Red
+    Write-Output ""
+    Write-Output "Deployment zakonczony z bledami!"
     exit 1
 }

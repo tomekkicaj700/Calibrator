@@ -334,7 +334,8 @@
                     MinWidth="40"
                     MinHeight="40"
                     FontSize="16"
-                    ToolTip="Panel logów">
+                    ToolTip="Panel logów"
+                    Click="btnToggleLogPanel_Click">
                     <TextBlock FontSize="22"
                                Text="📋"
                                VerticalAlignment="Center"
@@ -492,7 +493,8 @@
         </Grid>
 
         <!-- GridSplitter do regulacji wysokości logPanel -->
-        <GridSplitter Grid.Row="2"
+        <GridSplitter x:Name="logSplitter"
+                Grid.Row="2"
                       Height="6"
                       HorizontalAlignment="Stretch"
                       VerticalAlignment="Top"
