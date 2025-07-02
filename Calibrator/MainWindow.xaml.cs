@@ -398,6 +398,10 @@ windowSettings.WindowWidth.Value > 0 && windowSettings.WindowHeight.Value > 0)
                 btnRun.Background = Brushes.Red; // Czerwony kolor dla STOP
                 btnRun.Foreground = Brushes.White; // Biały tekst
 
+                // Update menu icon as well
+                if (menuIconRun != null)
+                    menuIconRun.Text = "⏸";
+
                 configTimer.Start();
                 commandCounterTimer.Start(); // Uruchom timer licznika komend
                 Log("▶ Pomiar parametrów uruchomiony");
@@ -410,6 +414,10 @@ windowSettings.WindowWidth.Value > 0 && windowSettings.WindowHeight.Value > 0)
                 btnRun.IsEnabled = true;
                 btnRun.Background = Brushes.Green; // Zielony kolor dla RUN
                 btnRun.Foreground = Brushes.White; // Biały tekst
+
+                // Update menu icon as well
+                if (menuIconRun != null)
+                    menuIconRun.Text = "▶";
 
                 configTimer.Stop();
                 commandCounterTimer.Stop(); // Zatrzymaj timer licznika komend
@@ -1447,6 +1455,72 @@ windowSettings.WindowWidth.Value > 0 && windowSettings.WindowHeight.Value > 0)
 
     private void measurementHistoryNewTab_Loaded(object sender, RoutedEventArgs e)
     {
+        // Loaded event for measurement history tab
+    }
 
+    /// <summary>
+    /// Event handler for setting measurement interval from menu
+    /// </summary>
+    private void SetInterval_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            if (sender is MenuItem menuItem && menuItem.Tag != null)
+            {
+                string tagValue = menuItem.Tag.ToString();
+                
+                // Find the corresponding combo box item and select it
+                foreach (ComboBoxItem item in comboInterval.Items)
+                {
+                    if (item.Tag?.ToString() == tagValue)
+                    {
+                        comboInterval.SelectedItem = item;
+                        Log($"Interwał próbkowania zmieniony na: {item.Content}");
+                        break;
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Log($"Błąd podczas zmiany interwału: {ex.Message}");
+        }
+    }
+
+    /// <summary>
+    /// Event handler for About dialog
+    /// </summary>
+    private void ShowAbout_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            string version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? "Unknown";
+            string message = $"Calibrator\n\n" +
+                           $"Wersja: {version}\n" +
+                           $"Framework: .NET 9.0\n\n" +
+                           $"Aplikacja do kalibracji zgrzewarek\n" +
+                           $"© 2024";
+
+            MessageBox.Show(message, "O programie", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        catch (Exception ex)
+        {
+            Log($"Błąd podczas wyświetlania okna 'O programie': {ex.Message}");
+        }
+    }
+
+    /// <summary>
+    /// Event handler for Exit menu item
+    /// </summary>
+    private void Exit_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            this.Close();
+        }
+        catch (Exception ex)
+        {
+            Log($"Błąd podczas zamykania aplikacji: {ex.Message}");
+        }
     }
 }

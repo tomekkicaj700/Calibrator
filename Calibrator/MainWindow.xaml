@@ -19,14 +19,116 @@
     mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
+        <!-- Menu Bar -->
+        <Menu Grid.Row="0" Background="#F0F0F0">
+            <MenuItem Header="_Plik">
+                <MenuItem Header="_Zapisz kalibrację" Click="btnSaveCalibration_Click">
+                    <MenuItem.Icon>
+                        <TextBlock Text="💾" FontSize="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="_Otwórz konfigurację" Click="btnOpenConfig_Click" ToolTip="Otwórz plik konfiguracji">
+                    <MenuItem.Icon>
+                        <TextBlock Text="⚙" FontSize="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="_Wyjście" Click="Exit_Click">
+                    <MenuItem.Icon>
+                        <TextBlock Text="✖" FontSize="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            
+            <MenuItem Header="_Połączenie">
+                <MenuItem Header="_Skanuj porty" Click="btnScanPorts_Click">
+                    <MenuItem.Icon>
+                        <TextBlock Text="🔌" FontSize="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Skanuj _USR-N520" Click="btnScanUSRDevices_Click">
+                    <MenuItem.Icon>
+                        <TextBlock Text="🌐" FontSize="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Skanuj _wszystkie" Click="btnScanAllDevices_Click">
+                    <MenuItem.Icon>
+                        <TextBlock Text="🔍" FontSize="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="_Serwer TCP" Click="btnTcpServer_Click">
+                    <MenuItem.Icon>
+                        <TextBlock Text="🌐" FontSize="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            
+            <MenuItem Header="_Kalibracja">
+                <MenuItem Header="_Odczytaj konfigurację" Click="btnReadConfig_Click">
+                    <MenuItem.Icon>
+                        <TextBlock Text="📖" FontSize="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="_Parametry zgrzewania" Click="btnReadWeldParams_Click">
+                    <MenuItem.Icon>
+                        <TextBlock Text="⚡" FontSize="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="_Resetuj statystyki" Click="btnResetStats_Click">
+                    <MenuItem.Icon>
+                        <TextBlock Text="↺" FontSize="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            
+            <MenuItem Header="_Kontrola">
+                <MenuItem Header="_RUN/STOP" Click="btnRun_Click">
+                    <MenuItem.Icon>
+                        <TextBlock x:Name="menuIconRun" Text="▶" FontSize="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="Interwał próbkowania">
+                    <MenuItem.Icon>
+                        <TextBlock Text="⏱" FontSize="16"/>
+                    </MenuItem.Icon>
+                    <MenuItem Header="3 x/s" Click="SetInterval_Click" Tag="333"/>
+                    <MenuItem Header="0.5 s" Click="SetInterval_Click" Tag="500"/>
+                    <MenuItem Header="1 s" Click="SetInterval_Click" Tag="1000"/>
+                    <MenuItem Header="2 s" Click="SetInterval_Click" Tag="2000"/>
+                    <MenuItem Header="3 s" Click="SetInterval_Click" Tag="3000"/>
+                </MenuItem>
+            </MenuItem>
+            
+            <MenuItem Header="_Widok">
+                <MenuItem Header="_Panel logów" Click="btnToggleLogPanel_Click">
+                    <MenuItem.Icon>
+                        <TextBlock Text="📋" FontSize="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            
+            <MenuItem Header="_Pomoc">
+                <MenuItem Header="_O programie" Click="ShowAbout_Click">
+                    <MenuItem.Icon>
+                        <TextBlock Text="ℹ" FontSize="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+
         <!--  DockPanel: przyciski na górze, TabControl pod spodem  -->
-        <DockPanel Grid.Row="0">
+        <DockPanel Grid.Row="1">
             <!--  Top Control Panel  -->
             <StackPanel
                 Margin="0,0,0,10"
@@ -245,7 +347,7 @@
 
         <!--  Splitter  -->
         <GridSplitter
-            Grid.Row="1"
+            Grid.Row="2"
             Height="5"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Center"
@@ -255,10 +357,10 @@
 
         <!--  Logger na dole  -->
         <controls:LogPanel x:Name="logPanel"
-                           Grid.Row="2"/>
+                           Grid.Row="3"/>
 
         <!--  Status Bar  -->
-        <StatusBar Grid.Row="3"
+        <StatusBar Grid.Row="4"
                    Background="#F0F0F0">
             <StatusBarItem>
                 <TextBlock x:Name="txtStatusSection0"
