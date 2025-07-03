@@ -151,6 +151,7 @@ public partial class MainWindow : Window
     private const int MAX_LOG_LINES = 500; // Zmniejszone z 1000 na 500
     private bool logNeedsUpdate = false;
     private readonly System.Windows.Threading.DispatcherTimer logUpdateTimer;
+    private DateTime lastCommunicationTime = DateTime.Now;
 
     // TCP Server service
     private LocalTcpServerService tcpServerService = new LocalTcpServerService();
@@ -478,6 +479,7 @@ windowSettings.WindowWidth.Value > 0 && windowSettings.WindowHeight.Value > 0)
 
         try
         {
+            lastCommunicationTime = DateTime.Now; // Aktualizuj czas ostatniej komunikacji
             Log("=== ODCZYTUJĘ KONFIGURACJĘ SYSTEMU ===");
 
             var config = await welderService?.ReadConfigurationAsync();
@@ -642,6 +644,7 @@ windowSettings.WindowWidth.Value > 0 && windowSettings.WindowHeight.Value > 0)
         }
         try
         {
+            lastCommunicationTime = DateTime.Now; // Aktualizuj czas ostatniej komunikacji
             Log("=== ODCZYTUJĘ PARAMETRY ZGRZEWANIA ===");
             IncrementCommandCounter();
             var parameters = await welderService?.ReadWeldParametersAsync();

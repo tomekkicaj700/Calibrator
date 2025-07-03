@@ -108,11 +108,41 @@ namespace WelderRS232
         {
             if (stream != null && stream.CanRead)
             {
-                byte[] buffer = new byte[1024];
-                int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
-                byte[] result = new byte[bytesRead];
-                Array.Copy(buffer, result, bytesRead);
-                return result;
+                try
+                {
+                    using var cts = new CancellationTokenSource(2000); // 2 sekundy timeout
+                    byte[] buffer = new byte[1024];
+                    var readTask = stream.ReadAsync(buffer, 0, buffer.Length, cts.Token);
+                    var timeoutTask = Task.Delay(2000, cts.Token);
+                    var completedTask = await Task.WhenAny(readTask, timeoutTask);
+
+                    if (completedTask == timeoutTask)
+                    {
+                        Log($"Timeout podczas odbioru danych (>2000ms) - używam CancellationToken");
+                        return new byte[0];
+                    }
+
+                    if (completedTask == readTask)
+                    {
+                        int bytesRead = await readTask;
+                        byte[] result = new byte[bytesRead];
+                        Array.Copy(buffer, result, bytesRead);
+                        return result;
+                    }
+
+                    return new byte[0];
+                }
+                catch (OperationCanceledException)
+                {
+                    Log($"Timeout podczas odbioru danych (>2000ms) - OperationCanceledException");
+                    return new byte[0];
+                }
+                catch (Exception ex)
+                {
+                    Log($"Błąd podczas odbioru danych: {ex.Message}");
+                    Log($"Typ błędu: {ex.GetType().Name}");
+                    return new byte[0];
+                }
             }
             return new byte[0];
         }

@@ -18,11 +18,9 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"
-                              MinWidth="150"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="5"/>
-            <ColumnDefinition Width="*"
-                              MinWidth="250"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <!-- Lewa kolumna: tabela pomiarów -->
@@ -148,24 +146,38 @@
         <!-- Prawa kolumna: komponenty -->
         <Grid Grid.Row="0"
               Grid.Column="2"
-              VerticalAlignment="Stretch"
               HorizontalAlignment="Stretch"
-              Margin="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
-            <controls:WeldMeasurementsComponent x:Name="weldMeasurementsComponent"
-                                                Grid.Row="0"
-                                                HorizontalAlignment="Stretch"
-                                                VerticalAlignment="Stretch"
-                                                Margin="0"
-                                                ShowStatistics="False"/>
-            <controls:MeasurementStatisticsComponent x:Name="measurementStatisticsComponent"
-                                                     Grid.Row="1"
-                                                     HorizontalAlignment="Stretch"
-                                                     VerticalAlignment="Stretch"
-                                                     Margin="0"/>
+              VerticalAlignment="Stretch"
+              Margin="0"
+              MinWidth="0">
+            <GroupBox Header="Pomiary zgrzewania"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+                      Margin="0"
+                      Background="Transparent"
+                      MinWidth="0">
+                <Grid HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+                      MinWidth="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <controls:WeldMeasurementsComponent x:Name="weldMeasurementsComponent"
+                                                        Grid.Row="0"
+                                                        HorizontalAlignment="Stretch"
+                                                        VerticalAlignment="Stretch"
+                                                        Margin="0"
+                                                        ShowStatistics="False"
+                                                        MinWidth="0"/>
+                    <controls:MeasurementStatisticsComponent x:Name="measurementStatisticsComponent"
+                                                             Grid.Row="1"
+                                                             HorizontalAlignment="Stretch"
+                                                             VerticalAlignment="Stretch"
+                                                             Margin="0"
+                                                             MinWidth="0"/>
+                </Grid>
+            </GroupBox>
         </Grid>
 
         <!-- Przyciski na dole w Gridzie -->

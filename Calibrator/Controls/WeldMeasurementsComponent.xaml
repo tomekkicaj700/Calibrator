@@ -11,7 +11,7 @@
     HorizontalAlignment="Stretch"
     VerticalAlignment="Stretch">
     <Grid HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch">
+          VerticalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -35,14 +35,14 @@
         <Border Grid.Row="1"
                 Grid.Column="0"
                 x:Name="borderNapiecieStats"
-                Margin="0,0,0,10"
                 BorderBrush="#00BCD4"
                 BorderThickness="1"
                 CornerRadius="4"
                 Visibility="Collapsed"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch">
-            <Grid Margin="5">
+            <Grid HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -52,50 +52,43 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Foreground="Red"
-                    Text="Max: "/>
-                <TextBlock
-                    x:Name="txtNapiecieMax"
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    FontSize="16"
-                    FontWeight="Bold"
-                    Foreground="Red"
-                    Text="0.00"/>
-                <TextBlock
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    Foreground="Blue"
-                    Text="Avr: "/>
-                <TextBlock
-                    x:Name="txtNapiecieAvr"
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    FontSize="16"
-                    FontWeight="Bold"
-                    Foreground="Blue"
-                    Text="0.00"/>
-                <TextBlock
-                    Grid.Row="2"
-                    Grid.Column="0"
-                    Foreground="#4CAF50"
-                    Text="Min: "/>
-                <TextBlock
-                    x:Name="txtNapiecieMin"
-                    Grid.Row="2"
-                    Grid.Column="1"
-                    FontSize="16"
-                    FontWeight="Bold"
-                    Foreground="#4CAF50"
-                    Text="0.00"/>
+                <TextBlock Grid.Row="0"
+                           Grid.Column="0"
+                           Foreground="Red"
+                           Text="Max: "/>
+                <TextBlock x:Name="txtNapiecieMax"
+                           Grid.Row="0"
+                           Grid.Column="1"
+                           FontSize="16"
+                           FontWeight="Bold"
+                           Foreground="Red"
+                           Text="0.00"/>
+                <TextBlock Grid.Row="1"
+                           Grid.Column="0"
+                           Foreground="Blue"
+                           Text="Avr: "/>
+                <TextBlock x:Name="txtNapiecieAvr"
+                           Grid.Row="1"
+                           Grid.Column="1"
+                           FontSize="16"
+                           FontWeight="Bold"
+                           Foreground="Blue"
+                           Text="0.00"/>
+                <TextBlock Grid.Row="2"
+                           Grid.Column="0"
+                           Foreground="#4CAF50"
+                           Text="Min: "/>
+                <TextBlock x:Name="txtNapiecieMin"
+                           Grid.Row="2"
+                           Grid.Column="1"
+                           FontSize="16"
+                           FontWeight="Bold"
+                           Foreground="#4CAF50"
+                           Text="0.00"/>
             </Grid>
         </Border>
         <Border Grid.Row="2"
                 Grid.Column="0"
-                Margin="0,0,0,10"
                 BorderBrush="#673AB7"
                 BorderThickness="2"
                 CornerRadius="4"
@@ -147,14 +140,14 @@
         <Border Grid.Row="1"
                 Grid.Column="1"
                 x:Name="borderPradStats"
-                Margin="0,0,0,10"
                 BorderBrush="#00BCD4"
                 BorderThickness="1"
                 CornerRadius="4"
                 Visibility="Collapsed"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch">
-            <Grid Margin="5">
+            <Grid HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -164,50 +157,43 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Foreground="Red"
-                    Text="Max: "/>
-                <TextBlock
-                    x:Name="txtPradMax"
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    FontSize="16"
-                    FontWeight="Bold"
-                    Foreground="Red"
-                    Text="0.00"/>
-                <TextBlock
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    Foreground="Blue"
-                    Text="Avr: "/>
-                <TextBlock
-                    x:Name="txtPradAvr"
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    FontSize="16"
-                    FontWeight="Bold"
-                    Foreground="Blue"
-                    Text="0.00"/>
-                <TextBlock
-                    Grid.Row="2"
-                    Grid.Column="0"
-                    Foreground="#4CAF50"
-                    Text="Min: "/>
-                <TextBlock
-                    x:Name="txtPradMin"
-                    Grid.Row="2"
-                    Grid.Column="1"
-                    FontSize="16"
-                    FontWeight="Bold"
-                    Foreground="#4CAF50"
-                    Text="0.00"/>
+                <TextBlock Grid.Row="0"
+                           Grid.Column="0"
+                           Foreground="Red"
+                           Text="Max: "/>
+                <TextBlock x:Name="txtPradMax"
+                           Grid.Row="0"
+                           Grid.Column="1"
+                           FontSize="16"
+                           FontWeight="Bold"
+                           Foreground="Red"
+                           Text="0.00"/>
+                <TextBlock Grid.Row="1"
+                           Grid.Column="0"
+                           Foreground="Blue"
+                           Text="Avr: "/>
+                <TextBlock x:Name="txtPradAvr"
+                           Grid.Row="1"
+                           Grid.Column="1"
+                           FontSize="16"
+                           FontWeight="Bold"
+                           Foreground="Blue"
+                           Text="0.00"/>
+                <TextBlock Grid.Row="2"
+                           Grid.Column="0"
+                           Foreground="#4CAF50"
+                           Text="Min: "/>
+                <TextBlock x:Name="txtPradMin"
+                           Grid.Row="2"
+                           Grid.Column="1"
+                           FontSize="16"
+                           FontWeight="Bold"
+                           Foreground="#4CAF50"
+                           Text="0.00"/>
             </Grid>
         </Border>
         <Border Grid.Row="2"
                 Grid.Column="1"
-                Margin="0,0,0,10"
                 BorderBrush="#673AB7"
                 BorderThickness="2"
                 CornerRadius="4"

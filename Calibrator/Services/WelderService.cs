@@ -283,13 +283,13 @@ namespace Calibrator.Services
                 }
                 else
                 {
-                    Log($"Błąd: Nie udało się odczytać parametrów zgrzewania. {errorDetails}");
+                    Log($"Błąd: Nie udało się odczytać parametrów zgrzewania. Szczegóły: {errorDetails}");
                     return null;
                 }
             }
             catch (Exception ex)
             {
-                Log($"Błąd: {ex.Message}");
+                Log($"Wystąpił wyjątek podczas odczytu parametrów zgrzewania: {ex.Message}");
                 return null;
             }
             finally

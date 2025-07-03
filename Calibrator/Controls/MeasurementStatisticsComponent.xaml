@@ -8,7 +8,7 @@
         d:DesignWidth="600"
         d:DesignHeight="120">
         <Grid HorizontalAlignment="Stretch"
-                        VerticalAlignment="Stretch">
+              VerticalAlignment="Stretch">
                 <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
