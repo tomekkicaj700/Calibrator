@@ -30,6 +30,7 @@ using Calibrator.Controls;
 using Logger;
 using static Logger.LoggerService;
 using System.Text.Json;
+using System.Diagnostics;
 
 namespace Calibrator;
 
@@ -84,6 +85,191 @@ public class WindowSettings
     public static string GetConfigFilePath()
     {
         return System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.xml");
+    }
+}
+
+/// <summary>
+/// Klasa do zarządzania procesami aplikacji - mechanizm bezpiecznego zamykania
+/// </summary>
+public class ProcessManager
+{
+    private const string RUNNING_FILE = "running.txt";
+    private const string REQUEST_CLOSE_FILE = "request-to-close.txt";
+    private const int CHECK_INTERVAL_MS = 1000; // Sprawdzaj co sekundę
+    private const int CLOSE_TIMEOUT_MS = 10000; // 10 sekund timeout na zamknięcie
+
+    private readonly string _appDirectory;
+    private readonly string _runningFilePath;
+    private readonly string _requestCloseFilePath;
+    private readonly DispatcherTimer _checkTimer;
+    private readonly Action<string> _logCallback;
+    private bool _isShuttingDown = false;
+
+    public ProcessManager(Action<string> logCallback)
+    {
+        _appDirectory = AppDomain.CurrentDomain.BaseDirectory;
+        _runningFilePath = System.IO.Path.Combine(_appDirectory, RUNNING_FILE);
+        _requestCloseFilePath = System.IO.Path.Combine(_appDirectory, REQUEST_CLOSE_FILE);
+        _logCallback = logCallback;
+
+        _checkTimer = new DispatcherTimer
+        {
+            Interval = TimeSpan.FromMilliseconds(CHECK_INTERVAL_MS)
+        };
+        _checkTimer.Tick += CheckForCloseRequest;
+    }
+
+    /// <summary>
+    /// Inicjalizuje mechanizm zarządzania procesami
+    /// </summary>
+    public void Initialize()
+    {
+        try
+        {
+            // Utwórz plik running.txt z ID procesu
+            int processId = Process.GetCurrentProcess().Id;
+            File.WriteAllText(_runningFilePath, processId.ToString());
+            _logCallback?.Invoke($"[PROCESS] Utworzono plik running.txt z ID procesu: {processId}");
+
+            // Uruchom timer sprawdzający żądania zamknięcia
+            _checkTimer.Start();
+            _logCallback?.Invoke("[PROCESS] Timer sprawdzania żądań zamknięcia uruchomiony");
+
+            // Zarejestruj handler dla zamykania aplikacji
+            Application.Current.Exit += OnApplicationExit;
+        }
+        catch (Exception ex)
+        {
+            _logCallback?.Invoke($"[PROCESS] Błąd podczas inicjalizacji: {ex.Message}");
+        }
+    }
+
+    /// <summary>
+    /// Zatrzymuje mechanizm zarządzania procesami
+    /// </summary>
+    public void Shutdown()
+    {
+        try
+        {
+            _isShuttingDown = true;
+            _checkTimer.Stop();
+            Application.Current.Exit -= OnApplicationExit;
+
+            // Usuń plik running.txt
+            if (File.Exists(_runningFilePath))
+            {
+                File.Delete(_runningFilePath);
+                _logCallback?.Invoke("[PROCESS] Usunięto plik running.txt");
+            }
+
+            // Usuń plik request-to-close.txt jeśli istnieje
+            if (File.Exists(_requestCloseFilePath))
+            {
+                File.Delete(_requestCloseFilePath);
+                _logCallback?.Invoke("[PROCESS] Usunięto plik request-to-close.txt");
+            }
+        }
+        catch (Exception ex)
+        {
+            _logCallback?.Invoke($"[PROCESS] Błąd podczas zamykania: {ex.Message}");
+        }
+    }
+
+    /// <summary>
+    /// Sprawdza czy istnieje żądanie zamknięcia aplikacji
+    /// </summary>
+    private void CheckForCloseRequest(object? sender, EventArgs e)
+    {
+        if (_isShuttingDown) return;
+
+        try
+        {
+            if (File.Exists(_requestCloseFilePath))
+            {
+                _logCallback?.Invoke("[PROCESS] Wykryto żądanie zamknięcia aplikacji");
+
+                // Usuń plik request-to-close.txt
+                File.Delete(_requestCloseFilePath);
+                _logCallback?.Invoke("[PROCESS] Usunięto plik request-to-close.txt");
+
+                // Zamknij aplikację
+                Application.Current.Dispatcher.BeginInvoke(() =>
+                {
+                    _logCallback?.Invoke("[PROCESS] Zamykanie aplikacji...");
+                    Application.Current.Shutdown();
+                });
+            }
+        }
+        catch (Exception ex)
+        {
+            _logCallback?.Invoke($"[PROCESS] Błąd podczas sprawdzania żądania zamknięcia: {ex.Message}");
+        }
+    }
+
+    /// <summary>
+    /// Handler dla zamykania aplikacji
+    /// </summary>
+    private void OnApplicationExit(object sender, ExitEventArgs e)
+    {
+        Shutdown();
+    }
+
+    /// <summary>
+    /// Statyczna metoda do sprawdzenia czy aplikacja jest uruchomiona w danej lokalizacji
+    /// </summary>
+    public static bool IsApplicationRunning(string directory)
+    {
+        string runningFile = System.IO.Path.Combine(directory, RUNNING_FILE);
+        return File.Exists(runningFile);
+    }
+
+    /// <summary>
+    /// Statyczna metoda do wysłania żądania zamknięcia aplikacji
+    /// </summary>
+    public static bool RequestApplicationClose(string directory, Action<string>? logCallback = null)
+    {
+        try
+        {
+            string requestFile = System.IO.Path.Combine(directory, REQUEST_CLOSE_FILE);
+            string runningFile = System.IO.Path.Combine(directory, RUNNING_FILE);
+
+            // Sprawdź czy aplikacja jest uruchomiona
+            if (!File.Exists(runningFile))
+            {
+                logCallback?.Invoke($"[DEPLOY] Aplikacja nie jest uruchomiona w {directory}");
+                return true; // Aplikacja już nie jest uruchomiona
+            }
+
+            // Utwórz plik żądania zamknięcia
+            File.WriteAllText(requestFile, DateTime.Now.ToString());
+            logCallback?.Invoke($"[DEPLOY] Wysłano żądanie zamknięcia do aplikacji w {directory}");
+
+            // Czekaj na zamknięcie aplikacji
+            DateTime startTime = DateTime.Now;
+            while (File.Exists(runningFile))
+            {
+                if ((DateTime.Now - startTime).TotalMilliseconds > CLOSE_TIMEOUT_MS)
+                {
+                    logCallback?.Invoke($"[DEPLOY] Timeout podczas oczekiwania na zamknięcie aplikacji w {directory}");
+                    return false;
+                }
+                Thread.Sleep(100); // Czekaj 100ms przed kolejnym sprawdzeniem
+            }
+
+            // Usuń plik żądania zamknięcia
+            if (File.Exists(requestFile))
+            {
+                File.Delete(requestFile);
+            }
+
+            logCallback?.Invoke($"[DEPLOY] Aplikacja została zamknięta w {directory}");
+            return true;
+        }
+        catch (Exception ex)
+        {
+            logCallback?.Invoke($"[DEPLOY] Błąd podczas wysyłania żądania zamknięcia: {ex.Message}");
+            return false;
+        }
     }
 }
 
@@ -158,6 +344,9 @@ public partial class MainWindow : Window
 
     private SKonfiguracjaSystemu? lastConfig;
 
+    // ProcessManager do zarządzania procesami aplikacji
+    private ProcessManager? processManager;
+
     // Właściwości pomocnicze do dostępu do kontrolek w UserControl
     private WeldParametersTab WeldParametersTab => weldParametersTab;
     private CalibrationParametersTab CalibrationParametersTab => calibrationParametersTab;
@@ -172,6 +361,10 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+
+        // Inicjalizacja ProcessManager do zarządzania procesami
+        processManager = new ProcessManager(Log);
+        processManager.Initialize();
 
         // Initialize services according to the new architecture
         InitializeServicesAsync();
@@ -878,6 +1071,9 @@ windowSettings.WindowWidth.Value > 0 && windowSettings.WindowHeight.Value > 0)
 
     private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
     {
+        // Zatrzymaj ProcessManager przed zamknięciem
+        processManager?.Shutdown();
+
         // Zapisz aktualny rozmiar i stan okna przed zamknięciem
         var settings = WindowSettings.Load();
 

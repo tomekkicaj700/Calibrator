@@ -62,6 +62,50 @@ $NetworkLocations = @($NetworkLocation, $NetworkLocation2)
 foreach ($location in $NetworkLocations) {
     Write-Output ""
     Write-Output "=== Kopiowanie do: $location ==="
+    $runningFile = Join-Path $location "running.txt"
+    $skipThisLocation = $false
+    if (Test-Path $runningFile) {
+        Write-Output "Wykryto uruchomiona aplikacje w lokalizacji docelowej: $location"
+        Write-Output "Wysylam zadanie zamkniecia aplikacji..."
+        
+        # Utwórz plik żądania zamknięcia
+        $requestCloseFile = Join-Path $location "request-to-close.txt"
+        try {
+            [System.IO.File]::WriteAllText($requestCloseFile, (Get-Date).ToString())
+            Write-Output "Wyslano zadanie zamkniecia aplikacji."
+            
+            # Czekaj na zamknięcie aplikacji (maksymalnie 15 sekund, co 1 sekunda)
+            $timeout = 15
+            $elapsed = 0
+            Write-Output "Oczekiwanie na zamkniecie aplikacji (maksymalnie $timeout sekund)..."
+            while ((Test-Path $runningFile) -and ($elapsed -lt $timeout)) {
+                Start-Sleep -Seconds 1
+                $elapsed++
+                Write-Output "  Czekam... ($elapsed s / $timeout s)"
+            }
+            
+            if (Test-Path $runningFile) {
+                Write-Output "Aplikacja nie zostala zamknieta w ciagu $timeout sekund. Pomijam kopiowanie do tej lokalizacji."
+                $skipThisLocation = $true
+            } else {
+                Write-Output "Aplikacja zostala zamknieta pomyslnie."
+            }
+            
+            # Usuń plik żądania zamknięcia
+            if (Test-Path $requestCloseFile) {
+                Remove-Item $requestCloseFile -Force
+                Write-Output "Usunieto plik zadania zamkniecia."
+            }
+        }
+        catch {
+            Write-Output "Blad podczas wysylania zadania zamkniecia: $($_.Exception.Message)"
+            Write-Output "Pomijam kopiowanie do tej lokalizacji."
+            $skipThisLocation = $true
+        }
+    }
+    if ($skipThisLocation) {
+        continue
+    }
     
     # Tworzenie katalogu docelowego jesli nie istnieje
     if (-not (Test-Path $location)) {
@@ -79,12 +123,44 @@ foreach ($location in $NetworkLocations) {
     # Kopiowanie plikow wykonywalnych i zaleznosci
     Write-Output "Kopiowanie plikow aplikacji..."
     try {
-        Copy-Item -Path "$SourcePath\*" -Destination $location -Recurse -Force
+        # Próbuj skopiować wszystkie pliki
+        Copy-Item -Path "$SourcePath\*" -Destination $location -Recurse -Force -ErrorAction Stop
         Write-Output "Pliki aplikacji skopiowane pomyslnie."
     }
     catch {
-        Write-Output "Blad podczas kopiowania plikow aplikacji: $($_.Exception.Message)"
-        continue
+        Write-Output "Błąd podczas kopiowania plików aplikacji: $($_.Exception.Message)"
+        Write-Output "Próbuję skopiować pliki pojedynczo..."
+        
+        # Próbuj skopiować pliki pojedynczo, pomijając te które są zablokowane
+        $sourceFiles = Get-ChildItem -Path $SourcePath -Recurse
+        $successCount = 0
+        $errorCount = 0
+        
+        foreach ($file in $sourceFiles) {
+            $relativePath = $file.FullName.Substring($SourcePath.Length)
+            $destinationPath = Join-Path $location $relativePath
+            
+            try {
+                # Utwórz katalog docelowy jeśli nie istnieje
+                $destinationDir = Split-Path $destinationPath -Parent
+                if (!(Test-Path $destinationDir)) {
+                    New-Item -ItemType Directory -Path $destinationDir -Force | Out-Null
+                }
+                
+                Copy-Item -Path $file.FullName -Destination $destinationPath -Force -ErrorAction Stop
+                $successCount++
+            }
+            catch {
+                Write-Output "  Nie udało się skopiować: $relativePath - $($_.Exception.Message)"
+                $errorCount++
+            }
+        }
+        
+        Write-Output "Kopiowanie zakonczoone: $successCount plikow skopiowanych, $errorCount bledow."
+        
+        if ($errorCount -gt 0) {
+            Write-Output "UWAGA: Niektore pliki nie zostaly skopiowane z powodu bledow."
+        }
     }
 
     # Kopiowanie plikow konfiguracyjnych
