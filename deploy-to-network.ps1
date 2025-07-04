@@ -2,7 +2,7 @@
 # Uruchom: .\deploy-to-network.ps1
 
 param(
-    [string]$Configuration = "Debug",
+    [string]$Configuration = "Release",
     [string]$NetworkLocation = "\\DiskStation\Public\Kalibrator",
     [string]$NetworkLocation2 = "\\KALIBRATOR\CalibratorPublic\Kalibrator"
 )
@@ -18,6 +18,59 @@ Write-Output "=== Kopiowanie Kalibrator do lokalizacji sieciowych ==="
 Write-Output "Konfiguracja: $Configuration"
 Write-Output "Lokalizacja docelowa 1: $NetworkLocation"
 Write-Output "Lokalizacja docelowa 2: $NetworkLocation2"
+
+# Krok 0: Sprawdzenie i zamknięcie lokalnej aplikacji
+Write-Output ""
+Write-Output "=== KROK 0: Sprawdzenie lokalnej aplikacji ==="
+$localRunningFile = "running.txt"
+$localRequestCloseFile = "request-to-close.txt"
+
+if (Test-Path $localRunningFile) {
+    Write-Output "Wykryto uruchomiona lokalna aplikacje. Wysylam zadanie zamkniecia..."
+    
+    try {
+        [System.IO.File]::WriteAllText($localRequestCloseFile, (Get-Date).ToString())
+        Write-Output "Wyslano zadanie zamkniecia lokalnej aplikacji."
+        
+        # Czekaj na zamknięcie lokalnej aplikacji (maksymalnie 10 sekund)
+        $timeout = 10
+        $elapsed = 0
+        Write-Output "Oczekiwanie na zamkniecie lokalnej aplikacji (maksymalnie $timeout sekund)..."
+        while ((Test-Path $localRunningFile) -and ($elapsed -lt $timeout)) {
+            Start-Sleep -Seconds 1
+            $elapsed++
+            Write-Output "  Czekam... ($elapsed s / $timeout s)"
+        }
+        
+        if (Test-Path $localRunningFile) {
+            Write-Output "Lokalna aplikacja nie zostala zamknieta. Próbuję wymusić zamknięcie..."
+            # Próbuj znaleźć i zakończyć procesy Calibrator
+            $processes = Get-Process -Name "Calibrator" -ErrorAction SilentlyContinue
+            if ($processes) {
+                foreach ($process in $processes) {
+                    Write-Output "Zamykam proces Calibrator (PID: $($process.Id))"
+                    $process.Kill()
+                }
+                Start-Sleep -Seconds 2
+            }
+        } else {
+            Write-Output "Lokalna aplikacja zostala zamknieta pomyslnie."
+        }
+        
+        # Usuń pliki kontrolne
+        if (Test-Path $localRequestCloseFile) {
+            Remove-Item $localRequestCloseFile -Force
+        }
+        if (Test-Path $localRunningFile) {
+            Remove-Item $localRunningFile -Force
+        }
+    }
+    catch {
+        Write-Output "Blad podczas zamykania lokalnej aplikacji: $($_.Exception.Message)"
+    }
+} else {
+    Write-Output "Lokalna aplikacja nie jest uruchomiona."
+}
 
 # Krok 1: Wykonanie dotnet publish
 Write-Output ""
@@ -58,11 +111,13 @@ $ProjectPath = "Calibrator\"
 # Lista lokalizacji docelowych
 $NetworkLocations = @($NetworkLocation, $NetworkLocation2)
 
-# Kopiowanie do wszystkich lokalizacji
+# Zapisz informację czy aplikacja była uruchomiona na początku
+$wasRunning = @{}
 foreach ($location in $NetworkLocations) {
     Write-Output ""
     Write-Output "=== Kopiowanie do: $location ==="
     $runningFile = Join-Path $location "running.txt"
+    $wasRunning[$location] = Test-Path $runningFile
     $skipThisLocation = $false
     if (Test-Path $runningFile) {
         Write-Output "Wykryto uruchomiona aplikacje w lokalizacji docelowej: $location"
@@ -185,6 +240,19 @@ foreach ($location in $NetworkLocations) {
         else {
             Write-Output "Plik nie istnieje: $file"
         }
+    }
+
+    # Po udanym kopiowaniu, jeśli aplikacja była uruchomiona na początku, uruchom ją ponownie
+    if ($wasRunning[$location]) {
+        $exePath = Join-Path $location "Calibrator.exe"
+        if (Test-Path $exePath) {
+            Write-Output "Uruchamiam aplikacje ponownie: $exePath"
+            Start-Process -FilePath $exePath
+        } else {
+            Write-Output "Nie znaleziono pliku Calibrator.exe w $location - nie uruchamiam ponownie."
+        }
+    } else {
+        Write-Output "Aplikacja nie byla uruchomiona przed deploymentem - nie uruchamiam ponownie."
     }
 }
 
