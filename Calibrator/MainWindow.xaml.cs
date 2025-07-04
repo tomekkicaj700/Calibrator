@@ -541,6 +541,31 @@ windowSettings.WindowWidth.Value > 0 && windowSettings.WindowHeight.Value > 0)
         }
     }
 
+    private string GetBuildDateTime()
+    {
+        try
+        {
+            // Próbuj odczytać z assembly
+            var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            var buildTime = assembly.GetCustomAttributes(typeof(System.Reflection.AssemblyMetadataAttribute), false)
+                .OfType<System.Reflection.AssemblyMetadataAttribute>()
+                .FirstOrDefault(x => x.Key == "BuildDateTime")?.Value;
+
+            if (!string.IsNullOrEmpty(buildTime))
+            {
+                return buildTime;
+            }
+
+            // Fallback - użyj czasu kompilacji z assembly
+            var fileInfo = new FileInfo(assembly.Location);
+            return fileInfo.LastWriteTime.ToString("yyyy-MM-dd HH:mm:ss");
+        }
+        catch
+        {
+            return "Nieznany";
+        }
+    }
+
     private void UpdateTitleWithLocalIP()
     {
         try
@@ -821,6 +846,9 @@ windowSettings.WindowWidth.Value > 0 && windowSettings.WindowHeight.Value > 0)
 
         txtStatusSection1.Text = $"Komendy/s: {commandsSentThisSecond}";
         txtStatusSection3.Text = $"Czas: {DateTime.Now:HH:mm:ss} | Log: {currentLogLines} linii";
+
+        // Aktualizuj informację o czasie buildu
+        txtBuildDateTime.Text = $"Build: {GetBuildDateTime()}";
     }
 
     private async Task ReadWeldParametersAndUpdateUIAsync(bool force = false)
@@ -1042,6 +1070,10 @@ windowSettings.WindowWidth.Value > 0 && windowSettings.WindowHeight.Value > 0)
 
         // Inicjalizuj pasek statusu
         UpdateStatusBar();
+
+        // Wyświetl informację o czasie buildu
+        var buildTime = GetBuildDateTime();
+        Log($"📦 Wersja aplikacji zbudowana: {buildTime}");
 
         // Wyświetl informację o skrótach klawiaturowych
         Log("🚀 Calibrator uruchomiony! Używaj klawiszy F1-F6 aby szybko przełączać zakładki.");

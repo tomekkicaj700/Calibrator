@@ -559,6 +559,14 @@
                     FontSize="12"
                     Text="Czas: 00:00:00"/>
             </StatusBarItem>
+            <Separator/>
+            <StatusBarItem>
+                <TextBlock
+                    x:Name="txtBuildDateTime"
+                    FontSize="12"
+                    Foreground="DarkGreen"
+                    Text="Build: 2024-01-01 00:00:00"/>
+            </StatusBarItem>
         </StatusBar>
     </Grid>
 </Window>

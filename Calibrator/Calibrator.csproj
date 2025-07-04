@@ -34,6 +34,7 @@
     <UseWPF>true</UseWPF>
     <NoWarn>NU1701</NoWarn>
     <ApplicationIcon>logo_icon.ico</ApplicationIcon>
+    <BuildDateTime>$([System.DateTime]::Now.ToString("yyyy-MM-dd HH:mm:ss"))</BuildDateTime>
   </PropertyGroup>
 
   <Target Name="TestTarget" AfterTargets="Build">
