@@ -3,8 +3,7 @@
 
 param(
     [string]$Configuration = "Release",
-    [string]$NetworkLocation = "\\DiskStation\Public\Kalibrator",
-    [string]$NetworkLocation2 = "\\KALIBRATOR\CalibratorPublic\Kalibrator"
+    [string]$NetworkLocation = "\\KALIBRATOR\CalibratorPublic\Kalibrator"
 )
 
 # Debugowanie parametrow
@@ -14,10 +13,9 @@ Write-Output "NetworkLocation: '$NetworkLocation'"
 Write-Output "NetworkLocation2: '$NetworkLocation2'"
 Write-Output "========================="
 
-Write-Output "=== Kopiowanie Kalibrator do lokalizacji sieciowych ==="
+Write-Output "=== Kopiowanie Kalibrator do lokalizacji sieciowej ==="
 Write-Output "Konfiguracja: $Configuration"
-Write-Output "Lokalizacja docelowa 1: $NetworkLocation"
-Write-Output "Lokalizacja docelowa 2: $NetworkLocation2"
+Write-Output "Lokalizacja docelowa: $NetworkLocation"
 
 # Krok 0: Sprawdzenie i zamknięcie lokalnej aplikacji
 Write-Output ""
@@ -73,7 +71,7 @@ if (Test-Path $localRunningFile) {
 }
 
 # Krok 1: Wykonanie dotnet publish
-Write-Output ""
+Write-Output ""Nie, to na komputerze. 
 Write-Output "=== KROK 1: Publikowanie aplikacji ==="
 Write-Output "Wykonywanie: dotnet publish Calibrator --configuration $Configuration"
 
@@ -109,7 +107,7 @@ else {
 $ProjectPath = "Calibrator\"
 
 # Lista lokalizacji docelowych
-$NetworkLocations = @($NetworkLocation, $NetworkLocation2)
+$NetworkLocations = @($NetworkLocation)
 
 # Zapisz informację czy aplikacja była uruchomiona na początku
 $wasRunning = @{}
@@ -242,17 +240,12 @@ foreach ($location in $NetworkLocations) {
         }
     }
 
-    # Po udanym kopiowaniu, jeśli aplikacja była uruchomiona na początku, uruchom ją ponownie
+    # Po udanym kopiowaniu, informuj o statusie
     if ($wasRunning[$location]) {
-        $exePath = Join-Path $location "Calibrator.exe"
-        if (Test-Path $exePath) {
-            Write-Output "Uruchamiam aplikacje ponownie: $exePath"
-            Start-Process -FilePath $exePath
-        } else {
-            Write-Output "Nie znaleziono pliku Calibrator.exe w $location - nie uruchamiam ponownie."
-        }
+        Write-Output "Aplikacja byla uruchomiona przed deploymentem i zostala zamknieta."
+        Write-Output "Aplikacja nie zostanie uruchomiona ponownie automatycznie."
     } else {
-        Write-Output "Aplikacja nie byla uruchomiona przed deploymentem - nie uruchamiam ponownie."
+        Write-Output "Aplikacja nie byla uruchomiona przed deploymentem."
     }
 }
 
@@ -260,16 +253,13 @@ foreach ($location in $NetworkLocations) {
 Write-Output ""
 Write-Output "=== Podsumowanie ==="
 $allSuccessful = $true
-foreach ($location in $NetworkLocations) {
-    if (Test-Path $location) {
-        $copiedFiles = Get-ChildItem -Path $location -File | Measure-Object
-        Write-Output "Lokalizacja: $location"
-        Write-Output "Liczba skopiowanych plikow: $($copiedFiles.Count)"
-    }
-    else {
-        Write-Output "Lokalizacja niedostepna: $location"
-        $allSuccessful = $false
-    }
+if (Test-Path $NetworkLocation) {
+    $copiedFiles = Get-ChildItem -Path $NetworkLocation -File | Measure-Object
+    Write-Output "Lokalizacja: $NetworkLocation"
+    Write-Output "Liczba skopiowanych plikow: $($copiedFiles.Count)"
+} else {
+    Write-Output "Lokalizacja niedostepna: $NetworkLocation"
+    $allSuccessful = $false
 }
 
 if ($allSuccessful) {
